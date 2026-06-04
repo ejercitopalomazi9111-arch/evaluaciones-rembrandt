@@ -232,8 +232,8 @@
   .sp-lines i:nth-child(3){left:52%;width:48px;background:linear-gradient(180deg,#f4b50a,transparent)}
   .sp-lines i:nth-child(4){left:69%;width:34px;background:linear-gradient(180deg,#3a51c0,transparent)}
   .sp-lines i:nth-child(5){left:83%;width:22px;background:linear-gradient(180deg,#f4b50a,transparent)}
-  .sp-logo{position:relative;width:150px;height:180px;display:flex;align-items:center;justify-content:center;z-index:2}
-  .sp-logo img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 14px 36px rgba(0,0,0,.45))}
+  .sp-logo{position:relative;width:172px;height:202px;display:flex;align-items:center;justify-content:center;z-index:2;background:#fff;border-radius:20px;padding:14px;border:3px solid var(--acento);box-shadow:0 18px 44px rgba(0,0,0,.42)}
+  .sp-logo img{width:100%;height:100%;object-fit:contain}
   .sp-letter{width:120px;height:120px;border-radius:24px;background:#fff;color:#27338f;font-weight:800;font-size:64px;display:flex;align-items:center;justify-content:center;box-shadow:0 14px 36px rgba(0,0,0,.4)}
   @media print{#splash{display:none !important}}
 </style>
@@ -438,8 +438,11 @@
           <div><label>Materia</label><select id="editSubject" onchange="renderEditor()"></select></div>
           <div><button class="btn sm" onclick="saveBank()">💾 Guardar</button></div>
           <div><button class="btn sec sm" onclick="exportBank()">⬇️ Exportar</button></div>
-          <div><button class="btn sec sm" onclick="document.getElementById('impBank').click()">⬆️ Importar</button>
+          <div><button class="btn sec sm" onclick="document.getElementById('impBank').click()">⬆️ Importar JSON</button>
             <input type="file" id="impBank" accept=".json" class="hidden" onchange="importBank(event)"></div>
+          <div><button class="btn sec sm" onclick="document.getElementById('impExcel').click()">📊 Importar Excel</button>
+            <input type="file" id="impExcel" accept=".xlsx,.xls,.csv" class="hidden" onchange="importExcel(event)"></div>
+          <div><button class="btn sec sm" onclick="plantillaExcel()">📄 Plantilla</button></div>
         </div>
         <div id="editorList" class="mt"></div>
         <button class="btn gold" onclick="addQuestion()">➕ Agregar pregunta</button>
@@ -532,6 +535,7 @@
 </div>
 
 <script src="anime.min.js"></script>
+<script src="xlsx.full.min.js"></script>
 <script>
 /* ====== DATOS ====== */
 const K_CFG='ev_cfg',K_BANK='ev_bank',K_GUIDE='ev_guide',K_RES='ev_res',K_TOUR='ev_tour',K_USERS='ev_users',K_STUD='ev_students';
@@ -705,6 +709,8 @@ function addQuestion(){const{lv,sid}=curEdit();if(!lv)return;BANK[lv][sid].push(
 async function delQuestion(i){if(await uiConfirm('¿Borrar esta pregunta?','Borrar',true)){const{lv,sid}=curEdit();BANK[lv][sid].splice(i,1);renderEditor()}}
 function saveBank(){save(K_BANK,BANK);toast('Banco guardado.','ok')}
 function exportBank(){const{lv,sid}=curEdit();if(!lv){toast('Selecciona una materia.','warn');return}downloadFile(JSON.stringify({level:lv,subject:sid,questions:BANK[lv][sid]},null,2),'preguntas_'+lv+'_'+sid+'.json','application/json')}
+function plantillaExcel(){const csv='﻿Pregunta,A,B,C,D,Correcta\n"¿Cuánto es 2 + 2?","3","4","5","6","B"\n"Capital de México","Guadalajara","Monterrey","Ciudad de México","Puebla","C"\n';downloadFile(csv,'plantilla_preguntas.csv','text/csv')}
+function importExcel(ev){const f=ev.target.files[0];if(!f)return;const{lv,sid}=curEdit();if(!lv){toast('Selecciona una materia.','warn');return}if(!window.XLSX){uiAlert('Falta el archivo xlsx.full.min.js en la carpeta del demo.','Importar Excel');return}const r=new FileReader();r.onload=()=>{try{const wb=XLSX.read(r.result,{type:'array'});const ws=wb.Sheets[wb.SheetNames[0]];const rows=XLSX.utils.sheet_to_json(ws,{header:1,blankrows:false});const map={'A':0,'B':1,'C':2,'D':3,'1':0,'2':1,'3':2,'4':3};const out=[];rows.forEach((row,i)=>{if(!row||!row.length)return;const first=(row[0]==null?'':String(row[0])).trim();if(!first)return;if(i===0&&/pregunta/i.test(first))return;const opts=[1,2,3,4].map(k=>row[k]==null?'':String(row[k]));const cs=(row[5]==null?'':String(row[5])).trim().toUpperCase();out.push({q:first,opts,correct:map[cs]!=null?map[cs]:0,img:''})});if(!out.length)throw new Error('no se encontraron preguntas');BANK[lv][sid]=out;save(K_BANK,BANK);renderEditor();toast('Importadas '+out.length+' preguntas de Excel a '+subjName(lv,sid)+'.','ok')}catch(e){uiAlert('No se pudo leer el Excel: '+e.message+'\n\nFormato esperado (columnas): Pregunta | A | B | C | D | Correcta (A-D).','Importar Excel')}};r.readAsArrayBuffer(f);ev.target.value=''}
 function importBank(ev){const f=ev.target.files[0];if(!f)return;const{lv,sid}=curEdit();if(!lv){toast('Selecciona una materia.','warn');return}const r=new FileReader();r.onload=()=>{try{const data=JSON.parse(r.result);const qs=Array.isArray(data)?data:data.questions;if(!Array.isArray(qs))throw new Error('formato inesperado');BANK[lv][sid]=qs.map(q=>({q:q.q||'',opts:(Array.isArray(q.opts)?q.opts:['','','','']).slice(0,4),correct:Number(q.correct)||0,img:q.img||''}));save(K_BANK,BANK);renderEditor();toast('Preguntas importadas a '+subjName(lv,sid)+' ('+qs.length+').','ok')}catch(e){uiAlert('El archivo no es válido: '+e.message,'Error al importar')}};r.readAsText(f);ev.target.value=''}
 
 /* ====== GUÍAS (editor) ====== */
