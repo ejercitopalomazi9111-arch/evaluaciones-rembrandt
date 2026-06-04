@@ -67,8 +67,15 @@
   .backlink{background:none;border:none;color:var(--azul);font-weight:600;font-size:14px;padding:6px 0;margin-bottom:6px}
   .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media(max-width:560px){.grid2{grid-template-columns:1fr}}
 
-  .hero{position:relative;overflow:hidden;border-radius:var(--radio);padding:40px 34px;margin-bottom:22px;
+  .hero{position:relative;overflow:hidden;border-radius:var(--radio);padding:34px 34px;margin-bottom:22px;
+    display:flex;align-items:flex-end;gap:20px;
     background:linear-gradient(135deg,var(--azul) 0%,#1d2a78 55%,#141d52 100%);color:#fff;box-shadow:var(--sombra)}
+  .hero-txt{position:relative;z-index:1;flex:1}
+  .mascota{height:190px;align-self:flex-end;position:relative;z-index:1;flex:0 0 auto;
+    filter:drop-shadow(0 12px 22px rgba(0,0,0,.35));animation:masc-float 3.4s ease-in-out infinite}
+  @keyframes masc-float{0%,100%{transform:translateY(0) rotate(-1.5deg)}50%{transform:translateY(-9px) rotate(1.5deg)}}
+  @media(max-width:700px){.mascota{display:none}}
+  @media print{.mascota{display:none}}
   .hero::after{content:"";position:absolute;right:-50px;top:-50px;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle,rgba(244,181,10,.30),transparent 70%)}
   .hero::before{content:"";position:absolute;left:-30px;bottom:-60px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(209,31,45,.24),transparent 70%)}
   .hero h2{font-size:32px;margin:12px 0 6px;position:relative}.hero p{margin:0;opacity:.9;font-size:15px;position:relative}
@@ -278,7 +285,7 @@
 
   <!-- HUB -->
   <section id="vHub">
-    <div class="hero"><span class="hero-badge">RESPETO · CULTURA · HONOR</span><h2>Evaluación Diagnóstica</h2><p id="hubCiclo">Nuevo Ingreso · Ciclo</p></div>
+    <div class="hero"><div class="hero-txt"><span class="hero-badge">RESPETO · CULTURA · HONOR</span><h2>Evaluación Diagnóstica</h2><p id="hubCiclo">Nuevo Ingreso · Ciclo</p></div><img class="mascota" src="mascota.png" alt="Mascota Instituto Rembrandt" onerror="this.remove()"></div>
     <div class="hub-grid">
       <div class="hub-card feat reveal" onclick="goCode()"><span class="bar" style="background:var(--azul2)"></span><div class="big" style="color:var(--azul2)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1"/><path d="M8.5 12l2.2 2.2L15.5 9.5"/></svg></div><h3>Presentar evaluación</h3><p>Ingresa con tu código y contesta tu examen.</p><button class="btn">Comenzar ahora</button></div>
     </div>
