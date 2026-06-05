@@ -497,7 +497,7 @@
       </div>
 
       <div id="tabProfes" class="tabpane hidden">
-        <div class="hint">Da de alta profesores con su usuario y contraseña, y asígnales las materias por nivel que imparten. Solo verán y editarán lo que les asignes.</div>
+        <div class="hint">Da de alta profesores con su usuario y contraseña. Por defecto <b>solo editan preguntas</b> de las materias que les asignes. Tú decides qué permisos extra darles (puedes activarlos/desactivarlos después).</div>
         <div class="grid2">
           <div><label>Nombre del profesor</label><input type="text" id="pName"></div>
           <div><label>Usuario</label><input type="text" id="pUser" autocomplete="off"></div>
@@ -505,6 +505,12 @@
         </div>
         <label class="mt">Materias asignadas (nivel · materia)</label>
         <div class="assign-grid" id="assignGrid"></div>
+        <label class="mt">Permisos extra (además de editar preguntas)</label>
+        <div class="chips" style="gap:14px">
+          <label class="chip-x"><input type="checkbox" id="pCapCalif" style="width:auto;margin-right:6px"> Ver calificaciones</label>
+          <label class="chip-x"><input type="checkbox" id="pCapAlumnos" style="width:auto;margin-right:6px"> Base de datos de alumnos</label>
+          <label class="chip-x"><input type="checkbox" id="pCapGuias" style="width:auto;margin-right:6px"> Editar guías</label>
+        </div>
         <div class="toolbar" style="justify-content:flex-start"><button class="btn sm" onclick="addProfe()">➕ Agregar profesor</button></div>
         <h3>Profesores registrados</h3>
         <div id="profesList"></div>
@@ -620,7 +626,7 @@ const DEFAULT_CFG={
 const DEFAULT_USERS=[
   {user:'coordinacion',pass:'coord2026',name:'Coordinación General',role:'coordinator',assign:[]},
   {user:'direccion',pass:'direccion2026',name:'Dirección',role:'direccion',assign:[]},
-  {user:'profe',pass:'profe123',name:'Profesor Demo',role:'teacher',assign:[{level:'secundaria',subject:'matematicas'}]},
+  {user:'profe',pass:'profe123',name:'Profesor Demo',role:'teacher',assign:[{level:'secundaria',subject:'matematicas'}],caps:{calif:true,alumnos:true,guias:true}},
   {user:'debug',pass:'debug2026',name:'Debug (Carlos)',role:'debug',assign:[]}
 ];
 
@@ -634,6 +640,7 @@ let CFG=load(K_CFG,DEFAULT_CFG),BANK=load(K_BANK,buildBank()),GUIDES=load(K_GUID
 ['coordPass','grupos','ciclos','activeCiclo','infoGeneral','contact','escala','timeMin'].forEach(k=>{if(CFG[k]===undefined)CFG[k]=DEFAULT_CFG[k]});
 if(!USERS.some(u=>u.role==='direccion')){USERS.push({user:'direccion',pass:'direccion2026',name:'Dirección',role:'direccion',assign:[]});save(K_USERS,USERS)}
 if(!USERS.some(u=>u.role==='debug')){USERS.push({user:'debug',pass:'debug2026',name:'Debug (Carlos)',role:'debug',assign:[]});save(K_USERS,USERS)}
+USERS.forEach(u=>{if(u.role==='teacher'&&!u.caps)u.caps={calif:true,alumnos:true,guias:true}}); // compat: profes previos conservan su acceso
 LEVELS.forEach(l=>{if(!BANK[l.id])BANK[l.id]={};if(!GUIDES[l.id])GUIDES[l.id]={};subjectsOf(l.id).forEach(s=>{if(!BANK[l.id][s.id])BANK[l.id][s.id]=buildBank()[l.id][s.id];if(!GUIDES[l.id][s.id])GUIDES[l.id][s.id]=buildGuides()[l.id][s.id]})});
 seedDemo();
 
@@ -740,7 +747,7 @@ function isDebug(){return currentUser&&currentUser.role==='debug'}
 function isCoordLevel(){return isCoord()||isDebug()} // coordinación o debug = acceso total a datos
 function accessiblePairs(){if(isCoordLevel()){const r=[];LEVELS.forEach(l=>subjectsOf(l.id).forEach(s=>r.push({level:l.id,subject:s.id})));return r}return(currentUser.assign||[]).slice()}
 function canSeeResult(r){if(isCoordLevel()||isDir())return true;return(currentUser.assign||[]).some(a=>a.level===r.level&&(r.mode===a.subject||r.mode==='__all__'))}
-function enterPanel(){document.getElementById('adminTitle').textContent=(isDebug()?'🐞 ':isCoord()?'👑 ':isDir()?'🏛️ ':'👩‍🏫 ')+currentUser.name;let tabs;if(isDir()){tabs=[['cal','Calificaciones'],['rep','Reportes']]}else{tabs=[['cal','Calificaciones'],['preg','Preguntas'],['guia','Guías'],['alum','Alumnos']];if(isCoordLevel())tabs.push(['profes','Profesores'],['tours','Recorridos'],['rep','Reportes'],['cfg','Configuración']);if(isDebug())tabs.push(['debug','🐞 Debug'])}document.getElementById('adminTabs').innerHTML=tabs.map((t,i)=>`<button class="tab${i===0?' on':''}" data-tab="${t[0]}" onclick="adminTab('${t[0]}')">${t[1]}</button>`).join('');fillCalFilters();renderCalif();fillEditLevels();fillGuideLevels();fillStudentLevels();fillStudentGroups();show('vAdmin');adminTab('cal')}
+function enterPanel(){document.getElementById('adminTitle').textContent=(isDebug()?'🐞 ':isCoord()?'👑 ':isDir()?'🏛️ ':'👩‍🏫 ')+currentUser.name;let tabs;if(isDir()){tabs=[['cal','Calificaciones'],['rep','Reportes']]}else if(isCoordLevel()){tabs=[['cal','Calificaciones'],['preg','Preguntas'],['guia','Guías'],['alum','Alumnos'],['profes','Profesores'],['tours','Recorridos'],['rep','Reportes'],['cfg','Configuración']];if(isDebug())tabs.push(['debug','🐞 Debug'])}else{const cp=currentUser.caps||{};tabs=[];if(cp.calif)tabs.push(['cal','Calificaciones']);tabs.push(['preg','Preguntas']);if(cp.guias)tabs.push(['guia','Guías']);if(cp.alumnos)tabs.push(['alum','Alumnos'])}document.getElementById('adminTabs').innerHTML=tabs.map((t,i)=>`<button class="tab${i===0?' on':''}" data-tab="${t[0]}" onclick="adminTab('${t[0]}')">${t[1]}</button>`).join('');fillCalFilters();renderCalif();fillEditLevels();fillGuideLevels();fillStudentLevels();fillStudentGroups();show('vAdmin');adminTab(tabs[0][0])}
 function adminTab(t){document.querySelectorAll('#adminTabs .tab').forEach(b=>b.classList.toggle('on',b.dataset.tab===t));document.querySelectorAll('#vAdmin .tabpane').forEach(p=>p.classList.add('hidden'));const map={cal:'tabCal',preg:'tabPreg',guia:'tabGuia',alum:'tabAlumnos',profes:'tabProfes',tours:'tabTours',rep:'tabReportes',cfg:'tabCfg',debug:'tabDebug'};document.getElementById(map[t]).classList.remove('hidden');if(t==='cfg'){fillConfigForm();renderCats()}if(t==='profes'){renderAssignGrid();renderProfes()}if(t==='tours')renderTours();if(t==='alum'){fillStudentLevels();fillStudentGroups();renderRoster()}if(t==='rep')renderReportes();if(t==='debug')renderDebug()}
 function accessibleLevels(){const ls=[];accessiblePairs().forEach(p=>{if(!ls.includes(p.level))ls.push(p.level)});return ls}
 function accSubjects(lv){return accessiblePairs().filter(p=>p.level===lv).map(p=>p.subject)}
@@ -795,8 +802,10 @@ function saveGuide(){const{lv,sid}=curGuide();if(!lv)return;GUIDES[lv][sid].text
 
 /* ====== PROFESORES ====== */
 function renderAssignGrid(){const g=document.getElementById('assignGrid');g.innerHTML=LEVELS.map(l=>`<div class="lvl"><b>${l.name}</b>${subjectsOf(l.id).map(s=>`<label><input type="checkbox" value="${l.id}|${s.id}">${s.name}</label>`).join('')}</div>`).join('')}
-function addProfe(){const name=document.getElementById('pName').value.trim(),user=document.getElementById('pUser').value.trim(),pass=document.getElementById('pPass').value.trim();if(!name||!user||!pass){toast('Completa nombre, usuario y contraseña.','warn');return}if(USERS.some(u=>u.user.toLowerCase()===user.toLowerCase())){toast('Ese usuario ya existe.','err');return}const assign=[...document.querySelectorAll('#assignGrid input:checked')].map(c=>{const[level,subject]=c.value.split('|');return{level,subject}});if(!assign.length){toast('Asigna al menos una materia.','warn');return}USERS.push({user,pass,name,role:'teacher',assign});save(K_USERS,USERS);document.getElementById('pName').value='';document.getElementById('pUser').value='';document.getElementById('pPass').value='';document.querySelectorAll('#assignGrid input:checked').forEach(c=>c.checked=false);renderProfes();toast('Profesor agregado.','ok')}
-function renderProfes(){const c=document.getElementById('profesList');const teachers=USERS.filter(u=>u.role==='teacher');if(!teachers.length){c.innerHTML='<p class="muted">Aún no hay profesores.</p>';return}c.innerHTML=teachers.map(u=>`<div class="tour-card"><div class="th"><b>${esc(u.name)}</b><button class="btn sec sm" onclick="delProfe('${jss(u.user)}')">🗑️ Quitar</button></div><div class="meta">Usuario: <b>${esc(u.user)}</b> · Contraseña: ${esc(u.pass)}</div><div class="meta">Materias: ${u.assign.map(a=>levelName(a.level)+'·'+subjName(a.level,a.subject)).join(', ')||'—'}</div></div>`).join('')}
+function addProfe(){const name=document.getElementById('pName').value.trim(),user=document.getElementById('pUser').value.trim(),pass=document.getElementById('pPass').value.trim();if(!name||!user||!pass){toast('Completa nombre, usuario y contraseña.','warn');return}if(USERS.some(u=>u.user.toLowerCase()===user.toLowerCase())){toast('Ese usuario ya existe.','err');return}const assign=[...document.querySelectorAll('#assignGrid input:checked')].map(c=>{const[level,subject]=c.value.split('|');return{level,subject}});if(!assign.length){toast('Asigna al menos una materia.','warn');return}const caps={calif:document.getElementById('pCapCalif').checked,alumnos:document.getElementById('pCapAlumnos').checked,guias:document.getElementById('pCapGuias').checked};USERS.push({user,pass,name,role:'teacher',assign,caps});save(K_USERS,USERS);document.getElementById('pName').value='';document.getElementById('pUser').value='';document.getElementById('pPass').value='';document.querySelectorAll('#assignGrid input:checked').forEach(c=>c.checked=false);['pCapCalif','pCapAlumnos','pCapGuias'].forEach(i=>document.getElementById(i).checked=false);renderProfes();toast('Profesor agregado.','ok')}
+const CAP_LABELS={calif:'Calificaciones',alumnos:'Base de datos',guias:'Guías'};
+function renderProfes(){const c=document.getElementById('profesList');const teachers=USERS.filter(u=>u.role==='teacher');if(!teachers.length){c.innerHTML='<p class="muted">Aún no hay profesores.</p>';return}c.innerHTML=teachers.map(u=>{const cp=u.caps||{};const toggles=Object.keys(CAP_LABELS).map(k=>`<label class="chip-x${cp[k]?' act':''}" style="cursor:pointer"><input type="checkbox" ${cp[k]?'checked':''} onchange="toggleCap('${jss(u.user)}','${k}',this.checked)" style="width:auto;margin-right:6px">${CAP_LABELS[k]}</label>`).join('');return`<div class="tour-card"><div class="th"><b>${esc(u.name)}</b><button class="btn sec sm" onclick="delProfe('${jss(u.user)}')">🗑️ Quitar</button></div><div class="meta">Usuario: <b>${esc(u.user)}</b> · Contraseña: ${esc(u.pass)}</div><div class="meta">Materias: ${u.assign.map(a=>levelName(a.level)+'·'+subjName(a.level,a.subject)).join(', ')||'—'}</div><div class="meta" style="margin-top:8px">Siempre: <b>edita preguntas</b>. Permisos extra:</div><div class="chips" style="gap:10px;margin-top:6px">${toggles}</div></div>`}).join('')}
+function toggleCap(user,cap,val){const u=USERS.find(x=>x.user===user&&x.role==='teacher');if(!u)return;if(!u.caps)u.caps={};u.caps[cap]=val;save(K_USERS,USERS);renderProfes();toast((val?'Permiso activado: ':'Permiso quitado: ')+CAP_LABELS[cap],'ok')}
 async function delProfe(user){if(await uiConfirm('¿Quitar este profesor?','Quitar profesor',true)){USERS=USERS.filter(u=>u.user!==user);save(K_USERS,USERS);renderProfes()}}
 
 /* ====== RECORRIDOS ====== */
