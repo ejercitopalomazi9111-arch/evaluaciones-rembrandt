@@ -127,9 +127,13 @@
   .thanks-ico{width:120px;height:120px;border-radius:50%;margin:6px auto 14px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--verde),#3fbf72);box-shadow:0 12px 30px rgba(46,158,91,.35)}
   .thanks-ico svg{width:58px;height:58px;stroke:#fff;stroke-width:5;fill:none;stroke-linecap:round;stroke-linejoin:round}
 
-  .tabs{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap}
-  .tab{padding:9px 16px;border-radius:10px;border:1px solid var(--linea);background:#fff;font-weight:600;font-size:14px;color:var(--gris)}
+  .tabs{display:flex;gap:8px;margin-bottom:18px;flex-wrap:nowrap;overflow-x:auto;padding-bottom:8px;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;mask-image:linear-gradient(90deg,transparent 0,#000 14px,#000 calc(100% - 14px),transparent 100%);-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 14px,#000 calc(100% - 14px),transparent 100%)}
+  .tabs::-webkit-scrollbar{height:6px}.tabs::-webkit-scrollbar-thumb{background:rgba(39,51,143,.22);border-radius:99px}
+  .tab{flex:0 0 auto;white-space:nowrap;padding:9px 15px;border-radius:10px;border:1px solid var(--linea);background:#fff;font-weight:600;font-size:14px;color:var(--gris);display:inline-flex;align-items:center;gap:7px}
+  .tab .tic{font-size:15px;line-height:1}
   .tab.on{background:var(--azul2);color:#fff;border-color:var(--azul2)}
+  .tab-sep{flex:0 0 auto;align-self:center;font-size:10px;font-weight:800;color:var(--gris);text-transform:uppercase;letter-spacing:1.2px;padding-left:12px;margin-left:4px;border-left:1px solid var(--linea);opacity:.65;white-space:nowrap}
+  @media(max-width:560px){.top h1{font-size:16px}.top p{display:none}.btn-ghost{padding:8px 10px;font-size:12px}.tab{font-size:13px;padding:8px 12px}}
   table.data{width:100%;border-collapse:collapse;font-size:13px}
   table.data th,table.data td{padding:9px 10px;border-bottom:1px solid var(--linea);text-align:left}
   table.data th{background:var(--fondo);color:var(--azul);font-weight:700}
@@ -816,16 +820,24 @@ function seedDemo(){if(STUDENTS.length)return;const mk=(name,group,level,mode,or
 /* ====== LOGIN / PANEL ====== */
 let currentUser=null;
 function goLogin(){document.getElementById('loginUser').value='';document.getElementById('loginPass').value='';show('vLogin')}
+const K_SESSION='ev_session';
+const TAB_ICONS={cal:'📊',preg:'📝',examenes:'🗂️',revision:'✍️',guia:'📚',alum:'👥',profes:'🧑‍🏫',tours:'📅',rep:'📈',cfg:'⚙️',debug:'🐞'};
+function renderTabs(tabs,active){return tabs.map(t=>{if(t[0]==='__sep__')return `<span class="tab-sep">${t[1]}</span>`;const ic=TAB_ICONS[t[0]]?`<span class="tic">${TAB_ICONS[t[0]]}</span>`:'';return `<button class="tab${t[0]===active?' on':''}" data-tab="${t[0]}" onclick="adminTab('${t[0]}')">${ic}${t[1]}</button>`}).join('')}
+function tabKeys(tabs){return tabs.filter(t=>t[0]!=='__sep__').map(t=>t[0])}
+function saveSession(tab){if(currentUser)try{localStorage.setItem(K_SESSION,JSON.stringify({user:currentUser.user,tab}))}catch(e){}}
+function clearSession(){try{localStorage.removeItem(K_SESSION)}catch(e){}}
+function restoreSession(){let s;try{s=JSON.parse(localStorage.getItem(K_SESSION)||'null')}catch(e){}if(!s||!s.user)return;const u=USERS.find(x=>x.user===s.user);if(!u)return;currentUser=u;pendingTab=s.tab;enterPanel()}
+let pendingTab=null;
 function doLogin(){const u=document.getElementById('loginUser').value.trim(),p=document.getElementById('loginPass').value;const usr=USERS.find(x=>x.user.toLowerCase()===u.toLowerCase()&&x.pass===p);if(!usr){toast('Usuario o contraseña incorrectos.','err');return}currentUser=usr;enterPanel()}
-function logout(){currentUser=null;goHub()}
+function logout(){currentUser=null;clearSession();goHub()}
 function isCoord(){return currentUser&&currentUser.role==='coordinator'}
 function isDir(){return currentUser&&currentUser.role==='direccion'}
 function isDebug(){return currentUser&&currentUser.role==='debug'}
 function isCoordLevel(){return isCoord()||isDebug()} // coordinación o debug = acceso total a datos
 function accessiblePairs(){if(isCoordLevel()){const r=[];LEVELS.forEach(l=>subjectsOf(l.id).forEach(s=>r.push({level:l.id,subject:s.id})));return r}return(currentUser.assign||[]).slice()}
 function canSeeResult(r){if(isCoordLevel()||isDir())return true;return(currentUser.assign||[]).some(a=>a.level===r.level&&(r.mode===a.subject||r.mode==='__all__'||(r.type==='parcial'&&a.subject===r.subjectId)))}
-function enterPanel(){document.getElementById('adminTitle').textContent=(isDebug()?'🐞 ':isCoord()?'👑 ':isDir()?'🏛️ ':'👩‍🏫 ')+currentUser.name;let tabs;const EX=feat('examenes');if(isDir()){tabs=[['cal','Calificaciones'],['rep','Reportes']]}else if(isCoordLevel()){tabs=[['cal','Calificaciones'],['preg','Preguntas']];if(EX)tabs.push(['examenes','Exámenes'],['revision','Revisión']);tabs.push(['guia','Guías'],['alum','Alumnos'],['profes','Profesores'],['tours','Recorridos'],['rep','Reportes'],['cfg','Configuración']);if(isDebug())tabs.push(['debug','🐞 Debug'])}else if(!feat('granularPerms')){tabs=[['cal','Calificaciones'],['preg','Preguntas']];if(EX)tabs.push(['examenes','Exámenes'],['revision','Revisión']);tabs.push(['guia','Guías'],['alum','Alumnos'])}else{const cp=currentUser.caps||{};tabs=[];if(cp.calif)tabs.push(['cal','Calificaciones']);tabs.push(['preg','Preguntas']);if(EX&&cp.examenes)tabs.push(['examenes','Exámenes'],['revision','Revisión']);if(cp.guias)tabs.push(['guia','Guías']);if(cp.alumnos)tabs.push(['alum','Alumnos'])}document.getElementById('adminTabs').innerHTML=tabs.map((t,i)=>`<button class="tab${i===0?' on':''}" data-tab="${t[0]}" onclick="adminTab('${t[0]}')">${t[1]}</button>`).join('');fillCalFilters();renderCalif();fillEditLevels();fillGuideLevels();fillStudentLevels();fillStudentGroups();show('vAdmin');adminTab(tabs[0][0])}
-function adminTab(t){document.querySelectorAll('#adminTabs .tab').forEach(b=>b.classList.toggle('on',b.dataset.tab===t));document.querySelectorAll('#vAdmin .tabpane').forEach(p=>p.classList.add('hidden'));const map={cal:'tabCal',preg:'tabPreg',guia:'tabGuia',alum:'tabAlumnos',profes:'tabProfes',tours:'tabTours',rep:'tabReportes',cfg:'tabCfg',debug:'tabDebug',examenes:'tabExamenes',revision:'tabRevision'};document.getElementById(map[t]).classList.remove('hidden');if(t==='cfg'){fillConfigForm();renderCats();renderSem();renderFeatToggles()}if(t==='profes'){renderAssignGrid();renderProfes()}if(t==='tours')renderTours();if(t==='alum'){fillStudentLevels();fillStudentGroups();renderRoster()}if(t==='rep')renderReportes();if(t==='debug')renderDebug();if(t==='examenes')renderExamsTab();if(t==='revision')renderRevision()}
+function enterPanel(){document.getElementById('adminTitle').textContent=(isDebug()?'🐞 ':isCoord()?'👑 ':isDir()?'🏛️ ':'👩‍🏫 ')+currentUser.name;let tabs;const EX=feat('examenes');if(isDir()){tabs=[['cal','Calificaciones'],['rep','Reportes']]}else if(isCoordLevel()){tabs=[['cal','Calificaciones']];if(EX)tabs.push(['examenes','Exámenes'],['revision','Revisión']);tabs.push(['preg','Preguntas'],['rep','Reportes'],['__sep__','Personas'],['alum','Alumnos'],['profes','Profesores'],['tours','Recorridos'],['guia','Guías'],['__sep__','Sistema'],['cfg','Configuración']);if(isDebug())tabs.push(['debug','Debug'])}else if(!feat('granularPerms')){tabs=[['cal','Calificaciones'],['preg','Preguntas']];if(EX)tabs.push(['examenes','Exámenes'],['revision','Revisión']);tabs.push(['guia','Guías'],['alum','Alumnos'])}else{const cp=currentUser.caps||{};tabs=[];if(cp.calif)tabs.push(['cal','Calificaciones']);tabs.push(['preg','Preguntas']);if(EX&&cp.examenes)tabs.push(['examenes','Exámenes'],['revision','Revisión']);if(cp.guias)tabs.push(['guia','Guías']);if(cp.alumnos)tabs.push(['alum','Alumnos'])}const keys=tabKeys(tabs);const start=(pendingTab&&keys.includes(pendingTab))?pendingTab:keys[0];pendingTab=null;document.getElementById('adminTabs').innerHTML=renderTabs(tabs,start);fillCalFilters();renderCalif();fillEditLevels();fillGuideLevels();fillStudentLevels();fillStudentGroups();show('vAdmin');adminTab(start)}
+function adminTab(t){document.querySelectorAll('#adminTabs .tab').forEach(b=>b.classList.toggle('on',b.dataset.tab===t));document.querySelectorAll('#vAdmin .tabpane').forEach(p=>p.classList.add('hidden'));const map={cal:'tabCal',preg:'tabPreg',guia:'tabGuia',alum:'tabAlumnos',profes:'tabProfes',tours:'tabTours',rep:'tabReportes',cfg:'tabCfg',debug:'tabDebug',examenes:'tabExamenes',revision:'tabRevision'};document.getElementById(map[t]).classList.remove('hidden');if(t==='cfg'){fillConfigForm();renderCats();renderSem();renderFeatToggles()}if(t==='profes'){renderAssignGrid();renderProfes()}if(t==='tours')renderTours();if(t==='alum'){fillStudentLevels();fillStudentGroups();renderRoster()}if(t==='rep')renderReportes();if(t==='debug')renderDebug();if(t==='examenes')renderExamsTab();if(t==='revision')renderRevision();saveSession(t);const at=document.querySelector('#adminTabs .tab.on');if(at)at.scrollIntoView({inline:'center',block:'nearest'})}
 function accessibleLevels(){const ls=[];accessiblePairs().forEach(p=>{if(!ls.includes(p.level))ls.push(p.level)});return ls}
 function accSubjects(lv){return accessiblePairs().filter(p=>p.level===lv).map(p=>p.subject)}
 function fillEditLevels(){document.getElementById('editLevel').innerHTML=accessibleLevels().map(l=>`<option value="${l}">${levelName(l)}</option>`).join('');fillEditSubjects()}
@@ -1000,7 +1012,7 @@ function playSplash(){const sp=document.getElementById('splash');if(!sp)return;c
    .add({targets:'#spLogo',translateX:-Math.round(window.innerWidth*0.62),rotate:'-4deg',duration:720,easing:'easeInCubic'},'+=420')
    .add({targets:'.sp-lines i',translateX:'160%',delay:anime.stagger(55),duration:600,easing:'easeInQuad'},'-=680')
    .add({targets:'#splash',opacity:0,duration:450,complete:()=>sp.remove()},'-=180')}
-goHub();playSplash();
+goHub();playSplash();restoreSession();
 </script>
 </body>
 </html>
