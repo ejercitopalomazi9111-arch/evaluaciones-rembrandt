@@ -128,10 +128,15 @@ const HEAD = `<!DOCTYPE html>
 
   <!-- ADMIN -->
   <section id="vAdmin" class="hidden">
-    <button class="backlink" onclick="logout()">← Cerrar sesión</button>
-    <div class="card">
-      <h2 style="margin-top:0" id="adminTitle">Coordinación</h2>
-      <div class="tabs" id="adminTabs"></div>
+    <div class="admin-shell">
+      <aside class="admin-side">
+        <div class="admin-brand"><div class="logo-box" id="sideLogo">R</div><div class="admin-brand-tx"><b id="sideSchool">Instituto Rembrandt</b><small>Bachillerato · Lite</small></div></div>
+        <nav class="tabs admin-nav" id="adminTabs"></nav>
+        <button class="admin-logout" onclick="logout()">⎋ Cerrar sesión</button>
+      </aside>
+      <div class="admin-main">
+        <header class="admin-top"><h2 id="adminTitle">Coordinación</h2></header>
+        <div class="card admin-content">
 
       <div id="tabCal" class="tabpane">
         <details class="acc" open><summary>📈 Estadísticas <span class="chip" id="statChip">0</span></summary><div class="accbody"><div class="cal-stats" id="calStats"></div></div></details>
@@ -186,6 +191,8 @@ const HEAD = `<!DOCTYPE html>
         <div class="row"><div style="flex:2"><input type="text" id="newCiclo" placeholder="Nuevo periodo, ej. 2027-2028"></div><div><button class="btn sm" onclick="addCiclo()">Agregar</button></div></div>
         <div class="toolbar" style="justify-content:flex-start"><button class="btn sm" onclick="saveConfig()">💾 Guardar configuración</button></div>
         <div class="upsell">✨ <b>Esta es la Edición Lite.</b> La <b>Edición Completa</b> añade: niveles Preescolar→Prepa, roles (Dirección y Profesores por materia), guías de estudio, agenda de recorridos, reportes generales, importación masiva por Excel, envío de constancias por correo y la versión web multiusuario en la nube. <i>Tus datos actuales se conservan al actualizar.</i></div>
+      </div>
+        </div>
       </div>
     </div>
   </section>
@@ -258,7 +265,7 @@ function finishQuiz(){stopTimer();const total=quiz.items.length;let hits=0;const
 function goLogin(){document.getElementById('loginPass').value='';show('vLogin')}
 function doLogin(){const p=document.getElementById('loginPass').value;if(p!==(CFG.coordPass||'coord2026')){toast('Contraseña incorrecta.','err');return}enterPanel()}
 function logout(){goHub()}
-function enterPanel(){document.getElementById('adminTitle').textContent='👑 Coordinación';const tabs=[['cal','Calificaciones'],['alum','Aspirantes'],['preg','Preguntas'],['cfg','Configuración']];document.getElementById('adminTabs').innerHTML=tabs.map((t,i)=>'<button class="tab'+(i===0?' on':'')+'" data-tab="'+t[0]+'" onclick="adminTab(\''+t[0]+'\')">'+t[1]+'</button>').join('');fillCalFilters();renderCalif();fillEditSubjects();fillStudentGroups();show('vAdmin');adminTab('cal')}
+function enterPanel(){document.getElementById('adminTitle').textContent='👑 Coordinación';const _ss=document.getElementById('sideSchool');if(_ss){_ss.textContent=CFG.school;setLogo('sideLogo')}const TI={cal:'📊',alum:'👥',preg:'📝',cfg:'⚙️'};const tabs=[['cal','Calificaciones'],['alum','Aspirantes'],['preg','Preguntas'],['cfg','Configuración']];document.getElementById('adminTabs').innerHTML=tabs.map((t,i)=>'<button class="tab'+(i===0?' on':'')+'" data-tab="'+t[0]+'" onclick="adminTab(\''+t[0]+'\')"><span class="tic">'+TI[t[0]]+'</span>'+t[1]+'</button>').join('');fillCalFilters();renderCalif();fillEditSubjects();fillStudentGroups();show('vAdmin');adminTab('cal')}
 function adminTab(t){document.querySelectorAll('#adminTabs .tab').forEach(b=>b.classList.toggle('on',b.dataset.tab===t));document.querySelectorAll('#vAdmin .tabpane').forEach(p=>p.classList.add('hidden'));const map={cal:'tabCal',alum:'tabAlumnos',preg:'tabPreg',cfg:'tabCfg'};document.getElementById(map[t]).classList.remove('hidden');if(t==='cfg'){fillConfigForm();renderCats()}if(t==='alum'){fillStudentGroups();renderRoster()}if(t==='preg')renderEditor()}
 
 /* ====== CALIFICACIONES ====== */

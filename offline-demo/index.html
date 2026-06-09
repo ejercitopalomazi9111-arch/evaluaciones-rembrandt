@@ -309,21 +309,41 @@
   header.top h1{font-size:21px}
   .sp-logo{width:200px;height:232px}
   @media(max-width:560px){.logo-box{width:58px;height:58px;font-size:24px;border-radius:13px}header.top h1{font-size:17px}}
-  @media(min-width:760px){
-    #adminTabs{flex-wrap:wrap;overflow:visible;-webkit-mask-image:none;mask-image:none;gap:10px;background:#f3f6ff;border:1px solid var(--linea);border-radius:14px;padding:10px}
-    #adminTabs .tab{flex:0 0 auto}
-  }
-  #adminTabs .tab{padding:11px 17px;font-size:14.5px;border-radius:12px;font-weight:700}
-  #adminTabs .tab .tic{font-size:17px}
-  #adminTabs .tab:hover:not(.on){transform:translateY(-1px)}
-  #adminTabs .tab.on{transform:translateY(-1px);box-shadow:0 6px 16px rgba(44,82,192,.30)}
-  #adminTabs .tab-sep{opacity:.8;color:var(--azul)}
-  #vAdmin .card{padding:26px}
-  #adminTitle{font-size:24px;letter-spacing:-.02em}
+  /* ===== PANEL DE COORDINACIÓN: layout con barra lateral (dashboard) ===== */
+  .admin-shell{display:flex;gap:18px;align-items:flex-start}
+  .admin-side{flex:0 0 236px;position:sticky;top:18px;background:var(--tarjeta);border-radius:var(--radio);box-shadow:var(--sombra);padding:16px 12px;display:flex;flex-direction:column;gap:4px;max-height:calc(100vh - 36px)}
+  .admin-brand{display:flex;align-items:center;gap:11px;padding:6px 8px 14px;border-bottom:1px solid var(--linea);margin-bottom:8px}
+  .admin-brand .logo-box{width:44px;height:44px;font-size:20px;border-radius:12px;flex:0 0 auto}
+  .admin-brand-tx{min-width:0}
+  .admin-brand-tx b{display:block;font-size:14px;color:var(--azul);line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .admin-brand-tx small{color:var(--gris);font-size:11px}
+  .admin-nav{display:flex;flex-direction:column;gap:4px;overflow-y:auto;overflow-x:hidden;background:none;border:none;padding:0;margin:0;flex:1;-webkit-mask-image:none;mask-image:none}
+  .admin-nav::-webkit-scrollbar{width:6px}
+  .admin-nav .tab{width:100%;justify-content:flex-start;border:none;background:none;color:var(--tinta);font-weight:600;padding:11px 12px;border-radius:11px;font-size:14px;white-space:nowrap}
+  .admin-nav .tab .tic{font-size:18px}
+  .admin-nav .tab:hover:not(.on){background:var(--fondo);transform:none}
+  .admin-nav .tab.on{background:var(--azul2);color:#fff;box-shadow:0 6px 16px rgba(44,82,192,.28);transform:none}
+  .admin-nav .tab-sep{border:none;border-left:none;padding:13px 12px 3px;margin:4px 0 0;font-size:10px;letter-spacing:1.6px;color:var(--gris);opacity:.85;text-transform:uppercase}
+  .admin-logout{margin-top:8px;border:1px solid var(--linea);background:#fff;color:var(--rojo);font-weight:700;padding:11px;border-radius:11px;font-size:13px;cursor:pointer;transition:.15s}
+  .admin-logout:hover{background:#fdecec;border-color:#f3c0c0}
+  .admin-main{flex:1;min-width:0}
+  .admin-top{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+  .admin-top h2{margin:0;font-size:24px;letter-spacing:-.02em}
+  .admin-content{padding:26px}
   .acc>summary{font-size:15px;padding:14px 16px}
   .acc{box-shadow:0 1px 2px rgba(20,35,90,.05),0 8px 22px rgba(20,35,90,.07)}
   .stat{background:#fff}
   .stat b{color:var(--azul)}
+  @media(max-width:860px){
+    .admin-shell{flex-direction:column}
+    .admin-side{position:static;flex:none;width:100%;max-height:none;flex-direction:row;flex-wrap:wrap;align-items:center;gap:8px}
+    .admin-brand{border-bottom:none;margin:0;padding:4px 8px;flex:0 0 auto}
+    .admin-nav{flex-direction:row;flex-wrap:wrap;width:100%;order:3}
+    .admin-nav .tab{width:auto}
+    .admin-nav .tab-sep{display:none}
+    .admin-logout{margin:0 0 0 auto}
+    .admin-content{padding:20px 18px}
+  }
 </style>
 </head>
 <body>
@@ -520,10 +540,15 @@
 
   <!-- ADMIN -->
   <section id="vAdmin" class="hidden">
-    <button class="backlink" onclick="logout()">← Cerrar sesión</button>
-    <div class="card">
-      <h2 style="margin-top:0" id="adminTitle">Panel</h2>
-      <div class="tabs" id="adminTabs"></div>
+    <div class="admin-shell">
+      <aside class="admin-side">
+        <div class="admin-brand"><div class="logo-box" id="sideLogo">R</div><div class="admin-brand-tx"><b id="sideSchool">Instituto Rembrandt</b><small>Panel de gestión</small></div></div>
+        <nav class="tabs admin-nav" id="adminTabs"></nav>
+        <button class="admin-logout" onclick="logout()">⎋ Cerrar sesión</button>
+      </aside>
+      <div class="admin-main">
+        <header class="admin-top"><h2 id="adminTitle">Panel</h2></header>
+        <div class="card admin-content">
 
       <div id="tabCal" class="tabpane">
         <details class="acc" open><summary>📈 Estadísticas <span class="chip" id="statChip">0</span></summary><div class="accbody"><div class="cal-stats" id="calStats"></div></div></details>
@@ -745,6 +770,8 @@
         <p class="muted" style="margin-top:-4px">Borra TODOS los alumnos y resultados (reales y de prueba) para entregar la página limpia. No toca preguntas, guías ni configuración.</p>
         <div class="toolbar" style="justify-content:flex-start"><button class="btn danger sm" onclick="dbgWipeAll()">🧹 Vaciar alumnos y resultados</button></div>
       </div>
+        </div>
+      </div>
     </div>
   </section>
 </div>
@@ -922,7 +949,7 @@ function isDebug(){return currentUser&&currentUser.role==='debug'}
 function isCoordLevel(){return isCoord()||isDebug()} // coordinación o debug = acceso total a datos
 function accessiblePairs(){if(isCoordLevel()){const r=[];LEVELS.forEach(l=>subjectsOf(l.id).forEach(s=>r.push({level:l.id,subject:s.id})));return r}return(currentUser.assign||[]).slice()}
 function canSeeResult(r){if(isCoordLevel()||isDir())return true;return(currentUser.assign||[]).some(a=>a.level===r.level&&(r.mode===a.subject||r.mode==='__all__'||(r.type==='parcial'&&a.subject===r.subjectId)))}
-function enterPanel(){document.getElementById('adminTitle').textContent=(isDebug()?'🐞 ':isCoord()?'👑 ':isDir()?'🏛️ ':'👩‍🏫 ')+currentUser.name;let tabs;const EX=feat('examenes');if(isDir()){tabs=[['cal','Calificaciones'],['rep','Reportes']]}else if(isCoordLevel()){tabs=[['cal','Calificaciones']];if(EX)tabs.push(['examenes','Exámenes']);else tabs.push(['preg','Preguntas']);tabs.push(['rep','Reportes'],['__sep__','Personas'],['alum','Alumnos'],['profes','Profesores'],['tours','Recorridos'],['guia','Guías'],['__sep__','Sistema'],['cfg','Configuración']);if(isDebug())tabs.push(['debug','Debug'])}else if(!feat('granularPerms')){tabs=[['cal','Calificaciones'],['preg','Preguntas']];if(EX)tabs.push(['examenes','Exámenes']);tabs.push(['guia','Guías'],['alum','Alumnos'])}else{const cp=currentUser.caps||{};tabs=[];if(EX){tabs.push(['examenes','Exámenes']);if(cp.preguntas)tabs.push(['preg','Preguntas'])}else{tabs.push(['preg','Preguntas'])}if(cp.calif)tabs.push(['cal','Calificaciones']);if(cp.guias)tabs.push(['guia','Guías']);if(cp.alumnos)tabs.push(['alum','Alumnos'])}const keys=tabKeys(tabs);const start=(pendingTab&&keys.includes(pendingTab))?pendingTab:keys[0];pendingTab=null;document.getElementById('adminTabs').innerHTML=renderTabs(tabs,start);fillCalFilters();renderCalif();fillEditLevels();fillGuideLevels();fillStudentLevels();fillStudentGroups();show('vAdmin');adminTab(start)}
+function enterPanel(){document.getElementById('adminTitle').textContent=(isDebug()?'🐞 ':isCoord()?'👑 ':isDir()?'🏛️ ':'👩‍🏫 ')+currentUser.name;let tabs;const EX=feat('examenes');if(isDir()){tabs=[['cal','Calificaciones'],['rep','Reportes']]}else if(isCoordLevel()){tabs=[['cal','Calificaciones']];if(EX)tabs.push(['examenes','Exámenes']);else tabs.push(['preg','Preguntas']);tabs.push(['rep','Reportes'],['__sep__','Personas'],['alum','Alumnos'],['profes','Profesores'],['tours','Recorridos'],['guia','Guías'],['__sep__','Sistema'],['cfg','Configuración']);if(isDebug())tabs.push(['debug','Debug'])}else if(!feat('granularPerms')){tabs=[['cal','Calificaciones'],['preg','Preguntas']];if(EX)tabs.push(['examenes','Exámenes']);tabs.push(['guia','Guías'],['alum','Alumnos'])}else{const cp=currentUser.caps||{};tabs=[];if(EX){tabs.push(['examenes','Exámenes']);if(cp.preguntas)tabs.push(['preg','Preguntas'])}else{tabs.push(['preg','Preguntas'])}if(cp.calif)tabs.push(['cal','Calificaciones']);if(cp.guias)tabs.push(['guia','Guías']);if(cp.alumnos)tabs.push(['alum','Alumnos'])}const keys=tabKeys(tabs);const start=(pendingTab&&keys.includes(pendingTab))?pendingTab:keys[0];pendingTab=null;const _ss=document.getElementById('sideSchool');if(_ss){_ss.textContent=CFG.school;setLogo('sideLogo')}document.getElementById('adminTabs').innerHTML=renderTabs(tabs,start);fillCalFilters();renderCalif();fillEditLevels();fillGuideLevels();fillStudentLevels();fillStudentGroups();show('vAdmin');adminTab(start)}
 function adminTab(t){document.querySelectorAll('#adminTabs .tab').forEach(b=>b.classList.toggle('on',b.dataset.tab===t));document.querySelectorAll('#vAdmin .tabpane').forEach(p=>p.classList.add('hidden'));const map={cal:'tabCal',preg:'tabPreg',guia:'tabGuia',alum:'tabAlumnos',profes:'tabProfes',tours:'tabTours',rep:'tabReportes',cfg:'tabCfg',debug:'tabDebug',examenes:'tabExamenes',revision:'tabRevision'};document.getElementById(map[t]).classList.remove('hidden');if(t==='preg'){const pb=document.getElementById('pregBack');if(pb)pb.style.display=document.querySelector('#adminTabs .tab[data-tab="examenes"]')?'':'none'}if(t==='cfg'){fillConfigForm();renderCats();renderSem();renderFeatToggles()}if(t==='profes'){renderAssignGrid();renderProfes()}if(t==='tours')renderTours();if(t==='alum'){fillStudentLevels();fillStudentGroups();renderRoster()}if(t==='rep')renderReportes();if(t==='debug')renderDebug();if(t==='examenes')renderExamsTab();if(t==='revision')renderRevision();saveSession(t);const at=document.querySelector('#adminTabs .tab.on');if(at)at.scrollIntoView({inline:'center',block:'nearest'})}
 function accessibleLevels(){const ls=[];accessiblePairs().forEach(p=>{if(!ls.includes(p.level))ls.push(p.level)});return ls}
 function accSubjects(lv){return accessiblePairs().filter(p=>p.level===lv).map(p=>p.subject)}
