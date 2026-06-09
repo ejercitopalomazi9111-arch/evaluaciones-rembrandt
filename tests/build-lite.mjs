@@ -33,19 +33,21 @@ const HEAD = `<!DOCTYPE html>
 <div id="constancia">
   <div class="cert">
     <div class="cert-wm">DIAGNÓSTICO</div>
-    <div class="cert-head"><div class="logo-box" id="certLogo">R</div><div><h2 id="certSchool">Instituto Rembrandt</h2><p id="certSub">Evaluación Diagnóstica</p></div></div>
-    <div class="cert-title"><h1>Constancia de Resultados</h1><div class="line"></div></div>
-    <div class="cert-body">Se hace constar que el alumno(a)
+    <img class="cert-formato-head" src="formato-encabezado.png" alt="Instituto Rembrandt" onerror="this.style.display='none'">
+    <div class="cert-head"><div><h2 id="certSchool">Instituto Rembrandt</h2><p id="certSub">Evaluación Diagnóstica</p></div></div>
+    <div class="cert-title"><h1>Reporte de Calificaciones</h1><div class="line"></div></div>
+    <div class="cert-body">Se hace constar que el/la aspirante
       <div class="cert-name" id="certName">Nombre</div>
-      <div id="certGroupLine" class="muted"></div>
-      presentó la evaluación diagnóstica de <b id="certSubject">Examen completo</b>, obteniendo una calificación de:
-      <div class="cert-grade" id="certGrade">0</div>
+      <div id="certInfoLine" class="muted"></div>
+      presentó la evaluación diagnóstica de <b id="certSubject">Examen completo</b>, obteniendo:
+      <div class="cert-gradewrap"><span class="cert-gradelbl">Calificación:</span><span class="cert-grade" id="certGrade">0</span></div>
       <div>nivel de desempeño <b id="certLevel">—</b> (<span id="certPct">0</span>% de aciertos, <span id="certHits">0/0</span> correctas).</div>
     </div>
     <div id="certBreakdown" class="center"></div>
-    <div class="cert-foot"><div class="cert-sign"><div class="ln"></div><b id="certDirector">Dirección</b><small id="certDirectorTitle">Dirección Escolar</small></div>
-      <div class="cert-sign"><div class="ln"></div><b>Sello de la institución</b><small>&nbsp;</small></div></div>
+    <div class="cert-foot"><div class="cert-sign"><div class="ln"></div><b id="certDirector">Dra. Blanca Ortiz Morales</b><small id="certDirectorTitle">Dirección Académica</small></div>
+      <div class="cert-sign"><div class="ln"></div><b id="certControl">&nbsp;</b><small>Control Escolar</small></div></div>
     <div class="cert-meta"><span id="certDate">Fecha</span><span id="certFolio">Folio</span></div>
+    <img class="cert-formato-foot" src="formato-pie.png" alt="" onerror="this.style.display='none'">
   </div>
   <div class="toolbar no-print">
     <button class="btn" onclick="imprimirConstancia()">🖨️ Imprimir / Guardar PDF</button>
@@ -56,7 +58,7 @@ const HEAD = `<!DOCTYPE html>
 <div class="wrap" id="app">
   <header class="top">
     <div class="logo-box" id="hdrLogo">R</div>
-    <div><h1 id="hdrSchool">Instituto Rembrandt</h1><p id="hdrSub">Evaluación Diagnóstica · Edición Lite</p></div>
+    <div><h1 id="hdrSchool">Instituto Rembrandt</h1><p id="hdrSub">Evaluación Diagnóstica · Bachillerato · Edición Lite</p></div>
     <div class="spacer"></div>
     <button class="btn-ghost" onclick="goHub()">Inicio</button>
     <button class="btn-ghost" onclick="goLogin()">Coordinación</button>
@@ -64,7 +66,7 @@ const HEAD = `<!DOCTYPE html>
 
   <!-- HUB -->
   <section id="vHub">
-    <div class="hero"><div class="hero-txt"><span class="hero-badge">RESPETO · CULTURA · HONOR</span><h2>Evaluación Diagnóstica</h2><p id="hubCiclo">Nuevo Ingreso · Ciclo</p></div><img class="mascota" src="mascota.png" alt="Mascota" onerror="this.remove()"></div>
+    <div class="hero"><div class="hero-txt"><span class="hero-badge">RESPETO · CULTURA · HONOR</span><h2>Evaluación Diagnóstica</h2><p id="hubCiclo">Nuevo ingreso · Periodo</p></div><img class="mascota" src="mascota.png" alt="Mascota" onerror="this.remove()"></div>
     <div class="hub-grid">
       <div class="hub-card feat" onclick="goCode()"><span class="bar" style="background:var(--azul2)"></span><div class="big" style="color:var(--azul2)">📝</div><h3>Presentar evaluación</h3><p>Ingresa con tu código y contesta tu examen.</p><button class="btn">Comenzar ahora</button></div>
     </div>
@@ -134,27 +136,24 @@ const HEAD = `<!DOCTYPE html>
       <div id="tabCal" class="tabpane">
         <details class="acc" open><summary>📈 Estadísticas <span class="chip" id="statChip">0</span></summary><div class="accbody"><div class="cal-stats" id="calStats"></div></div></details>
         <div class="row" style="align-items:flex-end">
-          <div><label>Grupo</label><select id="fGroup" onchange="renderCalif()"></select></div>
-          <div><label>Ciclo</label><select id="fCiclo" onchange="renderCalif()"></select></div>
+          <div><label>Periodo</label><select id="fCiclo" onchange="renderCalif()"></select></div>
           <div><label>Resultado</label><select id="fResult" onchange="renderCalif()"><option value="">Todos</option><option value="apro">Suficiente</option><option value="repro">Insuficiente</option></select></div>
-          <div style="flex:2"><label>Buscar alumno</label><input type="text" id="fSearch" oninput="renderCalif()" placeholder="Nombre…"></div>
+          <div style="flex:2"><label>Buscar aspirante</label><input type="text" id="fSearch" oninput="renderCalif()" placeholder="Nombre…"></div>
           <div><button class="btn sm" onclick="exportCSV()">⬇️ Excel</button></div>
         </div>
         <div id="calList" class="mt"></div>
       </div>
 
       <div id="tabAlumnos" class="tabpane hidden">
-        <div class="hint">Registra a los alumnos de nuevo ingreso. Cada uno recibe un <b>código único de un solo uso</b> para presentar el examen diagnóstico completo.</div>
+        <div class="hint">Registra a los aspirantes de nuevo ingreso a bachillerato. Cada uno recibe un <b>código único de un solo uso</b> para presentar el examen diagnóstico completo.</div>
         <div class="grid2">
-          <div><label>Nombre del alumno</label><input type="text" id="sName"></div>
-          <div><label>Grupo al que ingresa</label><select id="sGroup"></select></div>
+          <div><label>Nombre completo del aspirante</label><input type="text" id="sName"></div>
           <div><label>Escuela de procedencia</label><input type="text" id="sOrigin"></div>
-          <div><label>Correo del tutor</label><input type="email" id="sTEmail"></div>
+          <div><label>Correo de contacto</label><input type="email" id="sTEmail"></div>
         </div>
         <div class="toolbar" style="justify-content:flex-start"><button class="btn sm" onclick="addStudent()">➕ Registrar y generar código</button>
           <button class="btn sec sm" onclick="exportRoster()">⬇️ Exportar lista</button></div>
         <div class="row" style="align-items:flex-end">
-          <div><label>Filtrar por grupo</label><select id="fSGroup" onchange="renderRoster()"></select></div>
           <div><label>Estado</label><select id="fSStatus" onchange="renderRoster()"><option value="">Todos</option><option value="pending">Pendientes</option><option value="completed">Contestados</option></select></div>
           <div style="flex:2"><label>Buscar (nombre o código)</label><input type="text" id="fSSearch" oninput="renderRoster()" placeholder="Nombre o código…"></div>
         </div>
@@ -175,7 +174,7 @@ const HEAD = `<!DOCTYPE html>
         <div class="hint">Datos de la institución y del examen.</div>
         <div class="grid2">
           <div><label>Nombre de la escuela</label><input type="text" id="cfgSchool"></div>
-          <div><label>Subtítulo / Ciclo</label><input type="text" id="cfgSub"></div>
+          <div><label>Subtítulo / Periodo</label><input type="text" id="cfgSub"></div>
           <div><label>Nombre del Director(a)</label><input type="text" id="cfgDirector"></div>
           <div><label>Cargo del firmante</label><input type="text" id="cfgDirectorTitle"></div>
           <div><label>Calificación mínima aprobatoria (%)</label><input type="number" id="cfgPass" min="0" max="100"></div>
@@ -183,10 +182,8 @@ const HEAD = `<!DOCTYPE html>
           <div><label>Tiempo del examen (min, 0 = sin límite)</label><input type="number" id="cfgTime" min="0" max="300"></div>
           <div><label>¿Barajar preguntas/respuestas?</label><select id="cfgShuffle"><option value="1">Sí</option><option value="0">No</option></select></div>
         </div>
-        <h3 class="mt">Grupos</h3><div class="chips" id="catGrupos"></div>
-        <div class="row"><div style="flex:2"><input type="text" id="newGrupo" placeholder="Nuevo grupo, ej. 1.3"></div><div><button class="btn sm" onclick="addGrupo()">Agregar</button></div></div>
-        <h3 class="mt">Ciclos</h3><p class="muted" style="margin-top:-4px">★ marca el ciclo activo.</p><div class="chips" id="catCiclos"></div>
-        <div class="row"><div style="flex:2"><input type="text" id="newCiclo" placeholder="Nuevo ciclo, ej. 2027-2028"></div><div><button class="btn sm" onclick="addCiclo()">Agregar</button></div></div>
+        <h3 class="mt">Periodos</h3><p class="muted" style="margin-top:-4px">★ marca el periodo activo.</p><div class="chips" id="catCiclos"></div>
+        <div class="row"><div style="flex:2"><input type="text" id="newCiclo" placeholder="Nuevo periodo, ej. 2027-2028"></div><div><button class="btn sm" onclick="addCiclo()">Agregar</button></div></div>
         <div class="toolbar" style="justify-content:flex-start"><button class="btn sm" onclick="saveConfig()">💾 Guardar configuración</button></div>
         <div class="upsell">✨ <b>Esta es la Edición Lite.</b> La <b>Edición Completa</b> añade: niveles Preescolar→Prepa, roles (Dirección y Profesores por materia), guías de estudio, agenda de recorridos, reportes generales, importación masiva por Excel, envío de constancias por correo y la versión web multiusuario en la nube. <i>Tus datos actuales se conservan al actualizar.</i></div>
       </div>
@@ -208,16 +205,17 @@ const SUBJECTS={
   secundaria:[{id:'matematicas',name:'Matemáticas',ico:'📐'},{id:'quimica',name:'Química',ico:'⚗️'},{id:'biologia',name:'Biología',ico:'🧬'},{id:'lectura',name:'Lectura y Redacción',ico:'📖'},{id:'fisica',name:'Física',ico:'🔭'}],
   preparatoria:[{id:'matematicas',name:'Matemáticas',ico:'📐'},{id:'quimica',name:'Química',ico:'⚗️'},{id:'biologia',name:'Biología',ico:'🧬'},{id:'lectura',name:'Lectura y Redacción',ico:'📖'},{id:'fisica',name:'Física',ico:'🔭'}]
 };
-const QPS=20, LV='secundaria'; // Lite: examen diagnóstico fijo de Secundaria (5 materias)
+const QPS=20, LV='preparatoria'; // Lite: examen diagnóstico fijo de Bachillerato (5 materias)
 function subjectsOf(lv){return SUBJECTS[lv]||[]}
 function levelName(lv){const l=LEVELS.find(x=>x.id===lv);return l?l.name:lv}
 function subjName(lv,sid){const s=subjectsOf(lv).find(x=>x.id===sid);return s?s.name:sid}
-const DEFAULT_CFG={school:'Instituto Rembrandt de Querétaro',sub:'Evaluación Diagnóstica de Nuevo Ingreso · Ciclo 2026-2027',director:'Nombre del Director(a)',directorTitle:'Dirección Escolar',pass:60,logo:'',shuffle:1,escala:10,timeMin:0,grupos:['1.1','1.2','2.1','2.2','3.1','3.2','4.1','4.2','5.1','5.2','6.1','6.2'],ciclos:['2025-2026','2026-2027'],activeCiclo:'2026-2027',coordPass:'coord2026',infoGeneral:'',contact:{phone:'',email:'',addr:''}};
+const DEFAULT_CFG={school:'Instituto Rembrandt de Querétaro',sub:'Evaluación Diagnóstica de nuevo ingreso · Ciclo 2026-2027',director:'Dra. Blanca Ortiz Morales',directorTitle:'Dirección Académica',pass:60,logo:'',shuffle:1,escala:10,timeMin:0,grupos:[],ciclos:['2025-2026','2026-2027'],activeCiclo:'2026-2027',coordPass:'coord2026',infoGeneral:'',contact:{phone:'',email:'',addr:''}};
 function load(k,def){try{const v=localStorage.getItem(k);return v?JSON.parse(v):def}catch(e){return def}}
 function save(k,v){try{localStorage.setItem(k,JSON.stringify(v));return true}catch(e){toast('Almacenamiento lleno.','err');return false}}
 function buildBank(){const b={};LEVELS.forEach(l=>{b[l.id]={};subjectsOf(l.id).forEach(s=>{b[l.id][s.id]=[];for(let i=1;i<=QPS;i++)b[l.id][s.id].push({q:s.name+' — Pregunta '+i+' (placeholder, edítala)',opts:['Opción A','Opción B','Opción C','Opción D'],correct:(i-1)%4,img:''})})});return b}
 let CFG=load(K_CFG,DEFAULT_CFG),BANK=load(K_BANK,buildBank()),RES=load(K_RES,[]),STUDENTS=load(K_STUD,[]);
 ['coordPass','grupos','ciclos','activeCiclo','escala','timeMin','shuffle','pass'].forEach(k=>{if(CFG[k]===undefined)CFG[k]=DEFAULT_CFG[k]});
+if(CFG.director==='Nombre del Director(a)'||CFG.directorTitle==='Dirección Escolar'||!CFG.director){CFG.director='Dra. Blanca Ortiz Morales';CFG.directorTitle='Dirección Académica';save(K_CFG,CFG)}
 LEVELS.forEach(l=>{if(!BANK[l.id])BANK[l.id]={};subjectsOf(l.id).forEach(s=>{if(!BANK[l.id][s.id])BANK[l.id][s.id]=buildBank()[l.id][s.id]})});
 seedDemo();
 
@@ -236,7 +234,7 @@ const VIEWS=['vHub','vCode','vQuiz','vThanks','vLogin','vAdmin'];
 function show(id){VIEWS.forEach(v=>document.getElementById(v).classList.add('hidden'));document.getElementById(id).classList.remove('hidden');window.scrollTo({top:0,behavior:'smooth'});if(window.anime)anime({targets:'#'+id,opacity:[0,1],translateY:[12,0],easing:'easeOutQuad',duration:420})}
 function applyBranding(){document.getElementById('hdrSchool').textContent=CFG.school;setLogo('hdrLogo')}
 function setLogo(id){const el=document.getElementById(id);if(CFG.logo){const png=/^data:image\/png/i.test(CFG.logo);el.style.background=png?'#fff':'';el.style.padding=png?'4px':'';el.innerHTML='<img src="'+CFG.logo+'" style="object-fit:'+(png?'contain':'cover')+'">'}else{el.style.background='';el.style.padding='';el.textContent=(CFG.school||'R').trim().charAt(0).toUpperCase()}}
-function goHub(){stopTimer();applyBranding();document.getElementById('hubCiclo').textContent='Nuevo Ingreso · Ciclo '+CFG.activeCiclo;show('vHub')}
+function goHub(){stopTimer();applyBranding();document.getElementById('hubCiclo').textContent='Nuevo ingreso · Periodo '+CFG.activeCiclo;show('vHub')}
 function goCode(){document.getElementById('inCode').value='';show('vCode');setTimeout(()=>document.getElementById('inCode').focus(),120)}
 
 /* ====== ALUMNO / CÓDIGO ====== */
@@ -260,31 +258,31 @@ function finishQuiz(){stopTimer();const total=quiz.items.length;let hits=0;const
 function goLogin(){document.getElementById('loginPass').value='';show('vLogin')}
 function doLogin(){const p=document.getElementById('loginPass').value;if(p!==(CFG.coordPass||'coord2026')){toast('Contraseña incorrecta.','err');return}enterPanel()}
 function logout(){goHub()}
-function enterPanel(){document.getElementById('adminTitle').textContent='👑 Coordinación';const tabs=[['cal','Calificaciones'],['alum','Alumnos'],['preg','Preguntas'],['cfg','Configuración']];document.getElementById('adminTabs').innerHTML=tabs.map((t,i)=>'<button class="tab'+(i===0?' on':'')+'" data-tab="'+t[0]+'" onclick="adminTab(\''+t[0]+'\')">'+t[1]+'</button>').join('');fillCalFilters();renderCalif();fillEditSubjects();fillStudentGroups();show('vAdmin');adminTab('cal')}
+function enterPanel(){document.getElementById('adminTitle').textContent='👑 Coordinación';const tabs=[['cal','Calificaciones'],['alum','Aspirantes'],['preg','Preguntas'],['cfg','Configuración']];document.getElementById('adminTabs').innerHTML=tabs.map((t,i)=>'<button class="tab'+(i===0?' on':'')+'" data-tab="'+t[0]+'" onclick="adminTab(\''+t[0]+'\')">'+t[1]+'</button>').join('');fillCalFilters();renderCalif();fillEditSubjects();fillStudentGroups();show('vAdmin');adminTab('cal')}
 function adminTab(t){document.querySelectorAll('#adminTabs .tab').forEach(b=>b.classList.toggle('on',b.dataset.tab===t));document.querySelectorAll('#vAdmin .tabpane').forEach(p=>p.classList.add('hidden'));const map={cal:'tabCal',alum:'tabAlumnos',preg:'tabPreg',cfg:'tabCfg'};document.getElementById(map[t]).classList.remove('hidden');if(t==='cfg'){fillConfigForm();renderCats()}if(t==='alum'){fillStudentGroups();renderRoster()}if(t==='preg')renderEditor()}
 
 /* ====== CALIFICACIONES ====== */
-function fillCalFilters(){const fg=document.getElementById('fGroup'),fc=document.getElementById('fCiclo');fg.innerHTML=['(Todos los grupos)',...CFG.grupos].map((g,i)=>'<option value="'+(i===0?'':esc(g))+'">'+esc(g)+'</option>').join('');fc.innerHTML=['(Todos los ciclos)',...CFG.ciclos].map((c,i)=>'<option value="'+(i===0?'':esc(c))+'">'+esc(c)+'</option>').join('')}
-function filteredRes(){const fg=document.getElementById('fGroup').value,fc=document.getElementById('fCiclo').value,fr=document.getElementById('fResult').value,q=(document.getElementById('fSearch').value||'').toLowerCase();return RES.filter(r=>(!fg||r.group===fg)&&(!fc||r.ciclo===fc)&&(!q||(r.name||'').toLowerCase().includes(q))).filter(r=>fr==='apro'?r.pct>=CFG.pass:fr==='repro'?r.pct<CFG.pass:true)}
+function fillCalFilters(){const fc=document.getElementById('fCiclo');fc.innerHTML=['(Todos los periodos)',...CFG.ciclos].map((c,i)=>'<option value="'+(i===0?'':esc(c))+'">'+esc(c)+'</option>').join('')}
+function filteredRes(){const fc=document.getElementById('fCiclo').value,fr=document.getElementById('fResult').value,q=(document.getElementById('fSearch').value||'').toLowerCase();return RES.filter(r=>(!fc||r.ciclo===fc)&&(!q||(r.name||'').toLowerCase().includes(q))).filter(r=>fr==='apro'?r.pct>=CFG.pass:fr==='repro'?r.pct<CFG.pass:true)}
 function renderCalif(){const list=filteredRes();const n=list.length,avg=n?Math.round(list.reduce((a,r)=>a+r.pct,0)/n):0,apr=list.filter(r=>r.pct>=CFG.pass).length;document.getElementById('statChip').textContent=n;document.getElementById('calStats').innerHTML='<div class="stat"><b>'+n+'</b><small>Evaluaciones</small></div><div class="stat"><b>'+avg+'</b><small>Promedio</small></div><div class="stat"><b>'+apr+'</b><small>Suficientes</small></div><div class="stat"><b>'+(n?Math.round(apr/n*100):0)+'%</b><small>% Suficiente</small></div>';const cont=document.getElementById('calList');cont.innerHTML='';if(!n){cont.innerHTML='<p class="muted center" style="padding:24px">No hay evaluaciones que coincidan.</p>';return}
   const byCiclo={};list.forEach(r=>{(byCiclo[r.ciclo||'—']=byCiclo[r.ciclo||'—']||[]).push(r)});
-  Object.keys(byCiclo).sort().forEach(cy=>{const grupos={};byCiclo[cy].forEach(r=>{(grupos[r.group||'Sin grupo']=grupos[r.group||'Sin grupo']||[]).push(r)});let inner='';Object.keys(grupos).sort().forEach(g=>{const rows=grupos[g].sort((a,b)=>a.ts-b.ts);let t='<details class="acc"><summary>Grupo '+esc(g)+' <span class="chip">'+rows.length+'</span></summary><div class="accbody"><table class="data"><thead><tr><th>Fecha</th><th>Alumno</th><th>Calif.</th><th>Resultado</th><th>Constancia</th><th></th></tr></thead><tbody>';rows.forEach(r=>{t+='<tr><td>'+esc(r.date)+'</td><td>'+esc(r.name)+'</td><td><b>'+r.pct+'</b></td><td><span class="lvl-tag" style="background:'+(r.pct>=CFG.pass?'var(--verde)':'var(--rojo)')+'">'+(r.pct>=CFG.pass?'Suficiente':'Insuficiente')+'</span></td><td><span class="badge '+(r.printed?'ok':'no')+'">'+(r.printed?'🖨️ Impresa':'No impresa')+'</span></td><td><button class="btn sm" onclick="abrirConstancia(\''+jss(r.id)+'\')">Ver</button></td></tr>'});t+='</tbody></table></div></details>';inner+=t});cont.insertAdjacentHTML('beforeend','<details class="acc" open><summary>Ciclo '+esc(cy)+' <span class="chip">'+byCiclo[cy].length+'</span></summary><div class="accbody">'+inner+'</div></details>')})}
-function exportCSV(){const list=filteredRes();if(!list.length){toast('No hay resultados para exportar.','warn');return}const head=['Folio','Fecha','Alumno','Grupo','Ciclo','Aciertos','Total','Porcentaje','Resultado'];let csv='﻿'+head.join(',')+'\n';list.forEach(r=>{csv+=[r.folio,r.date,r.name,r.group,r.ciclo,r.hits,r.total,r.pct,(r.pct>=CFG.pass?'Suficiente':'Insuficiente')].map(v=>'"'+String(v==null?'':v).replace(/"/g,'""')+'"').join(',')+'\n'});downloadFile(csv,'calificaciones.csv','text/csv')}
+  Object.keys(byCiclo).sort().forEach(cy=>{const rows=byCiclo[cy].slice().sort((a,b)=>a.ts-b.ts);let inner='';{let t='<table class="data"><thead><tr><th>Fecha</th><th>Aspirante</th><th>Calif.</th><th>Resultado</th><th>Reporte</th><th></th></tr></thead><tbody>';rows.forEach(r=>{t+='<tr><td>'+esc(r.date)+'</td><td>'+esc(r.name)+'</td><td><b>'+r.pct+'</b></td><td><span class="lvl-tag" style="background:'+(r.pct>=CFG.pass?'var(--verde)':'var(--rojo)')+'">'+(r.pct>=CFG.pass?'Suficiente':'Insuficiente')+'</span></td><td><span class="badge '+(r.printed?'ok':'no')+'">'+(r.printed?'🖨️ Impresa':'No impresa')+'</span></td><td><button class="btn sm" onclick="abrirConstancia(\''+jss(r.id)+'\')">Ver</button></td></tr>'});t+='</tbody></table>';inner+=t}cont.insertAdjacentHTML('beforeend','<details class="acc" open><summary>Periodo '+esc(cy)+' <span class="chip">'+byCiclo[cy].length+'</span></summary><div class="accbody">'+inner+'</div></details>')})}
+function exportCSV(){const list=filteredRes();if(!list.length){toast('No hay resultados para exportar.','warn');return}const head=['Folio','Fecha','Aspirante','Periodo','Aciertos','Total','Porcentaje','Resultado'];let csv='﻿'+head.join(',')+'\n';list.forEach(r=>{csv+=[r.folio,r.date,r.name,r.ciclo,r.hits,r.total,r.pct,(r.pct>=CFG.pass?'Suficiente':'Insuficiente')].map(v=>'"'+String(v==null?'':v).replace(/"/g,'""')+'"').join(',')+'\n'});downloadFile(csv,'calificaciones.csv','text/csv')}
 
 /* ====== CONSTANCIA ====== */
 let certRec=null;
 function abrirConstancia(id){const r=RES.find(x=>x.id===id);if(r)renderCert(r)}
-function renderCert(rec){certRec=rec;const nv=nivel(rec.pct);document.getElementById('certSchool').textContent=CFG.school;document.getElementById('certSub').textContent=CFG.sub;setLogo('certLogo');document.getElementById('certName').textContent=rec.name;document.getElementById('certGroupLine').textContent=(rec.group?'Grupo: '+rec.group:'')+'  ·  '+levelName(rec.level)+(rec.ciclo?'  ·  Ciclo: '+rec.ciclo:'');document.getElementById('certSubject').textContent=rec.subject;const calif=Math.round(rec.hits/rec.total*(CFG.escala||10)*10)/10;document.getElementById('certGrade').textContent=calif+' / '+(CFG.escala||10);document.getElementById('certGrade').style.color=nv.col;document.getElementById('certLevel').textContent=nv.txt;document.getElementById('certPct').textContent=rec.pct;document.getElementById('certHits').textContent=rec.hits+'/'+rec.total;document.getElementById('certDirector').textContent=CFG.director;document.getElementById('certDirectorTitle').textContent=CFG.directorTitle;document.getElementById('certDate').textContent='Expedida: '+rec.date;document.getElementById('certFolio').textContent='Folio: '+rec.folio;const cb=document.getElementById('certBreakdown');cb.innerHTML='';if(rec.per){let h='<table class="bd-table" style="max-width:540px;margin:6px auto"><tr><th>Materia</th><th>Aciertos</th><th>%</th><th>Nivel</th></tr>';Object.keys(rec.per).forEach(sid=>{const p=rec.per[sid],pp=Math.round(p.hits/p.total*100),n2=nivel(pp);h+='<tr><td>'+subjName(rec.level,sid)+'</td><td>'+p.hits+'/'+p.total+'</td><td>'+pp+'%</td><td style="color:'+n2.col+';font-weight:700">'+n2.txt+'</td></tr>'});h+='</table>';cb.innerHTML=h}document.getElementById('app').style.display='none';document.getElementById('constancia').style.display='block';window.scrollTo({top:0})}
+function renderCert(rec){certRec=rec;const nv=nivel(rec.pct);document.getElementById('certSchool').textContent=CFG.school;document.getElementById('certSub').textContent=CFG.sub;document.getElementById('certName').textContent=rec.name;document.getElementById('certInfoLine').textContent=levelName(rec.level)+(rec.ciclo?'  ·  Periodo: '+rec.ciclo:'');document.getElementById('certSubject').textContent=rec.subject;const calif=Math.round(rec.hits/rec.total*(CFG.escala||10)*10)/10;document.getElementById('certGrade').textContent=calif+' / '+(CFG.escala||10);document.getElementById('certGrade').style.color=nv.col;document.getElementById('certLevel').textContent=nv.txt;document.getElementById('certPct').textContent=rec.pct;document.getElementById('certHits').textContent=rec.hits+'/'+rec.total;document.getElementById('certDirector').textContent=CFG.director;document.getElementById('certDirectorTitle').textContent=CFG.directorTitle;document.getElementById('certDate').textContent='Expedida: '+rec.date;document.getElementById('certFolio').textContent='Folio: '+rec.folio;const cb=document.getElementById('certBreakdown');cb.innerHTML='';if(rec.per){let h='<table class="bd-table" style="max-width:540px;margin:6px auto"><tr><th>Materia</th><th>Aciertos</th><th>%</th><th>Nivel</th></tr>';Object.keys(rec.per).forEach(sid=>{const p=rec.per[sid],pp=Math.round(p.hits/p.total*100),n2=nivel(pp);h+='<tr><td>'+subjName(rec.level,sid)+'</td><td>'+p.hits+'/'+p.total+'</td><td>'+pp+'%</td><td style="color:'+n2.col+';font-weight:700">'+n2.txt+'</td></tr>'});h+='</table>';cb.innerHTML=h}document.getElementById('app').style.display='none';document.getElementById('constancia').style.display='block';window.scrollTo({top:0})}
 function cerrarConstancia(){document.getElementById('constancia').style.display='none';document.getElementById('app').style.display='block';show('vAdmin');adminTab('cal')}
 function imprimirConstancia(){if(certRec){certRec.printed=true;save(K_RES,RES)}window.print()}
 
 /* ====== ALUMNOS / ROSTER ====== */
-function fillStudentGroups(){document.getElementById('sGroup').innerHTML=CFG.grupos.map(g=>'<option>'+esc(g)+'</option>').join('');document.getElementById('fSGroup').innerHTML='<option value="">(Todos)</option>'+CFG.grupos.map(g=>'<option>'+esc(g)+'</option>').join('')}
-function addStudent(){const name=document.getElementById('sName').value.trim();if(!name){toast('Escribe el nombre del alumno.','warn');return}const code=genCode();STUDENTS.push({code,name,group:document.getElementById('sGroup').value||'',level:LV,mode:'all',origin:document.getElementById('sOrigin').value.trim(),originGroup:'',tEmail:document.getElementById('sTEmail').value.trim(),sEmail:'',status:'pending',resultId:null,ciclo:CFG.activeCiclo});save(K_STUD,STUDENTS);['sName','sOrigin','sTEmail'].forEach(i=>document.getElementById(i).value='');renderRoster();uiAlert('Alumno registrado.\n\nCÓDIGO DE ACCESO:  '+code+'\n\nEntrégaselo al alumno para presentar su examen.','✅ Código generado')}
-function renderRoster(){const fg=(document.getElementById('fSGroup')||{}).value||'',fs=(document.getElementById('fSStatus')||{}).value||'',q=((document.getElementById('fSSearch')||{}).value||'').trim().toLowerCase();let list=STUDENTS.filter(s=>(!fg||s.group===fg)&&(!fs||s.status===fs)&&(!q||(s.name||'').toLowerCase().includes(q)||(s.code||'').toLowerCase().includes(q))).sort((a,b)=>(a.group||'').localeCompare(b.group||'')||a.name.localeCompare(b.name));const c=document.getElementById('rosterList');if(!list.length){c.innerHTML='<p class="muted center" style="padding:20px">'+(STUDENTS.length?'Ningún alumno coincide.':'No hay alumnos registrados.')+'</p>';return}c.innerHTML='<p class="muted" style="margin:0 0 8px">'+list.length+' alumno(s)</p><table class="data"><thead><tr><th>Código</th><th>Alumno</th><th>Grupo</th><th>Procedencia</th><th>Estado</th><th></th></tr></thead><tbody>'+list.map(s=>'<tr><td><b style="letter-spacing:1px">'+esc(s.code)+'</b></td><td>'+esc(s.name)+'</td><td>'+esc(s.group)+'</td><td>'+esc(s.origin||'—')+'</td><td><span class="badge '+(s.status==='completed'?'ok':'no')+'">'+(s.status==='completed'?'✓ Contestado':'Pendiente')+'</span></td><td><button class="btn sec sm" onclick="copyCode(\''+jss(s.code)+'\')">Copiar</button> <button class="btn sec sm" onclick="delStudent(\''+jss(s.code)+'\')">🗑️</button></td></tr>').join('')+'</tbody></table>'}
+function fillStudentGroups(){}
+function addStudent(){const name=document.getElementById('sName').value.trim();if(!name){toast('Escribe el nombre del aspirante.','warn');return}const code=genCode();STUDENTS.push({code,name,group:'',level:LV,mode:'all',origin:document.getElementById('sOrigin').value.trim(),originGroup:'',tEmail:document.getElementById('sTEmail').value.trim(),sEmail:'',status:'pending',resultId:null,ciclo:CFG.activeCiclo});save(K_STUD,STUDENTS);['sName','sOrigin','sTEmail'].forEach(i=>document.getElementById(i).value='');renderRoster();uiAlert('Aspirante registrado.\n\nCÓDIGO DE ACCESO:  '+code+'\n\nEntrégaselo al aspirante para presentar su examen.','✅ Código generado')}
+function renderRoster(){const fs=(document.getElementById('fSStatus')||{}).value||'',q=((document.getElementById('fSSearch')||{}).value||'').trim().toLowerCase();let list=STUDENTS.filter(s=>(!fs||s.status===fs)&&(!q||(s.name||'').toLowerCase().includes(q)||(s.code||'').toLowerCase().includes(q))).sort((a,b)=>a.name.localeCompare(b.name));const c=document.getElementById('rosterList');if(!list.length){c.innerHTML='<p class="muted center" style="padding:20px">'+(STUDENTS.length?'Ningún aspirante coincide.':'No hay aspirantes registrados.')+'</p>';return}c.innerHTML='<p class="muted" style="margin:0 0 8px">'+list.length+' aspirante(s)</p><table class="data"><thead><tr><th>Código</th><th>Aspirante</th><th>Procedencia</th><th>Estado</th><th></th></tr></thead><tbody>'+list.map(s=>'<tr><td><b style="letter-spacing:1px">'+esc(s.code)+'</b></td><td>'+esc(s.name)+'</td><td>'+esc(s.origin||'—')+'</td><td><span class="badge '+(s.status==='completed'?'ok':'no')+'">'+(s.status==='completed'?'✓ Contestado':'Pendiente')+'</span></td><td><button class="btn sec sm" onclick="copyCode(\''+jss(s.code)+'\')">Copiar</button> <button class="btn sec sm" onclick="delStudent(\''+jss(s.code)+'\')">🗑️</button></td></tr>').join('')+'</tbody></table>'}
 function copyCode(c){try{navigator.clipboard.writeText(c)}catch(e){}toast('Código copiado: '+c,'ok')}
 async function delStudent(code){if(await uiConfirm('¿Quitar este alumno del listado?','Quitar',true)){STUDENTS=STUDENTS.filter(s=>s.code!==code);save(K_STUD,STUDENTS);renderRoster()}}
-function exportRoster(){if(!STUDENTS.length){toast('No hay alumnos.','warn');return}const head=['Codigo','Alumno','Grupo','EscuelaProcedencia','Estado','CorreoTutor'];let csv='﻿'+head.join(',')+'\n';STUDENTS.forEach(s=>{csv+=[s.code,s.name,s.group,s.origin,s.status,s.tEmail].map(v=>'"'+String(v==null?'':v).replace(/"/g,'""')+'"').join(',')+'\n'});downloadFile(csv,'alumnos_codigos.csv','text/csv')}
+function exportRoster(){if(!STUDENTS.length){toast('No hay aspirantes.','warn');return}const head=['Codigo','Aspirante','EscuelaProcedencia','Estado','CorreoContacto'];let csv='﻿'+head.join(',')+'\n';STUDENTS.forEach(s=>{csv+=[s.code,s.name,s.origin,s.status,s.tEmail].map(v=>'"'+String(v==null?'':v).replace(/"/g,'""')+'"').join(',')+'\n'});downloadFile(csv,'alumnos_codigos.csv','text/csv')}
 
 /* ====== EDITOR DE PREGUNTAS (Secundaria) ====== */
 function fillEditSubjects(){document.getElementById('editSubject').innerHTML=subjectsOf(LV).map(s=>'<option value="'+s.id+'">'+esc(s.name)+'</option>').join('');renderEditor()}
@@ -299,17 +297,17 @@ function saveBank(){save(K_BANK,BANK);toast('Banco guardado.','ok')}
 
 /* ====== CONFIG ====== */
 function fillConfigForm(){document.getElementById('cfgSchool').value=CFG.school;document.getElementById('cfgSub').value=CFG.sub;document.getElementById('cfgDirector').value=CFG.director;document.getElementById('cfgDirectorTitle').value=CFG.directorTitle;document.getElementById('cfgPass').value=CFG.pass;document.getElementById('cfgEscala').value=CFG.escala;document.getElementById('cfgTime').value=CFG.timeMin;document.getElementById('cfgShuffle').value=CFG.shuffle?'1':'0'}
-function renderCats(){document.getElementById('catGrupos').innerHTML=CFG.grupos.length?CFG.grupos.map(x=>'<span class="chip-x">'+esc(x)+' <button onclick="delGrupo(\''+jss(x)+'\')">✕</button></span>').join(''):'<span class="muted">Sin grupos.</span>';document.getElementById('catCiclos').innerHTML=CFG.ciclos.length?CFG.ciclos.map(x=>'<span class="chip-x'+(x===CFG.activeCiclo?' act':'')+'"><span class="star" onclick="setActiveCiclo(\''+jss(x)+'\')">★</span> '+esc(x)+' <button onclick="delCiclo(\''+jss(x)+'\')">✕</button></span>').join(''):'<span class="muted">Sin ciclos.</span>'}
+function renderCats(){document.getElementById('catCiclos').innerHTML=CFG.ciclos.length?CFG.ciclos.map(x=>'<span class="chip-x'+(x===CFG.activeCiclo?' act':'')+'"><span class="star" onclick="setActiveCiclo(\''+jss(x)+'\')">★</span> '+esc(x)+' <button onclick="delCiclo(\''+jss(x)+'\')">✕</button></span>').join(''):'<span class="muted">Sin ciclos.</span>'}
 function addGrupo(){const v=document.getElementById('newGrupo').value.trim();if(!v)return;if(!CFG.grupos.includes(v))CFG.grupos.push(v);save(K_CFG,CFG);document.getElementById('newGrupo').value='';renderCats();fillCalFilters();fillStudentGroups();toast('Grupo agregado.','ok')}
 async function delGrupo(g){if(await uiConfirm('¿Quitar el grupo "'+g+'"?','Quitar grupo',true)){CFG.grupos=CFG.grupos.filter(x=>x!==g);save(K_CFG,CFG);renderCats();fillCalFilters();fillStudentGroups()}}
-function addCiclo(){const v=document.getElementById('newCiclo').value.trim();if(!v)return;if(!CFG.ciclos.includes(v))CFG.ciclos.push(v);save(K_CFG,CFG);document.getElementById('newCiclo').value='';renderCats();fillCalFilters();toast('Ciclo agregado.','ok')}
-async function delCiclo(c){if(CFG.ciclos.length<=1){toast('Debe existir al menos un ciclo.','warn');return}if(await uiConfirm('¿Quitar el ciclo "'+c+'"?','Quitar ciclo',true)){CFG.ciclos=CFG.ciclos.filter(x=>x!==c);if(CFG.activeCiclo===c)CFG.activeCiclo=CFG.ciclos[0];save(K_CFG,CFG);renderCats();fillCalFilters()}}
-function setActiveCiclo(c){CFG.activeCiclo=c;save(K_CFG,CFG);renderCats();toast('Ciclo activo: '+c,'ok')}
+function addCiclo(){const v=document.getElementById('newCiclo').value.trim();if(!v)return;if(!CFG.ciclos.includes(v))CFG.ciclos.push(v);save(K_CFG,CFG);document.getElementById('newCiclo').value='';renderCats();fillCalFilters();toast('Periodo agregado.','ok')}
+async function delCiclo(c){if(CFG.ciclos.length<=1){toast('Debe existir al menos un periodo.','warn');return}if(await uiConfirm('¿Quitar el periodo "'+c+'"?','Quitar periodo',true)){CFG.ciclos=CFG.ciclos.filter(x=>x!==c);if(CFG.activeCiclo===c)CFG.activeCiclo=CFG.ciclos[0];save(K_CFG,CFG);renderCats();fillCalFilters()}}
+function setActiveCiclo(c){CFG.activeCiclo=c;save(K_CFG,CFG);renderCats();toast('Periodo activo: '+c,'ok')}
 function saveConfig(){CFG.school=document.getElementById('cfgSchool').value.trim()||DEFAULT_CFG.school;CFG.sub=document.getElementById('cfgSub').value.trim();CFG.director=document.getElementById('cfgDirector').value.trim()||DEFAULT_CFG.director;CFG.directorTitle=document.getElementById('cfgDirectorTitle').value.trim();CFG.pass=Math.min(100,Math.max(0,parseInt(document.getElementById('cfgPass').value)||60));CFG.escala=Math.min(100,Math.max(1,parseInt(document.getElementById('cfgEscala').value)||10));CFG.timeMin=Math.min(300,Math.max(0,parseInt(document.getElementById('cfgTime').value)||0));CFG.shuffle=document.getElementById('cfgShuffle').value==='1'?1:0;save(K_CFG,CFG);applyBranding();toast('Configuración guardada.','ok')}
 
 /* ====== SEED mínimo (demo) ====== */
 function demoPer(){const p={};subjectsOf(LV).forEach(s=>{p[s.id]={hits:8+(Math.random()*12|0),total:20}});return p}
-function seedDemo(){if(STUDENTS.length)return;const mk=(name,group,origin)=>({code:genCode(),name,group,level:LV,mode:'all',origin,originGroup:'',tEmail:'',sEmail:'',status:'pending',resultId:null,ciclo:CFG.activeCiclo});STUDENTS=[mk('Ana Sofía Ramírez','1.1','Primaria Benito Juárez'),mk('Diego Hernández Cruz','1.1','Colegio del Valle'),mk('María Fernanda López','1.2','Instituto Niños Héroes')];const r0=STUDENTS[0];const hits=16,pct=80,nv=nivel(pct);RES.push({id:'F'+Math.random().toString(36).slice(2,9).toUpperCase(),folio:'FDEMO-'+r0.code,date:new Date().toLocaleString('es-MX'),ts:Date.now(),name:r0.name,group:r0.group,ciclo:r0.ciclo,level:LV,sEmail:'',tEmail:'',mode:'__all__',subject:'Examen completo',hits,total:100,pct,grade:pct,level_perf:nv.txt,per:demoPer(),printed:false,emailed:false});r0.status='completed';save(K_STUD,STUDENTS);save(K_RES,RES)}
+function seedDemo(){if(STUDENTS.length)return;const mk=(name,origin)=>({code:genCode(),name,group:'',level:LV,mode:'all',origin,originGroup:'',tEmail:'',sEmail:'',status:'pending',resultId:null,ciclo:CFG.activeCiclo});STUDENTS=[mk('Ana Sofía Ramírez','Secundaria Benito Juárez'),mk('Diego Hernández Cruz','Colegio del Valle'),mk('María Fernanda López','Secundaria Niños Héroes')];const r0=STUDENTS[0];const hits=16,pct=80,nv=nivel(pct);RES.push({id:'F'+Math.random().toString(36).slice(2,9).toUpperCase(),folio:'FDEMO-'+r0.code,date:new Date().toLocaleString('es-MX'),ts:Date.now(),name:r0.name,group:'',ciclo:r0.ciclo,level:LV,sEmail:'',tEmail:'',mode:'__all__',subject:'Examen completo',hits,total:100,pct,grade:pct,level_perf:nv.txt,per:demoPer(),printed:false,emailed:false});r0.status='completed';save(K_STUD,STUDENTS);save(K_RES,RES)}
 
 /* ====== SPLASH ====== */
 function splashFallback(img){img.parentNode.innerHTML='<div class="sp-letter">'+((CFG.school||'R').trim().charAt(0).toUpperCase())+'</div>'}
@@ -327,7 +325,7 @@ const out = HEAD + JS + '\n</script>\n</body>\n</html>\n';
 fs.mkdirSync(OUTDIR, { recursive: true });
 fs.writeFileSync(path.join(OUTDIR, 'index.html'), out, 'utf8');
 // copiar assets
-for (const a of ['anime.min.js','mascota.png']) {
+for (const a of ['anime.min.js','mascota.png','formato-encabezado.png','formato-pie.png']) {
   const src = path.join(path.dirname(FULL), a);
   if (fs.existsSync(src)) fs.copyFileSync(src, path.join(OUTDIR, a));
 }

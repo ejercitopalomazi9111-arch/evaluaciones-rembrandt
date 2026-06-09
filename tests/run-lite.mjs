@@ -50,7 +50,7 @@ async function main(){
   { const {c,page}=await ctx(); await readyAt(page,LITE);
     await page.evaluate(()=>goLogin()); await page.fill('#loginPass','coord2026'); await page.click('#vLogin >> text=Entrar');
     await page.click('#adminTabs .tab[data-tab="preg"]'); await page.evaluate(()=>saveBank());
-    const before=(await LS(page,'ev_bank')).secundaria.matematicas.length; await page.evaluate(()=>{addQuestion();saveBank()}); const after=(await LS(page,'ev_bank')).secundaria.matematicas.length;
+    const before=(await LS(page,'ev_bank')).preparatoria.matematicas.length; await page.evaluate(()=>{addQuestion();saveBank()}); const after=(await LS(page,'ev_bank')).preparatoria.matematicas.length;
     record('L6 editor agrega+guarda', after===before+1, `${before}→${after}`); await c.close(); }
 
   // L7: config escala afecta constancia

@@ -362,7 +362,7 @@ async function main(){
     const rows = await page.$$eval('#rosterList tbody tr', r=>r.length);
     // filter perf
     const tf0=Date.now();
-    await page.selectOption('#fSGroup','1.1');
+    await page.selectOption('#fSStatus','pending');
     await page.waitForTimeout(50);
     const tf1=Date.now();
     const lsBytes = await page.evaluate(()=>localStorage.getItem('ev_students').length);
@@ -426,7 +426,7 @@ async function main(){
     await page.click('#adminTabs .tab[data-tab="rep"]');
     await page.waitForTimeout(200);
     const tables = await page.$$eval('#repBody table', t=>t.length);
-    record('T20 reportes (por grupo/nivel/materia)', tables===3, `tablas=${tables}`);
+    record('T20 reportes (por nivel/materia)', tables===2, `tablas=${tables}`);
     await c.close();
   }
 
@@ -438,7 +438,7 @@ async function main(){
     await page.evaluate(()=>goTour());
     await page.click('#vTour >> text=Solicitar recorrido'); // sin datos
     let toast = await lastToast();
-    const v1 = /nombre del tutor/i.test(toast);
+    const v1 = /nombre de contacto/i.test(toast);
     await page.fill('#tName','Tutor X'); await page.fill('#tEmail','mal'); await page.fill('#tPhone','442');
     await page.click('#vTour >> text=Solicitar recorrido');
     await page.waitForTimeout(100);
@@ -634,8 +634,8 @@ async function main(){
     await page.click('#adminTabs .tab[data-tab="alum"]');
     const before = (await LS(page,'ev_students')).length;
     const b64 = await page.evaluate(()=>{
-      const data=[['Nombre','Grupo','Nivel','EscuelaProcedencia','GrupoProcedencia','CorreoTutor','CorreoAlumno']];
-      for(let i=0;i<50;i++) data.push(['Importado '+i,'1.1','secundaria','Esc '+i,'6.A','t'+i+'@x.com','']);
+      const data=[['Nombre','Nivel','EscuelaProcedencia','CorreoContacto','CorreoAlumno']];
+      for(let i=0;i<50;i++) data.push(['Importado '+i,'secundaria','Esc '+i,'t'+i+'@x.com','']);
       const ws=XLSX.utils.aoa_to_sheet(data); const wb=XLSX.utils.book_new();
       XLSX.utils.book_append_sheet(wb,ws,'Hoja1');
       return XLSX.write(wb,{type:'base64',bookType:'xlsx'});
