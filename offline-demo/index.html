@@ -804,7 +804,7 @@ if(!CFG.features)CFG.features=JSON.parse(JSON.stringify(DEFAULT_CFG.features));e
 if(!USERS.some(u=>u.role==='direccion')){USERS.push({user:'direccion',pass:'direccion2026',name:'Dirección',role:'direccion',assign:[]});save(K_USERS,USERS)}
 if(!USERS.some(u=>u.role==='debug')){USERS.push({user:'debug',pass:'debug2026',name:'Debug (Carlos)',role:'debug',assign:[]});save(K_USERS,USERS)}
 USERS.forEach(u=>{if(u.role==='teacher'){if(!u.caps)u.caps={};['preguntas','calif','alumnos','guias'].forEach(k=>{if(u.caps[k]===undefined)u.caps[k]=true})}}); // compat: profes previos conservan su acceso completo
-if(CFG.director==='Nombre del Director(a)'||CFG.directorTitle==='Dirección Escolar'||!CFG.director){CFG.director='Dra. Blanca Ortiz Morales';CFG.directorTitle='Dirección Académica';save(K_CFG,CFG)}
+if(CFG._dirV!==2){CFG.director='Dra. Blanca Ortiz Morales';CFG.directorTitle='Dirección Académica';CFG._dirV=2;save(K_CFG,CFG)}
 LEVELS.forEach(l=>{if(!BANK[l.id])BANK[l.id]={};if(!GUIDES[l.id])GUIDES[l.id]={};subjectsOf(l.id).forEach(s=>{if(!BANK[l.id][s.id])BANK[l.id][s.id]=buildBank()[l.id][s.id];if(!GUIDES[l.id][s.id])GUIDES[l.id][s.id]=buildGuides()[l.id][s.id]})});
 seedDemo();
 

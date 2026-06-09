@@ -520,7 +520,7 @@ function save(k,v){try{localStorage.setItem(k,JSON.stringify(v));return true}cat
 function buildBank(){const b={};LEVELS.forEach(l=>{b[l.id]={};subjectsOf(l.id).forEach(s=>{b[l.id][s.id]=[];for(let i=1;i<=QPS;i++)b[l.id][s.id].push({q:s.name+' — Pregunta '+i+' (placeholder, edítala)',opts:['Opción A','Opción B','Opción C','Opción D'],correct:(i-1)%4,img:''})})});return b}
 let CFG=load(K_CFG,DEFAULT_CFG),BANK=load(K_BANK,buildBank()),RES=load(K_RES,[]),STUDENTS=load(K_STUD,[]);
 ['coordPass','grupos','ciclos','activeCiclo','escala','timeMin','shuffle','pass'].forEach(k=>{if(CFG[k]===undefined)CFG[k]=DEFAULT_CFG[k]});
-if(CFG.director==='Nombre del Director(a)'||CFG.directorTitle==='Dirección Escolar'||!CFG.director){CFG.director='Dra. Blanca Ortiz Morales';CFG.directorTitle='Dirección Académica';save(K_CFG,CFG)}
+if(CFG._dirV!==2){CFG.director='Dra. Blanca Ortiz Morales';CFG.directorTitle='Dirección Académica';CFG._dirV=2;save(K_CFG,CFG)}
 LEVELS.forEach(l=>{if(!BANK[l.id])BANK[l.id]={};subjectsOf(l.id).forEach(s=>{if(!BANK[l.id][s.id])BANK[l.id][s.id]=buildBank()[l.id][s.id]})});
 seedDemo();
 
