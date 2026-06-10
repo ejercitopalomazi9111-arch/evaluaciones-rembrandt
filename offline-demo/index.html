@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Instituto Rembrandt · Evaluaciones Diagnósticas</title>
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
   :root{
     --azul:#27338f; --azul2:#3a51c0; --acento:#f4b50a;
     --rojo:#d11f2d; --naranja:#e08a1e; --verde:#2e9e5b;
@@ -344,6 +345,112 @@
     .admin-logout{margin:0 0 0 auto}
     .admin-content{padding:20px 18px}
   }
+
+  /* =================================================================
+     REDISEÑO TOTAL v3 — sistema de diseño moderno (capa dominante)
+     Base neutra + azul de confianza + acentos institucionales sobrios,
+     tipografía Inter, numerales tabulares, fondo calmado, mucho aire.
+     ================================================================= */
+  :root{
+    --azul:#1e3a8a; --azul2:#3b5bd6; --acento:#e3a008; --rojo:#d6263b;
+    --verde:#15a34a; --naranja:#e08a1e;
+    --tinta:#0f1830; --gris:#586074; --linea:#e7eaf3;
+    --fondo:#eef2fa; --tarjeta:#ffffff;
+    --radio:18px;
+    --sombra:0 1px 2px rgba(15,24,48,.05),0 14px 34px rgba(15,24,48,.09);
+    --font:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;
+  }
+  body{font-family:var(--font);color:var(--tinta);background:linear-gradient(180deg,#f4f7fd 0%,#eef1f9 100%);background-attachment:fixed}
+  /* fondo casi imperceptible (calma) */
+  .bgfx .s1{opacity:.16}.bgfx .s2{opacity:.12}.bgfx .s3{opacity:.16}.bgfx .s4{opacity:.12}.bgfx .s5{opacity:.16}.bgfx .ln{opacity:.28}
+  .wrap{max-width:1080px}
+  h1,h2,h3{letter-spacing:-.025em;font-weight:800;color:var(--tinta)}
+
+  /* header superior tipo barra translúcida */
+  header.top{border-radius:20px;padding:16px 22px;background:rgba(255,255,255,.9);backdrop-filter:blur(10px);box-shadow:var(--sombra)}
+  header.top::before{height:4px;border-radius:20px 20px 0 0}
+
+  /* botones */
+  .btn{border-radius:13px;padding:13px 22px;font-weight:700;background:linear-gradient(135deg,#3b5bd6,#2546c8);box-shadow:0 7px 18px rgba(45,70,200,.26)}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(45,70,200,.34)}
+  .btn.sec{background:#fff;color:var(--azul2);border:1.5px solid var(--linea);box-shadow:0 1px 2px rgba(15,24,48,.04)}
+  .btn.sec:hover{background:#f5f8ff;border-color:#c7d2f7}
+  .btn.sm{border-radius:11px;padding:9px 15px}
+  .btn.gold{background:linear-gradient(135deg,#eab308,#e3a008);color:#3a2c00}
+  .btn.danger{background:linear-gradient(135deg,#e23b4e,#c92638)}
+  .btn-ghost{border-radius:11px;border:1.5px solid var(--linea);font-weight:600;color:var(--azul2)}
+  .btn-ghost:hover{background:#f5f8ff;border-color:#c7d2f7}
+
+  /* campos */
+  input[type=text],input[type=number],input[type=password],input[type=email],select,textarea{border-radius:12px;border:1.5px solid var(--linea);background:#fbfcfe;padding:12px 14px;font-size:15px;color:var(--tinta)}
+  input:focus,select:focus,textarea:focus{border-color:var(--azul2);box-shadow:0 0 0 4px rgba(59,91,214,.13);background:#fff}
+  label{font-weight:600;color:#414a5e;font-size:12.5px;letter-spacing:.01em}
+
+  /* tarjetas */
+  .card{border-radius:var(--radio);box-shadow:var(--sombra);border:1px solid rgba(231,234,243,.8);padding:28px}
+
+  /* hero del hub */
+  .hero{border-radius:26px;padding:42px 42px;background:radial-gradient(130% 150% at 0% 0%,#2c40a0 0%,#1b2a6b 52%,#131e4c 100%);box-shadow:0 26px 64px rgba(16,25,80,.30)}
+  .hero h2{font-size:38px;font-weight:900;letter-spacing:-.035em;margin:14px 0 6px}
+  .hero p{font-size:15px;opacity:.92}
+  .hero-badge{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.26);letter-spacing:2.5px;font-size:11px}
+  .hero::after{filter:blur(10px);opacity:.5}
+
+  /* tarjetas del hub */
+  .hub-card{border-radius:20px;border:1px solid var(--linea)}
+  .hub-card.feat{background:linear-gradient(135deg,#ffffff,#eef3ff);border-color:#d6e0ff}
+  .hub-card:hover{box-shadow:0 18px 42px rgba(30,58,138,.16);border-color:#c7d2f7}
+  .hub-card h3{font-size:19px;color:var(--azul)}
+  .staff-bar{border-radius:14px;background:rgba(255,255,255,.7)}
+
+  /* selección de nivel / materia */
+  .tile,.subj{border-radius:16px;border:1.5px solid var(--linea)}
+  .tile:hover,.subj:hover{border-color:#c7d2f7;box-shadow:0 12px 26px rgba(30,58,138,.14)}
+  .tile h3,.subj h3{color:var(--azul)}
+
+  /* examen */
+  .qtext{font-size:21px;font-weight:800;color:#0e1730;line-height:1.4}
+  .opt{border-radius:14px;border:2px solid var(--linea);padding:16px 18px;font-size:15.5px;font-weight:600;color:#101d3c}
+  .opt:hover{border-color:#bcc9f5;background:#f5f8ff}
+  .opt.sel{border-color:var(--azul2);background:#eef3ff;box-shadow:0 0 0 4px rgba(59,91,214,.12)}
+  .opt .key{border-radius:9px;width:32px;height:32px;font-weight:800;background:#eef2fc;color:var(--azul2)}
+  .opt.sel .key{background:var(--azul2);color:#fff}
+  .progress{height:12px;border-radius:99px;background:#e6ebf6}
+  .progress>i{background:linear-gradient(90deg,var(--azul2),var(--acento))}
+  .pill{border-radius:99px;font-weight:700;background:#eef2fc;color:var(--azul)}
+
+  /* tablas de datos */
+  table.data th{background:#f5f7fd;color:var(--azul);font-size:11.5px;letter-spacing:.06em;padding:13px 12px;border-bottom:1px solid var(--linea)}
+  table.data td{padding:13px 12px;font-size:13.5px}
+  table.data tbody tr:hover{background:#f6f8fd}
+
+  /* métricas */
+  .stat{border-radius:16px;border:1px solid var(--linea);background:#fff;padding:18px}
+  .stat b{font-size:28px;font-weight:800;color:var(--azul)}
+  .acc{border-radius:14px;border-color:var(--linea)}
+  .acc>summary{font-weight:800;font-size:15px}
+  .badge,.lvl-tag{border-radius:99px;font-weight:700}
+  .hint{border-radius:12px}
+
+  /* panel: barra lateral refinada */
+  .admin-side{border-radius:20px;padding:18px 14px}
+  .admin-nav .tab{border-radius:12px;font-weight:600}
+  .admin-nav .tab.on{background:linear-gradient(135deg,#3b5bd6,#2546c8);box-shadow:0 8px 18px rgba(45,70,200,.3)}
+  .admin-top h2{font-size:27px}
+  .admin-content{border-radius:20px}
+
+  /* reporte / constancia: encabezado serif elegante */
+  .cert{border-radius:16px;border:1.5px solid var(--azul)}
+  .cert-title h1{font-family:Georgia,'Times New Roman',serif;font-size:30px;letter-spacing:.4px;color:var(--azul)}
+  .cert-name{font-family:Georgia,serif}
+  .cert-gradelbl{font-size:22px}
+  .cert-grade{font-size:46px;color:var(--azul)}
+
+  /* detalles */
+  .sp-logo{border-radius:24px;border-color:var(--acento)}
+  ::selection{background:rgba(59,91,214,.20)}
+  ::-webkit-scrollbar-thumb{background:rgba(30,58,138,.22)}
+  *:focus-visible{outline:2px solid var(--azul2);outline-offset:2px}
 </style>
 </head>
 <body>
