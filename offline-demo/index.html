@@ -451,6 +451,18 @@
   ::selection{background:rgba(59,91,214,.20)}
   ::-webkit-scrollbar-thumb{background:rgba(30,58,138,.22)}
   *:focus-visible{outline:2px solid var(--azul2);outline-offset:2px}
+
+  /* --- pulido /aesthetic: numerales tabulares · brillo del hero · micro-interacciones --- */
+  .stat b,.cert-grade,table.data td,.pill,#qCounter,#exQCounter,.opt .key,.cert-meta,.cal-stats b{font-variant-numeric:tabular-nums}
+  .hero::before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,rgba(255,255,255,.10) 0%,transparent 40%);pointer-events:none;width:auto;height:auto;border-radius:inherit}
+  .mascota{filter:drop-shadow(0 16px 28px rgba(0,0,0,.42))}
+  .opt{transition:transform .16s cubic-bezier(.22,1,.36,1),border-color .18s ease,background .18s ease,box-shadow .18s ease}
+  .opt:active{transform:scale(.99)}
+  .hub-card:hover .big svg{transform:scale(1.12) translateY(-2px)}
+  .stat{transition:transform .2s ease,box-shadow .2s ease}
+  .stat:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(15,24,48,.10)}
+  .btn:active{transform:translateY(0) scale(.99)}
+  .admin-nav .tab{transition:background .15s ease,color .15s ease,box-shadow .18s ease}
 </style>
 </head>
 <body>
