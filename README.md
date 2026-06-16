@@ -24,20 +24,20 @@ Paleta Rembrandt, iconos SVG, micro-interacciones (anime.js), accesibilidad (foc
 
 > Para que el logo real salga en la animación de apertura: súbelo en Coordinación → Configuración → Subir logo.
 
-## 2. Raíz — App web real (Next.js + Supabase)
-La versión multiusuario en línea (varios profesores a la vez, tiempo real, datos seguros). Reusa el diseño del demo.
+## 2. Raíz — App web con base de datos (Next.js + Supabase)
+La versión **multi-dispositivo en línea**: los aspirantes presentan el examen desde cualquier equipo y la Coordinación ve **todos** los resultados en un mismo lugar (no dependen del navegador donde se contestó). Mismo enfoque que el demo: examen de admisión a Bachillerato (5 materias, 50 preguntas reales) + panel de Coordinación.
 
-**Stack:** Next.js 16 · React 19 · Tailwind v4 · Supabase (Free) · Vercel (Free). Todo en planes gratis.
+**Stack:** Next.js 16 · React 19 · Supabase (Free) · Vercel (Free). Todo en planes gratis.
 
-**Estado actual:** scaffold + esquema de base de datos completo.
-- `supabase/migrations/0001_init.sql` → pegar en Supabase → SQL Editor → Run. Crea tablas (materias, perfiles, preguntas, resultados, alumnos, config), seguridad RLS por rol, y los RPC `start_exam(code)` / `submit_exam(code, answers)` que **califican en el servidor** (las respuestas correctas nunca salen al cliente).
+**Cómo funciona (seguro):**
+- `supabase/migrations/0001_init.sql` → pégalo en Supabase → SQL Editor → Run. Crea las tablas (`subjects`, `questions`, `results`, `students`, `config`, `profiles`), la seguridad **RLS** (solo Coordinación lee resultados/aspirantes; las preguntas con su respuesta correcta nunca son visibles al público), siembra **5 materias + 50 preguntas reales** y crea los RPC `start_exam(code)` / `submit_exam(code, answers)` que **califican en el servidor** — la respuesta correcta nunca sale al cliente.
+- Rutas de la app: `/` (inicio) · `/examen` (aspirante: código → examen → enviado) · `/coordinacion` (login + Resultados/constancia, Aspirantes y códigos, Banco de preguntas, Configuración).
 
-**Para correr la web (cuando haya proyecto Supabase):**
-```bash
-npm install
-# crear .env.local con NEXT_PUBLIC_SUPABASE_URL y NEXT_PUBLIC_SUPABASE_ANON_KEY
-npm run dev   # http://localhost:3000
-```
+**Puesta en marcha:**
+1. Crea un proyecto gratis en [supabase.com](https://supabase.com) y corre el SQL de `supabase/migrations/0001_init.sql`.
+2. Crea el usuario de Coordinación en Supabase → **Authentication → Users → Add user** (correo + contraseña). El trigger lo deja como `coordinator`.
+3. Copia `.env.example` a `.env.local` y pon tu `NEXT_PUBLIC_SUPABASE_URL` y `NEXT_PUBLIC_SUPABASE_ANON_KEY` (Supabase → Project Settings → API).
+4. Local: `npm install && npm run dev` → http://localhost:3000. Producción: importa el repo en **Vercel** y define ahí las mismas 2 variables.
 
 ⚠️ **Next.js 16 tiene breaking changes** respecto a versiones anteriores; leer `node_modules/next/dist/docs/` antes de codear (ver `AGENTS.md`).
 
