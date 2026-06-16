@@ -469,17 +469,17 @@
 <div class="bgfx" aria-hidden="true"><span class="ln"></span><span class="s1"></span><span class="s2"></span><span class="s3"></span><span class="s4"></span><span class="s5"></span></div>
 <div id="splash"><div class="sp-lines"><i></i><i></i><i></i><i></i><i></i></div><div class="sp-logo" id="spLogo"></div></div>
 
-<!-- ===== CONSTANCIA ===== -->
+<!-- ===== CONSTANCIA / REPORTE DE CALIFICACIONES ===== -->
 <div id="constancia">
   <div class="cert">
-    <div class="cert-wm">DIAGNÓSTICO</div>
+    <div class="cert-wm">ADMISIÓN</div>
     <img class="cert-formato-head" src="formato-encabezado.png" alt="Instituto Rembrandt" onerror="this.style.display='none'">
-    <div class="cert-head"><div><h2 id="certSchool">Instituto Rembrandt</h2><p id="certSub">Evaluación Diagnóstica</p></div></div>
+    <div class="cert-head"><div><h2 id="certSchool">Instituto Rembrandt</h2><p id="certSub">Examen de Admisión</p></div></div>
     <div class="cert-title"><h1>Reporte de Calificaciones</h1><div class="line"></div></div>
-    <div class="cert-body">Se hace constar que el/la alumno(a)
+    <div class="cert-body">Se hace constar que el/la aspirante
       <div class="cert-name" id="certName">Nombre</div>
       <div id="certInfoLine" class="muted"></div>
-      presentó la evaluación diagnóstica de <b id="certSubject">Materia</b>, obteniendo:
+      presentó el examen de admisión a Bachillerato, obteniendo:
       <div class="cert-gradewrap"><span class="cert-gradelbl">Calificación:</span><span class="cert-grade" id="certGrade">0</span></div>
       <div>nivel de desempeño <b id="certLevel">—</b> (<span id="certPct">0</span>% de aciertos, <span id="certHits">0/0</span> correctas).</div>
     </div>
@@ -499,397 +499,189 @@
 <div class="wrap" id="app">
   <header class="top">
     <div class="logo-box" id="hdrLogo">R</div>
-    <div><h1 id="hdrSchool">Instituto Rembrandt</h1><p id="hdrSub">Sistema de Evaluaciones Diagnósticas</p></div>
+    <div><h1 id="hdrSchool">Instituto Rembrandt</h1><p id="hdrSub">Examen de Admisión · Bachillerato</p></div>
     <div class="spacer"></div>
     <button class="btn-ghost" onclick="goHub()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-7 8 7"/><path d="M6 10v9h12v-9"/></svg>Inicio</button>
-    <button class="btn-ghost" onclick="goLogin()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Personal</button>
+    <button class="btn-ghost" id="staffBtn" onclick="goLogin()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Coordinación</button>
   </header>
 
-  <!-- HUB -->
+  <!-- ===== HUB ===== -->
   <section id="vHub">
-    <div class="hero"><div class="hero-txt"><span class="hero-badge">RESPETO · CULTURA · HONOR</span><h2>Evaluación Diagnóstica</h2><p id="hubCiclo">Nuevo ingreso · Periodo</p></div><img class="mascota" src="mascota.png" alt="Mascota Instituto Rembrandt" onerror="this.remove()"></div>
+    <div class="hero"><div class="hero-txt"><span class="hero-badge">RESPETO · CULTURA · HONOR</span><h2>Examen de Admisión</h2><p id="hubCiclo">Bachillerato · Nuevo ingreso</p></div><img class="mascota" src="mascota.png" alt="Mascota Instituto Rembrandt" onerror="this.remove()"></div>
     <div class="hub-grid">
-      <div class="hub-card feat reveal" onclick="goCode()"><span class="bar" style="background:var(--azul2)"></span><div class="big" style="color:var(--azul2)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1"/><path d="M8.5 12l2.2 2.2L15.5 9.5"/></svg></div><h3>Presentar evaluación</h3><p>Ingresa con tu código y contesta tu examen.</p><button class="btn">Comenzar ahora</button></div>
+      <div class="hub-card feat reveal" onclick="goCode()"><span class="bar" style="background:var(--azul2)"></span><div class="big" style="color:var(--azul2)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1"/><path d="M8.5 12l2.2 2.2L15.5 9.5"/></svg></div><h3>Presentar mi examen</h3><p>Soy aspirante a Bachillerato. Ingreso con el código que me dio la escuela y contesto mi examen de admisión.</p><button class="btn">Comenzar examen</button></div>
     </div>
-    <div class="hub-sub">
-      <div class="hub-card reveal" onclick="goLevel('guide')"><span class="bar" style="background:var(--verde)"></span><div class="big" style="color:var(--verde)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h11a1 1 0 0 1 1 1v15H6a1 1 0 0 1-1-1z"/><path d="M17 16H6a2 2 0 0 0-2 2"/><path d="M9 8h5M9 11h5"/></svg></div><h3>Guías de estudio</h3><p>Repasa los temas de tu nivel.</p><button class="btn sec sm">Ver guías</button></div>
-      <div class="hub-card reveal" onclick="goInfo()"><span class="bar" style="background:var(--acento)"></span><div class="big" style="color:var(--acento)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11.5V16"/><path d="M12 8h.01"/></svg></div><h3>Información general</h3><p>Conoce el instituto y el proceso.</p><button class="btn sec sm">Ver información</button></div>
-      <div class="hub-card reveal" onclick="goTour()"><span class="bar" style="background:var(--rojo)"></span><div class="big" style="color:var(--rojo)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="16" rx="2"/><path d="M4 9h16M8 3v4M16 3v4"/></svg></div><h3>Agendar recorrido</h3><p>Visita guiada con Coordinación.</p><button class="btn sec sm">Agendar</button></div>
-    </div>
-    <div class="staff-bar reveal" onclick="goLogin()"><span><svg style="width:15px;height:15px;vertical-align:-2px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg> <b>Acceso del personal</b> · Profesores y Coordinación</span><button class="btn sec sm">Entrar →</button></div>
   </section>
 
-  <!-- CÓDIGO DE ACCESO (alumno) -->
+  <!-- ===== CÓDIGO ===== -->
   <section id="vCode" class="hidden">
     <button class="backlink" onclick="goHub()">← Volver al inicio</button>
     <div class="card" style="max-width:480px;margin:0 auto">
-      <h2 style="margin-top:0">Presentar evaluación</h2>
-      <p class="muted">Escribe el <b>código de acceso</b> que te entregó la escuela. Solo puede usarse una vez.</p>
-      <div class="mt"><label>Código de acceso</label>
-        <input type="text" id="inCode" autocomplete="off" placeholder="Ej. 7K3Q9A" maxlength="8" onkeydown="if(event.key==='Enter'){event.preventDefault();validateCode()}" style="text-transform:uppercase;font-size:22px;letter-spacing:4px;text-align:center;font-weight:800"></div>
-      <div class="mt"><button class="btn" onclick="validateCode()">Comenzar →</button></div>
+      <h2 style="margin-top:0">Ingresa tu código</h2>
+      <p class="muted">Coordinación te entregó un <b>código de un solo uso</b>. Escríbelo para abrir tu examen de admisión.</p>
+      <label>Código de acceso</label>
+      <input type="text" id="inCode" placeholder="Ej. ABC234" maxlength="6" style="text-transform:uppercase;letter-spacing:4px;font-size:22px;font-weight:800;text-align:center" autocomplete="off">
+      <div class="mt"><button class="btn" style="width:100%" onclick="validateCode()">Abrir mi examen →</button></div>
+      <p class="muted mt center">Si tu código no funciona, avisa a Coordinación.</p>
     </div>
   </section>
 
-  <!-- NIVEL -->
-  <section id="vLevel" class="hidden">
-    <button class="backlink" onclick="goHub()">← Volver al inicio</button>
-    <div class="card"><h2 style="margin-top:0" id="levelTitle">Elige el nivel educativo</h2>
-      <p class="muted" id="levelSub">Selecciona el nivel al que ingresa el alumno.</p>
-      <div class="tiles" id="levelGrid"></div></div>
-  </section>
-
-  <!-- DATOS -->
-  <section id="vStudent" class="hidden">
-    <button class="backlink" onclick="goLevel('exam')">← Cambiar nivel</button>
-    <div class="card"><h2 style="margin-top:0">Datos del alumno</h2>
-      <p class="muted" id="studentLvl"></p>
-      <div class="row mt"><div><label>Nombre completo del alumno(a)</label><input type="text" id="inName" autocomplete="off"></div></div>
-      <div class="row mt"><div><label>Correo del alumno (opcional)</label><input type="email" id="inSEmail" autocomplete="off"></div>
-        <div><label>Correo de contacto</label><input type="email" id="inTEmail" autocomplete="off"></div></div>
-      <div class="mt"><button class="btn" onclick="goSubjects()">Continuar →</button></div></div>
-  </section>
-
-  <!-- MATERIA -->
-  <section id="vSubjects" class="hidden">
-    <button class="backlink" onclick="goStudentBack()">← Datos del alumno</button>
-    <div class="card"><h2 style="margin-top:0">Elige la materia a evaluar</h2><p class="muted" id="subjWho"></p><div class="subjects" id="subjGrid"></div></div>
-  </section>
-
-  <!-- GUÍAS -->
-  <section id="vGuides" class="hidden">
-    <button class="backlink" onclick="goLevel('guide')">← Cambiar nivel</button>
-    <div class="card" id="guideListCard"><h2 style="margin-top:0">📚 Guías de estudio</h2><p class="muted" id="guideLvlSub"></p><div class="subjects" id="guideGrid"></div></div>
-    <div class="card hidden" id="guideView">
-      <button class="backlink" onclick="backToGuideList()">← Todas las materias del nivel</button>
-      <h2 id="guideTitle" style="margin-top:0">Materia</h2>
-      <div id="guideBody" class="guide-body"></div>
-      <div id="guideFiles" class="filelist"></div>
-      <div class="mt"><button class="btn sec sm" onclick="backToGuideList()">← Volver a materias</button>
-        <button class="btn sec sm" onclick="goHub()">🏠 Inicio</button></div>
-    </div>
-  </section>
-
-  <!-- INFO -->
-  <section id="vInfo" class="hidden">
-    <button class="backlink" onclick="goHub()">← Volver al inicio</button>
-    <div class="card">
-      <div class="info-hero"><h3 id="infoSchool">Instituto Rembrandt</h3><p>RESPETO · CULTURA · HONOR</p></div>
-      <div id="infoBody" class="guide-body"></div>
-      <div class="info-contact" id="infoContact"></div>
-    </div>
-  </section>
-
-  <!-- RECORRIDO -->
-  <section id="vTour" class="hidden">
-    <button class="backlink" onclick="goHub()">← Volver al inicio</button>
-    <div class="card"><h2 style="margin-top:0">📅 Agendar un recorrido con Coordinación</h2>
-      <p class="muted">Déjanos tus datos y Coordinación te contactará para tu visita guiada.</p>
-      <div class="row mt"><div><label>Nombre de contacto *</label><input type="text" id="tName" autocomplete="off"></div>
-        <div><label>Correo de contacto *</label><input type="email" id="tEmail" autocomplete="off"></div></div>
-      <div class="row mt"><div><label>Teléfono de contacto *</label><input type="text" id="tPhone" autocomplete="off"></div>
-        <div><label>Nombre del aspirante</label><input type="text" id="tStudent" autocomplete="off"></div></div>
-      <div class="row mt"><div><label>Nivel de interés</label><select id="tLevel"></select></div>
-        <div><label>Fecha / horario preferido</label><input type="text" id="tDate" placeholder="Ej. Lunes 9 de junio, 10:00 am"></div></div>
-      <div class="mt"><label>Mensaje (opcional)</label><textarea id="tMsg" rows="3"></textarea></div>
-      <div class="toolbar" style="justify-content:flex-start"><button class="btn" onclick="enviarRecorrido()">Solicitar recorrido</button></div>
-      <p class="muted">¿Prefieres llamar? <b id="tourPhone"></b></p></div>
-  </section>
-
-  <!-- LOGIN -->
-  <section id="vLogin" class="hidden">
-    <button class="backlink" onclick="goHub()">← Volver al inicio</button>
-    <div class="card" style="max-width:440px;margin:0 auto">
-      <h2 style="margin-top:0">🔒 Acceso del personal</h2>
-      <p class="muted">Ingresa con el usuario y contraseña que te asignó Coordinación.</p>
-      <div class="mt"><label>Usuario</label><input type="text" id="loginUser" autocomplete="off" onkeydown="if(event.key==='Enter'){event.preventDefault();document.getElementById('loginPass').focus()}"></div>
-      <div class="mt"><label>Contraseña</label><input type="password" id="loginPass" onkeydown="if(event.key==='Enter'){event.preventDefault();doLogin()}"></div>
-      <div class="mt"><button class="btn" onclick="doLogin()">Entrar</button></div>
-      <p class="muted mt">Demo — Coordinación: <b>coordinacion / coord2026</b> · Dirección: <b>direccion / direccion2026</b> · Profesor: <b>profe / profe123</b></p>
-      <p class="muted" style="font-size:11px;opacity:.6">Soporte técnico: debug / debug2026</p>
-    </div>
-  </section>
-
-  <!-- QUIZ -->
+  <!-- ===== EXAMEN ===== -->
   <section id="vQuiz" class="hidden">
     <div class="card">
-      <div class="quiz-nav" style="margin-bottom:10px">
-        <span class="pill" id="qSubject">Materia</span>
-        <span class="pill" id="qTimer" style="display:none;background:#fdecec;color:var(--rojo)">⏱️ 00:00</span>
-        <span class="pill" id="qCounter">1 / 20</span>
+      <div class="quiz-nav" style="margin-bottom:14px">
+        <button class="backlink" onclick="abortarQuiz()">← Salir</button>
+        <div style="display:flex;align-items:center;gap:10px">
+          <span class="pill" id="qTimer" style="display:none">⏱️ 00:00</span>
+          <span class="pill" id="qSubject">Materia</span>
+          <span class="pill" id="qCounter">1 / 1</span>
+        </div>
       </div>
       <div class="progress"><i id="qBar"></i></div>
       <div id="qImgWrap"></div>
       <div class="qtext" id="qText">Pregunta…</div>
       <div id="qOpts"></div>
       <div class="quiz-nav">
-        <button class="btn sec sm" id="qPrev" onclick="prevQ()">← Anterior</button>
-        <button class="btn sm" id="qNext" onclick="nextQ()">Siguiente →</button>
+        <button class="btn sec" id="qPrev" onclick="prevQ()">← Anterior</button>
+        <button class="btn" id="qNext" onclick="nextQ()">Siguiente →</button>
       </div>
-      <div class="center mt"><button class="btn-ghost" onclick="abortarQuiz()">✕ Salir sin guardar</button></div>
     </div>
   </section>
 
-  <!-- EXAMEN PARCIAL -->
-  <section id="vExam" class="hidden">
-    <div class="card">
-      <div class="quiz-nav" style="margin-bottom:10px">
-        <span class="pill" id="exQSubject">Examen</span>
-        <span class="pill" id="exQTimer" style="display:none;background:#fdecec;color:var(--rojo)">⏱️ 00:00</span>
-        <span class="pill" id="exQCounter">1 / 1</span>
-      </div>
-      <div class="progress"><i id="exQBar"></i></div>
-      <div class="qtext" id="exQText">Pregunta…</div>
-      <div id="exQBody"></div>
-      <div class="quiz-nav">
-        <button class="btn sec sm" id="exQPrev" onclick="exPrev()">← Anterior</button>
-        <button class="btn sm" id="exQNext" onclick="exNext()">Siguiente →</button>
-      </div>
-      <div class="center mt"><button class="btn-ghost" onclick="exAbort()">✕ Salir sin guardar</button></div>
-    </div>
-  </section>
-
-  <!-- THANKS -->
+  <!-- ===== GRACIAS ===== -->
   <section id="vThanks" class="hidden">
-    <div class="card center"><div class="thanks-ico" id="thanksIco"><svg viewBox="0 0 52 52"><path d="M14 27l8 8 16-18"/></svg></div>
-      <h2 style="margin-top:0">¡Listo! Tus respuestas se enviaron correctamente</h2>
-      <p class="muted">Gracias por presentar tu evaluación. Tus profesores revisarán los resultados.<br>Ya puedes cerrar esta ventana.</p>
-      <div class="mt"><button class="btn" onclick="goHub()">Finalizar</button></div></div>
+    <div class="card center" style="max-width:560px;margin:0 auto">
+      <div class="thanks-ico"><svg viewBox="0 0 60 60"><path d="M14 31l11 11 21-23"/></svg></div>
+      <h2 style="margin:0 0 6px">¡Examen enviado!</h2>
+      <p class="muted">Tus respuestas se registraron correctamente. La Coordinación del Instituto Rembrandt revisará tu evaluación y se pondrá en contacto contigo.</p>
+      <p class="muted">Gracias por presentar tu examen de admisión. ¡Te deseamos mucho éxito!</p>
+      <div class="mt"><button class="btn" onclick="goHub()">Finalizar</button></div>
+    </div>
   </section>
 
-  <!-- ADMIN -->
+  <!-- ===== LOGIN COORDINACIÓN ===== -->
+  <section id="vLogin" class="hidden">
+    <button class="backlink" onclick="goHub()">← Volver al inicio</button>
+    <div class="card" style="max-width:420px;margin:0 auto">
+      <h2 style="margin-top:0">Acceso de Coordinación</h2>
+      <p class="muted">Área exclusiva del personal del instituto.</p>
+      <label>Usuario</label><input type="text" id="logUser" autocomplete="off" placeholder="usuario">
+      <label class="mt">Contraseña</label><input type="password" id="logPass" autocomplete="off" placeholder="contraseña">
+      <div class="mt"><button class="btn" style="width:100%" onclick="doLogin()">Entrar</button></div>
+    </div>
+  </section>
+
+  <!-- ===== PANEL COORDINACIÓN ===== -->
   <section id="vAdmin" class="hidden">
     <div class="admin-shell">
       <aside class="admin-side">
-        <div class="admin-brand"><div class="logo-box" id="sideLogo">R</div><div class="admin-brand-tx"><b id="sideSchool">Instituto Rembrandt</b><small>Panel de gestión</small></div></div>
-        <nav class="tabs admin-nav" id="adminTabs"></nav>
-        <button class="admin-logout" onclick="logout()">⎋ Cerrar sesión</button>
+        <div class="admin-brand"><div class="logo-box" id="admLogo">R</div><div class="admin-brand-tx"><b id="admSchool">Instituto Rembrandt</b><small>Coordinación</small></div></div>
+        <nav class="admin-nav">
+          <button class="tab on" data-pane="paneRes" onclick="adminTab('paneRes',this)"><span class="tic">📊</span> Resultados</button>
+          <button class="tab" data-pane="paneStud" onclick="adminTab('paneStud',this)"><span class="tic">🎟️</span> Aspirantes y códigos</button>
+          <button class="tab" data-pane="paneBank" onclick="adminTab('paneBank',this)"><span class="tic">📝</span> Banco de preguntas</button>
+          <button class="tab" data-pane="paneCfg" onclick="adminTab('paneCfg',this)"><span class="tic">⚙️</span> Configuración</button>
+        </nav>
+        <button class="admin-logout" onclick="goHub()">Cerrar sesión</button>
       </aside>
       <div class="admin-main">
-        <header class="admin-top"><h2 id="adminTitle">Panel</h2></header>
-        <div class="card admin-content">
 
-      <div id="tabCal" class="tabpane">
-        <details class="acc" open><summary>📈 Estadísticas <span class="chip" id="statChip">0</span></summary><div class="accbody"><div class="cal-stats" id="calStats"></div></div></details>
-        <div class="row" style="align-items:flex-end">
-          <div><label>Periodo</label><select id="fCiclo" onchange="renderCalif()"></select></div>
-          <div><label>Resultado</label><select id="fResult" onchange="renderCalif()"><option value="">Todos</option><option value="apro">Suficiente</option><option value="repro">Insuficiente</option></select></div>
-          <div><label>Estado del reporte</label><select id="fStatus" onchange="renderCalif()">
-            <option value="">Todas</option><option value="printed">Impresas</option><option value="noprinted">No impresas</option>
-            <option value="emailed">Enviadas</option><option value="noemailed">No enviadas</option>
-            <option value="both">Impresas y enviadas</option><option value="none">Sin imprimir ni enviar</option></select></div>
-          <div style="flex:2"><label>Buscar alumno</label><input type="text" id="fSearch" oninput="renderCalif()" placeholder="Nombre…"></div>
-          <div><button class="btn sm" onclick="exportCSV()">⬇️ Excel</button></div>
-        </div>
-        <div id="calList" class="mt"></div>
-      </div>
-
-      <div id="tabPreg" class="tabpane hidden">
-        <button class="backlink" id="pregBack" onclick="adminTab('examenes')" style="display:none">← Volver a Exámenes</button>
-        <div class="hint">Edita el banco de preguntas del <b>Examen Diagnóstico</b>. Marca la respuesta <b>correcta</b>. Puedes agregar preguntas e imágenes. Guarda al terminar.</div>
-        <div class="row" style="align-items:flex-end">
-          <div><label>Nivel educativo</label><select id="editLevel" onchange="fillEditSubjects()"></select></div>
-          <div><label>Materia</label><select id="editSubject" onchange="renderEditor()"></select></div>
-          <div><button class="btn sm" onclick="saveBank()">💾 Guardar</button></div>
-          <div><button class="btn sec sm" onclick="exportBank()">⬇️ Exportar</button></div>
-          <div><button class="btn sec sm" onclick="document.getElementById('impBank').click()">⬆️ Importar JSON</button>
-            <input type="file" id="impBank" accept=".json" class="hidden" onchange="importBank(event)"></div>
-          <div><button class="btn sec sm" onclick="document.getElementById('impExcel').click()">📊 Importar Excel</button>
-            <input type="file" id="impExcel" accept=".xlsx,.xls,.csv" class="hidden" onchange="importExcel(event)"></div>
-          <div><button class="btn sec sm" onclick="plantillaExcel()">📄 Plantilla</button></div>
-        </div>
-        <div id="editorList" class="mt"></div>
-        <button class="btn gold" onclick="addQuestion()">➕ Agregar pregunta</button>
-      </div>
-
-      <div id="tabGuia" class="tabpane hidden">
-        <div class="hint">Escribe la guía de tu materia y sube archivos (PDF/imágenes se ven dentro; Word/Excel/PPT se abren o descargan). Los alumnos la verán antes del examen.</div>
-        <div class="row" style="align-items:flex-end">
-          <div><label>Nivel educativo</label><select id="guideLevel" onchange="fillGuideSubjects()"></select></div>
-          <div><label>Materia</label><select id="guideSubject" onchange="loadGuideEditor()"></select></div>
-          <div><button class="btn sm" onclick="saveGuide()">💾 Guardar guía</button></div>
-        </div>
-        <div class="mt"><textarea id="guideText" rows="8" placeholder="Temas a repasar, ejercicios sugeridos, recomendaciones…"></textarea></div>
-        <div class="mt"><button class="btn sec sm" onclick="document.getElementById('guideFileInput').click()">📎 Adjuntar archivo</button>
-          <input type="file" id="guideFileInput" multiple class="hidden" accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,image/*" onchange="addGuideFiles(event)"></div>
-        <div id="guideEditFiles" class="filelist"></div>
-      </div>
-
-      <div id="tabAlumnos" class="tabpane hidden">
-        <div class="hint">Registra a los alumnos de nuevo ingreso. Cada uno recibe un <b>código único de un solo uso</b>: entrégaselo para que entre, conteste una vez y el código se bloquee.</div>
-        <div class="grid2">
-          <div><label>Nombre del alumno</label><input type="text" id="sName"></div>
-          <div><label>Nivel al que ingresa</label><select id="sLevel" onchange="fillStudentMode()"></select></div>
-          <div><label>Examen a presentar</label><select id="sMode" disabled title="Todos presentan el examen diagnóstico completo"></select></div>
-          <div><label>Escuela de procedencia</label><input type="text" id="sOrigin" placeholder="Escuela de la que viene"></div>
-          <div><label>Correo de contacto</label><input type="email" id="sTEmail"></div>
-          <div><label>Correo del alumno (opcional)</label><input type="email" id="sSEmail"></div>
-        </div>
-        <div class="toolbar" style="justify-content:flex-start"><button class="btn sm" onclick="addStudent()">➕ Registrar y generar código</button>
-          <button class="btn sec sm" onclick="exportRoster()">⬇️ Exportar</button>
-          <button class="btn sec sm" onclick="document.getElementById('impStudents').click()">📊 Importar alumnos (Excel)</button>
-          <input type="file" id="impStudents" accept=".xlsx,.xls,.csv" class="hidden" onchange="importStudents(event)">
-          <button class="btn sec sm" onclick="plantillaAlumnos()">📄 Plantilla alumnos</button></div>
-        <div class="row" style="align-items:flex-end">
-          <div><label>Estado</label><select id="fSStatus" onchange="rosterPage=1;renderRoster()"><option value="">Todos</option><option value="pending">Pendientes</option><option value="completed">Contestados</option></select></div>
-          <div style="flex:2"><label>Buscar (nombre o código)</label><input type="text" id="fSSearch" oninput="rosterPage=1;renderRoster()" placeholder="Nombre o código…"></div>
-        </div>
-        <div id="rosterList" class="mt"></div>
-        <div id="rosterPager" class="center mt"></div>
-      </div>
-
-      <div id="tabProfes" class="tabpane hidden">
-        <div class="hint">Da de alta profesores con su usuario y contraseña. Por defecto <b>solo crean/editan sus propios exámenes y revisan las respuestas abiertas</b> de sus exámenes. Tú decides qué permisos extra darles (puedes activarlos/desactivarlos después).</div>
-        <div class="grid2">
-          <div><label>Nombre del profesor</label><input type="text" id="pName"></div>
-          <div><label>Usuario</label><input type="text" id="pUser" autocomplete="off"></div>
-          <div><label>Contraseña</label><input type="text" id="pPass"></div>
-        </div>
-        <label class="mt">Materias asignadas (nivel · materia)</label>
-        <div class="assign-grid" id="assignGrid"></div>
-        <label class="mt">Permisos extra (además de editar preguntas)</label>
-        <div class="chips" style="gap:14px">
-          <label class="chip-x"><input type="checkbox" id="pCapCalif" style="width:auto;margin-right:6px"> Ver calificaciones</label>
-          <label class="chip-x"><input type="checkbox" id="pCapAlumnos" style="width:auto;margin-right:6px"> Base de datos de alumnos</label>
-          <label class="chip-x"><input type="checkbox" id="pCapGuias" style="width:auto;margin-right:6px"> Editar guías</label>
-          <label class="chip-x"><input type="checkbox" id="pCapPreguntas" style="width:auto;margin-right:6px"> Editar preguntas del diagnóstico</label>
-        </div>
-        <div class="toolbar" style="justify-content:flex-start"><button class="btn sm" onclick="addProfe()">➕ Agregar profesor</button></div>
-        <h3>Profesores registrados</h3>
-        <div id="profesList"></div>
-      </div>
-
-      <div id="tabTours" class="tabpane hidden">
-        <div class="hint">Solicitudes de recorrido. Marca el estado: pendiente, realizado o cancelado.</div>
-        <div class="row" style="align-items:flex-end"><div><label>Estado</label><select id="fTour" onchange="renderTours()">
-          <option value="">Todas</option><option value="pendiente">Pendientes</option><option value="realizado">Realizadas</option><option value="cancelado">Canceladas</option></select></div>
-          <div><button class="btn sm" onclick="exportTours()">⬇️ Exportar</button></div></div>
-        <div id="toursList" class="mt"></div>
-      </div>
-
-      <div id="tabReportes" class="tabpane hidden">
-        <div class="hint">Reporte general de resultados. Filtra por periodo y nivel; imprime o exporta.</div>
-        <div class="row" style="align-items:flex-end">
-          <div><label>Periodo</label><select id="rCiclo" onchange="renderReportes()"></select></div>
-          <div><label>Nivel</label><select id="rLevel" onchange="renderReportes()"></select></div>
-          <div><button class="btn sm" onclick="imprimirReporte()">🖨️ Imprimir / PDF</button></div>
-          <div><button class="btn sec sm" onclick="exportReporte()">⬇️ Excel</button></div>
-        </div>
-        <div id="repBody" class="mt"></div>
-      </div>
-
-      <div id="tabCfg" class="tabpane hidden">
-        <div class="hint">👑 Sección exclusiva de Coordinación. Abre cada apartado para editarlo. No olvides <b>Guardar</b> al final.</div>
-
-        <details class="acc" open><summary>🏫 Datos de la institución</summary><div class="accbody">
-          <div class="grid2">
-            <div><label>Nombre de la escuela</label><input type="text" id="cfgSchool"></div>
-            <div><label>Subtítulo / Periodo</label><input type="text" id="cfgSub"></div>
-            <div><label>Nombre del Director(a)</label><input type="text" id="cfgDirector"></div>
-            <div><label>Cargo del firmante</label><input type="text" id="cfgDirectorTitle"></div>
-            <div><label>Calificación mínima aprobatoria (%)</label><input type="number" id="cfgPass" min="0" max="100"></div>
-            <div><label>Escala de calificación (máximo, ej. 10)</label><input type="number" id="cfgEscala" min="1" max="100"></div>
-            <div><label>Tiempo del examen diagnóstico (min, 0 = sin límite)</label><input type="number" id="cfgTime" min="0" max="300"></div>
-            <div><label>¿Barajar preguntas/respuestas?</label><select id="cfgShuffle"><option value="1">Sí</option><option value="0">No</option></select></div>
-            <div><label>Logo (imagen)</label><input type="file" id="cfgLogo" accept="image/*" onchange="cargarLogo(event)"><p class="muted" style="margin:6px 0 0">Logo: <span id="logoState">predeterminado</span></p></div>
-          </div>
-        </div></details>
-
-        <details class="acc"><summary>ℹ️ Información general y contacto (público)</summary><div class="accbody">
-          <div><label>Texto para aspirantes</label><textarea id="cfgInfo" rows="5"></textarea></div>
-          <div class="grid2 mt"><div><label>Teléfono</label><input type="text" id="cfgPhone"></div>
-            <div><label>Correo</label><input type="text" id="cfgEmail"></div><div><label>Dirección</label><input type="text" id="cfgAddr"></div></div>
-        </div></details>
-
-        <details class="acc"><summary>🏷️ Categorías (periodos, semestres)</summary><div class="accbody">
-          <h3 style="margin-top:0">Periodos</h3><p class="muted" style="margin-top:-4px">★ marca el periodo activo.</p><div class="chips" id="catCiclos"></div>
-          <div class="row"><div style="flex:2"><input type="text" id="newCiclo" placeholder="Nuevo periodo, ej. 2027-2028"></div><div><button class="btn sm" onclick="addCiclo()">Agregar</button></div></div>
-          <h3 class="mt">Semestres (para exámenes parciales)</h3><div class="chips" id="catSem"></div>
-          <div class="row"><div style="flex:2"><input type="text" id="newSem" placeholder="Nuevo semestre, ej. 3er semestre"></div><div><button class="btn sm" onclick="addSem()">Agregar</button></div></div>
-        </div></details>
-
-        <details class="acc"><summary>⚙️ Funciones (avanzado)</summary><div class="accbody">
-          <p class="muted" style="margin-top:0">Activa o desactiva funciones añadidas recientemente. Si algo no te convence, apágalo y la app vuelve al comportamiento anterior.</p>
-          <div class="chips" style="gap:14px" id="featToggles"></div>
-        </div></details>
-
-        <details class="acc"><summary>🔒 Seguridad</summary><div class="accbody">
-          <div class="grid2"><div><label>Nueva contraseña de Coordinación (vacío = no cambiar)</label><input type="password" id="cfgCoord"></div></div>
-          <div class="mt"><button class="btn sec sm" onclick="resetTodo()">♻️ Restaurar de fábrica</button></div>
-        </div></details>
-
-        <div class="toolbar" style="justify-content:flex-start;margin-top:16px"><button class="btn" onclick="saveConfig()">💾 Guardar configuración</button></div>
-      </div>
-
-      <div id="tabExamenes" class="tabpane hidden">
-        <div id="examListView">
-          <div class="hint">Crea exámenes <b>parciales</b> por materia, parcial y semestre. Cada examen genera un <b>PIN</b> que compartes con los alumnos; se contesta solo dentro de la fecha que definas.</div>
-          <div class="toolbar" style="justify-content:flex-start"><button class="btn sm" onclick="nuevoExamen()">➕ Crear examen</button>
-            <button class="btn sec sm" id="revBtn" onclick="adminTab('revision')">✍️ Revisión manual</button></div>
-          <div id="examList" class="mt"></div>
-        </div>
-        <div id="examBuilder" class="hidden">
-          <button class="backlink" onclick="cerrarBuilder()">← Volver a exámenes</button>
-          <div class="grid2">
-            <div><label>Título del examen</label><input type="text" id="exTitle" placeholder="Ej. Matemáticas — 1er parcial"></div>
-            <div><label>Materia</label><select id="exSubject"></select></div>
-            <div><label>Parcial</label><select id="exParcial"><option>1er parcial</option><option>2do parcial</option><option>3er parcial</option><option>Final</option></select></div>
-            <div><label>Semestre</label><select id="exSem"></select></div>
-            <div><label>Periodo</label><select id="exCiclo"></select></div>
-          </div>
-          <div class="grid2 mt">
-            <div><label>Disponible desde</label><input type="datetime-local" id="exFrom"></div>
-            <div><label>Disponible hasta (vence)</label><input type="datetime-local" id="exTo"></div>
-            <div><label>Tiempo límite (min, 0=sin límite)</label><input type="number" id="exTime" value="0" min="0" max="300"></div>
-            <div><label>Barajar preguntas</label><select id="exShuffle"><option value="1">Sí</option><option value="0">No</option></select></div>
-            <div><label>¿Mostrar calificación al alumno al terminar?</label><select id="exShowGrade"><option value="0">No</option><option value="1">Sí</option></select></div>
-            <div><label>PIN del examen</label><input type="text" id="exPin" readonly style="font-weight:800;letter-spacing:2px"></div>
-          </div>
-          <div class="mt"><label>Descripción / instrucciones (opcional)</label><textarea id="exDesc" rows="2"></textarea></div>
-          <h3 class="mt">Preguntas</h3>
-          <div id="exQuestions"></div>
-          <div class="toolbar" style="justify-content:flex-start">
-            <button class="btn sec sm" onclick="addExQ('mc')">＋ Opción múltiple</button>
-            <button class="btn sec sm" onclick="addExQ('check')">＋ Casillas (varias)</button>
-            <button class="btn sec sm" onclick="addExQ('tf')">＋ Verdadero/Falso</button>
-            <button class="btn sec sm openq-btn" onclick="addExQ('short')">＋ Respuesta corta</button>
-            <button class="btn sec sm openq-btn" onclick="addExQ('para')">＋ Párrafo</button>
-          </div>
-          <div class="toolbar" style="justify-content:flex-start;margin-top:14px">
-            <button class="btn sm" onclick="guardarExamen()">💾 Guardar examen</button>
+        <!-- RESULTADOS -->
+        <div id="paneRes">
+          <div class="admin-top"><h2>Resultados del examen</h2></div>
+          <div class="card admin-content">
+            <div class="cal-stats" id="resStats"></div>
+            <div class="row mt" style="align-items:flex-end">
+              <div><label>Buscar</label><input type="text" id="fResSearch" placeholder="Nombre o código" oninput="renderResultados()"></div>
+              <div><label>Estado</label><select id="fResStatus" onchange="renderResultados()"><option value="">Todos</option><option value="suf">Suficientes</option><option value="ins">Insuficientes</option></select></div>
+              <div style="flex:0 0 auto"><button class="btn sec" onclick="exportResultados()">⬇️ Exportar (CSV)</button></div>
+              <div style="flex:0 0 auto"><button class="btn sec" onclick="imprimirReporte()">🖨️ Reporte general</button></div>
+            </div>
+            <div id="resList" class="mt"></div>
           </div>
         </div>
-      </div>
 
-      <div id="tabRevision" class="tabpane hidden">
-        <button class="backlink" onclick="adminTab('examenes')">← Volver a Exámenes</button>
-        <div class="hint">Respuestas abiertas marcadas para <b>revisión manual</b>. Asigna los puntos y aprueba; la calificación del alumno se actualiza sola.</div>
-        <div id="revList" class="mt"></div>
-      </div>
+        <!-- ASPIRANTES -->
+        <div id="paneStud" class="hidden">
+          <div class="admin-top"><h2>Aspirantes y códigos</h2></div>
+          <div class="card admin-content">
+            <div class="hint">Registra a cada aspirante para generarle un <b>código de un solo uso</b>. Entrégaselo para que presente su examen. El código deja de servir cuando termina el examen.</div>
+            <div class="row" style="align-items:flex-end">
+              <div><label>Nombre del aspirante</label><input type="text" id="sName" placeholder="Nombre completo"></div>
+              <div><label>Escuela de procedencia</label><input type="text" id="sOrigin" placeholder="Secundaria de origen"></div>
+              <div><label>Correo de contacto</label><input type="email" id="sEmail" placeholder="correo@ejemplo.com"></div>
+              <div style="flex:0 0 auto"><button class="btn" onclick="addStudent()">+ Registrar y generar código</button></div>
+            </div>
+            <div class="row mt">
+              <div style="flex:0 0 auto"><button class="btn sec sm" onclick="document.getElementById('impStud').click()">⬆️ Importar (Excel/CSV)</button><input type="file" id="impStud" accept=".xlsx,.xls,.csv" class="hidden" onchange="importStudents(event)"></div>
+              <div style="flex:0 0 auto"><button class="btn sec sm" onclick="plantillaAlumnos()">📄 Descargar plantilla</button></div>
+              <div style="flex:0 0 auto"><button class="btn sec sm" onclick="exportRoster()">⬇️ Exportar lista + códigos</button></div>
+            </div>
+            <div class="row mt" style="align-items:flex-end">
+              <div><label>Buscar</label><input type="text" id="fSSearch" placeholder="Nombre o código" oninput="renderRoster()"></div>
+              <div><label>Estado</label><select id="fSStatus" onchange="renderRoster()"><option value="">Todos</option><option value="pending">Pendientes</option><option value="completed">Contestados</option></select></div>
+            </div>
+            <div id="rosterList" class="mt"></div>
+            <div id="rosterPager" class="center mt"></div>
+          </div>
+        </div>
 
-      <div id="tabDebug" class="tabpane hidden">
-        <div class="hint" style="background:#1d2a78;color:#fff;border-color:#1d2a78">🐞 <b>Modo Debug — uso personal de Carlos.</b> Acceso a datos reales + herramientas para verificar seguridad y funcionamiento. Las calificaciones se editan desde la pestaña <b>Calificaciones</b> (botón ✏️ en cada fila).</div>
-        <h3>Estado del sistema</h3>
-        <div class="cal-stats" id="dbgStats"></div>
-        <h3 class="mt">Datos de prueba temporales</h3>
-        <p class="muted" style="margin-top:-4px">Genera alumnos y resultados <b>marcados como 🧪 PRUEBA</b> para validar la página sin ensuciar los datos reales. Puedes borrarlos de un golpe.</p>
-        <div class="row" style="align-items:flex-end">
-          <div><label>¿Cuántos alumnos de prueba?</label><input type="number" id="dbgN" min="1" max="2000" value="20"></div>
-          <div><label>¿Cuántos ya contestados?</label><input type="number" id="dbgDone" min="0" max="2000" value="10"></div>
-          <div><button class="btn sm" onclick="dbgGenerate()">🧪 Generar datos de prueba</button></div>
-          <div><button class="btn danger sm" onclick="dbgClearTest()">🗑️ Borrar SOLO datos de prueba</button></div>
+        <!-- BANCO DE PREGUNTAS -->
+        <div id="paneBank" class="hidden">
+          <div class="admin-top"><h2>Banco de preguntas</h2></div>
+          <div class="card admin-content">
+            <div class="hint">Preguntas del <b>examen de admisión a Bachillerato</b>. Marca con ✓ la respuesta correcta. Recuerda <b>Guardar</b> al terminar.</div>
+            <div class="chips" id="bankSubjChips"></div>
+            <div class="row" style="align-items:center">
+              <div class="muted" id="bankCount" style="flex:1"></div>
+              <div style="flex:0 0 auto"><button class="btn sec sm" onclick="addQuestion()">+ Pregunta</button></div>
+              <div style="flex:0 0 auto"><button class="btn sec sm" onclick="exportBank()">⬇️ Exportar</button></div>
+              <div style="flex:0 0 auto"><button class="btn sec sm" onclick="document.getElementById('impBank').click()">⬆️ Importar JSON</button><input type="file" id="impBank" accept=".json" class="hidden" onchange="importBank(event)"></div>
+            </div>
+            <div id="bankList" class="mt"></div>
+            <div class="mt"><button class="btn" onclick="saveBank()">💾 Guardar cambios</button></div>
+          </div>
         </div>
-        <h3 class="mt">Respaldo y seguridad</h3>
-        <div class="toolbar" style="justify-content:flex-start">
-          <button class="btn sec sm" onclick="dbgBackup()">⬇️ Respaldo total (JSON)</button>
-          <button class="btn sec sm" onclick="document.getElementById('dbgRestoreFile').click()">⬆️ Restaurar respaldo</button>
-          <input type="file" id="dbgRestoreFile" accept=".json" class="hidden" onchange="dbgRestore(event)">
+
+        <!-- CONFIGURACIÓN -->
+        <div id="paneCfg" class="hidden">
+          <div class="admin-top"><h2>Configuración</h2></div>
+          <div class="card admin-content">
+            <div class="grid2">
+              <div><label>Nombre del instituto</label><input type="text" id="cfgSchool"></div>
+              <div><label>Subtítulo del examen</label><input type="text" id="cfgSub"></div>
+              <div><label>Periodo / ciclo</label><input type="text" id="cfgPeriodo"></div>
+              <div><label>Calificación mínima para suficiente (%)</label><input type="number" id="cfgPass" min="1" max="100"></div>
+              <div><label>Escala de calificación (ej. 10 o 100)</label><input type="number" id="cfgEscala" min="1"></div>
+              <div><label>Tiempo límite (minutos · 0 = sin límite)</label><input type="number" id="cfgTime" min="0"></div>
+              <div><label>¿Barajar preguntas y respuestas?</label><select id="cfgShuffle"><option value="1">Sí</option><option value="0">No</option></select></div>
+              <div><label>Bloqueo anti-trampa (al cambiar de ventana)</label><select id="cfgAnti"><option value="1">Activado</option><option value="0">Desactivado</option></select></div>
+              <div><label>Firmante (Dirección)</label><input type="text" id="cfgDirector"></div>
+              <div><label>Cargo del firmante</label><input type="text" id="cfgDirectorTitle"></div>
+            </div>
+            <h3 class="mt">Contacto del instituto</h3>
+            <div class="grid2">
+              <div><label>Teléfono</label><input type="text" id="cfgPhone"></div>
+              <div><label>Correo</label><input type="text" id="cfgEmail"></div>
+              <div style="grid-column:1/-1"><label>Dirección</label><input type="text" id="cfgAddr"></div>
+            </div>
+            <h3 class="mt">Logo del instituto</h3>
+            <div class="row" style="align-items:center">
+              <div style="flex:0 0 auto"><button class="btn sec sm" onclick="document.getElementById('cfgLogo').click()">Subir logo</button><input type="file" id="cfgLogo" accept="image/*" class="hidden" onchange="uploadLogo(event)"></div>
+              <div style="flex:0 0 auto"><button class="btn sec sm" onclick="removeLogo()">Quitar logo</button></div>
+            </div>
+            <h3 class="mt">Acceso de Coordinación</h3>
+            <div class="grid2">
+              <div><label>Usuario</label><input type="text" id="cfgUser"></div>
+              <div><label>Contraseña</label><input type="text" id="cfgPass"></div>
+            </div>
+            <div class="mt"><button class="btn" onclick="saveConfig()">💾 Guardar configuración</button></div>
+            <h3 class="mt" style="color:var(--rojo)">Zona de mantenimiento</h3>
+            <p class="muted" style="margin-top:-4px">Borra TODOS los aspirantes y resultados para dejar el sistema listo para un nuevo periodo. No toca el banco de preguntas ni la configuración.</p>
+            <button class="btn danger sm" onclick="limpiarDatos()">🗑️ Borrar aspirantes y resultados</button>
+          </div>
         </div>
-        <h3 class="mt">Preparar para producción</h3>
-        <p class="muted" style="margin-top:-4px">Borra TODOS los alumnos y resultados (reales y de prueba) para entregar la página limpia. No toca preguntas, guías ni configuración.</p>
-        <div class="toolbar" style="justify-content:flex-start"><button class="btn danger sm" onclick="dbgWipeAll()">🧹 Vaciar alumnos y resultados</button></div>
-      </div>
-        </div>
+
       </div>
     </div>
   </section>
@@ -898,366 +690,281 @@
 <script src="anime.min.js"></script>
 <script src="xlsx.full.min.js"></script>
 <script>
-/* ====== DATOS ====== */
-const K_CFG='ev_cfg',K_BANK='ev_bank',K_GUIDE='ev_guide',K_RES='ev_res',K_TOUR='ev_tour',K_USERS='ev_users',K_STUD='ev_students',K_EXAMS='ev_exams';
-const SVGN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">';
-const LEVELS=[
-  {id:'preescolar',name:'Preescolar',svg:SVGN+'<path d="M12 4l2.3 4.7 5.2.7-3.8 3.6.9 5.1L12 16.9 7.4 18.2l.9-5.1L4.5 9.4l5.2-.7z"/></svg>'},
-  {id:'primaria',name:'Primaria',svg:SVGN+'<path d="M5 19l1-4L16 5l3 3L9 18z"/><path d="M14 7l3 3"/></svg>'},
-  {id:'secundaria',name:'Secundaria',svg:SVGN+'<path d="M10 4v5l-4.5 8A1 1 0 0 0 6.4 19h11.2a1 1 0 0 0 .9-1.5L14 9V4"/><path d="M9 4h6"/></svg>'},
-  {id:'preparatoria',name:'Preparatoria',svg:SVGN+'<path d="M3 9l9-4 9 4-9 4z"/><path d="M7 11.5V15c0 1 2.4 2.5 5 2.5s5-1.5 5-2.5v-3.5"/></svg>'}
-];
-const SUBJECTS={
-  preescolar:[{id:'lenguaje',name:'Lenguaje y Comunicación',ico:'🗣️'},{id:'pensamiento',name:'Pensamiento Matemático',ico:'🔢'},{id:'mundo',name:'Exploración del Mundo',ico:'🌎'}],
-  primaria:[{id:'matematicas',name:'Matemáticas',ico:'📐'},{id:'espanol',name:'Español',ico:'📖'},{id:'ciencias',name:'Ciencias Naturales',ico:'🔬'}],
-  secundaria:[{id:'matematicas',name:'Matemáticas',ico:'📐'},{id:'quimica',name:'Química',ico:'⚗️'},{id:'biologia',name:'Biología',ico:'🧬'},{id:'lectura',name:'Lectura y Redacción',ico:'📖'},{id:'fisica',name:'Física',ico:'🔭'}],
-  preparatoria:[{id:'matematicas',name:'Matemáticas',ico:'📐'},{id:'quimica',name:'Química',ico:'⚗️'},{id:'biologia',name:'Biología',ico:'🧬'},{id:'lectura',name:'Lectura y Redacción',ico:'📖'},{id:'fisica',name:'Física',ico:'🔭'}]
-};
-const QPS=20;
-function subjectsOf(lv){return SUBJECTS[lv]||[]}
-function levelName(lv){const l=LEVELS.find(x=>x.id===lv);return l?l.name:lv}
-function subjName(lv,sid){const s=subjectsOf(lv).find(x=>x.id===sid);return s?s.name:sid}
-function levelIdByName(n){const l=LEVELS.find(x=>x.name===n);return l?l.id:'secundaria'}
+/* ============================================================
+   Instituto Rembrandt — Examen de Admisión a Bachillerato
+   Demo offline (un solo archivo, sin servidor). Datos en localStorage.
+   Flujo: aspirante entra con código -> examen -> Coordinación revisa.
+   ============================================================ */
 
+/* ---------- almacenamiento ---------- */
+const K_CFG='evp_cfg', K_BANK='evp_bank', K_RES='evp_res', K_STUD='evp_stud';
+function load(k,def){try{const v=localStorage.getItem(k);return v?JSON.parse(v):def}catch(e){return def}}
+function save(k,v){try{localStorage.setItem(k,JSON.stringify(v));return true}catch(e){toast('Almacenamiento lleno. En la versión web no hay este límite.','err');return false}}
+
+/* ---------- materias del examen ---------- */
+const SUBJECTS=[
+  {id:'matematicas',name:'Matemáticas',ico:'📐'},
+  {id:'lectura',name:'Lectura y Redacción',ico:'📖'},
+  {id:'fisica',name:'Física',ico:'🔭'},
+  {id:'quimica',name:'Química',ico:'⚗️'},
+  {id:'biologia',name:'Biología',ico:'🧬'}
+];
+function subjName(id){const s=SUBJECTS.find(x=>x.id===id);return s?s.name:id}
+
+/* ---------- banco real de preguntas (nivel ingreso a bachillerato) ---------- */
+const SEED_BANK={
+  matematicas:[
+    {q:'¿Cuánto es el 15% de 240?',opts:['24','36','360','16'],correct:1},
+    {q:'Resuelve la ecuación 3x − 7 = 14. ¿Cuánto vale x?',opts:['7','3','21','−7'],correct:0},
+    {q:'¿Cuál es el área de un triángulo con base de 8 cm y altura de 5 cm?',opts:['40 cm²','13 cm²','20 cm²','26 cm²'],correct:2},
+    {q:'¿Cuál es el resultado de 2³ + 3²?',opts:['13','17','36','72'],correct:1},
+    {q:'Si 4 lápices cuestan $12, ¿cuánto cuestan 7 lápices al mismo precio?',opts:['$28','$21','$19','$24'],correct:1},
+    {q:'Simplifica la fracción 18/24 a su mínima expresión.',opts:['3/4','9/12','2/3','6/8'],correct:0},
+    {q:'¿Cuál es el perímetro de un cuadrado cuyo lado mide 9 cm?',opts:['18 cm','81 cm','36 cm','45 cm'],correct:2},
+    {q:'¿Cuál es el resultado de (−5) + (−3) − (−2)?',opts:['−10','−6','−4','0'],correct:1},
+    {q:'¿Cuál de los siguientes números es primo?',opts:['21','27','29','33'],correct:2},
+    {q:'En la recta y = 2x + 1, ¿cuánto vale y cuando x = 3?',opts:['5','6','7','9'],correct:2}
+  ],
+  lectura:[
+    {q:'¿Cuál de las siguientes palabras está escrita correctamente?',opts:['esepción','excepción','ecepción','exepción'],correct:1},
+    {q:'¿Cuál es el antónimo de «efímero»?',opts:['breve','pasajero','duradero','frágil'],correct:2},
+    {q:'¿Cuál de las siguientes oraciones es correcta?',opts:['Espero que halla buenas noticias.','Espero que haya buenas noticias.','Ojalá halla mucha paz.','No creo que halla nadie.'],correct:1},
+    {q:'En la oración «Caminaba rápidamente», la palabra «rápidamente» es un:',opts:['adjetivo','sustantivo','adverbio','verbo'],correct:2},
+    {q:'¿Cuál es un sinónimo de «abundante»?',opts:['escaso','copioso','vacío','breve'],correct:1},
+    {q:'¿Cuál de estas palabras agudas lleva acento (tilde)?',opts:['reloj','cantar','café','feliz'],correct:2},
+    {q:'Lee el texto: «La lectura constante mejora el vocabulario, la ortografía y la concentración. Quien lee con frecuencia comprende mejor lo que escucha y se expresa con más claridad.» Según el texto, ¿cuál de estos beneficios NO se menciona?',opts:['Mejora el vocabulario','Mejora la ortografía','Aumenta la estatura','Mejora la concentración'],correct:2},
+    {q:'¿Para qué se usa principalmente la coma?',opts:['Para terminar una idea completa','Para separar elementos de una enumeración','Para indicar una pregunta','Para unir dos textos largos'],correct:1},
+    {q:'En la oración «Los niños juegan en el parque», ¿cuál es el sujeto?',opts:['juegan','en el parque','Los niños','parque'],correct:2},
+    {q:'¿Cuál de las siguientes palabras es un sustantivo?',opts:['correr','azul','libertad','rápido'],correct:2}
+  ],
+  fisica:[
+    {q:'¿Cuál es la unidad de fuerza en el Sistema Internacional?',opts:['Joule','Newton','Watt','Pascal'],correct:1},
+    {q:'¿Cómo se calcula la rapidez (velocidad) media?',opts:['fuerza × masa','distancia ÷ tiempo','masa ÷ volumen','tiempo × distancia'],correct:1},
+    {q:'¿Cuál de las siguientes es una magnitud escalar?',opts:['fuerza','velocidad','temperatura','aceleración'],correct:2},
+    {q:'Si un automóvil recorre 100 m en 5 s, ¿cuál es su rapidez?',opts:['5 m/s','20 m/s','500 m/s','0.05 m/s'],correct:1},
+    {q:'¿Cómo se llama la energía que tiene un cuerpo por estar en movimiento?',opts:['potencial','cinética','térmica','química'],correct:1},
+    {q:'¿Cuál es la unidad de la corriente eléctrica?',opts:['volt','ohm','ampere','watt'],correct:2},
+    {q:'El valor aproximado de la aceleración de la gravedad en la Tierra es:',opts:['9.8 m/s²','1 m/s²','100 m/s²','980 m/s²'],correct:0},
+    {q:'¿Qué instrumento se usa para medir la temperatura?',opts:['barómetro','termómetro','dinamómetro','amperímetro'],correct:1},
+    {q:'La primera ley de Newton también se conoce como la ley de la:',opts:['gravedad','inercia','acción y reacción','energía'],correct:1},
+    {q:'La luz se propaga en el vacío a una velocidad aproximada de:',opts:['300 km/s','3 000 km/s','300 000 km/s','30 km/s'],correct:2}
+  ],
+  quimica:[
+    {q:'¿Cuál es el símbolo químico del oxígeno?',opts:['Ox','O','Og','Os'],correct:1},
+    {q:'El agua (H₂O) está formada por hidrógeno y:',opts:['carbono','oxígeno','nitrógeno','helio'],correct:1},
+    {q:'¿Cuáles son los tres estados de agregación de la materia más comunes?',opts:['sólido, líquido y plasma','sólido, líquido y gaseoso','líquido, gaseoso y plasma','sólido, gaseoso y coloide'],correct:1},
+    {q:'¿Cómo se llama el cambio de estado de líquido a gas?',opts:['fusión','evaporación','condensación','solidificación'],correct:1},
+    {q:'¿Cuál partícula del átomo tiene carga negativa?',opts:['protón','neutrón','electrón','núcleo'],correct:2},
+    {q:'Una sustancia con un pH de 2 se considera:',opts:['básica','neutra','ácida','salina'],correct:2},
+    {q:'La tabla periódica organiza los:',opts:['compuestos','elementos químicos','minerales','mezclas'],correct:1},
+    {q:'El símbolo «Na» corresponde al elemento:',opts:['nitrógeno','sodio','níquel','neón'],correct:1},
+    {q:'¿Cómo se llama una mezcla en la que no se distinguen sus componentes a simple vista?',opts:['heterogénea','homogénea','compuesta','saturada'],correct:1},
+    {q:'¿Cómo se llama el cambio de estado de gas a líquido?',opts:['sublimación','condensación','fusión','evaporación'],correct:1}
+  ],
+  biologia:[
+    {q:'¿Cuál es la unidad básica de los seres vivos?',opts:['el átomo','la célula','el tejido','el órgano'],correct:1},
+    {q:'¿Qué seres vivos realizan principalmente la fotosíntesis?',opts:['los animales','las plantas','los hongos','los virus'],correct:1},
+    {q:'¿Qué órgano se encarga de bombear la sangre por el cuerpo?',opts:['el pulmón','el hígado','el corazón','el riñón'],correct:2},
+    {q:'¿En qué parte de la célula se encuentra principalmente el ADN?',opts:['la membrana','el citoplasma','el núcleo','la pared celular'],correct:2},
+    {q:'¿Cómo se llaman los seres vivos que fabrican su propio alimento?',opts:['heterótrofos','autótrofos','carnívoros','parásitos'],correct:1},
+    {q:'¿Cuál es la función principal del sistema respiratorio?',opts:['digerir los alimentos','el intercambio de gases','bombear la sangre','producir hormonas'],correct:1},
+    {q:'¿Cuál de los siguientes animales es un mamífero?',opts:['el tiburón','la ballena','el cocodrilo','el salmón'],correct:1},
+    {q:'¿Qué estructura tiene la célula vegetal que la célula animal no posee?',opts:['el núcleo','la pared celular','la membrana','el citoplasma'],correct:1},
+    {q:'¿Cómo se llama el conjunto formado por los seres vivos y el ambiente donde habitan?',opts:['población','ecosistema','especie','individuo'],correct:1},
+    {q:'¿Cuál es la función principal de los glóbulos rojos?',opts:['defender contra infecciones','transportar oxígeno','coagular la sangre','digerir nutrientes'],correct:1}
+  ]
+};
+function buildBank(){const b={};SUBJECTS.forEach(s=>{b[s.id]=(SEED_BANK[s.id]||[]).map(q=>({q:q.q,opts:q.opts.slice(),correct:q.correct,img:''}))});return b}
+
+/* ---------- configuración por defecto ---------- */
 const DEFAULT_CFG={
   school:'Instituto Rembrandt de Querétaro',
-  sub:'Evaluación Diagnóstica de nuevo ingreso · Periodo 2026-2027',
-  director:'Dra. Blanca Ortiz Morales',directorTitle:'Dirección Académica',pass:60,logo:'',shuffle:1,escala:10,timeMin:0,
-  grupos:['1.1','1.2','2.1','2.2','3.1','3.2','4.1','4.2','5.1','5.2','6.1','6.2'],
-  ciclos:['2025-2026','2026-2027'],activeCiclo:'2026-2027',coordPass:'coord2026',
-  infoGeneral:'El Instituto Rembrandt de Querétaro ofrece educación en los niveles Preescolar, Primaria, Secundaria y Preparatoria, bajo los valores de RESPETO, CULTURA y HONOR.\n\nLa evaluación diagnóstica de nuevo ingreso nos permite conocer el nivel académico de cada aspirante para brindarle el mejor acompañamiento desde su llegada. No busca aprobar o reprobar, sino orientar.',
-  contact:{phone:'442 218 2770',email:'contacto@irembrandt.com.mx',addr:'C. de la Brisa 215, Col. Satélite, Santiago de Querétaro, Qro.'},
-  semestres:['1er semestre','2do semestre'],
-  features:{granularPerms:true,examenes:true,openQuestions:true} // funciones añadidas desde la Lite (toggle en Config)
+  sub:'Examen de Admisión · Bachillerato · Ciclo 2026-2027',
+  periodo:'2026-2027',
+  director:'Dra. Blanca Ortiz Morales', directorTitle:'Dirección Académica',
+  pass:60, escala:10, timeMin:40, shuffle:1, anti:1, logo:'',
+  coordUser:'coordinacion', coordPass:'coord2026',
+  contact:{phone:'442 218 2770', email:'admisiones@irembrandt.com.mx', addr:'C. de la Brisa 215, Col. Satélite, Santiago de Querétaro, Qro.'}
 };
-function feat(k){return !CFG.features||CFG.features[k]!==false}
-const DEFAULT_USERS=[
-  {user:'coordinacion',pass:'coord2026',name:'Coordinación General',role:'coordinator',assign:[]},
-  {user:'direccion',pass:'direccion2026',name:'Dirección',role:'direccion',assign:[]},
-  {user:'profe',pass:'profe123',name:'Profesor Demo',role:'teacher',assign:[{level:'secundaria',subject:'matematicas'}],caps:{preguntas:true,calif:true,alumnos:true,guias:true}},
-  {user:'debug',pass:'debug2026',name:'Debug (Carlos)',role:'debug',assign:[]}
-];
 
-function load(k,def){try{const v=localStorage.getItem(k);return v?JSON.parse(v):def}catch(e){return def}}
-function save(k,v){try{localStorage.setItem(k,JSON.stringify(v));return true}catch(e){toast('Almacenamiento lleno (archivos muy grandes). En la versión web no hay este límite.','err');return false}}
-function buildBank(){const b={};LEVELS.forEach(l=>{b[l.id]={};subjectsOf(l.id).forEach(s=>{b[l.id][s.id]=[];for(let i=1;i<=QPS;i++)b[l.id][s.id].push({q:`${s.name} (${l.name}) — Pregunta ${i} (placeholder, edítala)`,opts:['Opción A','Opción B','Opción C','Opción D'],correct:(i-1)%4,img:''})})});return b}
-function buildGuides(){const g={};LEVELS.forEach(l=>{g[l.id]={};subjectsOf(l.id).forEach(s=>{g[l.id][s.id]={text:`Guía de estudio de ${s.name} — ${l.name}\n\n(El profesor publicará aquí los temas a repasar.)`,files:[]}})});return g}
-
-let CFG=load(K_CFG,DEFAULT_CFG),BANK=load(K_BANK,buildBank()),GUIDES=load(K_GUIDE,buildGuides()),RES=load(K_RES,[]),TOURS=load(K_TOUR,[]),USERS=load(K_USERS,DEFAULT_USERS),STUDENTS=load(K_STUD,[]),EXAMS=load(K_EXAMS,[]);
-// compat
-['coordPass','grupos','ciclos','activeCiclo','infoGeneral','contact','escala','timeMin','semestres'].forEach(k=>{if(CFG[k]===undefined)CFG[k]=DEFAULT_CFG[k]});
-if(!CFG.features)CFG.features=JSON.parse(JSON.stringify(DEFAULT_CFG.features));else Object.keys(DEFAULT_CFG.features).forEach(k=>{if(CFG.features[k]===undefined)CFG.features[k]=DEFAULT_CFG.features[k]});
-if(!USERS.some(u=>u.role==='direccion')){USERS.push({user:'direccion',pass:'direccion2026',name:'Dirección',role:'direccion',assign:[]});save(K_USERS,USERS)}
-if(!USERS.some(u=>u.role==='debug')){USERS.push({user:'debug',pass:'debug2026',name:'Debug (Carlos)',role:'debug',assign:[]});save(K_USERS,USERS)}
-USERS.forEach(u=>{if(u.role==='teacher'){if(!u.caps)u.caps={};['preguntas','calif','alumnos','guias'].forEach(k=>{if(u.caps[k]===undefined)u.caps[k]=true})}}); // compat: profes previos conservan su acceso completo
-if(CFG._dirV!==2){CFG.director='Dra. Blanca Ortiz Morales';CFG.directorTitle='Dirección Académica';CFG._dirV=2;save(K_CFG,CFG)}
-LEVELS.forEach(l=>{if(!BANK[l.id])BANK[l.id]={};if(!GUIDES[l.id])GUIDES[l.id]={};subjectsOf(l.id).forEach(s=>{if(!BANK[l.id][s.id])BANK[l.id][s.id]=buildBank()[l.id][s.id];if(!GUIDES[l.id][s.id])GUIDES[l.id][s.id]=buildGuides()[l.id][s.id]})});
+let CFG=load(K_CFG,DEFAULT_CFG), BANK=load(K_BANK,buildBank()), RES=load(K_RES,[]), STUDENTS=load(K_STUD,[]);
+// compatibilidad: completa llaves nuevas
+Object.keys(DEFAULT_CFG).forEach(k=>{if(CFG[k]===undefined)CFG[k]=DEFAULT_CFG[k]});
+if(!CFG.contact)CFG.contact=DEFAULT_CFG.contact;
+SUBJECTS.forEach(s=>{if(!BANK[s.id]||!BANK[s.id].length)BANK[s.id]=buildBank()[s.id]});
 seedDemo();
 
-/* ====== AVISOS ====== */
+/* ====== AVISOS (modales/toasts propios, nada de alert/confirm nativos) ====== */
 function toast(msg,type){let w=document.querySelector('.ui-toast-wrap');if(!w){w=document.createElement('div');w.className='ui-toast-wrap';document.body.appendChild(w)}const t=document.createElement('div');t.className='ui-toast'+(type?' '+type:'');t.textContent=msg;w.appendChild(t);requestAnimationFrame(()=>t.classList.add('on'));setTimeout(()=>{t.classList.remove('on');setTimeout(()=>t.remove(),250)},2800)}
 function uiModal(o){return new Promise(res=>{const ov=document.createElement('div');ov.className='ui-ov';const ih=o.input?`<input type="${o.itype||'text'}" id="uiIn" autocomplete="off" placeholder="${o.placeholder||''}" value="${(o.value||'').replace(/"/g,'&quot;')}">`:'';const ch=o.cancelText?`<button class="btn sec sm" id="uiCancel">${o.cancelText}</button>`:'';ov.innerHTML=`<div class="ui-modal">${o.title?`<h4>${o.title}</h4>`:''}<p>${o.msg}</p>${ih}<div class="acts">${ch}<button class="btn sm${o.danger?' danger':''}" id="uiOk">${o.okText||'Aceptar'}</button></div></div>`;document.body.appendChild(ov);requestAnimationFrame(()=>ov.classList.add('on'));const inEl=ov.querySelector('#uiIn');if(inEl)setTimeout(()=>inEl.select(),60);const close=v=>{ov.classList.remove('on');setTimeout(()=>ov.remove(),200);res(v)};ov.querySelector('#uiOk').onclick=()=>close(o.input?inEl.value:true);const c=ov.querySelector('#uiCancel');if(c)c.onclick=()=>close(o.input?null:false);ov.addEventListener('click',e=>{if(e.target===ov)close(o.input?null:false)});if(inEl)inEl.addEventListener('keydown',e=>{if(e.key==='Enter')close(inEl.value);if(e.key==='Escape')close(null)})})}
 function uiAlert(m,t){return uiModal({title:t||'Aviso',msg:m,okText:'Entendido'})}
 function uiConfirm(m,t,d){return uiModal({title:t||'Confirmar',msg:m,okText:'Sí',cancelText:'Cancelar',danger:d})}
 function esc(s){return String(s==null?'':s).replace(/[<>&]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;'}[c]))}
-// escapa un valor para usarlo DENTRO de una cadena JS '...' que vive en un atributo HTML "..."
 function jss(s){return String(s==null?'':s).replace(/\\/g,'\\\\').replace(/'/g,'\\u0027').replace(/"/g,'&quot;').replace(/</g,'\\u003C').replace(/\r?\n/g,' ')}
 
-/* ====== NIVELES Y NIVEL DE DESEMPEÑO ====== */
+/* ====== NIVEL DE DESEMPEÑO ====== */
 function nivel(p){if(p>=90)return{txt:'Sobresaliente',col:'var(--verde)'};if(p>=70)return{txt:'Satisfactorio',col:'var(--azul2)'};if(p>=CFG.pass)return{txt:'Básico',col:'var(--naranja)'};return{txt:'Insuficiente',col:'var(--rojo)'}}
+function calif(pct){return (pct/100*CFG.escala)}
+function califTxt(pct){const g=calif(pct);return (Math.round(g*10)/10).toString()}
 
 /* ====== NAVEGACIÓN ====== */
-const VIEWS=['vHub','vCode','vLevel','vStudent','vSubjects','vGuides','vInfo','vTour','vLogin','vQuiz','vExam','vThanks','vAdmin'];
+const VIEWS=['vHub','vCode','vQuiz','vThanks','vLogin','vAdmin'];
 function show(id){VIEWS.forEach(v=>document.getElementById(v).classList.add('hidden'));document.getElementById(id).classList.remove('hidden');window.scrollTo({top:0,behavior:'smooth'});if(window.anime)anime({targets:'#'+id,opacity:[0,1],translateY:[12,0],easing:'easeOutQuad',duration:420});setTimeout(setupReveal,30)}
 let _revealIO;
 function setupReveal(){const els=[...document.querySelectorAll('.reveal:not(.in)')];if(!('IntersectionObserver' in window)){els.forEach(e=>e.classList.add('in'));return}if(!_revealIO)_revealIO=new IntersectionObserver(ents=>{ents.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');_revealIO.unobserve(en.target)}})},{threshold:.12,rootMargin:'0px 0px -40px 0px'});let k=0;els.forEach(e=>{e.style.transitionDelay=(k++*80)+'ms';_revealIO.observe(e)})}
-function applyBranding(){document.getElementById('hdrSchool').textContent=CFG.school;setLogo('hdrLogo')}
-function setLogo(id){const el=document.getElementById(id);if(CFG.logo){const png=/^data:image\/png/i.test(CFG.logo);el.style.background=png?'#fff':'';el.style.padding=png?'4px':'';el.innerHTML=`<img src="${CFG.logo}" style="object-fit:${png?'contain':'cover'}">`}else{el.style.background='';el.style.padding='';el.textContent=(CFG.school||'R').trim().charAt(0).toUpperCase()}}
-function goHub(){stopTimer();applyBranding();document.getElementById('hubCiclo').textContent='Nuevo ingreso · Periodo '+CFG.activeCiclo;show('vHub')}
+function applyBranding(){document.getElementById('hdrSchool').textContent=CFG.school;document.getElementById('admSchool').textContent=CFG.school;setLogo('hdrLogo');setLogo('admLogo');setLogo('spLogo')}
+function setLogo(id){const el=document.getElementById(id);if(!el)return;if(CFG.logo){const png=/^data:image\/png/i.test(CFG.logo);el.style.background=png?'#fff':'';el.style.padding=png?'4px':'';el.innerHTML=`<img src="${CFG.logo}" style="object-fit:${png?'contain':'cover'};width:100%;height:100%">`}else{el.style.background='';el.style.padding='';el.textContent=(CFG.school||'R').trim().charAt(0).toUpperCase()}}
+function goHub(){stopTimer();clearLock();applyBranding();document.getElementById('hubCiclo').textContent='Bachillerato · Nuevo ingreso · Ciclo '+CFG.periodo;document.getElementById('hdrSub').textContent=CFG.sub;show('vHub')}
 
-let levelPurpose='exam',examLevel='secundaria',guideLevel='secundaria';
-function goLevel(purpose){levelPurpose=purpose;document.getElementById('levelTitle').textContent=purpose==='guide'?'¿De qué nivel quieres las guías?':'Elige el nivel educativo';document.getElementById('levelSub').textContent=purpose==='guide'?'Selecciona el nivel para ver sus guías de estudio.':'Selecciona el nivel al que ingresa el alumno.';renderLevelGrid();show('vLevel')}
-function renderLevelGrid(){const g=document.getElementById('levelGrid');g.innerHTML='';LEVELS.forEach(l=>{const b=document.createElement('button');b.className='tile';b.innerHTML=`<span class="bar-accent"></span><div class="ico">${l.svg||l.ico}</div><h3>${l.name}</h3><small>${subjectsOf(l.id).length} materias</small>`;b.onclick=()=>pickLevel(l.id);g.appendChild(b)});if(window.anime)anime({targets:'#levelGrid .tile',opacity:[0,1],translateY:[16,0],delay:anime.stagger(55),easing:'easeOutQuad',duration:460})}
-function pickLevel(lv){if(levelPurpose==='exam'){examLevel=lv;document.getElementById('studentLvl').textContent='Nivel: '+levelName(lv)+' · Periodo '+CFG.activeCiclo;['inName','inSEmail','inTEmail'].forEach(i=>document.getElementById(i).value='');show('vStudent');setTimeout(()=>document.getElementById('inName').focus(),120)}else{guideLevel=lv;goGuides()}}
-function fillGroupSelect(){}
-function goStudentBack(){show('vStudent')}
-function goSubjects(){const name=document.getElementById('inName').value.trim();if(!name){toast('Escribe el nombre del alumno.','warn');document.getElementById('inName').focus();return}document.getElementById('subjWho').textContent=`${name} · ${levelName(examLevel)}`;renderSubjects();show('vSubjects')}
-function renderSubjects(){const g=document.getElementById('subjGrid');g.innerHTML='';const all=document.createElement('button');all.className='subj';all.style.background='linear-gradient(135deg,#eaf0ff,#fff)';const tot=subjectsOf(examLevel).reduce((a,s)=>a+BANK[examLevel][s.id].length,0);all.innerHTML=`<span class="bar-accent" style="background:var(--acento)"></span><div class="ico">🎓</div><h3>Examen diagnóstico completo</h3><small>${subjectsOf(examLevel).length} materias · ${tot} preguntas</small>`;all.onclick=()=>startQuiz('__all__');g.appendChild(all);if(window.anime)anime({targets:'#subjGrid .subj',opacity:[0,1],translateY:[18,0],delay:anime.stagger(55),easing:'easeOutQuad',duration:480})}
+/* ====== CÓDIGO (aspirante) ====== */
+function goCode(){document.getElementById('inCode').value='';show('vCode');setTimeout(()=>document.getElementById('inCode').focus(),120)}
+function validateCode(){const code=(document.getElementById('inCode').value||'').trim().toUpperCase();if(!code){toast('Escribe tu código.','warn');return}const st=STUDENTS.find(s=>s.code===code);if(!st){toast('Código no válido.','err');return}if(st.status==='completed'){uiAlert('Este examen ya fue contestado con este código. Si crees que es un error, avisa a Coordinación.','Código ya usado');return}startExam(st)}
 
-/* ====== GUÍAS (alumno) ====== */
-function goGuides(){document.getElementById('guideLvlSub').textContent='Nivel: '+levelName(guideLevel)+'. Elige una materia para repasar.';document.getElementById('guideView').classList.add('hidden');document.getElementById('guideListCard').classList.remove('hidden');renderGuideGrid();show('vGuides')}
-function renderGuideGrid(){const g=document.getElementById('guideGrid');g.innerHTML='';subjectsOf(guideLevel).forEach(s=>{const b=document.createElement('button');b.className='subj';b.innerHTML=`<span class="bar-accent" style="background:var(--verde)"></span><div class="ico">${s.ico}</div><h3>${s.name}</h3><small>Ver guía</small>`;b.onclick=()=>openGuide(s.id);g.appendChild(b)});if(window.anime)anime({targets:'#guideGrid .subj',opacity:[0,1],translateY:[16,0],delay:anime.stagger(50),easing:'easeOutQuad',duration:450})}
-function fileIcon(t){if(/pdf/.test(t))return'📕';if(/image/.test(t))return'🖼️';if(/word|document/.test(t))return'📘';if(/sheet|excel/.test(t))return'📗';if(/presentation|powerpoint/.test(t))return'📙';return'📄'}
-function openGuide(sid){const gd=GUIDES[guideLevel][sid]||{text:'',files:[]};document.getElementById('guideTitle').textContent='📚 '+subjName(guideLevel,sid)+' · '+levelName(guideLevel);document.getElementById('guideBody').textContent=(gd.text||'').trim()||'El profesor aún no ha publicado la guía de esta materia.';const fc=document.getElementById('guideFiles');fc.innerHTML=(gd.files||[]).map((f,i)=>`<div class="fileitem"><span>${fileIcon(f.type)}</span><span class="fn">${esc(f.name)}</span><button class="btn sec sm" onclick="openFile('${guideLevel}','${sid}',${i})">Abrir</button></div>`).join('')||'<p class="muted">Sin archivos adjuntos.</p>';document.getElementById('guideListCard').classList.add('hidden');document.getElementById('guideView').classList.remove('hidden');if(window.anime)anime({targets:'#guideView',opacity:[0,1],translateY:[10,0],easing:'easeOutQuad',duration:400})}
-function backToGuideList(){document.getElementById('guideView').classList.add('hidden');document.getElementById('guideListCard').classList.remove('hidden')}
-function openFile(lv,sid,i){const f=GUIDES[lv][sid].files[i];if(!f)return;const w=window.open();if(w){if(/pdf|image/.test(f.type)){w.document.write(`<iframe src="${f.data}" style="border:0;width:100%;height:100vh"></iframe>`)}else{const a=w.document.createElement('a');a.href=f.data;a.download=f.name;w.document.body.appendChild(a);a.click();w.close()}}}
-
-/* ====== INFO ====== */
-function goInfo(){document.getElementById('infoSchool').textContent=CFG.school;document.getElementById('infoBody').textContent=CFG.infoGeneral||'';const c=CFG.contact||{};document.getElementById('infoContact').innerHTML=`<div class="ic"><span class="em">📞</span><div><b>Teléfono</b>${esc(c.phone||'—')}</div></div><div class="ic"><span class="em">✉️</span><div><b>Correo</b>${esc(c.email||'—')}</div></div><div class="ic"><span class="em">📍</span><div><b>Dirección</b>${esc(c.addr||'—')}</div></div>`;show('vInfo')}
-
-/* ====== RECORRIDO ====== */
-function goTour(){const sel=document.getElementById('tLevel');sel.innerHTML=LEVELS.map(l=>`<option>${l.name}</option>`).join('');document.getElementById('tourPhone').textContent=(CFG.contact&&CFG.contact.phone)||'';['tName','tEmail','tPhone','tStudent','tDate','tMsg'].forEach(i=>document.getElementById(i).value='');show('vTour')}
-function enviarRecorrido(){const name=document.getElementById('tName').value.trim(),email=document.getElementById('tEmail').value.trim(),phone=document.getElementById('tPhone').value.trim();if(!name){toast('Escribe el nombre de contacto.','warn');return}if(!/.+@.+\..+/.test(email)){toast('Escribe un correo válido.','warn');return}if(!phone){toast('Escribe el teléfono de contacto.','warn');return}TOURS.push({id:'T'+Date.now().toString(36).toUpperCase(),date:new Date().toLocaleString('es-MX'),ts:Date.now(),name,email,phone,student:document.getElementById('tStudent').value.trim(),level:document.getElementById('tLevel').value,pref:document.getElementById('tDate').value.trim(),msg:document.getElementById('tMsg').value.trim(),status:'pendiente'});save(K_TOUR,TOURS);uiAlert('¡Gracias! Tu solicitud de recorrido fue registrada. Coordinación te contactará pronto.','Solicitud enviada').then(goHub)}
-
-/* ====== QUIZ ====== */
+/* ====== EXAMEN ====== */
 let quiz=null;
 function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a}
-function remap(q){const o=CFG.shuffle?shuffle([0,1,2,3]):[0,1,2,3];return{opts:o.map(i=>q.opts[i]),correct:o.indexOf(q.correct)}}
-function startQuiz(mode){const pack=sid=>BANK[examLevel][sid].map(q=>({subj:sid,q:q.q,img:q.img||'',...remap(q)}));let items=[];if(mode==='__all__')subjectsOf(examLevel).forEach(s=>items.push(...pack(s.id)));else items=pack(mode);if(CFG.shuffle)items=shuffle(items);items.forEach(it=>it.ans=null);quiz={mode,items,idx:0,level:examLevel,name:document.getElementById('inName').value.trim(),group:'',sEmail:document.getElementById('inSEmail').value.trim(),tEmail:document.getElementById('inTEmail').value.trim(),ciclo:CFG.activeCiclo};window.__lastQ=-1;show('vQuiz');renderQ();startTimer()}
-function renderQ(){const it=quiz.items[quiz.idx],n=quiz.items.length;document.getElementById('qSubject').textContent=quiz.mode==='__all__'?subjName(quiz.level,it.subj):subjName(quiz.level,quiz.mode);document.getElementById('qCounter').textContent=`${quiz.idx+1} / ${n}`;document.getElementById('qBar').style.width=(quiz.idx/n*100)+'%';document.getElementById('qImgWrap').innerHTML=it.img?`<img class="qimg" src="${it.img}">`:'';document.getElementById('qText').textContent=it.q;const c=document.getElementById('qOpts');c.innerHTML='';const K=['A','B','C','D'];it.opts.forEach((o,i)=>{const b=document.createElement('button');b.className='opt'+(it.ans===i?' sel':'');b.innerHTML=`<span class="key">${K[i]}</span><span>${o}</span>`;b.onclick=()=>{it.ans=i;renderQ()};c.appendChild(b)});document.getElementById('qPrev').style.visibility=quiz.idx===0?'hidden':'visible';document.getElementById('qNext').textContent=quiz.idx===n-1?'Terminar ✓':'Siguiente →';if(window.anime&&window.__lastQ!==quiz.idx){window.__lastQ=quiz.idx;anime({targets:'#qText,#qImgWrap',opacity:[0,1],translateX:[14,0],easing:'easeOutQuad',duration:340});anime({targets:'#qOpts .opt',opacity:[0,1],translateY:[10,0],delay:anime.stagger(45),easing:'easeOutQuad',duration:340})}}
-async function nextQ(){const it=quiz.items[quiz.idx];if(it.ans===null){if(!await uiConfirm('No has respondido esta pregunta. ¿Continuar?','Sin responder'))return}if(quiz.idx<quiz.items.length-1){quiz.idx++;renderQ()}else finishQuiz()}
+function remap(q){const order=CFG.shuffle?shuffle([0,1,2,3]):[0,1,2,3];return{opts:order.map(i=>q.opts[i]),correct:order.indexOf(q.correct)}}
+function startExam(st){let items=[];SUBJECTS.forEach(s=>{(BANK[s.id]||[]).forEach(q=>items.push({subj:s.id,q:q.q,img:q.img||'',...remap(q)}))});if(CFG.shuffle)items=shuffle(items);items.forEach(it=>it.ans=null);quiz={items,idx:0,locks:0,student:st};window.__lastQ=-1;show('vQuiz');renderQ();startTimer();armLock()}
+function renderQ(){const it=quiz.items[quiz.idx],n=quiz.items.length;document.getElementById('qSubject').textContent=subjName(it.subj);document.getElementById('qCounter').textContent=`${quiz.idx+1} / ${n}`;document.getElementById('qBar').style.width=(quiz.idx/n*100)+'%';document.getElementById('qImgWrap').innerHTML=it.img?`<img class="qimg" src="${it.img}">`:'';document.getElementById('qText').textContent=it.q;const c=document.getElementById('qOpts');c.innerHTML='';const K=['A','B','C','D'];it.opts.forEach((o,i)=>{const b=document.createElement('button');b.className='opt'+(it.ans===i?' sel':'');b.innerHTML=`<span class="key">${K[i]}</span><span>${esc(o)}</span>`;b.onclick=()=>{it.ans=i;renderQ()};c.appendChild(b)});document.getElementById('qPrev').style.visibility=quiz.idx===0?'hidden':'visible';document.getElementById('qNext').textContent=quiz.idx===n-1?'Terminar ✓':'Siguiente →';if(window.anime&&window.__lastQ!==quiz.idx){window.__lastQ=quiz.idx;anime({targets:'#qText,#qImgWrap',opacity:[0,1],translateX:[14,0],easing:'easeOutQuad',duration:340});anime({targets:'#qOpts .opt',opacity:[0,1],translateY:[10,0],delay:anime.stagger(45),easing:'easeOutQuad',duration:340})}}
+async function nextQ(){const it=quiz.items[quiz.idx];if(it.ans===null){if(!await uiConfirm('No has respondido esta pregunta. ¿Quieres continuar de todos modos?','Sin responder'))return}if(quiz.idx<quiz.items.length-1){quiz.idx++;renderQ()}else{const faltan=quiz.items.filter(x=>x.ans===null).length;if(faltan&&!await uiConfirm('Te faltan '+faltan+' pregunta(s) por responder. ¿Enviar tu examen así?','Terminar examen'))return;finishQuiz()}}
 function prevQ(){if(quiz.idx>0){quiz.idx--;renderQ()}}
-async function abortarQuiz(){if(await uiConfirm('¿Salir del examen? No se guardará nada.','Salir'))goHub()}
+async function abortarQuiz(){if(await uiConfirm('¿Salir del examen? No se guardará ninguna respuesta.','Salir',true)){clearLock();goHub()}}
+
+/* cronómetro */
 let _tInt=null,_tLeft=0;
 function fmtT(s){const m=Math.floor(s/60),x=s%60;return(m<10?'0':'')+m+':'+(x<10?'0':'')+x}
 function startTimer(){stopTimer();const el=document.getElementById('qTimer');if(!CFG.timeMin||CFG.timeMin<=0){el.style.display='none';return}_tLeft=CFG.timeMin*60;el.style.display='';el.textContent='⏱️ '+fmtT(_tLeft);_tInt=setInterval(()=>{_tLeft--;el.textContent='⏱️ '+fmtT(Math.max(0,_tLeft));if(_tLeft<=0){stopTimer();toast('Se acabó el tiempo. Se enviaron tus respuestas.','warn');finishQuiz()}},1000)}
 function stopTimer(){if(_tInt){clearInterval(_tInt);_tInt=null}const el=document.getElementById('qTimer');if(el)el.style.display='none'}
-function finishQuiz(){stopTimer();const total=quiz.items.length;let hits=0;const per={};quiz.items.forEach(it=>{const ok=it.ans===it.correct;if(ok)hits++;if(!per[it.subj])per[it.subj]={hits:0,total:0};per[it.subj].total++;if(ok)per[it.subj].hits++});const pct=Math.round(hits/total*100),nv=nivel(pct);const rec={id:'F'+Date.now().toString(36).toUpperCase(),folio:'F'+new Date().toISOString().slice(2,10).replace(/-/g,'')+'-'+Math.random().toString(36).slice(2,7).toUpperCase(),date:new Date().toLocaleString('es-MX'),ts:Date.now(),name:quiz.name,group:quiz.group,ciclo:quiz.ciclo,level:quiz.level,sEmail:quiz.sEmail,tEmail:quiz.tEmail,mode:quiz.mode,subject:quiz.mode==='__all__'?'Examen completo':subjName(quiz.level,quiz.mode),hits,total,pct,grade:pct,level_perf:nv.txt,per,interruptions:(quiz._locks||[]),printed:false,emailed:false};RES.push(rec);if(quiz.studentCode){const st=STUDENTS.find(s=>s.code===quiz.studentCode);if(st){st.status='completed';st.resultId=rec.id;save(K_STUD,STUDENTS)}}save(K_RES,RES);show('vThanks');if(window.anime){anime({targets:'#thanksIco',scale:[0,1],easing:'easeOutElastic(1,.6)',duration:900});anime({targets:'#thanksIco svg path',strokeDashoffset:[anime.setDashoffset,0],easing:'easeOutQuad',duration:700,delay:300})}}
 
-/* ====== CÓDIGOS DE ACCESO (alumno) ====== */
-function goCode(){document.getElementById('inCode').value='';show('vCode');setTimeout(()=>document.getElementById('inCode').focus(),120)}
-function launchExam(level,mode,info){const m=(mode==='all')?'__all__':mode;const pack=sid=>BANK[level][sid].map(q=>({subj:sid,q:q.q,img:q.img||'',...remap(q)}));let items=[];if(m==='__all__')subjectsOf(level).forEach(s=>items.push(...pack(s.id)));else items=pack(mode);if(CFG.shuffle)items=shuffle(items);items.forEach(it=>it.ans=null);quiz={mode:m,items,idx:0,level,name:info.name,group:info.group||'',sEmail:info.sEmail||'',tEmail:info.tEmail||'',ciclo:info.ciclo||CFG.activeCiclo,studentCode:info.code||null};window.__lastQ=-1;show('vQuiz');renderQ();startTimer()}
-function validateCode(){const code=(document.getElementById('inCode').value||'').trim().toUpperCase();if(!code){toast('Escribe tu código.','warn');return}const st=STUDENTS.find(s=>s.code===code);if(st){if(st.status==='completed'){uiAlert('Este examen ya fue contestado con este código. Si crees que es un error, avisa a tu coordinación.','Código ya usado');return}launchExam(st.level,st.mode,{name:st.name,group:st.group,sEmail:st.sEmail,tEmail:st.tEmail,ciclo:st.ciclo,code:st.code});return}
-  // ¿es PIN de un examen parcial?
-  if(feat('examenes')){const ex=EXAMS.find(e=>(e.pin||'').toUpperCase()===code);if(ex){const av=examDisponible(ex);if(!av.ok){uiAlert(av.msg,'Examen no disponible');return}startExamPrompt(ex);return}}
-  toast('Código no válido.','err')}
+/* anti-trampa: detecta cambio de ventana/pestaña durante el examen */
+function armLock(){if(!CFG.anti)return;document.addEventListener('visibilitychange',onHide);window.addEventListener('blur',onHide)}
+function clearLock(){document.removeEventListener('visibilitychange',onHide);window.removeEventListener('blur',onHide);const o=document.getElementById('lockOv');if(o)o.remove()}
+function onHide(){if(!quiz||document.getElementById('vQuiz').classList.contains('hidden'))return;if(document.getElementById('lockOv'))return;if(document.visibilityState==='hidden'||document.hidden){quiz.locks++;showLock()}}
+function showLock(){if(document.getElementById('lockOv'))return;const o=document.createElement('div');o.className='lock-ov';o.id='lockOv';o.innerHTML=`<div class="lock-card"><div class="lk-ico">🔒</div><h2>Examen pausado</h2><p class="muted">Saliste de la ventana del examen. Por seguridad se registró este evento (${quiz.locks}). Vuelve a tu examen para continuar.</p><button class="btn" onclick="hideLock()">Reanudar examen</button></div>`;document.body.appendChild(o)}
+function hideLock(){const o=document.getElementById('lockOv');if(o)o.remove()}
 
-/* ====== ROSTER (registro de alumnos + códigos) ====== */
-function genCode(){let c;const ch='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';do{c='';for(let i=0;i<6;i++)c+=ch[Math.random()*ch.length|0]}while(STUDENTS.some(s=>s.code===c));return c}
-function fillStudentLevels(){document.getElementById('sLevel').innerHTML=LEVELS.map(l=>`<option value="${l.id}">${l.name}</option>`).join('');fillStudentMode()}
-function fillStudentMode(){document.getElementById('sMode').innerHTML='<option value="all">Examen diagnóstico completo</option>'}
-function fillStudentGroups(){}
-function addStudent(){const name=document.getElementById('sName').value.trim();if(!name){toast('Escribe el nombre del alumno.','warn');return}const code=genCode();STUDENTS.push({code,name,group:'',level:document.getElementById('sLevel').value,mode:document.getElementById('sMode').value,origin:document.getElementById('sOrigin').value.trim(),originGroup:'',tEmail:document.getElementById('sTEmail').value.trim(),sEmail:document.getElementById('sSEmail').value.trim(),status:'pending',resultId:null,ciclo:CFG.activeCiclo});save(K_STUD,STUDENTS);['sName','sOrigin','sTEmail','sSEmail'].forEach(i=>document.getElementById(i).value='');renderRoster();uiAlert('Alumno registrado.\n\nCÓDIGO DE ACCESO:  '+code+'\n\nEntrégaselo al alumno para presentar su examen.','✅ Código generado')}
-let rosterPage=1;const ROSTER_PAGE=50;
-function renderRoster(){const fg=(document.getElementById('fSGroup')||{}).value||'',fs=(document.getElementById('fSStatus')||{}).value||'',q=((document.getElementById('fSSearch')||{}).value||'').trim().toLowerCase();let list=STUDENTS.filter(s=>(!fg||s.group===fg)&&(!fs||s.status===fs)&&(!q||(s.name||'').toLowerCase().includes(q)||(s.code||'').toLowerCase().includes(q))).sort((a,b)=>a.name.localeCompare(b.name));const c=document.getElementById('rosterList'),pg=document.getElementById('rosterPager');if(pg)pg.innerHTML='';if(!list.length){c.innerHTML='<p class="muted center" style="padding:20px">'+(STUDENTS.length?'Ningún alumno coincide con el filtro.':'No hay alumnos registrados.')+'</p>';return}
-  const pages=Math.ceil(list.length/ROSTER_PAGE);if(rosterPage>pages)rosterPage=pages;if(rosterPage<1)rosterPage=1;const start=(rosterPage-1)*ROSTER_PAGE,pageRows=list.slice(start,start+ROSTER_PAGE);
-  c.innerHTML='<p class="muted" style="margin:0 0 8px">'+list.length+' alumno(s) · mostrando '+(start+1)+'–'+(start+pageRows.length)+'</p><table class="data"><thead><tr><th>Código</th><th>Alumno</th><th>Procedencia</th><th>Nivel</th><th>Examen</th><th>Estado</th><th></th></tr></thead><tbody>'+pageRows.map(s=>`<tr><td><b style="letter-spacing:1px">${esc(s.code)}</b></td><td>${s._test?'<span class="badge" style="color:#a6671a;border-color:#e3b873;background:#fdf3e0">🧪</span> ':''}${esc(s.name)}</td><td>${esc(s.origin||'—')}</td><td>${esc(levelName(s.level))}</td><td>${esc(s.mode==='all'?'Completo':subjName(s.level,s.mode))}</td><td><span class="badge ${s.status==='completed'?'ok':'no'}">${s.status==='completed'?'✓ Contestado':'Pendiente'}</span></td><td><button class="btn sec sm" onclick="copyCode('${jss(s.code)}')">Copiar</button> <button class="btn sec sm" onclick="delStudent('${jss(s.code)}')">🗑️</button></td></tr>`).join('')+'</tbody></table>';
-  if(pages>1&&pg)pg.innerHTML=`<button class="btn sec sm" ${rosterPage<=1?'disabled':''} onclick="rosterPage--;renderRoster()">← Anterior</button> <span class="pill" style="margin:0 8px">Página ${rosterPage} / ${pages}</span> <button class="btn sec sm" ${rosterPage>=pages?'disabled':''} onclick="rosterPage++;renderRoster()">Siguiente →</button>`}
-function plantillaAlumnos(){const csv='﻿Nombre,Nivel,EscuelaProcedencia,CorreoContacto,CorreoAlumno\n"Ana López","secundaria","Primaria Juárez","contacto@correo.com",""\n"Luis Pérez","secundaria","Colegio Valle","contacto2@correo.com",""\n';downloadFile(csv,'plantilla_alumnos.csv','text/csv')}
-function importStudents(ev){const f=ev.target.files[0];if(!f)return;if(!window.XLSX){uiAlert('Falta el archivo xlsx.full.min.js en la carpeta.','Importar alumnos');ev.target.value='';return}const r=new FileReader();r.onload=()=>{try{const wb=XLSX.read(r.result,{type:'array'});const ws=wb.Sheets[wb.SheetNames[0]];const rows=XLSX.utils.sheet_to_json(ws,{header:1,blankrows:false});let added=0;const lvIds=LEVELS.map(l=>l.id);rows.forEach((row,i)=>{if(!row||!row.length)return;const name=(row[0]==null?'':String(row[0])).trim();if(!name)return;if(i===0&&/nombre/i.test(name))return;let level=(row[1]==null?'':String(row[1])).trim().toLowerCase();if(!lvIds.includes(level)){const byName=levelIdByName((row[1]==null?'':String(row[1])).trim());level=lvIds.includes(byName)?byName:'secundaria'}STUDENTS.push({code:genCode(),name,group:'',level,mode:'all',origin:(row[2]==null?'':String(row[2])).trim(),originGroup:'',tEmail:(row[3]==null?'':String(row[3])).trim(),sEmail:(row[4]==null?'':String(row[4])).trim(),status:'pending',resultId:null,ciclo:CFG.activeCiclo});added++});if(!added)throw new Error('no se encontraron alumnos válidos');save(K_STUD,STUDENTS);rosterPage=1;renderRoster();uiAlert('Se importaron '+added+' alumno(s) y se generaron sus códigos.\n\nTodos presentarán el examen diagnóstico completo. Usa "Exportar" para descargar la lista con los códigos asignados.','✅ Alumnos importados')}catch(e){uiAlert('No se pudo leer el archivo: '+e.message+'\n\nColumnas esperadas: Nombre | Nivel | EscuelaProcedencia | CorreoContacto | CorreoAlumno.','Importar alumnos')}};r.readAsArrayBuffer(f);ev.target.value=''}
-function copyCode(c){try{navigator.clipboard.writeText(c)}catch(e){}toast('Código copiado: '+c,'ok')}
-async function delStudent(code){if(await uiConfirm('¿Quitar este alumno del listado?','Quitar',true)){STUDENTS=STUDENTS.filter(s=>s.code!==code);save(K_STUD,STUDENTS);renderRoster()}}
-function exportRoster(){if(!STUDENTS.length){toast('No hay alumnos.','warn');return}const head=['Codigo','Alumno','EscuelaProcedencia','Nivel','Examen','Estado','CorreoContacto','CorreoAlumno'];let csv='﻿'+head.join(',')+'\n';STUDENTS.forEach(s=>{csv+=[s.code,s.name,s.origin,levelName(s.level),s.mode==='all'?'Completo':subjName(s.level,s.mode),s.status,s.tEmail,s.sEmail].map(v=>`"${String(v==null?'':v).replace(/"/g,'""')}"`).join(',')+'\n'});downloadFile(csv,'alumnos_codigos.csv','text/csv')}
-function demoPer(level){const p={};subjectsOf(level).forEach(s=>{p[s.id]={hits:8+(Math.random()*12|0),total:20}});return p}
-function seedDemo(){if(STUDENTS.length)return;const mk=(name,level,mode,origin,tEmail)=>({code:genCode(),name,group:'',level,mode,origin,originGroup:'',tEmail,sEmail:'',status:'pending',resultId:null,ciclo:CFG.activeCiclo});
-  STUDENTS=[mk('Ana Sofía Ramírez','secundaria','all','Primaria Benito Juárez','contacto.ana@correo.com'),
-    mk('Diego Hernández Cruz','secundaria','all','Colegio del Valle','contacto.diego@correo.com'),
-    mk('María Fernanda López','secundaria','all','Instituto Niños Héroes','contacto.mafer@correo.com'),
-    mk('Luis Ángel Torres','primaria','all','Jardín Las Rosas','contacto.luis@correo.com'),
-    mk('Valentina Gómez Ruiz','preparatoria','all','Secundaria Técnica 5','contacto.valen@correo.com')];
-  function completar(st,hits,total){const pct=Math.round(hits/total*100),nv=nivel(pct);const rec={id:'F'+Math.random().toString(36).slice(2,9).toUpperCase(),folio:'FDEMO-'+st.code,date:new Date().toLocaleString('es-MX'),ts:Date.now()-(Math.random()*86400000|0),name:st.name,group:st.group,ciclo:st.ciclo,level:st.level,sEmail:st.sEmail,tEmail:st.tEmail,mode:(st.mode==='all'?'__all__':st.mode),subject:st.mode==='all'?'Examen completo':subjName(st.level,st.mode),hits,total,pct,grade:pct,level_perf:nv.txt,per:st.mode==='all'?demoPer(st.level):{[st.mode]:{hits,total}},printed:false,emailed:false};RES.push(rec);st.status='completed';st.resultId=rec.id}
-  completar(STUDENTS[0],16,20);completar(STUDENTS[2],11,20);
-  save(K_STUD,STUDENTS);save(K_RES,RES)}
+function finishQuiz(){stopTimer();clearLock();const total=quiz.items.length;let hits=0;const per={};quiz.items.forEach(it=>{const ok=it.ans===it.correct;if(ok)hits++;if(!per[it.subj])per[it.subj]={hits:0,total:0};per[it.subj].total++;if(ok)per[it.subj].hits++});const pct=total?Math.round(hits/total*100):0,nv=nivel(pct);const st=quiz.student;const rec={id:'F'+Date.now().toString(36).toUpperCase(),folio:'ADM-'+new Date().toISOString().slice(2,10).replace(/-/g,'')+'-'+(st.code||Math.random().toString(36).slice(2,6).toUpperCase()),date:new Date().toLocaleString('es-MX'),ts:Date.now(),name:st.name,code:st.code,origin:st.origin||'',email:st.email||'',hits,total,pct,grade:calif(pct),level_perf:nv.txt,per,locks:quiz.locks||0,printed:false,emailed:false};RES.push(rec);st.status='completed';st.resultId=rec.id;save(K_RES,RES);save(K_STUD,STUDENTS);show('vThanks');if(window.anime){anime({targets:'.thanks-ico',scale:[0,1],easing:'easeOutElastic(1,.6)',duration:900});anime({targets:'.thanks-ico svg path',strokeDashoffset:[anime.setDashoffset,0],easing:'easeOutQuad',duration:700,delay:300})}}
 
-/* ====== LOGIN / PANEL ====== */
-let currentUser=null;
-function goLogin(){document.getElementById('loginUser').value='';document.getElementById('loginPass').value='';show('vLogin')}
-const K_SESSION='ev_session';
-const TAB_ICONS={cal:'📊',preg:'📝',examenes:'🗂️',revision:'✍️',guia:'📚',alum:'👥',profes:'🧑‍🏫',tours:'📅',rep:'📈',cfg:'⚙️',debug:'🐞'};
-function renderTabs(tabs,active){return tabs.map(t=>{if(t[0]==='__sep__')return `<span class="tab-sep">${t[1]}</span>`;const ic=TAB_ICONS[t[0]]?`<span class="tic">${TAB_ICONS[t[0]]}</span>`:'';return `<button class="tab${t[0]===active?' on':''}" data-tab="${t[0]}" onclick="adminTab('${t[0]}')">${ic}${t[1]}</button>`}).join('')}
-function tabKeys(tabs){return tabs.filter(t=>t[0]!=='__sep__').map(t=>t[0])}
-function saveSession(tab){if(currentUser)try{localStorage.setItem(K_SESSION,JSON.stringify({user:currentUser.user,tab}))}catch(e){}}
-function clearSession(){try{localStorage.removeItem(K_SESSION)}catch(e){}}
-function restoreSession(){let s;try{s=JSON.parse(localStorage.getItem(K_SESSION)||'null')}catch(e){}if(!s||!s.user)return;const u=USERS.find(x=>x.user===s.user);if(!u)return;currentUser=u;pendingTab=s.tab;enterPanel()}
-let pendingTab=null;
-function doLogin(){const u=document.getElementById('loginUser').value.trim(),p=document.getElementById('loginPass').value;const usr=USERS.find(x=>x.user.toLowerCase()===u.toLowerCase()&&x.pass===p);if(!usr){toast('Usuario o contraseña incorrectos.','err');return}currentUser=usr;enterPanel()}
-function logout(){currentUser=null;clearSession();goHub()}
-function isCoord(){return currentUser&&currentUser.role==='coordinator'}
-function isDir(){return currentUser&&currentUser.role==='direccion'}
-function isDebug(){return currentUser&&currentUser.role==='debug'}
-function isCoordLevel(){return isCoord()||isDebug()} // coordinación o debug = acceso total a datos
-function accessiblePairs(){if(isCoordLevel()){const r=[];LEVELS.forEach(l=>subjectsOf(l.id).forEach(s=>r.push({level:l.id,subject:s.id})));return r}return(currentUser.assign||[]).slice()}
-function canSeeResult(r){if(isCoordLevel()||isDir())return true;return(currentUser.assign||[]).some(a=>a.level===r.level&&(r.mode===a.subject||r.mode==='__all__'||(r.type==='parcial'&&a.subject===r.subjectId)))}
-function enterPanel(){document.getElementById('adminTitle').textContent=(isDebug()?'🐞 ':isCoord()?'👑 ':isDir()?'🏛️ ':'👩‍🏫 ')+currentUser.name;let tabs;const EX=feat('examenes');if(isDir()){tabs=[['cal','Calificaciones'],['rep','Reportes']]}else if(isCoordLevel()){tabs=[['cal','Calificaciones']];if(EX)tabs.push(['examenes','Exámenes']);else tabs.push(['preg','Preguntas']);tabs.push(['rep','Reportes'],['__sep__','Personas'],['alum','Alumnos'],['profes','Profesores'],['tours','Recorridos'],['guia','Guías'],['__sep__','Sistema'],['cfg','Configuración']);if(isDebug())tabs.push(['debug','Debug'])}else if(!feat('granularPerms')){tabs=[['cal','Calificaciones'],['preg','Preguntas']];if(EX)tabs.push(['examenes','Exámenes']);tabs.push(['guia','Guías'],['alum','Alumnos'])}else{const cp=currentUser.caps||{};tabs=[];if(EX){tabs.push(['examenes','Exámenes']);if(cp.preguntas)tabs.push(['preg','Preguntas'])}else{tabs.push(['preg','Preguntas'])}if(cp.calif)tabs.push(['cal','Calificaciones']);if(cp.guias)tabs.push(['guia','Guías']);if(cp.alumnos)tabs.push(['alum','Alumnos'])}const keys=tabKeys(tabs);const start=(pendingTab&&keys.includes(pendingTab))?pendingTab:keys[0];pendingTab=null;const _ss=document.getElementById('sideSchool');if(_ss){_ss.textContent=CFG.school;setLogo('sideLogo')}document.getElementById('adminTabs').innerHTML=renderTabs(tabs,start);fillCalFilters();renderCalif();fillEditLevels();fillGuideLevels();fillStudentLevels();fillStudentGroups();show('vAdmin');adminTab(start)}
-function adminTab(t){document.querySelectorAll('#adminTabs .tab').forEach(b=>b.classList.toggle('on',b.dataset.tab===t));document.querySelectorAll('#vAdmin .tabpane').forEach(p=>p.classList.add('hidden'));const map={cal:'tabCal',preg:'tabPreg',guia:'tabGuia',alum:'tabAlumnos',profes:'tabProfes',tours:'tabTours',rep:'tabReportes',cfg:'tabCfg',debug:'tabDebug',examenes:'tabExamenes',revision:'tabRevision'};document.getElementById(map[t]).classList.remove('hidden');if(t==='preg'){const pb=document.getElementById('pregBack');if(pb)pb.style.display=document.querySelector('#adminTabs .tab[data-tab="examenes"]')?'':'none'}if(t==='cfg'){fillConfigForm();renderCats();renderSem();renderFeatToggles()}if(t==='profes'){renderAssignGrid();renderProfes()}if(t==='tours')renderTours();if(t==='alum'){fillStudentLevels();fillStudentGroups();renderRoster()}if(t==='rep')renderReportes();if(t==='debug')renderDebug();if(t==='examenes')renderExamsTab();if(t==='revision')renderRevision();saveSession(t);const at=document.querySelector('#adminTabs .tab.on');if(at)at.scrollIntoView({inline:'center',block:'nearest'})}
-function accessibleLevels(){const ls=[];accessiblePairs().forEach(p=>{if(!ls.includes(p.level))ls.push(p.level)});return ls}
-function accSubjects(lv){return accessiblePairs().filter(p=>p.level===lv).map(p=>p.subject)}
-function fillEditLevels(){document.getElementById('editLevel').innerHTML=accessibleLevels().map(l=>`<option value="${l}">${levelName(l)}</option>`).join('');fillEditSubjects()}
-function fillEditSubjects(){const lv=document.getElementById('editLevel').value;document.getElementById('editSubject').innerHTML=accSubjects(lv).map(s=>`<option value="${s}">${subjName(lv,s)}</option>`).join('');renderEditor()}
-function fillGuideLevels(){document.getElementById('guideLevel').innerHTML=accessibleLevels().map(l=>`<option value="${l}">${levelName(l)}</option>`).join('');fillGuideSubjects()}
-function fillGuideSubjects(){const lv=document.getElementById('guideLevel').value;document.getElementById('guideSubject').innerHTML=accSubjects(lv).map(s=>`<option value="${s}">${subjName(lv,s)}</option>`).join('');loadGuideEditor()}
-function curEdit(){return{lv:document.getElementById('editLevel').value,sid:document.getElementById('editSubject').value}}
-function curGuide(){return{lv:document.getElementById('guideLevel').value,sid:document.getElementById('guideSubject').value}}
+/* ====== LOGIN COORDINACIÓN ====== */
+function goLogin(){document.getElementById('logUser').value='';document.getElementById('logPass').value='';show('vLogin');setTimeout(()=>document.getElementById('logUser').focus(),120)}
+function doLogin(){const u=document.getElementById('logUser').value.trim(),p=document.getElementById('logPass').value;if(u===CFG.coordUser&&p===CFG.coordPass){goAdmin()}else{toast('Usuario o contraseña incorrectos.','err')}}
+function goAdmin(){applyBranding();renderResultados();renderRoster();renderConfig();show('vAdmin');adminTab('paneRes',document.querySelector('.admin-nav .tab'))}
+function adminTab(pane,btn){['paneRes','paneStud','paneBank','paneCfg'].forEach(p=>document.getElementById(p).classList.add('hidden'));document.getElementById(pane).classList.remove('hidden');document.querySelectorAll('.admin-nav .tab').forEach(t=>t.classList.remove('on'));if(btn)btn.classList.add('on');if(pane==='paneRes')renderResultados();if(pane==='paneStud')renderRoster();if(pane==='paneBank')renderBank();if(pane==='paneCfg')renderConfig()}
 
-/* ====== CALIFICACIONES ====== */
-function fillCalFilters(){const fc=document.getElementById('fCiclo');fc.innerHTML=['(Todos los periodos)',...CFG.ciclos].map((c,i)=>`<option value="${i===0?'':esc(c)}">${esc(c)}</option>`).join('')}
-function filteredRes(){const fc=document.getElementById('fCiclo').value,fs=document.getElementById('fStatus').value,fr=document.getElementById('fResult').value,q=(document.getElementById('fSearch').value||'').toLowerCase();return RES.filter(r=>canSeeResult(r)).filter(r=>(!fc||r.ciclo===fc)&&(!q||(r.name||'').toLowerCase().includes(q))).filter(r=>fr==='apro'?r.pct>=CFG.pass:fr==='repro'?r.pct<CFG.pass:true).filter(r=>{if(fs==='printed')return r.printed;if(fs==='noprinted')return!r.printed;if(fs==='emailed')return r.emailed;if(fs==='noemailed')return!r.emailed;if(fs==='both')return r.printed&&r.emailed;if(fs==='none')return!r.printed&&!r.emailed;return true})}
-function renderCalif(){const list=filteredRes();const n=list.length,avg=n?Math.round(list.reduce((a,r)=>a+r.pct,0)/n):0,apr=list.filter(r=>r.pct>=CFG.pass).length;document.getElementById('statChip').textContent=n;document.getElementById('calStats').innerHTML=`<div class="stat"><b>${n}</b><small>Evaluaciones</small></div><div class="stat"><b>${avg}</b><small>Promedio</small></div><div class="stat"><b>${apr}</b><small>Aprobados</small></div><div class="stat"><b>${n?Math.round(apr/n*100):0}%</b><small>% Aprobación</small></div>`;const cont=document.getElementById('calList');cont.innerHTML='';if(!n){cont.innerHTML='<p class="muted center" style="padding:24px">No hay evaluaciones que coincidan.</p>';return}
-  const byCiclo={};list.forEach(r=>{(byCiclo[r.ciclo||'—']=byCiclo[r.ciclo||'—']||[]).push(r)});
-  const dbg=isDebug();
-  Object.keys(byCiclo).sort().forEach(cy=>{const rows=byCiclo[cy].slice().sort((a,b)=>a.ts-b.ts);let inner='';{let t=`<table class="data"><thead><tr><th>Fecha</th><th>Alumno</th><th>Nivel</th><th>Examen</th><th>Calif.</th><th>Resultado</th><th>Reporte</th><th></th></tr></thead><tbody>`;rows.forEach(r=>{t+=`<tr><td>${esc(r.date)}</td><td>${r._test?'<span class="badge" style="color:#a6671a;border-color:#e3b873;background:#fdf3e0">🧪 PRUEBA</span> ':''}${esc(r.name)}${r.interruptions&&r.interruptions.length?` <span class="badge" style="color:var(--rojo);border-color:var(--rojo);background:#fdecec" title="Salió de la ventana ${r.interruptions.length} vez/veces durante el examen">⚠️ ${r.interruptions.length}</span>`:''}</td><td>${esc(levelName(r.level))}</td><td>${esc(r.subject)}</td><td><b>${r.pct}</b></td><td><span class="lvl-tag" style="background:${r.pct>=CFG.pass?'var(--verde)':'var(--rojo)'}">${r.pct>=CFG.pass?'Suficiente':'Insuficiente'}</span></td><td><span class="badge ${r.printed?'ok':'no'}">${r.printed?'🖨️ Impresa':'No impresa'}</span> <span class="badge ${r.emailed?'ok':'no'}">${r.emailed?'✉️ Enviada':'No enviada'}</span></td><td><button class="btn sm" onclick="abrirConstancia('${jss(r.id)}')">Ver</button>${dbg?` <button class="btn sec sm" onclick="editarCalif('${jss(r.id)}')" title="Editar calificación (debug)">✏️</button>`:''}</td></tr>`});t+='</tbody></table>';inner+=t}cont.insertAdjacentHTML('beforeend',`<details class="acc" open><summary>Periodo ${esc(cy)} <span class="chip">${byCiclo[cy].length}</span></summary><div class="accbody">${inner}</div></details>`)})}
-function editarCalif(id){if(!isDebug())return;const r=RES.find(x=>x.id===id);if(!r)return;const ov=document.createElement('div');ov.className='ui-ov';ov.innerHTML=`<div class="ui-modal" style="max-width:460px"><h4>✏️ Editar calificación (debug)</h4><p style="margin-bottom:10px"><b>${esc(r.name)}</b> · ${esc(r.subject)} · ${esc(r.group||'—')}</p><div class="row"><div><label>Aciertos</label><input type="number" id="edHits" min="0" value="${r.hits}"></div><div><label>Total de preguntas</label><input type="number" id="edTotal" min="1" value="${r.total}"></div></div><p class="muted" id="edPrev" style="margin:10px 0 0"></p><div class="acts" style="margin-top:16px"><button class="btn sec sm" id="edCancel">Cancelar</button><button class="btn sm" id="edSave">Guardar cambios</button></div></div>`;document.body.appendChild(ov);requestAnimationFrame(()=>ov.classList.add('on'));const hI=ov.querySelector('#edHits'),tI=ov.querySelector('#edTotal'),pv=ov.querySelector('#edPrev');const prev=()=>{let h=Math.max(0,parseInt(hI.value)||0),tt=Math.max(1,parseInt(tI.value)||1);if(h>tt)h=tt;const pct=Math.round(h/tt*100),cal=Math.round(h/tt*(CFG.escala||10)*10)/10;pv.textContent=`Quedaría: ${pct}% · ${cal} / ${CFG.escala||10} · ${pct>=CFG.pass?'Suficiente':'Insuficiente'}`};hI.oninput=prev;tI.oninput=prev;prev();const close=()=>{ov.classList.remove('on');setTimeout(()=>ov.remove(),200)};ov.querySelector('#edCancel').onclick=close;ov.addEventListener('click',e=>{if(e.target===ov)close()});ov.querySelector('#edSave').onclick=()=>{let h=Math.max(0,parseInt(hI.value)||0),tt=Math.max(1,parseInt(tI.value)||1);if(h>tt)h=tt;r.hits=h;r.total=tt;r.pct=Math.round(h/tt*100);r.grade=r.pct;r.level_perf=nivel(r.pct).txt;r._edited=true;if(r.mode!=='__all__'&&r.per&&r.per[r.mode]){r.per[r.mode]={hits:h,total:tt}}save(K_RES,RES);renderCalif();close();toast('Calificación actualizada.','ok')}}
-function exportCSV(){const list=filteredRes();if(!list.length){toast('No hay resultados para exportar.','warn');return}const head=['Folio','Fecha','Alumno','Periodo','Nivel','Materia','Aciertos','Total','Porcentaje','Desempeño','Impresa','Enviada','Correo'];let csv='﻿'+head.join(',')+'\n';list.forEach(r=>{csv+=[r.folio,r.date,r.name,r.ciclo,levelName(r.level),r.subject,r.hits,r.total,r.pct,r.level_perf,r.printed?'Sí':'No',r.emailed?'Sí':'No',r.tEmail].map(v=>`"${String(v==null?'':v).replace(/"/g,'""')}"`).join(',')+'\n'});downloadFile(csv,'calificaciones.csv','text/csv')}
+/* ====== RESULTADOS ====== */
+function renderResultados(){
+  const done=RES.slice();const suf=done.filter(r=>r.pct>=CFG.pass).length;const n=done.length;
+  const avg=n?(done.reduce((a,r)=>a+r.grade,0)/n):0;
+  const pend=STUDENTS.filter(s=>s.status!=='completed').length;
+  document.getElementById('resStats').innerHTML=
+    `<div class="stat"><b>${n}</b><small>Exámenes presentados</small></div>`+
+    `<div class="stat"><b>${n?(Math.round(avg*10)/10):'—'}</b><small>Promedio (de ${CFG.escala})</small></div>`+
+    `<div class="stat"><b>${n?Math.round(suf/n*100)+'%':'—'}</b><small>Suficientes</small></div>`+
+    `<div class="stat"><b>${pend}</b><small>Códigos sin usar</small></div>`;
+  const q=(document.getElementById('fResSearch').value||'').trim().toLowerCase();
+  const fst=document.getElementById('fResStatus').value;
+  let list=done.filter(r=>(!q||(r.name||'').toLowerCase().includes(q)||(r.code||'').toLowerCase().includes(q))).filter(r=>!fst||(fst==='suf'?r.pct>=CFG.pass:r.pct<CFG.pass)).sort((a,b)=>b.ts-a.ts);
+  const c=document.getElementById('resList');
+  if(!list.length){c.innerHTML='<p class="muted center" style="padding:24px">Aún no hay exámenes presentados que coincidan.</p>';return}
+  c.innerHTML='<table class="data"><thead><tr><th>Aspirante</th><th>Código</th><th>Aciertos</th><th>Calif.</th><th>Nivel</th><th>Fecha</th><th></th></tr></thead><tbody>'+list.map(r=>{const nv=nivel(r.pct);return `<tr><td><b>${esc(r.name)}</b>${r.locks?' <span title="Salió de la ventana '+r.locks+' vez(ces)" class="badge no">⚠️ '+r.locks+'</span>':''}</td><td style="letter-spacing:1px">${esc(r.code||'—')}</td><td>${r.hits}/${r.total} (${r.pct}%)</td><td><b>${califTxt(r.pct)}</b></td><td><span class="lvl-tag" style="background:${nv.col}">${nv.txt}</span></td><td class="muted">${esc(r.date)}</td><td><button class="btn sec sm" onclick="openConstancia('${jss(r.id)}')">Ver constancia</button></td></tr>`}).join('')+'</tbody></table>';
+}
+function exportResultados(){if(!RES.length){toast('No hay resultados.','warn');return}const head=['Folio','Aspirante','Codigo','Escuela','Aciertos','Total','Porcentaje','Calificacion','Nivel','Fecha','Correo'];let csv='﻿'+head.join(',')+'\n';RES.forEach(r=>{csv+=[r.folio,r.name,r.code,r.origin,r.hits,r.total,r.pct+'%',califTxt(r.pct),r.level_perf,r.date,r.email].map(v=>`"${String(v==null?'':v).replace(/"/g,'""')}"`).join(',')+'\n'});downloadFile(csv,'resultados_admision.csv','text/csv')}
+let _repHTML='';
+function imprimirReporte(){if(!RES.length){toast('No hay resultados para el reporte.','warn');return}const n=RES.length,suf=RES.filter(r=>r.pct>=CFG.pass).length,avg=Math.round(RES.reduce((a,r)=>a+r.grade,0)/n*10)/10;const filas=RES.slice().sort((a,b)=>b.pct-a.pct).map(r=>`<tr><td>${esc(r.name)}</td><td>${esc(r.code||'')}</td><td>${esc(r.origin||'')}</td><td>${r.pct}%</td><td>${califTxt(r.pct)}</td><td>${esc(r.level_perf)}</td></tr>`).join('');
+  // promedio por materia
+  const acc={};SUBJECTS.forEach(s=>acc[s.id]={h:0,t:0});RES.forEach(r=>{Object.keys(r.per||{}).forEach(k=>{if(acc[k]){acc[k].h+=r.per[k].hits;acc[k].t+=r.per[k].total}})});const matRows=SUBJECTS.map(s=>{const a=acc[s.id];const p=a.t?Math.round(a.h/a.t*100):0;return `<tr><td>${s.name}</td><td>${p}%</td></tr>`}).join('');
+  _repHTML='<style>body{font-family:Arial;color:#172046;padding:24px}table{border-collapse:collapse;width:100%;margin:6px 0 16px}th,td{border:1px solid #ccd;padding:7px 10px;text-align:left;font-size:13px}th{background:#eef1fb;color:#27338f}h1,h2,h3{color:#27338f}</style>'+
+    '<h1>'+esc(CFG.school)+'</h1><p>'+esc(CFG.sub)+'</p>'+
+    '<p><b>Exámenes:</b> '+n+' · <b>Promedio:</b> '+avg+'/'+CFG.escala+' · <b>Suficientes:</b> '+suf+' ('+Math.round(suf/n*100)+'%)</p>'+
+    '<h3>Promedio de aciertos por materia</h3><table><thead><tr><th>Materia</th><th>% aciertos</th></tr></thead><tbody>'+matRows+'</tbody></table>'+
+    '<h3>Detalle por aspirante</h3><table><thead><tr><th>Aspirante</th><th>Código</th><th>Escuela</th><th>%</th><th>Calif.</th><th>Nivel</th></tr></thead><tbody>'+filas+'</tbody></table>';
+  const w=window.open();w.document.write('<html><head><title>Reporte general de admisión</title></head><body>'+_repHTML+'</body></html>');w.document.close();w.focus();setTimeout(()=>w.print(),350)}
 
 /* ====== CONSTANCIA ====== */
-let certRec=null;
-function abrirConstancia(id){const r=RES.find(x=>x.id===id);if(r)renderCert(r)}
-function renderCert(rec){certRec=rec;const nv=nivel(rec.pct);document.getElementById('certSchool').textContent=CFG.school;document.getElementById('certSub').textContent=CFG.sub;document.getElementById('certName').textContent=rec.name;document.getElementById('certInfoLine').textContent=levelName(rec.level)+(rec.ciclo?'  ·  Periodo: '+rec.ciclo:'');document.getElementById('certSubject').textContent=rec.subject;const calif=Math.round(rec.hits/rec.total*(CFG.escala||10)*10)/10;document.getElementById('certGrade').textContent=calif+' / '+(CFG.escala||10);document.getElementById('certGrade').style.color=nv.col;document.getElementById('certLevel').textContent=nv.txt;document.getElementById('certPct').textContent=rec.pct;document.getElementById('certHits').textContent=`${rec.hits}/${rec.total}`;document.getElementById('certDirector').textContent=CFG.director;document.getElementById('certDirectorTitle').textContent=CFG.directorTitle;document.getElementById('certDate').textContent='Expedida: '+rec.date;document.getElementById('certFolio').textContent='Folio: '+rec.folio;const cb=document.getElementById('certBreakdown');cb.innerHTML='';if(rec.mode==='__all__'){let h='<table class="bd-table" style="max-width:540px;margin:6px auto"><tr><th>Materia</th><th>Aciertos</th><th>%</th><th>Nivel</th></tr>';Object.keys(rec.per).forEach(sid=>{const p=rec.per[sid],pp=Math.round(p.hits/p.total*100),n2=nivel(pp);h+=`<tr><td>${subjName(rec.level,sid)}</td><td>${p.hits}/${p.total}</td><td>${pp}%</td><td style="color:${n2.col};font-weight:700">${n2.txt}</td></tr>`});h+='</table>';cb.innerHTML=h}document.getElementById('app').style.display='none';document.getElementById('constancia').style.display='block';window.scrollTo({top:0})}
-function cerrarConstancia(){document.getElementById('constancia').style.display='none';document.getElementById('app').style.display='block';show('vAdmin');adminTab('cal')}
-function imprimirConstancia(){if(certRec){certRec.printed=true;save(K_RES,RES)}window.print()}
-function enviarCorreo(){if(!certRec)return;const r=certRec;const to=r.tEmail||r.sEmail||'';uiModal({title:'✉️ Enviar reporte de calificaciones',msg:'Correo de contacto:',input:true,itype:'email',value:to,okText:'Abrir correo',cancelText:'Cancelar'}).then(dest=>{if(dest===null)return;if(!/.+@.+\..+/.test(dest)){toast('Correo no válido.','err');return}const subject=`Constancia de resultados - ${r.name} (${CFG.school})`;const body=`Estimado(a):\n\nSe comparte la constancia de la evaluación diagnóstica de ${r.name}${r.group?` (Grupo ${r.group}, ${levelName(r.level)})`:''}.\n\nMateria: ${r.subject}\nCalificación: ${r.pct}\nNivel: ${r.level_perf}\nAciertos: ${r.hits}/${r.total}\nFolio: ${r.folio}\nFecha: ${r.date}\n\nNota: la constancia oficial en PDF se adjunta por separado (genérela con "Imprimir / Guardar PDF").\n\nAtentamente,\n${CFG.director}\n${CFG.directorTitle} · ${CFG.school}`;window.location.href='mailto:'+encodeURIComponent(dest)+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);r.emailed=true;save(K_RES,RES);toast('Abriendo tu correo… adjunta el PDF.','ok')})}
+let curRes=null;
+function openConstancia(id){const r=RES.find(x=>x.id===id);if(!r)return;curRes=r;const nv=nivel(r.pct);
+  document.getElementById('certSchool').textContent=CFG.school;
+  document.getElementById('certSub').textContent=CFG.sub;
+  document.getElementById('certName').textContent=r.name;
+  document.getElementById('certInfoLine').textContent=(r.origin?'Procedente de: '+r.origin+' · ':'')+'Código: '+(r.code||'—');
+  document.getElementById('certGrade').textContent=califTxt(r.pct);
+  document.getElementById('certLevel').textContent=nv.txt;
+  document.getElementById('certPct').textContent=r.pct;
+  document.getElementById('certHits').textContent=r.hits+'/'+r.total;
+  document.getElementById('certDirector').textContent=CFG.director;
+  document.getElementById('certDirectorTitle').textContent=CFG.directorTitle;
+  document.getElementById('certDate').textContent=r.date;
+  document.getElementById('certFolio').textContent='Folio: '+r.folio;
+  const per=r.per||{};document.getElementById('certBreakdown').innerHTML='<table class="bd-table"><thead><tr><th>Materia</th><th>Aciertos</th><th>%</th></tr></thead><tbody>'+SUBJECTS.filter(s=>per[s.id]).map(s=>{const d=per[s.id];const p=d.total?Math.round(d.hits/d.total*100):0;return `<tr><td>${s.name}</td><td>${d.hits}/${d.total}</td><td>${p}%</td></tr>`}).join('')+'</tbody></table>';
+  document.getElementById('app').style.display='none';document.getElementById('constancia').style.display='block';window.scrollTo(0,0)}
+function cerrarConstancia(){document.getElementById('constancia').style.display='none';document.getElementById('app').style.display='block'}
+function imprimirConstancia(){if(curRes){curRes.printed=true;save(K_RES,RES)}window.print()}
+function enviarCorreo(){if(!curRes)return;const r=curRes;const to=r.email||'';const subj=encodeURIComponent('Resultado de examen de admisión - '+CFG.school);const body=encodeURIComponent('Estimado(a) aspirante '+r.name+':\n\nLe compartimos el resultado de su examen de admisión a Bachillerato.\n\nCalificación: '+califTxt(r.pct)+' de '+CFG.escala+'\nAciertos: '+r.hits+' de '+r.total+' ('+r.pct+'%)\nNivel de desempeño: '+r.level_perf+'\nFolio: '+r.folio+'\n\nAtentamente,\n'+CFG.director+'\n'+CFG.school);r.emailed=true;save(K_RES,RES);window.location.href='mailto:'+to+'?subject='+subj+'&body='+body}
 
-/* ====== EDITOR PREGUNTAS ====== */
-function renderEditor(){const{lv,sid}=curEdit();if(!lv){document.getElementById('editorList').innerHTML='<p class="muted">No tienes materias asignadas.</p>';return}const list=document.getElementById('editorList');list.innerHTML='';BANK[lv][sid].forEach((q,qi)=>{const d=document.createElement('div');d.className='qedit';let oh='';['A','B','C','D'].forEach((k,oi)=>{oh+=`<div class="optline"><input type="radio" name="c_${qi}" ${q.correct===oi?'checked':''} onchange="setCorrect(${qi},${oi})"><span class="key" style="width:24px;height:24px;font-size:12px">${k}</span><input type="text" value="${esc(q.opts[oi])}" oninput="setOpt(${qi},${oi},this.value)"></div>`});const ih=q.img?`<div class="imgrow"><img src="${q.img}"><button class="btn sec sm" onclick="clearImg(${qi})">Quitar imagen</button></div>`:`<div class="imgrow"><button class="btn sec sm" onclick="document.getElementById('qi_${qi}').click()">🖼️ Agregar imagen</button><input type="file" id="qi_${qi}" accept="image/*" class="hidden" onchange="setImg(${qi},event)"></div>`;d.innerHTML=`<div class="qtop"><label>Pregunta ${qi+1}</label><button class="btn sec sm" onclick="delQuestion(${qi})">🗑️</button></div><textarea rows="2" oninput="setQ(${qi},this.value)">${esc(q.q)}</textarea><div class="opts4">${oh}</div>${ih}`;list.appendChild(d)})}
-function setQ(i,v){const{lv,sid}=curEdit();BANK[lv][sid][i].q=v}
-function setOpt(i,o,v){const{lv,sid}=curEdit();BANK[lv][sid][i].opts[o]=v}
-function setCorrect(i,o){const{lv,sid}=curEdit();BANK[lv][sid][i].correct=o}
-function setImg(i,ev){const f=ev.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{const{lv,sid}=curEdit();BANK[lv][sid][i].img=r.result;renderEditor();toast('Imagen agregada (recuerda Guardar).','ok')};r.readAsDataURL(f)}
-function clearImg(i){const{lv,sid}=curEdit();BANK[lv][sid][i].img='';renderEditor()}
-function addQuestion(){const{lv,sid}=curEdit();if(!lv)return;BANK[lv][sid].push({q:'Nueva pregunta',opts:['','','',''],correct:0,img:''});renderEditor();const el=document.getElementById('editorList');el.lastElementChild.scrollIntoView({behavior:'smooth',block:'center'});toast('Pregunta agregada (recuerda Guardar).','ok')}
-async function delQuestion(i){if(await uiConfirm('¿Borrar esta pregunta?','Borrar',true)){const{lv,sid}=curEdit();BANK[lv][sid].splice(i,1);renderEditor()}}
-function saveBank(){save(K_BANK,BANK);toast('Banco guardado.','ok')}
-function exportBank(){const{lv,sid}=curEdit();if(!lv){toast('Selecciona una materia.','warn');return}downloadFile(JSON.stringify({level:lv,subject:sid,questions:BANK[lv][sid]},null,2),'preguntas_'+lv+'_'+sid+'.json','application/json')}
-function plantillaExcel(){const csv='﻿Pregunta,A,B,C,D,Correcta\n"¿Cuánto es 2 + 2?","3","4","5","6","B"\n"Capital de México","Guadalajara","Monterrey","Ciudad de México","Puebla","C"\n';downloadFile(csv,'plantilla_preguntas.csv','text/csv')}
-function importExcel(ev){const f=ev.target.files[0];if(!f)return;const{lv,sid}=curEdit();if(!lv){toast('Selecciona una materia.','warn');return}if(!window.XLSX){uiAlert('Falta el archivo xlsx.full.min.js en la carpeta del demo.','Importar Excel');return}const r=new FileReader();r.onload=()=>{try{const wb=XLSX.read(r.result,{type:'array'});const ws=wb.Sheets[wb.SheetNames[0]];const rows=XLSX.utils.sheet_to_json(ws,{header:1,blankrows:false});const map={'A':0,'B':1,'C':2,'D':3,'1':0,'2':1,'3':2,'4':3};const out=[];const bad=[];let rowNum=0;rows.forEach((row,i)=>{if(!row||!row.length)return;const first=(row[0]==null?'':String(row[0])).trim();if(!first)return;if(i===0&&/pregunta/i.test(first))return;rowNum++;const opts=[1,2,3,4].map(k=>row[k]==null?'':String(row[k]));const raw=(row[5]==null?'':String(row[5])).trim();const cs=raw.toUpperCase();let correct;if(map[cs]!=null){correct=map[cs]}else{const mi=opts.findIndex(o=>o.trim()!==''&&o.trim().toLowerCase()===raw.toLowerCase());if(mi>=0){correct=mi}else{correct=0;bad.push(rowNum)}}out.push({q:first,opts,correct,img:''})});if(!out.length)throw new Error('no se encontraron preguntas');BANK[lv][sid]=out;save(K_BANK,BANK);renderEditor();if(bad.length){uiAlert('Se importaron '+out.length+' preguntas, PERO la columna "Correcta" no se reconoció en la(s) pregunta(s): '+bad.join(', ')+'.\n\nDebe ser A, B, C o D (o el texto exacto de la opción correcta). En esas se dejó la opción A por defecto — revísalas antes de aplicar el examen.','⚠️ Revisa la respuesta correcta')}else{toast('Importadas '+out.length+' preguntas de Excel a '+subjName(lv,sid)+'.','ok')}}catch(e){uiAlert('No se pudo leer el Excel: '+e.message+'\n\nFormato esperado (columnas): Pregunta | A | B | C | D | Correcta (A-D).','Importar Excel')}};r.readAsArrayBuffer(f);ev.target.value=''}
-function importBank(ev){const f=ev.target.files[0];if(!f)return;const{lv,sid}=curEdit();if(!lv){toast('Selecciona una materia.','warn');return}const r=new FileReader();r.onload=()=>{try{const data=JSON.parse(r.result);const qs=Array.isArray(data)?data:data.questions;if(!Array.isArray(qs))throw new Error('formato inesperado');BANK[lv][sid]=qs.map(q=>({q:q.q||'',opts:(Array.isArray(q.opts)?q.opts:['','','','']).slice(0,4),correct:Number(q.correct)||0,img:q.img||''}));save(K_BANK,BANK);renderEditor();toast('Preguntas importadas a '+subjName(lv,sid)+' ('+qs.length+').','ok')}catch(e){uiAlert('El archivo no es válido: '+e.message,'Error al importar')}};r.readAsText(f);ev.target.value=''}
+/* ====== ASPIRANTES (roster + códigos) ====== */
+function genCode(){let c;const ch='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';do{c='';for(let i=0;i<6;i++)c+=ch[Math.random()*ch.length|0]}while(STUDENTS.some(s=>s.code===c));return c}
+function addStudent(){const name=document.getElementById('sName').value.trim();if(!name){toast('Escribe el nombre del aspirante.','warn');return}const code=genCode();STUDENTS.push({code,name,origin:document.getElementById('sOrigin').value.trim(),email:document.getElementById('sEmail').value.trim(),status:'pending',resultId:null});save(K_STUD,STUDENTS);['sName','sOrigin','sEmail'].forEach(i=>document.getElementById(i).value='');renderRoster();uiAlert('Aspirante registrado.\n\nCÓDIGO DE ACCESO:  '+code+'\n\nEntrégaselo para que presente su examen de admisión.','✅ Código generado')}
+let rosterPage=1;const ROSTER_PAGE=50;
+function renderRoster(){const fs=(document.getElementById('fSStatus')||{}).value||'',q=((document.getElementById('fSSearch')||{}).value||'').trim().toLowerCase();let list=STUDENTS.filter(s=>(!fs||s.status===fs)&&(!q||(s.name||'').toLowerCase().includes(q)||(s.code||'').toLowerCase().includes(q))).sort((a,b)=>a.name.localeCompare(b.name));const c=document.getElementById('rosterList'),pg=document.getElementById('rosterPager');if(pg)pg.innerHTML='';if(!list.length){c.innerHTML='<p class="muted center" style="padding:20px">'+(STUDENTS.length?'Ningún aspirante coincide con el filtro.':'Aún no hay aspirantes registrados.')+'</p>';return}
+  const pages=Math.ceil(list.length/ROSTER_PAGE);if(rosterPage>pages)rosterPage=pages;if(rosterPage<1)rosterPage=1;const start=(rosterPage-1)*ROSTER_PAGE,rows=list.slice(start,start+ROSTER_PAGE);
+  c.innerHTML='<p class="muted" style="margin:0 0 8px">'+list.length+' aspirante(s)</p><table class="data"><thead><tr><th>Código</th><th>Aspirante</th><th>Escuela de procedencia</th><th>Estado</th><th></th></tr></thead><tbody>'+rows.map(s=>`<tr><td><b style="letter-spacing:1px">${esc(s.code)}</b></td><td>${esc(s.name)}</td><td>${esc(s.origin||'—')}</td><td><span class="badge ${s.status==='completed'?'ok':'no'}">${s.status==='completed'?'✓ Contestado':'Pendiente'}</span></td><td><button class="btn sec sm" onclick="copyCode('${jss(s.code)}')">Copiar</button> <button class="btn sec sm" onclick="delStudent('${jss(s.code)}')">🗑️</button></td></tr>`).join('')+'</tbody></table>';
+  if(pages>1&&pg)pg.innerHTML=`<button class="btn sec sm" ${rosterPage<=1?'disabled':''} onclick="rosterPage--;renderRoster()">← Anterior</button> <span class="pill" style="margin:0 8px">Página ${rosterPage} / ${pages}</span> <button class="btn sec sm" ${rosterPage>=pages?'disabled':''} onclick="rosterPage++;renderRoster()">Siguiente →</button>`}
+function copyCode(c){try{navigator.clipboard.writeText(c)}catch(e){}toast('Código copiado: '+c,'ok')}
+async function delStudent(code){const st=STUDENTS.find(s=>s.code===code);if(await uiConfirm('¿Quitar a '+(st?st.name:'este aspirante')+' del listado?','Quitar',true)){STUDENTS=STUDENTS.filter(s=>s.code!==code);save(K_STUD,STUDENTS);renderRoster()}}
+function plantillaAlumnos(){const csv='﻿Nombre,EscuelaProcedencia,CorreoContacto\n"Ana López","Secundaria Técnica 5","contacto@correo.com"\n"Luis Pérez","Colegio del Valle","contacto2@correo.com"\n';downloadFile(csv,'plantilla_aspirantes.csv','text/csv')}
+function importStudents(ev){const f=ev.target.files[0];if(!f)return;if(!window.XLSX){uiAlert('Falta el archivo xlsx.full.min.js en la carpeta.','Importar');ev.target.value='';return}const r=new FileReader();r.onload=()=>{try{const wb=XLSX.read(r.result,{type:'array'});const ws=wb.Sheets[wb.SheetNames[0]];const rows=XLSX.utils.sheet_to_json(ws,{header:1,blankrows:false});let added=0;rows.forEach((row,i)=>{if(!row||!row.length)return;const name=(row[0]==null?'':String(row[0])).trim();if(!name)return;if(i===0&&/nombre/i.test(name))return;STUDENTS.push({code:genCode(),name,origin:(row[1]==null?'':String(row[1])).trim(),email:(row[2]==null?'':String(row[2])).trim(),status:'pending',resultId:null});added++});if(!added)throw new Error('no se encontraron aspirantes válidos');save(K_STUD,STUDENTS);rosterPage=1;renderRoster();uiAlert('Se importaron '+added+' aspirante(s) y se generaron sus códigos.\n\nUsa "Exportar lista + códigos" para descargarlos.','✅ Importados')}catch(e){uiAlert('No se pudo leer el archivo: '+e.message+'\n\nColumnas esperadas: Nombre | EscuelaProcedencia | CorreoContacto.','Importar')}};r.readAsArrayBuffer(f);ev.target.value=''}
+function exportRoster(){if(!STUDENTS.length){toast('No hay aspirantes.','warn');return}const head=['Codigo','Aspirante','EscuelaProcedencia','Estado','CorreoContacto'];let csv='﻿'+head.join(',')+'\n';STUDENTS.forEach(s=>{csv+=[s.code,s.name,s.origin,s.status==='completed'?'Contestado':'Pendiente',s.email].map(v=>`"${String(v==null?'':v).replace(/"/g,'""')}"`).join(',')+'\n'});downloadFile(csv,'aspirantes_codigos.csv','text/csv')}
 
-/* ====== GUÍAS (editor) ====== */
-function loadGuideEditor(){const{lv,sid}=curGuide();if(!lv){document.getElementById('guideText').value='';document.getElementById('guideEditFiles').innerHTML='';return}document.getElementById('guideText').value=GUIDES[lv][sid].text||'';renderGuideEditFiles()}
-function renderGuideEditFiles(){const{lv,sid}=curGuide();const fs=GUIDES[lv][sid].files||[];document.getElementById('guideEditFiles').innerHTML=fs.map((f,i)=>`<div class="fileitem"><span>${fileIcon(f.type)}</span><span class="fn">${esc(f.name)}</span><button class="btn sec sm" onclick="openFileEdit(${i})">Abrir</button><button class="btn sec sm" onclick="delGuideFile(${i})">🗑️</button></div>`).join('')||'<p class="muted">Sin archivos.</p>'}
-function openFileEdit(i){const{lv,sid}=curGuide();openFileObj(GUIDES[lv][sid].files[i])}
-function openFileObj(f){if(!f)return;const w=window.open();if(w){if(/pdf|image/.test(f.type))w.document.write(`<iframe src="${f.data}" style="border:0;width:100%;height:100vh"></iframe>`);else{const a=w.document.createElement('a');a.href=f.data;a.download=f.name;w.document.body.appendChild(a);a.click();w.close()}}}
-function addGuideFiles(ev){const{lv,sid}=curGuide();const files=[...ev.target.files];let pend=files.length;files.forEach(f=>{if(f.size>4*1024*1024){toast(`"${f.name}" es muy grande para el modo offline (máx ~4MB).`,'warn');if(--pend===0)renderGuideEditFiles();return}const r=new FileReader();r.onload=()=>{GUIDES[lv][sid].files.push({name:f.name,type:f.type||'',data:r.result});if(--pend===0){renderGuideEditFiles();toast('Archivo(s) adjuntado(s) (recuerda Guardar).','ok')}};r.readAsDataURL(f)});ev.target.value=''}
-async function delGuideFile(i){if(await uiConfirm('¿Quitar este archivo?','Quitar',true)){const{lv,sid}=curGuide();GUIDES[lv][sid].files.splice(i,1);renderGuideEditFiles()}}
-function saveGuide(){const{lv,sid}=curGuide();if(!lv)return;GUIDES[lv][sid].text=document.getElementById('guideText').value;if(save(K_GUIDE,GUIDES))toast('Guía guardada.','ok')}
+/* ====== BANCO DE PREGUNTAS ====== */
+let bankSubj='matematicas';
+function renderBank(){const chips=document.getElementById('bankSubjChips');chips.innerHTML=SUBJECTS.map(s=>`<span class="chip-x${s.id===bankSubj?' act':''}" onclick="bankSubj='${s.id}';renderBank()">${s.ico} ${s.name} <b style="color:var(--azul)">${(BANK[s.id]||[]).length}</b></span>`).join('');
+  const list=BANK[bankSubj]||[];document.getElementById('bankCount').textContent=list.length+' pregunta(s) en '+subjName(bankSubj);
+  const c=document.getElementById('bankList');const K=['A','B','C','D'];
+  c.innerHTML=list.map((qq,qi)=>{const opts=qq.opts.map((o,oi)=>`<label class="optline"><input type="radio" name="cor${qi}" ${qq.correct===oi?'checked':''} onchange="setCorrect(${qi},${oi})"><span class="key" style="width:24px;height:24px;font-size:12px">${K[oi]}</span><input type="text" value="${esc(o).replace(/"/g,'&quot;')}" oninput="setOpt(${qi},${oi},this.value)"></label>`).join('');return `<div class="qedit"><div class="qtop"><b>Pregunta ${qi+1}</b><button class="btn danger sm" onclick="delQuestion(${qi})">Eliminar</button></div><textarea rows="2" oninput="setQText(${qi},this.value)" style="margin-top:8px">${esc(qq.q)}</textarea><div class="opts4">${opts}</div><p class="muted" style="margin:6px 0 0;font-size:12px">Marca el círculo de la respuesta correcta.</p></div>`}).join('')||'<p class="muted center" style="padding:20px">No hay preguntas en esta materia. Usa "+ Pregunta".</p>';
+}
+function setQText(i,v){BANK[bankSubj][i].q=v}
+function setOpt(i,o,v){BANK[bankSubj][i].opts[o]=v}
+function setCorrect(i,o){BANK[bankSubj][i].correct=o}
+function addQuestion(){BANK[bankSubj].push({q:'Nueva pregunta',opts:['Opción A','Opción B','Opción C','Opción D'],correct:0,img:''});renderBank();setTimeout(()=>{const l=document.getElementById('bankList');l.scrollIntoView({behavior:'smooth',block:'end'})},30)}
+async function delQuestion(i){if(await uiConfirm('¿Eliminar esta pregunta?','Eliminar',true)){BANK[bankSubj].splice(i,1);renderBank()}}
+function saveBank(){save(K_BANK,BANK);toast('Banco de preguntas guardado.','ok')}
+function exportBank(){downloadFile(JSON.stringify(BANK,null,2),'banco_preguntas.json','application/json')}
+function importBank(ev){const f=ev.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const data=JSON.parse(r.result);let ok=false;SUBJECTS.forEach(s=>{if(Array.isArray(data[s.id])){BANK[s.id]=data[s.id].map(q=>({q:q.q||'',opts:(q.opts||['','','','']).slice(0,4),correct:q.correct||0,img:q.img||''}));ok=true}});if(!ok)throw new Error('formato no reconocido');save(K_BANK,BANK);renderBank();uiAlert('Banco de preguntas importado correctamente.','✅ Importado')}catch(e){uiAlert('No se pudo importar: '+e.message,'Importar')}};r.readAsText(f);ev.target.value=''}
 
-/* ====== PROFESORES ====== */
-function renderAssignGrid(){const g=document.getElementById('assignGrid');g.innerHTML=LEVELS.map(l=>`<div class="lvl"><b>${l.name}</b>${subjectsOf(l.id).map(s=>`<label><input type="checkbox" value="${l.id}|${s.id}">${s.name}</label>`).join('')}</div>`).join('')}
-function addProfe(){const name=document.getElementById('pName').value.trim(),user=document.getElementById('pUser').value.trim(),pass=document.getElementById('pPass').value.trim();if(!name||!user||!pass){toast('Completa nombre, usuario y contraseña.','warn');return}if(USERS.some(u=>u.user.toLowerCase()===user.toLowerCase())){toast('Ese usuario ya existe.','err');return}const assign=[...document.querySelectorAll('#assignGrid input:checked')].map(c=>{const[level,subject]=c.value.split('|');return{level,subject}});if(!assign.length){toast('Asigna al menos una materia.','warn');return}const caps={calif:document.getElementById('pCapCalif').checked,alumnos:document.getElementById('pCapAlumnos').checked,guias:document.getElementById('pCapGuias').checked,preguntas:document.getElementById('pCapPreguntas').checked};USERS.push({user,pass,name,role:'teacher',assign,caps});save(K_USERS,USERS);document.getElementById('pName').value='';document.getElementById('pUser').value='';document.getElementById('pPass').value='';document.querySelectorAll('#assignGrid input:checked').forEach(c=>c.checked=false);['pCapCalif','pCapAlumnos','pCapGuias','pCapPreguntas'].forEach(i=>document.getElementById(i).checked=false);renderProfes();toast('Profesor agregado.','ok')}
-const CAP_LABELS={calif:'Calificaciones',alumnos:'Base de datos',guias:'Guías',preguntas:'Editar preguntas (diagnóstico)'};
-function renderProfes(){const c=document.getElementById('profesList');const teachers=USERS.filter(u=>u.role==='teacher');if(!teachers.length){c.innerHTML='<p class="muted">Aún no hay profesores.</p>';return}c.innerHTML=teachers.map(u=>{const cp=u.caps||{};const toggles=Object.keys(CAP_LABELS).map(k=>`<label class="chip-x${cp[k]?' act':''}" style="cursor:pointer"><input type="checkbox" ${cp[k]?'checked':''} onchange="toggleCap('${jss(u.user)}','${k}',this.checked)" style="width:auto;margin-right:6px">${CAP_LABELS[k]}</label>`).join('');return`<div class="tour-card"><div class="th"><b>${esc(u.name)}</b><button class="btn sec sm" onclick="delProfe('${jss(u.user)}')">🗑️ Quitar</button></div><div class="meta">Usuario: <b>${esc(u.user)}</b> · Contraseña: ${esc(u.pass)}</div><div class="meta">Materias: ${u.assign.map(a=>levelName(a.level)+'·'+subjName(a.level,a.subject)).join(', ')||'—'}</div><div class="meta" style="margin-top:8px">Siempre: <b>edita preguntas</b>. Permisos extra:</div><div class="chips" style="gap:10px;margin-top:6px">${toggles}</div></div>`}).join('')}
-function toggleCap(user,cap,val){const u=USERS.find(x=>x.user===user&&x.role==='teacher');if(!u)return;if(!u.caps)u.caps={};u.caps[cap]=val;save(K_USERS,USERS);renderProfes();toast((val?'Permiso activado: ':'Permiso quitado: ')+CAP_LABELS[cap],'ok')}
-async function delProfe(user){if(await uiConfirm('¿Quitar este profesor?','Quitar profesor',true)){USERS=USERS.filter(u=>u.user!==user);save(K_USERS,USERS);renderProfes()}}
+/* ====== CONFIGURACIÓN ====== */
+function renderConfig(){const c=CFG.contact||{};const set=(id,v)=>{const e=document.getElementById(id);if(e)e.value=v==null?'':v};
+  set('cfgSchool',CFG.school);set('cfgSub',CFG.sub);set('cfgPeriodo',CFG.periodo);set('cfgPass',CFG.pass);set('cfgEscala',CFG.escala);set('cfgTime',CFG.timeMin);
+  document.getElementById('cfgShuffle').value=CFG.shuffle?'1':'0';document.getElementById('cfgAnti').value=CFG.anti?'1':'0';
+  set('cfgDirector',CFG.director);set('cfgDirectorTitle',CFG.directorTitle);set('cfgPhone',c.phone);set('cfgEmail',c.email);set('cfgAddr',c.addr);set('cfgUser',CFG.coordUser);set('cfgPass',CFG.coordPass)}
+function saveConfig(){const g=id=>document.getElementById(id).value;CFG.school=g('cfgSchool').trim()||CFG.school;CFG.sub=g('cfgSub').trim();CFG.periodo=g('cfgPeriodo').trim();CFG.pass=Math.max(1,Math.min(100,parseInt(g('cfgPass'))||60));CFG.escala=Math.max(1,parseInt(g('cfgEscala'))||10);CFG.timeMin=Math.max(0,parseInt(g('cfgTime'))||0);CFG.shuffle=g('cfgShuffle')==='1'?1:0;CFG.anti=g('cfgAnti')==='1'?1:0;CFG.director=g('cfgDirector').trim();CFG.directorTitle=g('cfgDirectorTitle').trim();CFG.contact={phone:g('cfgPhone').trim(),email:g('cfgEmail').trim(),addr:g('cfgAddr').trim()};CFG.coordUser=g('cfgUser').trim()||'coordinacion';CFG.coordPass=g('cfgPass')||CFG.coordPass;save(K_CFG,CFG);applyBranding();toast('Configuración guardada.','ok')}
+function uploadLogo(ev){const f=ev.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{CFG.logo=r.result;save(K_CFG,CFG);applyBranding();toast('Logo actualizado.','ok')};r.readAsDataURL(f);ev.target.value=''}
+function removeLogo(){CFG.logo='';save(K_CFG,CFG);applyBranding();toast('Logo quitado.','ok')}
+async function limpiarDatos(){if(!await uiConfirm('Esto borrará TODOS los aspirantes y resultados. El banco de preguntas y la configuración se conservan. ¿Continuar?','Borrar datos',true))return;STUDENTS=[];RES=[];save(K_STUD,STUDENTS);save(K_RES,RES);renderResultados();renderRoster();toast('Datos borrados. Sistema listo para un nuevo periodo.','ok')}
 
-/* ====== RECORRIDOS ====== */
-function renderTours(){const f=document.getElementById('fTour').value;const c=document.getElementById('toursList');let list=TOURS.filter(t=>!f||t.status===f).sort((a,b)=>b.ts-a.ts);if(!list.length){c.innerHTML='<p class="muted center" style="padding:24px">No hay solicitudes.</p>';return}c.innerHTML=list.map(t=>`<div class="tour-card ${t.status}"><div class="th"><b>${esc(t.name)}</b><span class="muted">${esc(t.date)}</span></div><div class="meta">Aspirante: ${esc(t.student||'—')} · Nivel: ${esc(t.level)} · Estado: <b>${t.status}</b></div><div class="meta">📞 ${esc(t.phone)} · ✉️ ${esc(t.email)}</div>${t.pref?`<div class="meta">Preferencia: ${esc(t.pref)}</div>`:''}${t.msg?`<div class="meta">"${esc(t.msg)}"</div>`:''}<div class="toolbar" style="justify-content:flex-start;margin:10px 0 0"><button class="btn sm" onclick="registrarDesdeTour('${t.id}')">➕ Registrar alumno</button><button class="btn sec sm" onclick="setTour('${t.id}','realizado')">✓ Realizado</button><button class="btn sec sm" onclick="setTour('${t.id}','pendiente')">⏳ Pendiente</button><button class="btn sec sm" onclick="setTour('${t.id}','cancelado')">✕ Cancelar</button><button class="btn sec sm" onclick="delTour('${t.id}')">🗑️</button></div></div>`).join('')}
-function setTour(id,st){const t=TOURS.find(x=>x.id===id);if(t){t.status=st;save(K_TOUR,TOURS);renderTours()}}
-function registrarDesdeTour(id){const t=TOURS.find(x=>x.id===id);if(!t)return;adminTab('alum');document.getElementById('sName').value=t.student||'';const lid=levelIdByName(t.level);document.getElementById('sLevel').value=lid;fillStudentMode();document.getElementById('sTEmail').value=t.email||'';document.getElementById('sOrigin').value='';document.getElementById('sSEmail').value='';if(t.status==='pendiente'){t.status='realizado';save(K_TOUR,TOURS)}document.getElementById('sName').scrollIntoView({behavior:'smooth',block:'center'});toast('Datos del recorrido cargados. Elige grupo y examen, luego "Registrar".','ok')}
-async function delTour(id){if(await uiConfirm('¿Borrar esta solicitud?','Borrar',true)){TOURS=TOURS.filter(x=>x.id!==id);save(K_TOUR,TOURS);renderTours()}}
-function exportTours(){if(!TOURS.length){toast('No hay solicitudes.','warn');return}const head=['Fecha','Contacto','Correo','Telefono','Aspirante','Nivel','Preferencia','Mensaje','Estado'];let csv='﻿'+head.join(',')+'\n';TOURS.forEach(t=>{csv+=[t.date,t.name,t.email,t.phone,t.student,t.level,t.pref,t.msg,t.status].map(v=>`"${String(v==null?'':v).replace(/"/g,'""')}"`).join(',')+'\n'});downloadFile(csv,'recorridos.csv','text/csv')}
+/* ====== UTILIDADES ====== */
+function downloadFile(content,name,type){const blob=new Blob([content],{type:type||'text/plain'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},100)}
 
-/* ====== REPORTES GENERALES (Coordinación / Dirección) ====== */
-let _repHTML='';
-function fillReportFilters(){document.getElementById('rCiclo').innerHTML=['(Todos los periodos)',...CFG.ciclos].map((c,i)=>`<option value="${i===0?'':esc(c)}">${esc(c)}</option>`).join('');document.getElementById('rLevel').innerHTML='<option value="">(Todos los niveles)</option>'+LEVELS.map(l=>`<option value="${l.id}">${l.name}</option>`).join('')}
-function agg(list,keyfn){const m={};list.forEach(r=>{const k=keyfn(r);if(!m[k])m[k]={n:0,sum:0,suf:0};m[k].n++;m[k].sum+=r.pct;if(r.pct>=CFG.pass)m[k].suf++});return m}
-function repTable(title,m){let t=`<h3>${title}</h3><table class="data"><thead><tr><th>${esc(title.replace('Por ',''))}</th><th>Evaluaciones</th><th>Promedio</th><th>Suficiente</th><th>%</th></tr></thead><tbody>`;Object.keys(m).sort().forEach(k=>{const o=m[k];t+=`<tr><td>${esc(k)}</td><td>${o.n}</td><td>${Math.round(o.sum/o.n)}</td><td>${o.suf}</td><td>${Math.round(o.suf/o.n*100)}%</td></tr>`});return t+'</tbody></table>'}
-function renderReportes(){if(!document.getElementById('rCiclo').options.length)fillReportFilters();const rc=document.getElementById('rCiclo').value,rl=document.getElementById('rLevel').value;const list=RES.filter(r=>canSeeResult(r)).filter(r=>(!rc||r.ciclo===rc)&&(!rl||r.level===rl));const body=document.getElementById('repBody');if(!list.length){body.innerHTML='<p class="muted center" style="padding:24px">No hay datos para el reporte.</p>';_repHTML='';return}
-  const n=list.length,avg=Math.round(list.reduce((a,r)=>a+r.pct,0)/n),suf=list.filter(r=>r.pct>=CFG.pass).length;
-  const byL=agg(list,r=>levelName(r.level)),byS=agg(list,r=>r.subject);
-  const cab=esc(CFG.school)+' · Reporte general · '+(rc||'Todos los periodos')+(rl?(' · '+levelName(rl)):'')+' · '+new Date().toLocaleDateString('es-MX');
-  const stats=`<div class="cal-stats"><div class="stat"><b>${n}</b><small>Evaluaciones</small></div><div class="stat"><b>${avg}</b><small>Promedio</small></div><div class="stat"><b>${suf}</b><small>Suficiente</small></div><div class="stat"><b>${Math.round(suf/n*100)}%</b><small>% Suficiente</small></div></div>`;
-  const tablas=repTable('Por nivel',byL)+repTable('Por materia',byS);
-  body.innerHTML=`<div class="info-hero"><h3>${esc(CFG.school)}</h3><p>${cab}</p></div>${stats}${tablas}`;
-  _repHTML='<style>body{font-family:Arial;color:#172046;padding:24px}table{border-collapse:collapse;width:100%;margin:6px 0 16px}th,td{border:1px solid #ccd;padding:7px 10px;text-align:left;font-size:13px}th{background:#eef1fb;color:#27338f}h1,h2,h3{color:#27338f}</style><h1>'+esc(CFG.school)+'</h1><p>'+cab+'</p><p><b>Evaluaciones:</b> '+n+' · <b>Promedio:</b> '+avg+' · <b>Suficiente:</b> '+suf+' ('+Math.round(suf/n*100)+'%)</p>'+tablas}
-function imprimirReporte(){if(!_repHTML){toast('Genera primero el reporte (hay datos).','warn');return}const w=window.open();w.document.write('<html><head><title>Reporte general</title></head><body>'+_repHTML+'</body></html>');w.document.close();w.focus();setTimeout(()=>w.print(),300)}
-function exportReporte(){const rc=document.getElementById('rCiclo').value,rl=document.getElementById('rLevel').value;const list=RES.filter(r=>canSeeResult(r)).filter(r=>(!rc||r.ciclo===rc)&&(!rl||r.level===rl));if(!list.length){toast('No hay datos.','warn');return}const head=['Categoria','Valor','Evaluaciones','Promedio','Suficiente','PorcentajeSuf'];let csv='﻿'+head.join(',')+'\n';const dump=(cat,m)=>{Object.keys(m).sort().forEach(k=>{const o=m[k];csv+=[cat,k,o.n,Math.round(o.sum/o.n),o.suf,Math.round(o.suf/o.n*100)+'%'].map(v=>`"${String(v).replace(/"/g,'""')}"`).join(',')+'\n'})};dump('Nivel',agg(list,r=>levelName(r.level)));dump('Materia',agg(list,r=>r.subject));downloadFile(csv,'reporte_general.csv','text/csv')}
+/* ====== DATOS DE EJEMPLO (solo la primera vez) ====== */
+function seedDemo(){if(STUDENTS.length||RES.length)return;const mk=(name,origin,email)=>({code:genCode(),name,origin,email,status:'pending',resultId:null});
+  STUDENTS=[mk('Ana Sofía Ramírez','Secundaria Técnica 5','contacto.ana@correo.com'),
+    mk('Diego Hernández Cruz','Colegio del Valle','contacto.diego@correo.com'),
+    mk('María Fernanda López','Secundaria General Niños Héroes','contacto.mafer@correo.com'),
+    mk('Luis Ángel Torres','Secundaria Benito Juárez','contacto.luis@correo.com'),
+    mk('Valentina Gómez Ruiz','Instituto Cumbres','contacto.valen@correo.com')];
+  function completar(st,perMap){let hits=0,total=0;const per={};Object.keys(perMap).forEach(k=>{per[k]={hits:perMap[k][0],total:perMap[k][1]};hits+=perMap[k][0];total+=perMap[k][1]});const pct=Math.round(hits/total*100),nv=nivel(pct);RES.push({id:'F'+Math.random().toString(36).slice(2,9).toUpperCase(),folio:'ADM-DEMO-'+st.code,date:new Date(Date.now()-(Math.random()*5*86400000|0)).toLocaleString('es-MX'),ts:Date.now()-(Math.random()*5*86400000|0),name:st.name,code:st.code,origin:st.origin,email:st.email,hits,total,pct,grade:calif(pct),level_perf:nv.txt,per,locks:0,printed:false,emailed:false});st.status='completed'}
+  completar(STUDENTS[0],{matematicas:[8,10],lectura:[9,10],fisica:[7,10],quimica:[8,10],biologia:[9,10]});
+  completar(STUDENTS[2],{matematicas:[5,10],lectura:[6,10],fisica:[4,10],quimica:[5,10],biologia:[6,10]});
+  save(K_STUD,STUDENTS);save(K_RES,RES)}
 
-/* ====== CONFIG ====== */
-function fillConfigForm(){document.getElementById('cfgSchool').value=CFG.school;document.getElementById('cfgSub').value=CFG.sub;document.getElementById('cfgDirector').value=CFG.director;document.getElementById('cfgDirectorTitle').value=CFG.directorTitle;document.getElementById('cfgPass').value=CFG.pass;document.getElementById('cfgEscala').value=CFG.escala;document.getElementById('cfgTime').value=CFG.timeMin;document.getElementById('cfgShuffle').value=CFG.shuffle?'1':'0';document.getElementById('logoState').textContent=CFG.logo?'cargado ✔':'predeterminado';document.getElementById('cfgInfo').value=CFG.infoGeneral||'';document.getElementById('cfgPhone').value=(CFG.contact&&CFG.contact.phone)||'';document.getElementById('cfgEmail').value=(CFG.contact&&CFG.contact.email)||'';document.getElementById('cfgAddr').value=(CFG.contact&&CFG.contact.addr)||''}
-function renderCats(){document.getElementById('catCiclos').innerHTML=CFG.ciclos.length?CFG.ciclos.map(x=>`<span class="chip-x${x===CFG.activeCiclo?' act':''}"><span class="star" onclick="setActiveCiclo('${jss(x)}')">★</span> ${esc(x)} <button onclick="delCiclo('${jss(x)}')">✕</button></span>`).join(''):'<span class="muted">Sin ciclos.</span>'}
-function addGrupo(){const v=document.getElementById('newGrupo').value.trim();if(!v)return;if(!CFG.grupos.includes(v))CFG.grupos.push(v);save(K_CFG,CFG);document.getElementById('newGrupo').value='';renderCats();fillCalFilters();toast('Grupo agregado.','ok')}
-async function delGrupo(g){if(await uiConfirm(`¿Quitar el grupo "${g}"?`,'Quitar grupo',true)){CFG.grupos=CFG.grupos.filter(x=>x!==g);save(K_CFG,CFG);renderCats();fillCalFilters()}}
-function addCiclo(){const v=document.getElementById('newCiclo').value.trim();if(!v)return;if(!CFG.ciclos.includes(v))CFG.ciclos.push(v);save(K_CFG,CFG);document.getElementById('newCiclo').value='';renderCats();fillCalFilters();toast('Periodo agregado.','ok')}
-async function delCiclo(c){if(CFG.ciclos.length<=1){toast('Debe existir al menos un periodo.','warn');return}if(await uiConfirm(`¿Quitar el periodo "${c}"?`,'Quitar periodo',true)){CFG.ciclos=CFG.ciclos.filter(x=>x!==c);if(CFG.activeCiclo===c)CFG.activeCiclo=CFG.ciclos[0];save(K_CFG,CFG);renderCats();fillCalFilters()}}
-function setActiveCiclo(c){CFG.activeCiclo=c;save(K_CFG,CFG);renderCats();toast('Periodo activo: '+c,'ok')}
-function cargarLogo(ev){const f=ev.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{CFG.logo=r.result;document.getElementById('logoState').textContent='cargado (recuerda Guardar)'};r.readAsDataURL(f)}
-function saveConfig(){CFG.school=document.getElementById('cfgSchool').value.trim()||DEFAULT_CFG.school;CFG.sub=document.getElementById('cfgSub').value.trim();CFG.director=document.getElementById('cfgDirector').value.trim()||DEFAULT_CFG.director;CFG.directorTitle=document.getElementById('cfgDirectorTitle').value.trim();CFG.pass=Math.min(100,Math.max(0,parseInt(document.getElementById('cfgPass').value)||60));CFG.escala=Math.min(100,Math.max(1,parseInt(document.getElementById('cfgEscala').value)||10));CFG.timeMin=Math.min(300,Math.max(0,parseInt(document.getElementById('cfgTime').value)||0));CFG.shuffle=document.getElementById('cfgShuffle').value==='1'?1:0;CFG.infoGeneral=document.getElementById('cfgInfo').value;CFG.contact={phone:document.getElementById('cfgPhone').value.trim(),email:document.getElementById('cfgEmail').value.trim(),addr:document.getElementById('cfgAddr').value.trim()};const cp=document.getElementById('cfgCoord').value;if(cp){CFG.coordPass=cp;const co=USERS.find(u=>u.role==='coordinator');if(co)co.pass=cp;save(K_USERS,USERS)}document.getElementById('cfgCoord').value='';save(K_CFG,CFG);applyBranding();fillConfigForm();toast('Configuración guardada.','ok')}
-function resetTodo(){const ov=document.createElement('div');ov.className='ui-ov';ov.innerHTML=`<div class="ui-modal" style="max-width:470px"><h4>♻️ Restaurar de fábrica</h4><p>Esto restaura <b>institución, categorías, banco de preguntas y guías</b> a los valores de fábrica. Evaluaciones, recorridos y profesores NO se borran. <b style="color:var(--rojo)">Esta acción no se puede deshacer.</b></p><label>Para confirmar, escribe la contraseña de Coordinación</label><input type="password" id="rtPass" autocomplete="off"><div class="acts" style="margin-top:16px"><button class="btn sec sm" id="rtCancel">Cancelar</button><button class="btn sm danger" id="rtOk" disabled>Espera… (5)</button></div></div>`;document.body.appendChild(ov);requestAnimationFrame(()=>ov.classList.add('on'));const ok=ov.querySelector('#rtOk');let left=5;const tick=setInterval(()=>{left--;if(left<=0){clearInterval(tick);ok.disabled=false;ok.textContent='Restaurar de fábrica'}else ok.textContent='Espera… ('+left+')'},1000);const close=()=>{clearInterval(tick);ov.classList.remove('on');setTimeout(()=>ov.remove(),200)};ov.querySelector('#rtCancel').onclick=close;ov.addEventListener('click',e=>{if(e.target===ov)close()});setTimeout(()=>ov.querySelector('#rtPass').focus(),60);ok.onclick=()=>{if(ok.disabled)return;const p=ov.querySelector('#rtPass').value;if(p!==(CFG.coordPass||'coord2026')){toast('Contraseña incorrecta.','err');return}close();CFG=JSON.parse(JSON.stringify(DEFAULT_CFG));BANK=buildBank();GUIDES=buildGuides();save(K_CFG,CFG);save(K_BANK,BANK);save(K_GUIDE,GUIDES);fillConfigForm();renderCats();renderSem();renderFeatToggles();fillEditLevels();fillGuideLevels();applyBranding();fillCalFilters();toast('Restaurado de fábrica.','ok')}}
-
-function downloadFile(content,name,type){const blob=new Blob([content],{type});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1500)}
-
-/* ====== CONFIG: semestres + toggles de funciones ====== */
-const FEATURE_LABELS={granularPerms:'Permisos granulares de profesores',examenes:'Exámenes parciales (constructor)',openQuestions:'Preguntas abiertas (precisión + revisión manual)'};
-function renderSem(){const el=document.getElementById('catSem');if(!el)return;el.innerHTML=(CFG.semestres||[]).length?CFG.semestres.map(x=>`<span class="chip-x">${esc(x)} <button onclick="delSem('${jss(x)}')">✕</button></span>`).join(''):'<span class="muted">Sin semestres.</span>'}
-function addSem(){const v=document.getElementById('newSem').value.trim();if(!v)return;if(!CFG.semestres)CFG.semestres=[];if(!CFG.semestres.includes(v))CFG.semestres.push(v);save(K_CFG,CFG);document.getElementById('newSem').value='';renderSem();toast('Semestre agregado.','ok')}
-async function delSem(s){if(await uiConfirm('¿Quitar el semestre "'+s+'"?','Quitar',true)){CFG.semestres=CFG.semestres.filter(x=>x!==s);save(K_CFG,CFG);renderSem()}}
-function renderFeatToggles(){const el=document.getElementById('featToggles');if(!el)return;el.innerHTML=Object.keys(FEATURE_LABELS).map(k=>`<label class="chip-x${feat(k)?' act':''}" style="cursor:pointer"><input type="checkbox" ${feat(k)?'checked':''} onchange="toggleFeature('${k}',this.checked)" style="width:auto;margin-right:6px">${FEATURE_LABELS[k]}</label>`).join('')}
-function toggleFeature(k,val){if(!CFG.features)CFG.features={};CFG.features[k]=val;save(K_CFG,CFG);renderFeatToggles();toast((val?'Función activada: ':'Función desactivada: ')+FEATURE_LABELS[k]+'. Aplica al reabrir el panel.','ok')}
-
-/* ====== EXÁMENES PARCIALES ====== */
-function stripAccents(s){return s.normalize('NFD').replace(/[̀-ͯ]/g,'')}
-function levenshtein(a,b){const m=a.length,n=b.length;if(!m)return n;if(!n)return m;const d=Array.from({length:m+1},(_,i)=>[i,...Array(n).fill(0)]);for(let j=0;j<=n;j++)d[0][j]=j;for(let i=1;i<=m;i++)for(let j=1;j<=n;j++){const c=a[i-1]===b[j-1]?0:1;d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+c)}return d[m][n]}
-// precisión 0-100: más alto = más estricto. <100 ignora mayúsculas; <85 ignora acentos; <70 ignora signos. Acepta si similitud >= precisión.
-function gradeOpen(expected,given,precision){precision=(precision==null?85:precision);const norm=s=>{let x=(''+s).trim().replace(/\s+/g,' ');if(precision<100)x=x.toLowerCase();if(precision<85)x=stripAccents(x);if(precision<70)x=x.replace(/[.,;:!¡¿?"'()\-_]/g,'');return x};const g=norm(given);const alts=(''+expected).split('|').map(a=>norm(a)).filter(a=>a.length);if(!alts.length)return false;return alts.some(e=>{if(!e&&!g)return true;const ml=Math.max(e.length,g.length)||1;return (1-levenshtein(e,g)/ml)>=precision/100})}
-function genPin(){let c;const ch='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';do{c='';for(let i=0;i<6;i++)c+=ch[Math.random()*ch.length|0]}while(EXAMS.some(e=>e.pin===c));return c}
-function examDisponible(ex){if(ex.active===false)return{ok:false,msg:'Este examen está desactivado por el profesor.'};const now=Date.now();if(ex.from&&now<new Date(ex.from).getTime())return{ok:false,msg:'Este examen aún no está disponible. Abre el '+new Date(ex.from).toLocaleString('es-MX')+'.'};if(ex.to&&now>new Date(ex.to).getTime())return{ok:false,msg:'Este examen ya venció ('+new Date(ex.to).toLocaleString('es-MX')+').'};return{ok:true}}
-function myExams(){if(isCoordLevel())return EXAMS.slice();return EXAMS.filter(e=>e.owner===currentUser.user)}
-function pendReviewCount(){const mine=myExams().map(e=>e.id);let pend=0;RES.forEach(r=>{if(r.type==='parcial'&&r.items&&(isCoordLevel()||mine.includes(r.examId)))r.items.forEach(it=>{if(it.manual&&it.correct===null)pend++})});return pend}
-function renderExamsTab(){document.getElementById('examBuilder').classList.add('hidden');document.getElementById('examListView').classList.remove('hidden');const c=document.getElementById('examList');const has=t=>!!document.querySelector('#adminTabs .tab[data-tab="'+t+'"]');const rb=document.getElementById('revBtn');if(rb){const pc=pendReviewCount();rb.textContent='✍️ Revisión manual'+(pc?' ('+pc+')':'')}const ndiag=RES.filter(r=>r.type!=='parcial').length;const diag=`<div class="tour-card" style="border-left:5px solid var(--acento)"><div class="th"><b>📋 Examen Diagnóstico de nuevo ingreso</b><span class="pill" style="background:#fff7e6;color:#7a5a12">Institucional · ya creado</span></div><div class="meta">Todas las materias (examen completo) · Acceso por <b>código único</b> del alumno · ${ndiag} respuesta(s)</div><div class="toolbar" style="justify-content:flex-start;margin:10px 0 0">${(isCoordLevel()||has('preg'))?`<button class="btn sec sm" onclick="adminTab('preg')">✎ Editar preguntas</button>`:''}${has('alum')?`<button class="btn sec sm" onclick="adminTab('alum')">👥 Alumnos y códigos</button>`:''}${has('cal')?`<button class="btn sec sm" onclick="adminTab('cal')">📊 Resultados</button>`:''}</div></div>`;const list=myExams().sort((a,b)=>b.created-a.created);const parc=list.map(e=>{const n=RES.filter(r=>r.examId===e.id).length;const av=examDisponible(e);return`<div class="tour-card"><div class="th"><b>${esc(e.title)}</b><span class="pill">PIN ${esc(e.pin)}</span></div><div class="meta">${esc(subjName(e.level,e.subject))} · ${esc(e.parcial)} · ${esc(e.semestre||'—')} · Periodo ${esc(e.ciclo)}</div><div class="meta">${e.questions.length} pregunta(s) · ${n} respuesta(s) · <b style="color:${av.ok?'var(--verde)':'var(--rojo)'}">${av.ok?'Disponible':'No disponible'}</b>${e.to?(' · vence '+new Date(e.to).toLocaleString('es-MX')):''}</div><div class="toolbar" style="justify-content:flex-start;margin:10px 0 0"><button class="btn sec sm" onclick="copyPin('${jss(e.pin)}')">📋 Copiar PIN</button><button class="btn sec sm" onclick="editExamen('${jss(e.id)}')">✎ Editar</button><button class="btn sec sm" onclick="dupExamen('${jss(e.id)}')">⧉ Duplicar</button><button class="btn sec sm" onclick="toggleExamActive('${jss(e.id)}')">${e.active===false?'▶️ Activar':'⏸️ Desactivar'}</button><button class="btn sec sm" onclick="delExamen('${jss(e.id)}')">🗑️</button></div></div>`}).join('')||'<p class="muted center" style="padding:14px">Aún no hay exámenes parciales. Crea el primero con el botón de arriba.</p>';const showDiag=isCoordLevel()||has('preg')||has('cal')||has('alum');c.innerHTML=`${showDiag?`<h3 style="margin-top:0">Diagnóstico</h3>${diag}`:''}<h3 class="${showDiag?'mt':''}" style="${showDiag?'':'margin-top:0'}">Mis exámenes parciales</h3>${parc}`}
-let bldQs=[],bldId=null;
-function fillExamSelects(){const pairs=accessiblePairs();const seen={};document.getElementById('exSubject').innerHTML=pairs.map(p=>`<option value="${p.level}|${p.subject}">${levelName(p.level)} · ${subjName(p.level,p.subject)}</option>`).join('');document.getElementById('exSem').innerHTML=(CFG.semestres||[]).map(s=>`<option>${esc(s)}</option>`).join('')||'<option>1er semestre</option>';document.getElementById('exCiclo').innerHTML=CFG.ciclos.map(c=>`<option ${c===CFG.activeCiclo?'selected':''}>${esc(c)}</option>`).join('')}
-function nuevoExamen(){bldId=null;bldQs=[];fillExamSelects();document.getElementById('exTitle').value='';document.getElementById('exDesc').value='';document.getElementById('exFrom').value='';document.getElementById('exTo').value='';document.getElementById('exTime').value='0';document.getElementById('exShuffle').value='1';document.getElementById('exShowGrade').value='0';document.getElementById('exParcial').selectedIndex=0;document.getElementById('exPin').value=genPin();document.querySelectorAll('#tabExamenes .openq-btn').forEach(b=>b.style.display=feat('openQuestions')?'':'none');renderBuilderQs();document.getElementById('examListView').classList.add('hidden');document.getElementById('examBuilder').classList.remove('hidden')}
-function editExamen(id){const e=EXAMS.find(x=>x.id===id);if(!e)return;bldId=id;bldQs=JSON.parse(JSON.stringify(e.questions));fillExamSelects();document.getElementById('exTitle').value=e.title;document.getElementById('exSubject').value=e.level+'|'+e.subject;document.getElementById('exParcial').value=e.parcial;document.getElementById('exSem').value=e.semestre||'';document.getElementById('exCiclo').value=e.ciclo;document.getElementById('exFrom').value=e.from||'';document.getElementById('exTo').value=e.to||'';document.getElementById('exTime').value=e.timeMin||0;document.getElementById('exShuffle').value=e.shuffle?'1':'0';document.getElementById('exShowGrade').value=e.showGrade?'1':'0';document.getElementById('exPin').value=e.pin;document.querySelectorAll('#tabExamenes .openq-btn').forEach(b=>b.style.display=feat('openQuestions')?'':'none');renderBuilderQs();document.getElementById('examListView').classList.add('hidden');document.getElementById('examBuilder').classList.remove('hidden')}
-function cerrarBuilder(){renderExamsTab()}
-function addExQ(type){if((type==='short'||type==='para')&&!feat('openQuestions')){toast('Las preguntas abiertas están desactivadas en Configuración.','warn');return}const base={type,q:'',required:true,points:1};if(type==='mc')Object.assign(base,{opts:['','','',''],correct:0});else if(type==='check')Object.assign(base,{opts:['','','',''],correct:[]});else if(type==='tf')Object.assign(base,{opts:['Verdadero','Falso'],correct:0});else Object.assign(base,{answer:'',precision:85,manual:false});bldQs.push(base);renderBuilderQs();const el=document.getElementById('exQuestions');if(el.lastElementChild)el.lastElementChild.scrollIntoView({behavior:'smooth',block:'center'})}
-const QTYPE_NAMES={mc:'Opción múltiple',check:'Casillas (varias)',tf:'Verdadero/Falso',short:'Respuesta corta',para:'Párrafo'};
-function renderBuilderQs(){const c=document.getElementById('exQuestions');if(!bldQs.length){c.innerHTML='<p class="muted">Agrega preguntas con los botones de abajo.</p>';return}c.innerHTML=bldQs.map((q,i)=>{const typeOpts=Object.keys(QTYPE_NAMES).filter(t=>(t!=='short'&&t!=='para')||feat('openQuestions')).map(t=>'<option value="'+t+'"'+(q.type===t?' selected':'')+'>'+QTYPE_NAMES[t]+'</option>').join('');let body='';if(q.type==='mc'||q.type==='check'){body='<div class="opts4">'+q.opts.map((o,oi)=>{const sel=q.type==='mc'?(q.correct===oi):(Array.isArray(q.correct)&&q.correct.includes(oi));return`<div class="optline"><input type="${q.type==='mc'?'radio':'checkbox'}" name="exc_${i}" ${sel?'checked':''} onchange="exSetCorrect(${i},${oi},this.checked)"><input type="text" value="${esc(o)}" placeholder="Opción ${oi+1}" oninput="exSetOpt(${i},${oi},this.value)"></div>`}).join('')+'</div><button class="btn sec sm" onclick="exAddOpt('+i+')">＋ opción</button>';}else if(q.type==='tf'){body='<div class="opts4">'+['Verdadero','Falso'].map((o,oi)=>`<div class="optline"><input type="radio" name="exc_${i}" ${q.correct===oi?'checked':''} onchange="exSetCorrect(${i},${oi},true)"><span>${o}</span></div>`).join('')+'</div>';}else{body=`<div class="row"><div style="flex:2"><label>Respuesta(s) correcta(s) — separa alternativas con |</label><input type="text" value="${esc(q.answer||'')}" oninput="exSetAns(${i},this.value)" placeholder="Ej. París | Paris"></div></div><div class="row" style="align-items:center"><div><label>Precisión: <b id="exPrecV_${i}">${q.precision}</b>%</label><input type="range" min="0" max="100" value="${q.precision}" oninput="exSetPrec(${i},this.value)" ${q.manual?'disabled':''} style="width:100%"></div><div><label style="display:flex;align-items:center;gap:6px;text-transform:none"><input type="checkbox" style="width:auto" ${q.manual?'checked':''} onchange="exSetManual(${i},this.checked)"> Revisar manualmente</label><small class="muted">${q.manual?'No se autocalifica; tú la revisas.':'100=exacta · &lt;100 ignora mayúsculas · &lt;85 acentos · &lt;70 signos.'}</small></div></div>`;}return`<div class="qedit"><div class="qtop"><div style="display:flex;align-items:center;gap:8px"><b>${i+1}.</b><select onchange="exChangeType(${i},this.value)" style="width:auto;display:inline-block;padding:7px 10px;font-weight:600">${typeOpts}</select></div><div><label style="display:inline-flex;align-items:center;gap:5px;text-transform:none;font-weight:500;margin-right:10px"><input type="checkbox" style="width:auto" ${q.required?'checked':''} onchange="exSetReq(${i},this.checked)"> Obligatoria</label><input type="number" min="0" max="100" value="${q.points}" oninput="exSetPts(${i},this.value)" title="Puntos" style="width:64px;display:inline-block"> pts <button class="btn sec sm" onclick="exDelQ(${i})">🗑️</button></div></div><textarea rows="2" placeholder="Escribe la pregunta…" oninput="exSetQ(${i},this.value)">${esc(q.q)}</textarea>${body}</div>`}).join('')}
-function exSetQ(i,v){bldQs[i].q=v}
-function exSetOpt(i,o,v){bldQs[i].opts[o]=v}
-function exSetCorrect(i,o,checked){const q=bldQs[i];if(q.type==='check'){if(!Array.isArray(q.correct))q.correct=[];if(checked){if(!q.correct.includes(o))q.correct.push(o)}else q.correct=q.correct.filter(x=>x!==o)}else q.correct=o}
-function exAddOpt(i){bldQs[i].opts.push('');renderBuilderQs()}
-function exSetAns(i,v){bldQs[i].answer=v}
-function exSetPrec(i,v){bldQs[i].precision=parseInt(v)||0;const el=document.getElementById('exPrecV_'+i);if(el)el.textContent=bldQs[i].precision}
-function exSetManual(i,v){bldQs[i].manual=v;renderBuilderQs()}
-function exSetReq(i,v){bldQs[i].required=v}
-function exSetPts(i,v){bldQs[i].points=Math.max(0,parseInt(v)||0)}
-function exDelQ(i){bldQs.splice(i,1);renderBuilderQs()}
-function exChangeType(i,type){if((type==='short'||type==='para')&&!feat('openQuestions')){toast('Las preguntas abiertas están desactivadas en Configuración.','warn');renderBuilderQs();return}const q=bldQs[i];const nu={type,q:q.q,required:q.required,points:q.points};if(type==='mc')Object.assign(nu,{opts:(q.opts&&q.opts.length>=2?q.opts.slice():['','','','']),correct:0});else if(type==='check')Object.assign(nu,{opts:(q.opts&&q.opts.length>=2?q.opts.slice():['','','','']),correct:[]});else if(type==='tf')Object.assign(nu,{opts:['Verdadero','Falso'],correct:0});else Object.assign(nu,{answer:q.answer||'',precision:q.precision!=null?q.precision:85,manual:!!q.manual});bldQs[i]=nu;renderBuilderQs()}
-function guardarExamen(){const title=document.getElementById('exTitle').value.trim();if(!title){toast('Ponle un título al examen.','warn');return}if(!bldQs.length){toast('Agrega al menos una pregunta.','warn');return}for(const q of bldQs){if(!(''+q.q).trim()){toast('Hay una pregunta sin texto.','warn');return}}const[level,subject]=document.getElementById('exSubject').value.split('|');const from=document.getElementById('exFrom').value,to=document.getElementById('exTo').value;if(from&&to&&new Date(to).getTime()<new Date(from).getTime()){toast('La fecha de cierre es anterior a la de apertura.','warn');return}const ex={id:bldId||('EX'+Date.now().toString(36).toUpperCase()),pin:document.getElementById('exPin').value,title,level,subject,owner:(bldId?(EXAMS.find(e=>e.id===bldId)||{}).owner:currentUser.user)||currentUser.user,group:'',parcial:document.getElementById('exParcial').value,semestre:document.getElementById('exSem').value,ciclo:document.getElementById('exCiclo').value,from,to,timeMin:Math.max(0,parseInt(document.getElementById('exTime').value)||0),shuffle:document.getElementById('exShuffle').value==='1'?1:0,showGrade:document.getElementById('exShowGrade').value==='1'?1:0,desc:document.getElementById('exDesc').value.trim(),questions:JSON.parse(JSON.stringify(bldQs)),active:true,created:(bldId?(EXAMS.find(e=>e.id===bldId)||{}).created:Date.now())||Date.now()};if(bldId){const idx=EXAMS.findIndex(e=>e.id===bldId);EXAMS[idx]=ex}else EXAMS.push(ex);save(K_EXAMS,EXAMS);toast('Examen guardado. PIN: '+ex.pin,'ok');renderExamsTab()}
-function copyPin(p){try{navigator.clipboard.writeText(p)}catch(e){}toast('PIN copiado: '+p,'ok')}
-async function delExamen(id){if(await uiConfirm('¿Borrar este examen? (No borra las respuestas ya entregadas.)','Borrar examen',true)){EXAMS=EXAMS.filter(e=>e.id!==id);save(K_EXAMS,EXAMS);renderExamsTab()}}
-function dupExamen(id){const e=EXAMS.find(x=>x.id===id);if(!e)return;const c=JSON.parse(JSON.stringify(e));c.id='EX'+Date.now().toString(36).toUpperCase();c.pin=genPin();c.title=e.title+' (copia)';c.created=Date.now();c.owner=currentUser.user;EXAMS.push(c);save(K_EXAMS,EXAMS);renderExamsTab();toast('Examen duplicado. Nuevo PIN: '+c.pin,'ok')}
-function toggleExamActive(id){const e=EXAMS.find(x=>x.id===id);if(!e)return;e.active=e.active===false;save(K_EXAMS,EXAMS);renderExamsTab()}
-
-/* ====== ALUMNO: presentar examen parcial ====== */
-let pexam=null;
-function startExamPrompt(ex){const ov=document.createElement('div');ov.className='ui-ov';ov.innerHTML=`<div class="ui-modal" style="max-width:460px"><h4>${esc(ex.title)}</h4><p>${esc(subjName(ex.level,ex.subject))} · ${esc(ex.parcial)} · ${esc(ex.group)}${ex.desc?('<br><br>'+esc(ex.desc)):''}</p><label>Tu nombre completo</label><input type="text" id="exStName" autocomplete="off"><div class="acts" style="margin-top:16px"><button class="btn sec sm" id="exStCancel">Cancelar</button><button class="btn sm" id="exStOk">Comenzar →</button></div></div>`;document.body.appendChild(ov);requestAnimationFrame(()=>ov.classList.add('on'));const close=()=>{ov.classList.remove('on');setTimeout(()=>ov.remove(),200)};ov.querySelector('#exStCancel').onclick=close;ov.addEventListener('click',e=>{if(e.target===ov)close()});setTimeout(()=>ov.querySelector('#exStName').focus(),60);ov.querySelector('#exStOk').onclick=()=>{const name=ov.querySelector('#exStName').value.trim();if(!name){toast('Escribe tu nombre.','warn');return}close();launchParcial(ex,name,'')}}
-function launchParcial(ex,name,group){let items=ex.questions.map((q,i)=>({...JSON.parse(JSON.stringify(q)),_i:i,ans:(q.type==='check'?[]:(q.type==='short'||q.type==='para'?'':null))}));if(ex.shuffle)items=shuffle(items);pexam={ex,items,idx:0,name,group};window.__lastEx=-1;show('vExam');renderExamQ();exStartTimer()}
-function renderExamQ(){const it=pexam.items[pexam.idx],n=pexam.items.length;document.getElementById('exQSubject').textContent=subjName(pexam.ex.level,pexam.ex.subject);document.getElementById('exQCounter').textContent=(pexam.idx+1)+' / '+n;document.getElementById('exQBar').style.width=(pexam.idx/n*100)+'%';document.getElementById('exQText').textContent=(it.required?'':'(opcional) ')+it.q;const c=document.getElementById('exQBody');c.innerHTML='';if(it.type==='mc'||it.type==='tf'){const K=['A','B','C','D','E','F'];it.opts.forEach((o,i)=>{const b=document.createElement('button');b.className='opt'+(it.ans===i?' sel':'');b.innerHTML=`<span class="key">${it.type==='tf'?(i?'F':'V'):K[i]}</span><span>${esc(o)}</span>`;b.onclick=()=>{it.ans=i;renderExamQ()};c.appendChild(b)})}else if(it.type==='check'){it.opts.forEach((o,i)=>{const on=Array.isArray(it.ans)&&it.ans.includes(i);const b=document.createElement('button');b.className='opt'+(on?' sel':'');b.innerHTML=`<span class="key">${on?'✓':''}</span><span>${esc(o)}</span>`;b.onclick=()=>{if(!Array.isArray(it.ans))it.ans=[];if(it.ans.includes(i))it.ans=it.ans.filter(x=>x!==i);else it.ans.push(i);renderExamQ()};c.appendChild(b)})}else{const ta=document.createElement('textarea');ta.rows=it.type==='para'?5:2;ta.value=it.ans||'';ta.placeholder='Escribe tu respuesta…';ta.oninput=()=>{it.ans=ta.value};c.appendChild(ta)}document.getElementById('exQPrev').style.visibility=pexam.idx===0?'hidden':'visible';document.getElementById('exQNext').textContent=pexam.idx===n-1?'Terminar ✓':'Siguiente →';if(window.anime&&window.__lastEx!==pexam.idx){window.__lastEx=pexam.idx;anime({targets:'#exQText,#exQBody',opacity:[0,1],translateX:[14,0],easing:'easeOutQuad',duration:320})}}
-function exAnswered(it){return it.type==='check'?(Array.isArray(it.ans)&&it.ans.length>0):(it.type==='short'||it.type==='para'?(''+it.ans).trim().length>0:it.ans!==null)}
-async function exNext(){const it=pexam.items[pexam.idx];if(it.required&&!exAnswered(it)){if(!await uiConfirm('Esta pregunta es obligatoria y no la has respondido. ¿Continuar de todos modos?','Sin responder'))return}if(pexam.idx<pexam.items.length-1){pexam.idx++;renderExamQ()}else finishExam()}
-function exPrev(){if(pexam.idx>0){pexam.idx--;renderExamQ()}}
-async function exAbort(){if(await uiConfirm('¿Salir del examen? No se guardará nada.','Salir'))goHub()}
-let _exT=null,_exLeft=0;
-function exStartTimer(){exStopTimer();const el=document.getElementById('exQTimer');const tm=pexam.ex.timeMin;if(!tm||tm<=0){el.style.display='none';return}_exLeft=tm*60;el.style.display='';el.textContent='⏱️ '+fmtT(_exLeft);_exT=setInterval(()=>{_exLeft--;el.textContent='⏱️ '+fmtT(Math.max(0,_exLeft));if(_exLeft<=0){exStopTimer();toast('Se acabó el tiempo.','warn');finishExam()}},1000)}
-function exStopTimer(){if(_exT){clearInterval(_exT);_exT=null}const el=document.getElementById('exQTimer');if(el)el.style.display='none'}
-function finishExam(){exStopTimer();const ex=pexam.ex;let earned=0,totalPts=0,pending=0;const recItems=pexam.items.slice().sort((a,b)=>a._i-b._i).map(it=>{const pts=it.points||0;totalPts+=pts;let correct=null,earn=0,manual=false,given=it.ans;if(it.type==='mc'||it.type==='tf'){correct=(it.ans===it.correct);earn=correct?pts:0}else if(it.type==='check'){const a=(Array.isArray(it.ans)?it.ans:[]).slice().sort(),b=(Array.isArray(it.correct)?it.correct:[]).slice().sort();correct=a.length===b.length&&a.every((x,k)=>x===b[k]);earn=correct?pts:0}else{if(it.manual){manual=true;correct=null;earn=0;pending++}else{correct=gradeOpen(it.answer,it.ans||'',it.precision);earn=correct?pts:0}}earned+=earn;return{type:it.type,q:it.q,points:pts,earned:earn,correct,manual,given,expected:(it.type==='short'||it.type==='para')?it.answer:(it.opts?it.opts.filter((o,oi)=>it.type==='check'?(it.correct||[]).includes(oi):it.correct===oi).join(' / '):'')}});const pct=totalPts?Math.round(earned/totalPts*100):0;const nv=nivel(pct);const rec={id:'P'+Date.now().toString(36).toUpperCase(),folio:'P'+new Date().toISOString().slice(2,10).replace(/-/g,'')+'-'+Math.random().toString(36).slice(2,7).toUpperCase(),date:new Date().toLocaleString('es-MX'),ts:Date.now(),name:pexam.name,group:pexam.group,ciclo:ex.ciclo,level:ex.level,sEmail:'',tEmail:'',mode:'parcial',type:'parcial',examId:ex.id,examTitle:ex.title,parcial:ex.parcial,semestre:ex.semestre,subject:subjName(ex.level,ex.subject),subjectId:ex.subject,items:recItems,hits:earned,total:totalPts,pct,grade:pct,level_perf:nv.txt,pendingCount:pending,interruptions:(pexam._locks||[]),printed:false,emailed:false};RES.push(rec);save(K_RES,RES);show('vThanks');const tw=document.querySelector('#vThanks p');if(tw){if(pending>0)tw.innerHTML='Tu examen se envió. Algunas respuestas las revisará tu profesor.<br>Ya puedes cerrar esta ventana.';else if(ex.showGrade)tw.innerHTML='Tu calificación: <b>'+pct+'%</b> ('+earned+'/'+totalPts+' puntos).<br>Ya puedes cerrar esta ventana.';else tw.innerHTML='Gracias por presentar tu examen.<br>Ya puedes cerrar esta ventana.'}if(window.anime){anime({targets:'#thanksIco',scale:[0,1],easing:'easeOutElastic(1,.6)',duration:900})}}
-
-/* ====== REVISIÓN MANUAL ====== */
-function renderRevision(){const mine=myExams().map(e=>e.id);const pend=[];RES.forEach(r=>{if(r.type!=='parcial'||!r.items)return;if(!isCoordLevel()&&!mine.includes(r.examId))return;r.items.forEach((it,qi)=>{if(it.manual&&it.correct===null)pend.push({r,it,qi})})});const c=document.getElementById('revList');if(!pend.length){c.innerHTML='<p class="muted center" style="padding:24px">No hay respuestas pendientes de revisión. 🎉</p>';return}c.innerHTML=pend.map(({r,it,qi})=>`<div class="qedit"><div class="meta"><b>${esc(r.examTitle||'Examen')}</b> · ${esc(r.name)} · ${esc(r.group)}</div><div class="qtext" style="font-size:16px;margin:8px 0">${esc(it.q)}</div><div class="meta">Respuesta del alumno:</div><div class="card" style="margin:6px 0;padding:12px;background:#fbfcff">${esc(it.given||'(en blanco)')}</div>${it.expected?`<div class="meta">Esperada: <b>${esc(it.expected)}</b></div>`:''}<div class="toolbar" style="justify-content:flex-start;margin-top:8px;align-items:center"><span class="muted">Vale ${it.points} pts:</span><button class="btn sm" onclick="reviewAns('${jss(r.id)}',${qi},${it.points})">✓ Correcta (${it.points})</button><button class="btn sec sm" onclick="reviewAns('${jss(r.id)}',${qi},0)">✕ Incorrecta (0)</button><input type="number" min="0" max="${it.points}" value="${it.points}" id="rev_${r.id}_${qi}" style="width:70px"><button class="btn sec sm" onclick="reviewAnsPartial('${jss(r.id)}',${qi})">Puntos parciales</button></div></div>`).join('')}
-function reviewAns(resId,qi,earn){const r=RES.find(x=>x.id===resId);if(!r)return;const it=r.items[qi];it.correct=earn>0;it.earned=earn;recalcRec(r);save(K_RES,RES);renderRevision();renderCalif();toast('Respuesta calificada.','ok')}
-function reviewAnsPartial(resId,qi){const el=document.getElementById('rev_'+resId+'_'+qi);const r=RES.find(x=>x.id===resId);if(!r)return;const it=r.items[qi];const max=it.points||0;let v=Math.max(0,Math.min(max,parseInt(el.value)||0));it.correct=v>0;it.earned=v;recalcRec(r);save(K_RES,RES);renderRevision();renderCalif();toast('Puntos asignados: '+v,'ok')}
-function recalcRec(r){let earned=0,total=0,pend=0;r.items.forEach(it=>{total+=it.points||0;if(it.manual&&it.correct===null)pend++;else earned+=(it.earned||0)});r.hits=earned;r.total=total;r.pct=total?Math.round(earned/total*100):0;r.grade=r.pct;r.level_perf=nivel(r.pct).txt;r.pendingCount=pend}
-
-/* ====== DEBUG (solo rol debug) ====== */
-function renderDebug(){if(!isDebug())return;const testStud=STUDENTS.filter(s=>s._test).length,testRes=RES.filter(r=>r._test).length;let kb=0;try{['ev_cfg','ev_bank','ev_guide','ev_res','ev_tour','ev_users','ev_students'].forEach(k=>{const v=localStorage.getItem(k);if(v)kb+=v.length});}catch(e){}document.getElementById('dbgStats').innerHTML=`<div class="stat"><b>${STUDENTS.length}</b><small>Alumnos (${testStud} 🧪)</small></div><div class="stat"><b>${RES.length}</b><small>Resultados (${testRes} 🧪)</small></div><div class="stat"><b>${TOURS.length}</b><small>Recorridos</small></div><div class="stat"><b>${(kb/1024).toFixed(0)} KB</b><small>Almacenamiento</small></div>`}
-function dbgGenerate(){if(!isDebug())return;const n=Math.min(2000,Math.max(1,parseInt(document.getElementById('dbgN').value)||20));let done=Math.min(n,Math.max(0,parseInt(document.getElementById('dbgDone').value)||0));const nombres=['Ana','Luis','María','Diego','Sofía','Carlos','Valeria','Jorge','Camila','Iván','Paola','Hugo','Renata','Mateo','Daniela','Emiliano','Regina','Andrés','Frida','Pablo'];const ape=['García','López','Hernández','Martínez','Pérez','Sánchez','Ramírez','Cruz','Flores','Gómez','Díaz','Reyes','Torres','Vázquez'];for(let i=0;i<n;i++){const name=nombres[Math.random()*nombres.length|0]+' '+ape[Math.random()*ape.length|0]+' '+ape[Math.random()*ape.length|0];const st={code:genCode(),name,group:'',level:'secundaria',mode:'all',origin:'Escuela de prueba',originGroup:'6.A',tEmail:'prueba'+i+'@test.local',sEmail:'',status:'pending',resultId:null,ciclo:CFG.activeCiclo,_test:true};STUDENTS.push(st);if(done>0){const hits=5+(Math.random()*16|0),pct=Math.round(hits/20*100),nv=nivel(pct);const rec={id:'F'+Date.now().toString(36)+i,folio:'FTEST-'+st.code,date:new Date().toLocaleString('es-MX'),ts:Date.now()-(Math.random()*86400000|0),name,group:'',ciclo:st.ciclo,level:'secundaria',sEmail:'',tEmail:st.tEmail,mode:'__all__',subject:'Examen completo',hits,total:20,pct,grade:pct,level_perf:nv.txt,per:demoPer('secundaria'),printed:false,emailed:false,_test:true};RES.push(rec);st.status='completed';st.resultId=rec.id;done--}}save(K_STUD,STUDENTS);save(K_RES,RES);renderDebug();fillCalFilters();renderCalif();rosterPage=1;renderRoster();toast('Generados '+n+' alumnos de prueba.','ok')}
-async function dbgClearTest(){if(!isDebug())return;const ns=STUDENTS.filter(s=>s._test).length,nr=RES.filter(r=>r._test).length;if(!ns&&!nr){toast('No hay datos de prueba.','warn');return}if(await uiConfirm(`Se borrarán ${ns} alumno(s) y ${nr} resultado(s) marcados como prueba. Los datos reales NO se tocan. ¿Continuar?`,'Borrar datos de prueba',true)){STUDENTS=STUDENTS.filter(s=>!s._test);RES=RES.filter(r=>!r._test);save(K_STUD,STUDENTS);save(K_RES,RES);renderDebug();fillCalFilters();renderCalif();rosterPage=1;renderRoster();toast('Datos de prueba eliminados.','ok')}}
-function dbgBackup(){if(!isDebug())return;const dump={_app:'evaluaciones-rembrandt',_date:new Date().toISOString(),ev_cfg:CFG,ev_bank:BANK,ev_guide:GUIDES,ev_res:RES,ev_tour:TOURS,ev_users:USERS,ev_students:STUDENTS};downloadFile(JSON.stringify(dump,null,2),'respaldo_evaluaciones_'+new Date().toISOString().slice(0,10)+'.json','application/json')}
-function dbgRestore(ev){if(!isDebug())return;const f=ev.target.files[0];if(!f)return;const r=new FileReader();r.onload=async()=>{try{const d=JSON.parse(r.result);if(!d||!d.ev_students&&!d.ev_res&&!d.ev_cfg)throw new Error('no parece un respaldo válido');if(!await uiConfirm('Esto REEMPLAZA todos los datos actuales (alumnos, resultados, preguntas, guías, usuarios y configuración) con los del respaldo. ¿Continuar?','Restaurar respaldo',true)){ev.target.value='';return}if(d.ev_cfg){CFG=d.ev_cfg;save(K_CFG,CFG)}if(d.ev_bank){BANK=d.ev_bank;save(K_BANK,BANK)}if(d.ev_guide){GUIDES=d.ev_guide;save(K_GUIDE,GUIDES)}if(d.ev_res){RES=d.ev_res;save(K_RES,RES)}if(d.ev_tour){TOURS=d.ev_tour;save(K_TOUR,TOURS)}if(d.ev_users){USERS=d.ev_users;save(K_USERS,USERS)}if(d.ev_students){STUDENTS=d.ev_students;save(K_STUD,STUDENTS)}applyBranding();renderDebug();fillCalFilters();renderCalif();rosterPage=1;renderRoster();uiAlert('Respaldo restaurado correctamente.','✅ Listo')}catch(e){uiAlert('No se pudo restaurar: '+e.message,'Error')}};r.readAsText(f);ev.target.value=''}
-async function dbgWipeAll(){if(!isDebug())return;if(await uiConfirm('Se borrarán TODOS los alumnos y resultados (reales y de prueba). Preguntas, guías, usuarios y configuración se conservan. Útil para entregar la página limpia antes de producción. ¿Continuar?','Vaciar para producción',true)){STUDENTS=[];RES=[];save(K_STUD,STUDENTS);save(K_RES,RES);renderDebug();fillCalFilters();renderCalif();rosterPage=1;renderRoster();toast('Alumnos y resultados vaciados. Página lista para producción.','ok')}}
-
-function splashFallback(img){img.parentNode.innerHTML='<div class="sp-letter">'+((CFG.school||'R').trim().charAt(0).toUpperCase())+'</div>'}
-function playSplash(){const sp=document.getElementById('splash');if(!sp)return;const lg=document.getElementById('spLogo');if(CFG.logo){lg.innerHTML='<img src="'+CFG.logo+'" alt="logo" onerror="splashFallback(this)">'}else{lg.innerHTML='<div class="sp-letter">'+((CFG.school||'R').trim().charAt(0).toUpperCase())+'</div>'}const reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;if(!window.anime||reduce){setTimeout(()=>{sp.style.transition='opacity .4s';sp.style.opacity='0';setTimeout(()=>sp.remove(),420)},800);return}
-  anime.timeline({easing:'easeOutQuad'})
-   .add({targets:'.sp-lines i',translateX:['-160%','0%'],delay:anime.stagger(80),duration:650})
-   .add({targets:'#spLogo',scale:[0.5,1],opacity:[0,1],duration:600,easing:'easeOutBack'},'-=350')
-   .add({targets:'#spLogo',translateX:-Math.round(window.innerWidth*0.62),rotate:'-4deg',duration:720,easing:'easeInCubic'},'+=420')
-   .add({targets:'.sp-lines i',translateX:'160%',delay:anime.stagger(55),duration:600,easing:'easeInQuad'},'-=680')
-   .add({targets:'#splash',opacity:0,duration:450,complete:()=>sp.remove()},'-=180')}
-function setupTabWheel(){const el=document.getElementById('adminTabs');if(!el)return;el.addEventListener('wheel',e=>{if(Math.abs(e.deltaY)>Math.abs(e.deltaX)){el.scrollLeft+=e.deltaY;e.preventDefault()}},{passive:false})}
-
-/* ====== ANTI-TRAMPA: bloqueo al cambiar de ventana/pestaña durante el examen ====== */
-let examLockState=null;
-function examTakingCtx(){if(pexam&&!document.getElementById('vExam').classList.contains('hidden'))return 'exam';if(quiz&&!document.getElementById('vQuiz').classList.contains('hidden'))return 'quiz';return null}
-function maybeLockExam(){if(examLockState)return;const ctx=examTakingCtx();if(ctx)lockExam(ctx)}
-function lockExam(ctx){if(examLockState)return;examLockState={ctx};if(ctx==='exam')exStopTimer();else stopTimer();const ov=document.createElement('div');ov.className='lock-ov';ov.id='examLock';ov.innerHTML=`<div class="lock-card"><div class="lk-ico">🔒</div><h2>Examen bloqueado</h2><p class="muted">Saliste de la ventana o cambiaste de pestaña durante el examen. Por seguridad, el examen quedó bloqueado.</p><p>Llama a tu profesor(a). Solo el personal puede liberarlo con su <b>código</b> y una <b>justificación</b>.</p><div style="margin-top:14px"><label>Código del profesor</label><input type="password" id="lkCode" autocomplete="off" onkeydown="if(event.key==='Enter')document.getElementById('lkJust').focus()"></div><div class="mt"><label>Justificación</label><textarea id="lkJust" rows="2" placeholder="Motivo de la liberación…"></textarea></div><div class="mt"><button class="btn" onclick="releaseExam()">Liberar examen</button></div></div>`;document.body.appendChild(ov);requestAnimationFrame(()=>{const c=document.getElementById('lkCode');if(c)c.focus()})}
-function isStaffPass(code){if(!code)return false;if(code===(CFG.coordPass||'coord2026'))return true;return USERS.some(u=>u.pass===code)}
-function releaseExam(){if(!examLockState)return;const code=document.getElementById('lkCode').value;const just=(document.getElementById('lkJust').value||'').trim();if(!isStaffPass(code)){toast('Código incorrecto.','err');return}if(!just){toast('Escribe una justificación.','warn');document.getElementById('lkJust').focus();return}const ctx=examLockState.ctx;const tgt=ctx==='exam'?pexam:quiz;if(tgt){tgt._locks=tgt._locks||[];tgt._locks.push({ts:Date.now(),justification:just})}const ov=document.getElementById('examLock');if(ov)ov.remove();examLockState=null;if(ctx==='exam')exResumeTimer();else resumeTimer();toast('Examen liberado. Puedes continuar.','ok')}
-function resumeTimer(){if(!CFG.timeMin||CFG.timeMin<=0||_tLeft<=0)return;const el=document.getElementById('qTimer');el.style.display='';el.textContent='⏱️ '+fmtT(_tLeft);_tInt=setInterval(()=>{_tLeft--;el.textContent='⏱️ '+fmtT(Math.max(0,_tLeft));if(_tLeft<=0){stopTimer();toast('Se acabó el tiempo.','warn');finishQuiz()}},1000)}
-function exResumeTimer(){if(!pexam||!pexam.ex.timeMin||pexam.ex.timeMin<=0||_exLeft<=0)return;const el=document.getElementById('exQTimer');el.style.display='';el.textContent='⏱️ '+fmtT(_exLeft);_exT=setInterval(()=>{_exLeft--;el.textContent='⏱️ '+fmtT(Math.max(0,_exLeft));if(_exLeft<=0){exStopTimer();toast('Se acabó el tiempo.','warn');finishExam()}},1000)}
-function setupExamGuard(){document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')maybeLockExam()});window.addEventListener('blur',()=>{setTimeout(()=>{if(!document.hasFocus())maybeLockExam()},0)})}
-goHub();playSplash();restoreSession();setupTabWheel();setupExamGuard();
+/* ====== ARRANQUE ====== */
+window.addEventListener('DOMContentLoaded',()=>{
+  applyBranding();
+  goHub();
+  const sp=document.getElementById('splash');
+  if(window.anime){anime.timeline().add({targets:'#splash .sp-lines i',translateY:['-30%','0%'],opacity:[0,.9],delay:anime.stagger(60),easing:'easeOutQuad',duration:520}).add({targets:'#spLogo',scale:[.6,1],opacity:[0,1],easing:'easeOutElastic(1,.7)',duration:900},'-=200').add({targets:'#splash',opacity:0,easing:'easeInQuad',duration:450,delay:520,complete:()=>sp.style.display='none'})}
+  else{setTimeout(()=>sp.style.display='none',600)}
+});
+document.addEventListener('keydown',e=>{if(e.key==='Enter'&&!document.getElementById('vCode').classList.contains('hidden'))validateCode()});
 </script>
 </body>
 </html>

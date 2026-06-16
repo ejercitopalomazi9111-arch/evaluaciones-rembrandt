@@ -4,23 +4,25 @@ Sistema para aplicar **exámenes diagnósticos de nuevo ingreso** (opción múlt
 
 Este repo contiene **dos partes**:
 
-## 1. `offline-demo/` — Demo funcional (sin instalar nada)
-Un solo archivo `index.html` que corre en el navegador, **sin servidor, sin cuenta, sin pagos**. Sirve para presentar el sistema a la dirección y validar el flujo completo. Guarda datos en `localStorage`.
+## 1. `offline-demo/` — Examen de Admisión a Bachillerato (sin instalar nada)
+Un solo archivo `index.html` que corre en el navegador, **sin servidor, sin cuenta, sin pagos**. Hace **exactamente dos cosas**: que el aspirante presente su examen de admisión y que la Coordinación lo revise. Guarda datos en `localStorage`.
 
 **Cómo abrirlo:** doble clic en `offline-demo/index.html`.
 
-**Incluye:**
-- Hub de bienvenida + animación de apertura (logo + líneas Rembrandt).
-- Alumno entra con **código único de un solo uso** (no se repite el examen).
-- Niveles educativos (Preescolar → Preparatoria); banco de preguntas por nivel·materia (con imágenes, importar/exportar).
-- **Login del personal**: Coordinación (acceso total) y profesores (solo sus materias/grados, que asigna Coordinación).
-- Panel: Calificaciones (estadísticas, filtros, constancia imprimible/PDF, envío por correo, tracking impreso/enviado), Preguntas, Guías de estudio (con archivos), Alumnos (roster + códigos), Profesores, Recorridos, Configuración.
-- Guías de estudio, Información general y Agendar recorrido para aspirantes.
-- Paleta Rembrandt, iconos SVG, micro-interacciones (anime.js), scroll-reveal.
+**Flujo del aspirante:**
+1. Coordinación le entrega un **código de un solo uso**.
+2. Entra en "Presentar mi examen", escribe el código y contesta el **examen de admisión completo** (5 materias: Matemáticas, Lectura y Redacción, Física, Química y Biología) con **preguntas reales de nivel ingreso a bachillerato**.
+3. Al terminar ve una pantalla de agradecimiento. El código deja de funcionar (no se repite el examen).
 
-**Accesos demo:** Coordinación `coordinacion / coord2026` · Profesor `profe / profe123`.
+**Panel de Coordinación** (`coordinacion / coord2026`):
+- **Resultados**: estadísticas (presentados, promedio, % suficientes, códigos sin usar), filtros, **constancia imprimible/PDF** por aspirante, envío por correo y **reporte general** (incluye promedio de aciertos por materia). Marca si un aspirante salió de la ventana durante el examen.
+- **Aspirantes y códigos**: registra aspirantes (manual o importando Excel/CSV), genera y copia sus códigos, exporta la lista.
+- **Banco de preguntas**: edita, agrega o elimina preguntas por materia, marca la respuesta correcta, importa/exporta en JSON.
+- **Configuración**: nombre/logo del instituto, calificación mínima, escala, tiempo límite, barajar, **bloqueo anti-trampa** al cambiar de ventana, firmante de la constancia, contacto y contraseña de acceso. Incluye "borrar datos" para iniciar un nuevo periodo.
 
-> Para que el logo real salga en la animación: coloca el escudo como `offline-demo/logo.png`, o súbelo en Coordinación → Configuración → Logo.
+Paleta Rembrandt, iconos SVG, micro-interacciones (anime.js), accesibilidad (foco visible, contraste AA).
+
+> Para que el logo real salga en la animación de apertura: súbelo en Coordinación → Configuración → Subir logo.
 
 ## 2. Raíz — App web real (Next.js + Supabase)
 La versión multiusuario en línea (varios profesores a la vez, tiempo real, datos seguros). Reusa el diseño del demo.
