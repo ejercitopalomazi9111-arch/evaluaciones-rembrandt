@@ -33,7 +33,7 @@ export function ValoresTriada() {
                 <Reveal delay={i * 80}>
                   <div className="py-8 sm:py-10">
                     <div className="flex items-baseline gap-4">
-                      <span className="tabular font-mono text-xs font-bold text-rojo">
+                      <span className="tabular font-mono text-xs font-bold text-rojo-texto">
                         {String(i + 1).padStart(2, '0')}
                       </span>
                       <h3 className="text-3xl uppercase" style={{ fontStretch: '118%' }}>

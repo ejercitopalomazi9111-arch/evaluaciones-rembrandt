@@ -64,7 +64,7 @@ export default function InstitutoPage() {
           <ul className="mt-10 grid list-none gap-px bg-linea sm:grid-cols-2">
             {SEDES.map((s) => (
               <li key={s.id} className="bg-hueso-2 p-7 sm:p-9">
-                <p className="font-mono text-[0.6rem] font-bold tracking-[0.18em] text-rojo uppercase">
+                <p className="font-mono text-[0.6rem] font-bold tracking-[0.18em] text-rojo-texto uppercase">
                   {s.nombre}
                 </p>
                 <address className="mt-3 text-lg leading-relaxed not-italic">

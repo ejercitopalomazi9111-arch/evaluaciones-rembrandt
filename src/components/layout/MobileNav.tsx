@@ -119,7 +119,7 @@ export function MobileNav() {
                         activo ? 'text-white' : 'text-white/85'
                       }`}
                     >
-                      <span className="tabular font-mono text-xs font-bold text-rojo">
+                      <span className="tabular font-mono text-xs font-bold text-rojo-claro">
                         {String(i + 1).padStart(2, '0')}
                       </span>
                       {item.label}

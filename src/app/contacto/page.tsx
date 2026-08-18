@@ -79,7 +79,7 @@ export default function ContactoPage() {
 
               {SEDES.map((s) => (
                 <div key={s.id} className="border border-linea bg-papel p-6">
-                  <p className="font-mono text-[0.58rem] font-bold tracking-[0.16em] text-rojo uppercase">
+                  <p className="font-mono text-[0.58rem] font-bold tracking-[0.16em] text-rojo-texto uppercase">
                     {s.nombre}
                   </p>
                   <address className="mt-2 leading-relaxed not-italic">

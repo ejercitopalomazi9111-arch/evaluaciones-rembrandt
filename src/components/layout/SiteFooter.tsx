@@ -39,7 +39,7 @@ export function SiteFooter() {
               </p>
             </div>
             <p className="mt-5 max-w-sm text-lg font-bold text-balance">{INSTITUCION.lema}</p>
-            <p className="mt-3 font-mono text-[0.62rem] tracking-[0.2em] text-white/45 uppercase">
+            <p className="mt-3 font-mono text-[0.62rem] tracking-[0.2em] text-white/55 uppercase">
               {INSTITUCION.caracteristicas.join(' · ')}
             </p>
 
@@ -70,7 +70,7 @@ export function SiteFooter() {
           <div className="grid gap-9 sm:grid-cols-2 lg:grid-cols-4">
             {NAV_PIE.map((col) => (
               <nav key={col.label} aria-label={col.label}>
-                <p className="font-mono text-[0.6rem] font-bold tracking-[0.2em] text-rojo uppercase">
+                <p className="font-mono text-[0.6rem] font-bold tracking-[0.2em] text-rojo-claro uppercase">
                   {col.label}
                 </p>
                 <ul className="mt-4 list-none space-y-1">
@@ -93,7 +93,7 @@ export function SiteFooter() {
         <div className="grid gap-8 border-t border-white/12 py-10 sm:grid-cols-2 lg:grid-cols-3">
           {SEDES.map((s) => (
             <div key={s.id}>
-              <p className="font-mono text-[0.6rem] font-bold tracking-[0.2em] text-white/45 uppercase">
+              <p className="font-mono text-[0.6rem] font-bold tracking-[0.2em] text-white/55 uppercase">
                 {s.nombre}
               </p>
               <address className="mt-2 text-sm leading-relaxed text-white/75 not-italic">
@@ -103,14 +103,14 @@ export function SiteFooter() {
                 href={s.mapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-2 inline-flex min-h-9 items-center font-mono text-[0.65rem] tracking-wide text-rojo uppercase hover:underline"
+                className="mt-2 inline-flex min-h-9 items-center font-mono text-[0.65rem] tracking-wide text-rojo-claro uppercase hover:underline"
               >
                 Cómo llegar →
               </a>
             </div>
           ))}
           <div>
-            <p className="font-mono text-[0.6rem] font-bold tracking-[0.2em] text-white/45 uppercase">
+            <p className="font-mono text-[0.6rem] font-bold tracking-[0.2em] text-white/55 uppercase">
               Contacto
             </p>
             <ul className="mt-2 list-none space-y-1">
@@ -135,7 +135,7 @@ export function SiteFooter() {
         </div>
 
         <div className="flex flex-col gap-3 border-t border-white/12 py-7 sm:flex-row sm:items-center sm:justify-between">
-          <p className="font-mono text-[0.6rem] tracking-[0.14em] text-white/40 uppercase">
+          <p className="font-mono text-[0.6rem] tracking-[0.14em] text-white/55 uppercase">
             © {new Date().getFullYear()} {INSTITUCION.nombreLegal}
           </p>
           <ul className="flex list-none flex-wrap gap-x-6 gap-y-1">

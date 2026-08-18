@@ -103,7 +103,7 @@ export function NivelTemplate({ nivel, extra }: { nivel: Nivel; extra?: ReactNod
               <h2 className="mt-5 text-3xl">Dónde se cursa</h2>
             </div>
             <div className="corte-esquina-sm bg-papel p-5 ring-1 ring-linea">
-              <p className="font-mono text-[0.58rem] font-bold tracking-[0.18em] text-rojo uppercase">
+              <p className="font-mono text-[0.58rem] font-bold tracking-[0.18em] text-rojo-texto uppercase">
                 {sede.nombre}
               </p>
               <address className="mt-2 text-sm leading-relaxed text-tinta-suave not-italic">

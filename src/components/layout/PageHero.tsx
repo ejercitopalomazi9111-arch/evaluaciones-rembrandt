@@ -35,7 +35,7 @@ export function PageHero({
           <div className="max-w-[42rem]">
             {migas && (
               <nav aria-label="Ruta de navegación" className="mb-6">
-                <ol className="flex list-none flex-wrap items-center gap-x-2 gap-y-1 font-mono text-[0.6rem] tracking-[0.14em] text-white/45 uppercase">
+                <ol className="flex list-none flex-wrap items-center gap-x-2 gap-y-1 font-mono text-[0.6rem] tracking-[0.14em] text-white/55 uppercase">
                   <li>
                     <Link href="/" className="hover:text-white">
                       Inicio

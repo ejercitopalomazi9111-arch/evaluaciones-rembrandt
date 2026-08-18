@@ -32,7 +32,7 @@ function PanelExito({ estado }: { estado: Extract<EstadoFormulario, { estado: 'o
   useEffect(() => ref.current?.focus(), []);
   return (
     <div className="corte-esquina bg-papel p-8 ring-1 ring-linea shadow-[6px_6px_0_0_var(--color-rojo)]">
-      <p className="font-mono text-[0.6rem] font-bold tracking-[0.2em] text-rojo uppercase">
+      <p className="font-mono text-[0.6rem] font-bold tracking-[0.2em] text-rojo-texto uppercase">
         Solicitud recibida
       </p>
       <h3 ref={ref} tabIndex={-1} className="mt-4 text-2xl outline-none">

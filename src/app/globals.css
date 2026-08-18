@@ -188,15 +188,21 @@ p, li {
   background: linear-gradient(90deg, var(--color-azul) 0 45%, var(--color-rojo) 45% 100%);
 }
 
-/* Revelado al hacer scroll — sin librerías */
-.revelar {
-  opacity: 0;
-  transform: translate3d(0, 18px, 0);
-  transition: opacity 0.5s var(--ease-tecnico), transform 0.5s var(--ease-tecnico);
-}
-.revelar[data-visible='true'] {
-  opacity: 1;
-  transform: none;
+/* Revelado al hacer scroll — sin librerías.
+   Dos decisiones deliberadas:
+   1. Va dentro de `scripting: enabled`. Sin JavaScript el contenido se muestra
+      normal en vez de quedarse invisible para siempre.
+   2. Anima sólo `transform`, no `opacity`. Un texto a medio desvanecer no
+      cumple contraste mientras dura la transición, y `transform` no afecta al
+      layout, así que tampoco produce saltos. */
+@media (scripting: enabled) {
+  .revelar {
+    transform: translate3d(0, 18px, 0);
+    transition: transform 0.5s var(--ease-tecnico);
+  }
+  .revelar[data-visible='true'] {
+    transform: none;
+  }
 }
 
 /* Trampa anti-spam: fuera de pantalla, no display:none (los bots la saltan) */
@@ -219,7 +225,6 @@ p, li {
     transition-duration: 0.01ms !important;
   }
   .revelar {
-    opacity: 1;
     transform: none;
   }
 }

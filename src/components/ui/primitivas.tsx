@@ -52,7 +52,7 @@ export function Eyebrow({
   className?: string;
 }) {
   const color =
-    tono === 'claro' ? 'text-white/70' : tono === 'rojo' ? 'text-rojo' : 'text-tinta-suave';
+    tono === 'claro' ? 'text-white/70' : tono === 'rojo' ? 'text-rojo-texto' : 'text-tinta-suave';
   const regla = tono === 'claro' ? 'bg-white/35' : 'bg-rojo';
   return (
     <p

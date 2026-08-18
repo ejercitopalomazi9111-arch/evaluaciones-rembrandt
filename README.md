@@ -111,12 +111,28 @@ vector.**
 
 ## Accesibilidad y rendimiento
 
-- Mobile-first, verificado sin desbordamiento horizontal desde **320 px**.
+Lo que está **medido**, no supuesto:
+
+- **axe-core, WCAG 2.1 AA: 0 violaciones** en 7 rutas × 2 anchos (390 px y 1440 px).
+- **Sin desbordamiento horizontal y un solo `<h1>`** en las 13 rutas públicas, verificado a
+  **320 / 390 / 768 / 1440 px**.
+- **Funciona con JavaScript desactivado**: ningún elemento queda oculto ni desplazado, y los
+  formularios conservan su `action`.
+
+Decisiones de diseño detrás de eso:
+
+- El revelado al hacer scroll anima **sólo `transform`**, nunca `opacity`, y va dentro de
+  `@media (scripting: enabled)`. Un texto a medio desvanecer no cumple contraste, y sin JS el
+  contenido debe verse igual.
+- El rojo del escudo `#d0202e` sirve para display grande y elementos gráficos; el texto pequeño
+  usa `--color-rojo-texto #a3141f` sobre claro y `--color-rojo-claro #ff4d5a` sobre tinta.
 - Objetivos táctiles ≥ 44 px; inputs de 16 px para que iOS no haga zoom al enfocar.
 - Navegación móvil con trampa de foco, cierre con `Escape` e `inert` sobre el resto de la página.
 - El LCP de la portada es **texto**, no una imagen.
 - El mapa de Google se carga **sólo si el visitante lo pide**.
 - Cero cookies y cero scripts de terceros, tal como declara el aviso de privacidad.
+
+Falta por medir: Lighthouse de rendimiento con red y CPU limitadas.
 
 ---
 

@@ -38,7 +38,7 @@ export default function PendientesPage() {
           {FOTOS_PENDIENTES.map((f) => (
             <li key={f.id} className="grid gap-2 py-5 sm:grid-cols-[16rem_minmax(0,1fr)]">
               <div>
-                <code className="font-mono text-xs font-bold text-rojo">{f.id}.jpg</code>
+                <code className="font-mono text-xs font-bold text-rojo-texto">{f.id}.jpg</code>
                 <p className="mt-1 font-mono text-[0.65rem] text-tinta-suave">{f.ratio}</p>
               </div>
               <p className="text-sm text-tinta-suave">{f.nota}</p>

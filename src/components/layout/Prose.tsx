@@ -32,7 +32,7 @@ export function DocumentoLegal({
                 href={`#${s.id}`}
                 className="flex min-h-9 items-baseline gap-3 text-sm hover:text-rojo-texto"
               >
-                <span className="tabular font-mono text-[0.65rem] text-rojo">
+                <span className="tabular font-mono text-[0.65rem] text-rojo-texto">
                   {String(i + 1).padStart(2, '0')}
                 </span>
                 {s.titulo}
@@ -46,7 +46,7 @@ export function DocumentoLegal({
         {secciones.map((s, i) => (
           <section key={s.id} id={s.id} className="scroll-mt-28">
             <h2 className="flex items-baseline gap-4 text-2xl">
-              <span className="tabular font-mono text-sm font-bold text-rojo">
+              <span className="tabular font-mono text-sm font-bold text-rojo-texto">
                 {String(i + 1).padStart(2, '0')}
               </span>
               {s.titulo}

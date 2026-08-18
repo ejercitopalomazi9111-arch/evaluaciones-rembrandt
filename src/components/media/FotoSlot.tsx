@@ -70,7 +70,7 @@ export function FotoSlot({
         <p className="font-mono text-[0.58rem] font-bold tracking-[0.18em] text-azul/75 uppercase">
           Espacio para fotografía
         </p>
-        <p className="max-w-[26ch] font-mono text-[0.6rem] leading-relaxed text-azul/55">
+        <p className="max-w-[26ch] font-mono text-[0.6rem] leading-relaxed text-azul/80">
           {slot.id}
         </p>
       </div>

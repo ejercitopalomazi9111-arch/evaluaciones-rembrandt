@@ -106,7 +106,7 @@ export function HeroInicio() {
                   <span className="block font-display text-3xl font-black text-white">
                     {d.valor}
                   </span>
-                  <span className="mt-1.5 block font-mono text-[0.58rem] leading-tight tracking-[0.16em] text-white/45 uppercase">
+                  <span className="mt-1.5 block font-mono text-[0.58rem] leading-tight tracking-[0.16em] text-white/55 uppercase">
                     {d.etiqueta}
                   </span>
                 </dd>

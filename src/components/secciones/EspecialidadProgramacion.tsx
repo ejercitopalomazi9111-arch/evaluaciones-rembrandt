@@ -51,7 +51,7 @@ export function EspecialidadProgramacion({ conCta = true }: { conCta?: boolean }
                 <Reveal delay={i * 60}>
                   <div className="flex gap-5 bg-tinta p-6 sm:p-7">
                     <div className="flex flex-col items-center gap-3">
-                      <span className="tabular font-mono text-xs font-bold text-rojo">
+                      <span className="tabular font-mono text-xs font-bold text-rojo-claro">
                         {String(i + 1).padStart(2, '0')}
                       </span>
                       <span aria-hidden="true" className="block w-px flex-1 bg-white/15" />
@@ -70,7 +70,7 @@ export function EspecialidadProgramacion({ conCta = true }: { conCta?: boolean }
           </ul>
         </div>
 
-        <p className="mt-12 max-w-3xl border-l-2 border-rojo pl-5 font-mono text-xs leading-relaxed text-white/45">
+        <p className="mt-12 max-w-3xl border-l-2 border-rojo pl-5 font-mono text-xs leading-relaxed text-white/55">
           {ESPECIALIDAD.nota}
         </p>
       </Container>

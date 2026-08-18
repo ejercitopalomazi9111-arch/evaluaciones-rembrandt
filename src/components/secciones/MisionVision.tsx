@@ -16,7 +16,7 @@ export function MisionVision() {
           {bloques.map((b) => (
             <article key={b.id} id={b.id} className="bg-hueso p-8 sm:p-10">
               <h2
-                className="font-mono text-eyebrow font-bold tracking-[0.2em] text-rojo uppercase"
+                className="font-mono text-eyebrow font-bold tracking-[0.2em] text-rojo-texto uppercase"
               >
                 {b.etiqueta}
               </h2>
