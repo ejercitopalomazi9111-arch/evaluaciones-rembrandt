@@ -37,17 +37,20 @@ const VINETAS =
   'https://cdn.gamma.app/bra78pkqaxdfqh0/design-anything/bmcXm02lgbXZs6oGRsKA0/6Vf45D2aNfOSw1An33xZF.png';
 
 /**
- * Encuadres de la escena. `x` es la posición horizontal del recorte dentro del
- * original, de 0 (izquierda) a 1 (derecha); cada nivel se queda con un tramo
- * distinto del paisaje para que las cuatro páginas no repitan la misma vista.
+ * Encuadres de la escena.
+ *
+ * - `x` es la posición horizontal del recorte, de 0 (izquierda) a 1 (derecha).
+ * - `zoom` amplía antes de recortar. Los arcos del acueducto se repiten, así que
+ *   mover sólo el eje horizontal daba cuatro fondos casi idénticos; cambiar
+ *   también el acercamiento es lo que hace que cada nivel se lea distinto.
  */
 const RECORTES = [
-  { nombre: 'escena-queretaro', ancho: 1600, alto: 900, x: 0.5, calidad: 62 },
-  { nombre: 'fondo-preescolar', ancho: 1200, alto: 900, x: 0.06, calidad: 58 },
-  { nombre: 'fondo-primaria', ancho: 1200, alto: 900, x: 0.36, calidad: 58 },
-  { nombre: 'fondo-secundaria', ancho: 1200, alto: 900, x: 0.64, calidad: 58 },
-  { nombre: 'fondo-preparatoria', ancho: 1200, alto: 900, x: 0.94, calidad: 58 },
-  { nombre: 'fondo-vida', ancho: 1500, alto: 645, x: 0.5, calidad: 58 },
+  { nombre: 'escena-queretaro', ancho: 1600, alto: 900, x: 0.5, zoom: 1, calidad: 62 },
+  { nombre: 'fondo-preescolar', ancho: 1200, alto: 900, x: 0.04, zoom: 1.7, calidad: 58 },
+  { nombre: 'fondo-primaria', ancho: 1200, alto: 900, x: 0.42, zoom: 1.15, calidad: 58 },
+  { nombre: 'fondo-secundaria', ancho: 1200, alto: 900, x: 0.72, zoom: 2.1, calidad: 58 },
+  { nombre: 'fondo-preparatoria', ancho: 1200, alto: 900, x: 0.99, zoom: 1.35, calidad: 58 },
+  { nombre: 'fondo-vida', ancho: 1500, alto: 645, x: 0.5, zoom: 1.25, calidad: 58 },
 ];
 
 /** La rejilla se lee en el orden en que se pidió: arriba izq/der, abajo izq/der. */
@@ -89,15 +92,17 @@ const meta = await sharp(escena).metadata();
 for (const r of RECORTES) {
   // Se escala a la altura pedida y después se recorta a lo ancho, para que el
   // horizonte quede siempre a la misma altura en todas las piezas.
-  const escala = r.alto / meta.height;
+  const escala = (r.alto / meta.height) * r.zoom;
   const anchoEscalado = Math.round(meta.width * escala);
   const disponible = Math.max(0, anchoEscalado - r.ancho);
 
   const buffer = await sharp(escena)
-    .resize({ height: r.alto })
+    .resize({ height: Math.round(r.alto * r.zoom) })
     .extract({
       left: Math.round(disponible * r.x),
-      top: 0,
+      // Con acercamiento sobra alto: se conserva la banda inferior, que es donde
+      // están los arcos y el caserío. Recortar por arriba sólo quitaría cielo.
+      top: Math.round(r.alto * (r.zoom - 1)),
       width: Math.min(r.ancho, anchoEscalado),
       height: r.alto,
     })
