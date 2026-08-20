@@ -42,3 +42,6 @@ next-env.d.ts
 
 # permitir la plantilla de variables de entorno
 !.env.example
+
+# empaquetado de una sola página
+/sitio-una-pagina.html

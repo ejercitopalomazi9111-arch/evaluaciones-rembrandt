@@ -30,6 +30,23 @@ sigue optimizando.
    el SEO queda mal.
 5. **Deploy.** A partir de ahí, cada push a la rama actualiza el sitio solo.
 
+### Compartir el sitio sin desplegar nada
+
+`scripts/empaquetar-una-pagina.mjs` empaqueta las 13 rutas públicas en **un solo archivo HTML
+autocontenido** (~1.6 MB), con el CSS, las tipografías, el escudo, la mascota y el arte
+incrustados. Se abre en cualquier dispositivo, funciona sin conexión y no pide ningún recurso
+externo. Útil para enseñar el sitio antes de que exista el dominio.
+
+```bash
+npm run build
+npx next start -p 3310                     # en otra terminal
+node scripts/empaquetar-una-pagina.mjs     # genera sitio-una-pagina.html
+```
+
+En esa versión los formularios abren el correo con el mensaje ya redactado (no hay servidor
+detrás) y el mapa embebido se sustituye por el enlace a Google Maps. Todo lo demás —navegación,
+menú móvil, acordeones, revelados— funciona igual.
+
 > **Por qué no GitHub Pages:** sólo sirve archivos estáticos, y los docs de Next 16 confirman que
 > en export estático **no funcionan las Server Actions, `headers()` ni la optimización de
 > imágenes**. Es decir, se perderían los formularios y las imágenes pesarían más en móvil.
