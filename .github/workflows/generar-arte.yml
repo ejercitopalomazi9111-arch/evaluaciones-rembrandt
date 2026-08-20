@@ -1,12 +1,23 @@
 # Genera el arte del sitio y lo committea.
 #
 # Vive en Actions porque el entorno de desarrollo sale a internet por un proxy
-# con lista blanca que no alcanza los CDN de imagen; el runner sí. Se dispara a
-# mano (`workflow_dispatch`) para no gastar minutos en cada push.
+# con lista blanca que no alcanza los CDN de imagen; el runner sí.
+#
+# `workflow_dispatch` sólo queda disponible cuando el archivo existe en la rama
+# por defecto, así que mientras esto viva en una rama de trabajo el disparo real
+# es el push. El filtro de rutas lo limita a cambios en la propia receta: el
+# commit que hace el job toca `public/img`, que no está en la lista, de modo que
+# no se realimenta.
 name: Generar arte
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - 'claude/**'
+    paths:
+      - '.github/workflows/generar-arte.yml'
+      - 'scripts/generar-arte-ia.mjs'
 
 permissions:
   contents: write
