@@ -90,22 +90,27 @@ const escena = await bajar(ESCENA);
 const meta = await sharp(escena).metadata();
 
 for (const r of RECORTES) {
-  // Se escala a la altura pedida y después se recorta a lo ancho, para que el
-  // horizonte quede siempre a la misma altura en todas las piezas.
-  const escala = (r.alto / meta.height) * r.zoom;
-  const anchoEscalado = Math.round(meta.width * escala);
-  const disponible = Math.max(0, anchoEscalado - r.ancho);
-
-  const buffer = await sharp(escena)
+  // Se escala por altura y después se recorta a lo ancho, para que el horizonte
+  // quede a la misma altura en todas las piezas.
+  //
+  // El escalado se hace en dos pasos y se leen las medidas reales del resultado
+  // en vez de predecirlas: el redondeo de sharp difiere del propio por un píxel
+  // y con encuadres pegados al borde (x ≈ 1) eso basta para que `extract` se
+  // salga de la imagen y aborte.
+  const escalado = await sharp(escena)
     .resize({ height: Math.round(r.alto * r.zoom) })
-    .extract({
-      left: Math.round(disponible * r.x),
-      // Con acercamiento sobra alto: se conserva la banda inferior, que es donde
-      // están los arcos y el caserío. Recortar por arriba sólo quitaría cielo.
-      top: Math.round(r.alto * (r.zoom - 1)),
-      width: Math.min(r.ancho, anchoEscalado),
-      height: r.alto,
-    })
+    .toBuffer();
+  const me = await sharp(escalado).metadata();
+
+  const ancho = Math.min(r.ancho, me.width);
+  const alto = Math.min(r.alto, me.height);
+  const left = Math.min(Math.round((me.width - ancho) * r.x), me.width - ancho);
+  // Con acercamiento sobra alto: se conserva la banda inferior, que es donde
+  // están los arcos y el caserío. Recortar por arriba sólo quitaría cielo.
+  const top = Math.max(0, me.height - alto);
+
+  const buffer = await sharp(escalado)
+    .extract({ left, top, width: ancho, height: alto })
     .webp({ quality: r.calidad, effort: 6 })
     .toBuffer();
 
