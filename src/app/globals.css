@@ -3,7 +3,7 @@
 /* ═══════════════════════════════════════════════════════════════════════════
    INSTITUTO REMBRANDT DE QUERÉTARO — Sistema de diseño "Geometría tecnológica"
    Derivado de la papelería oficial: cuña diagonal roja/azul del pie y la doble
-   regla azul+roja de la cabecera. Esquinas vivas, retícula de plano técnico,
+   regla azul+roja de la cabecera. Esquinas vivas, retícula de grano técnico,
    sombras duras desplazadas. En el membrete el nombre va en ROJO y el azul es
    estructura: por eso aquí el rojo es la acción y el azul es el suelo.
    ═══════════════════════════════════════════════════════════════════════════ */
@@ -97,28 +97,31 @@
   --ease-corte: cubic-bezier(0.65, 0, 0.35, 1);
 }
 
-/* ── Geometría (no son tokens de tema, son formas) ────────────────────── */
+/* ── Geometría y textura (no son tokens de tema, son formas) ─────────────── */
 :root {
-  --rejilla: 34px;
-  --plano-color: color-mix(in srgb, var(--color-azul) 12%, transparent);
-  --plano:
-    linear-gradient(var(--plano-color) 1px, transparent 1px) 0 0 / var(--rejilla) var(--rejilla),
-    linear-gradient(90deg, var(--plano-color) 1px, transparent 1px) 0 0 / var(--rejilla) var(--rejilla);
-  --plano-claro:
-    linear-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px) 0 0 / var(--rejilla) var(--rejilla),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px) 0 0 / var(--rejilla) var(--rejilla);
+  /* Grano: un PNG de 128px en `repeat`. Chrome lo trata como UNA textura y lo
+     cachea. Sustituye a las retículas de gradientes repetidos que había antes,
+     que se repintaban en cada fotograma de scroll y eran la causa principal de
+     que la página fuera a tirones. */
+  --grano: url('/grano.png');
+  --escena: url('/ilustraciones/escena-queretaro.svg');
 }
 
 html {
-  overflow-x: clip;
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
   scroll-padding-top: 5.5rem;
 }
 
 body {
-  background: var(--color-hueso);
-  color: var(--color-tinta);
+  /* Terreno continuo azul profundo. Antes el sitio alternaba bloques claros y
+     oscuros y ese vaivén rompía la cohesión; ahora todo se asienta sobre el
+     mismo campo y el hueso queda para los bloques que quieren destacar. */
+  background:
+    radial-gradient(120% 80% at 70% 0%, #16205e 0%, transparent 60%),
+    linear-gradient(180deg, #0d1450 0%, #0b0e1a 55%, #0b0e1a 100%);
+  background-attachment: scroll;
+  color: #f4f3ef;
   font-family: var(--font-sans);
   font-size: var(--text-base);
   line-height: 1.62;
@@ -156,12 +159,16 @@ p, li {
 
 /* ── Utilidades del sistema ───────────────────────────────────────────── */
 
-/* Retícula de plano técnico */
-.plano {
-  background-image: var(--plano);
-}
-.plano-claro {
-  background-image: var(--plano-claro);
+/* Textura de grano sobre las superficies oscuras. Una sola imagen repetida,
+   sin gradientes que recalcular al desplazar. */
+.grano::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: var(--grano);
+  opacity: 0.5;
+  pointer-events: none;
+  mix-blend-mode: overlay;
 }
 
 /* Cortes diagonales — el gesto del membrete */
@@ -283,4 +290,14 @@ p, li {
 @media print {
   .no-imprimir { display: none !important; }
   body { background: #fff; }
+}
+
+/* ── Rendimiento de scroll ────────────────────────────────────────────────
+   `content-visibility` deja que Chrome se salte layout y pintado de las
+   secciones que no están en pantalla. En una página larga es la diferencia
+   entre un scroll suelto y uno a tirones. `contain-intrinsic-size` le da una
+   altura estimada para que la barra de scroll no salte. */
+.seccion-difierible {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 720px;
 }

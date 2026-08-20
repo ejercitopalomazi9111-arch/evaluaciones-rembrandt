@@ -4,7 +4,7 @@
  */
 export function BandaDiagonal({
   invertida = false,
-  fondo = 'bg-hueso',
+  fondo = 'bg-transparent',
 }: {
   invertida?: boolean;
   fondo?: string;

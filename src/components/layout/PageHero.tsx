@@ -25,7 +25,7 @@ export function PageHero({
 
   return (
     <div className="relative overflow-hidden bg-tinta text-hueso">
-      <div aria-hidden="true" className="plano-claro absolute inset-0 opacity-55" />
+      <div aria-hidden="true" className="grano absolute inset-0 opacity-55" />
       {arte ? (
         <div
           aria-hidden="true"

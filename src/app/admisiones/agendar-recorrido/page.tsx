@@ -25,25 +25,25 @@ export default function AgendarRecorridoPage() {
             </div>
 
             <aside className="lg:sticky lg:top-28 lg:self-start">
-              <div className="corte-esquina bg-papel p-7 ring-1 ring-linea">
+              <div className="corte-esquina bg-azul-hondo/60 p-7 ring-1 ring-white/12">
                 <Eyebrow>¿Prefieres llamar?</Eyebrow>
                 <a
                   href={`tel:${CONTACTO.telefonoE164}`}
-                  className="tabular mt-4 block font-display text-2xl font-black hover:text-rojo-texto"
+                  className="tabular mt-4 block font-display text-2xl font-black hover:text-rojo-claro"
                 >
                   {CONTACTO.telefonoDisplay}
                 </a>
                 <a
                   href={`mailto:${CONTACTO.email}`}
-                  className="mt-3 block text-sm break-all text-azul underline"
+                  className="mt-3 block text-sm break-all text-azul-vivo underline"
                 >
                   {CONTACTO.email}
                 </a>
 
-                <div className="mt-7 space-y-5 border-t border-linea pt-6">
+                <div className="mt-7 space-y-5 border-t border-white/12 pt-6">
                   {SEDES.map((s) => (
                     <div key={s.id}>
-                      <p className="font-mono text-[0.58rem] font-bold tracking-[0.16em] text-tinta-suave uppercase">
+                      <p className="font-mono text-[0.58rem] font-bold tracking-[0.16em] text-white/70 uppercase">
                         {s.nombre}
                       </p>
                       <address className="mt-1.5 text-sm leading-relaxed not-italic">

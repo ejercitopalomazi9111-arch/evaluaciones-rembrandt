@@ -3,18 +3,18 @@
 import { useEffect, useId, useRef, type ReactNode } from 'react';
 
 const BASE_CAMPO =
-  'block w-full min-h-(--spacing-toque) border border-linea bg-papel px-4 py-3 text-base ' +
-  'transition-colors placeholder:text-tinta-suave/60 focus:border-azul focus:outline-none ' +
+  'block w-full min-h-(--spacing-toque) border border-white/12 bg-azul-hondo/60 px-4 py-3 text-base ' +
+  'transition-colors placeholder:text-white/70/60 focus:border-azul focus:outline-none ' +
   'aria-[invalid=true]:border-rojo aria-[invalid=true]:bg-rojo-tenue/40';
 
 function Etiqueta({ htmlFor, children, opcional }: { htmlFor: string; children: ReactNode; opcional?: boolean }) {
   return (
     <label
       htmlFor={htmlFor}
-      className="mb-2 flex items-baseline justify-between gap-3 font-mono text-[0.62rem] font-bold tracking-[0.16em] text-tinta uppercase"
+      className="mb-2 flex items-baseline justify-between gap-3 font-mono text-[0.62rem] font-bold tracking-[0.16em] text-white uppercase"
     >
       <span>{children}</span>
-      {opcional && <span className="font-normal text-tinta-suave normal-case">opcional</span>}
+      {opcional && <span className="font-normal text-white/70 normal-case">opcional</span>}
     </label>
   );
 }
@@ -22,7 +22,7 @@ function Etiqueta({ htmlFor, children, opcional }: { htmlFor: string; children: 
 export function FieldError({ id, mensaje }: { id: string; mensaje?: string }) {
   if (!mensaje) return null;
   return (
-    <p id={id} className="mt-2 flex items-start gap-2 text-sm font-medium text-rojo-texto">
+    <p id={id} className="mt-2 flex items-start gap-2 text-sm font-medium text-rojo-claro">
       <span aria-hidden="true" className="mt-1.5 block size-1.5 shrink-0 bg-rojo" />
       {mensaje}
     </p>

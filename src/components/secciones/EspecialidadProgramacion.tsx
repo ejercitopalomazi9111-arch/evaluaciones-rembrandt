@@ -5,14 +5,14 @@ import { Reveal } from '@/components/ui/Reveal';
 import { SelloDGETI } from '@/components/marca/Marca';
 
 /**
- * La pieza de venta del instituto. Tratamiento de plano técnico: fondo tinta,
+ * La pieza de venta del instituto. Tratamiento de grano técnico: fondo tinta,
  * retícula, numeración monoespaciada. Es el mayor diferenciador de la escuela
  * y hasta ahora estaba escondido en el sitio anterior.
  */
 export function EspecialidadProgramacion({ conCta = true }: { conCta?: boolean }) {
   return (
     <Section className="relative overflow-hidden bg-tinta text-hueso" id="especialidad">
-      <div aria-hidden="true" className="plano-claro absolute inset-0 opacity-60" />
+      <div aria-hidden="true" className="grano absolute inset-0 opacity-60" />
       {/* Circuito vivo: los trazos se dibujan al entrar y después recorren
           pulsos. Es el eje «Programación» del instituto hecho movimiento. */}
       <canvas

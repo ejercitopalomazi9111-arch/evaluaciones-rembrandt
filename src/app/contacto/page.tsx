@@ -78,8 +78,8 @@ export default function ContactoPage() {
               </div>
 
               {SEDES.map((s) => (
-                <div key={s.id} className="border border-linea bg-papel p-6">
-                  <p className="font-mono text-[0.58rem] font-bold tracking-[0.16em] text-rojo-texto uppercase">
+                <div key={s.id} className="border border-white/12 bg-azul-hondo/60 p-6">
+                  <p className="font-mono text-[0.58rem] font-bold tracking-[0.16em] text-rojo-claro uppercase">
                     {s.nombre}
                   </p>
                   <address className="mt-2 leading-relaxed not-italic">
@@ -89,7 +89,7 @@ export default function ContactoPage() {
                     href={s.mapsUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-3 inline-flex min-h-11 items-center font-mono text-xs font-bold tracking-[0.14em] text-azul uppercase hover:underline"
+                    className="mt-3 inline-flex min-h-11 items-center font-mono text-xs font-bold tracking-[0.14em] text-azul-vivo uppercase hover:underline"
                   >
                     Cómo llegar →
                   </a>
@@ -100,7 +100,7 @@ export default function ContactoPage() {
         </Container>
       </Section>
 
-      <Section className="bg-hueso-2" compacta>
+      <Section className="bg-azul-hondo/45" compacta>
         <Container>
           <Eyebrow>Ubicación</Eyebrow>
           <h2 className="mt-5 mb-8 text-3xl">Plantel principal</h2>

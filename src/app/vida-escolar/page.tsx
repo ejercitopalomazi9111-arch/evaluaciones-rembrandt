@@ -24,15 +24,15 @@ export default function VidaEscolarPage() {
 
       <Section>
         <Container>
-          <ul className="grid list-none gap-px bg-linea sm:grid-cols-2">
+          <ul className="grid list-none gap-px bg-white/12 sm:grid-cols-2">
             {EJES.map((e, i) => (
               <li key={e.titulo}>
                 <Reveal delay={i * 60} className="h-full">
-                  <div className="flex h-full gap-5 bg-hueso p-7 sm:p-9">
+                  <div className="flex h-full gap-5 bg-transparent p-7 sm:p-9">
                     <Icon name={e.icono} className="mt-1 size-7 shrink-0 text-rojo" />
                     <div>
                       <h2 className="text-2xl">{e.titulo}</h2>
-                      <p className="mt-3 text-tinta-suave">{e.texto}</p>
+                      <p className="mt-3 text-white/70">{e.texto}</p>
                     </div>
                   </div>
                 </Reveal>
@@ -64,7 +64,7 @@ export default function VidaEscolarPage() {
         <Container>
           <Eyebrow>Galería</Eyebrow>
           <h2 className="mt-5 max-w-2xl text-3xl">El instituto por dentro</h2>
-          <p className="mt-4 max-w-[58ch] text-tinta-suave">
+          <p className="mt-4 max-w-[58ch] text-white/70">
             Estos espacios están reservados para fotografías reales del plantel. Se publican
             únicamente con el consentimiento de padres y tutores cuando aparecen alumnos.
           </p>

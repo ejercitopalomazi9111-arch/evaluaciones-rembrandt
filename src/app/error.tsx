@@ -15,7 +15,7 @@ export default function Error({ reset }: { error: Error & { digest?: string }; r
           <button
             type="button"
             onClick={reset}
-            className="mt-8 inline-flex min-h-(--spacing-toque) items-center bg-white px-6 font-mono text-xs font-bold tracking-[0.13em] text-tinta uppercase"
+            className="mt-8 inline-flex min-h-(--spacing-toque) items-center bg-hueso px-6 font-mono text-xs font-bold tracking-[0.13em] text-tinta uppercase"
           >
             Reintentar
           </button>

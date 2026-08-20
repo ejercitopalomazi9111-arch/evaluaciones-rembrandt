@@ -18,7 +18,7 @@ export function NavEscritorio() {
                 href={item.href}
                 aria-current={activo ? 'page' : undefined}
                 className={`relative flex min-h-11 items-center px-3.5 font-mono text-xs font-semibold tracking-[0.1em] uppercase transition-colors ${
-                  activo ? 'text-rojo-texto' : 'text-tinta hover:text-rojo-texto'
+                  activo ? 'text-rojo-claro' : 'text-white hover:text-rojo-claro'
                 }`}
               >
                 {item.label}
@@ -32,16 +32,16 @@ export function NavEscritorio() {
 
               {item.hijos && (
                 <div className="invisible absolute top-full left-0 pt-2 opacity-0 transition-[opacity,visibility] duration-150 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
-                  <ul className="w-64 list-none border border-linea bg-papel shadow-[6px_6px_0_0_var(--color-tinta)]">
+                  <ul className="w-64 list-none border border-white/12 bg-azul-hondo/60 shadow-[6px_6px_0_0_var(--color-tinta)]">
                     {item.hijos.map((h) => (
-                      <li key={h.href} className="border-b border-linea last:border-b-0">
+                      <li key={h.href} className="border-b border-white/12 last:border-b-0">
                         <Link
                           href={h.href}
                           className="block px-4 py-3 transition-colors hover:bg-azul-tenue"
                         >
                           <span className="block text-sm font-bold">{h.label}</span>
                           {h.descripcion && (
-                            <span className="mt-0.5 block font-mono text-[0.6rem] tracking-wide text-tinta-suave uppercase">
+                            <span className="mt-0.5 block font-mono text-[0.6rem] tracking-wide text-white/70 uppercase">
                               {h.descripcion}
                             </span>
                           )}

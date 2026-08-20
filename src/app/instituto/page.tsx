@@ -24,20 +24,20 @@ export default function InstitutoPage() {
       <Section>
         <Container>
           <div className="grid items-center gap-10 lg:grid-cols-[auto_minmax(0,1fr)] lg:gap-16">
-            <div className="corte-esquina bg-papel p-8 ring-1 ring-linea">
+            <div className="corte-esquina bg-azul-hondo/60 p-8 ring-1 ring-white/12">
               <Escudo size={168} className="mx-auto" />
             </div>
             <div className="max-w-[52ch]">
               <Eyebrow>El escudo</Eyebrow>
               <h2 className="mt-5 text-3xl">Todo lo que somos cabe en un escudo</h2>
-              <p className="mt-5 text-lg text-tinta-suave">
+              <p className="mt-5 text-lg text-white/70">
                 En el centro, el autorretrato de Rembrandt van Rijn con su boina — el maestro que
                 convirtió la luz en un instrumento de precisión. Alrededor, las tres palabras que
-                rigen la casa: <strong className="text-tinta">Respeto</strong>,{' '}
-                <strong className="text-tinta">Cultura</strong> y{' '}
-                <strong className="text-tinta">Honor</strong>.
+                rigen la casa: <strong className="text-white">Respeto</strong>,{' '}
+                <strong className="text-white">Cultura</strong> y{' '}
+                <strong className="text-white">Honor</strong>.
               </p>
-              <p className="mt-4 text-tinta-suave">
+              <p className="mt-4 text-white/70">
                 No hay una declaración de principios más corta ni más exigente que ésa.
               </p>
               <ul className="mt-7 flex list-none flex-wrap gap-2">
@@ -57,27 +57,27 @@ export default function InstitutoPage() {
       <MisionVision />
 
       {/* Planteles */}
-      <Section className="bg-hueso-2">
+      <Section className="bg-azul-hondo/45">
         <Container>
           <Eyebrow>Planteles</Eyebrow>
           <h2 className="mt-5 max-w-2xl text-3xl">Dos sedes, a unos pasos una de otra</h2>
-          <ul className="mt-10 grid list-none gap-px bg-linea sm:grid-cols-2">
+          <ul className="mt-10 grid list-none gap-px bg-white/12 sm:grid-cols-2">
             {SEDES.map((s) => (
-              <li key={s.id} className="bg-hueso-2 p-7 sm:p-9">
-                <p className="font-mono text-[0.6rem] font-bold tracking-[0.18em] text-rojo-texto uppercase">
+              <li key={s.id} className="bg-azul-hondo/45 p-7 sm:p-9">
+                <p className="font-mono text-[0.6rem] font-bold tracking-[0.18em] text-rojo-claro uppercase">
                   {s.nombre}
                 </p>
                 <address className="mt-3 text-lg leading-relaxed not-italic">
                   {direccionCompleta(s)}
                 </address>
-                <p className="mt-4 font-mono text-[0.62rem] tracking-[0.14em] text-tinta-suave uppercase">
+                <p className="mt-4 font-mono text-[0.62rem] tracking-[0.14em] text-white/70 uppercase">
                   {s.niveles.join(' · ')}
                 </p>
                 <a
                   href={s.mapsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-4 inline-flex min-h-11 items-center font-mono text-xs font-bold tracking-[0.14em] text-azul uppercase hover:underline"
+                  className="mt-4 inline-flex min-h-11 items-center font-mono text-xs font-bold tracking-[0.14em] text-azul-vivo uppercase hover:underline"
                 >
                   Cómo llegar →
                 </a>

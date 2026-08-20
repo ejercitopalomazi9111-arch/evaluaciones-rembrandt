@@ -6,6 +6,12 @@ const nextConfig: NextConfig = {
     // `quality` distinto del default rompe el build.
     qualities: [70, 82, 90],
     formats: ['image/avif', 'image/webp'],
+    // Las ilustraciones son SVG propios, generados por `scripts/generar-ilustraciones.mjs`.
+    // No hay SVG de terceros ni subidos por usuarios, y aun así se sirven con una CSP
+    // estricta que impide cualquier script dentro del archivo.
+    dangerouslyAllowSVG: true,
+    contentDispositionType: 'attachment',
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
   poweredByHeader: false,
   async headers() {

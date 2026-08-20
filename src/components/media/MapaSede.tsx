@@ -15,7 +15,7 @@ export function MapaSede({ sede }: { sede: Sede }) {
 
   if (cargar) {
     return (
-      <div className="aspect-[16/9] w-full border border-linea sm:aspect-[21/9]">
+      <div className="aspect-[16/9] w-full border border-white/12 sm:aspect-[21/9]">
         <iframe
           title={`Mapa de ${sede.nombre}`}
           src={`https://maps.google.com/maps?q=${consulta}&output=embed`}
@@ -28,9 +28,9 @@ export function MapaSede({ sede }: { sede: Sede }) {
   }
 
   return (
-    <div className="plano relative flex aspect-[16/9] w-full flex-col items-center justify-center gap-4 border border-linea bg-azul-tenue p-6 text-center sm:aspect-[21/9]">
-      <p className="max-w-md font-medium text-tinta">{direccionCompleta(sede)}</p>
-      <p className="max-w-sm text-sm text-tinta-suave">
+    <div className="grano relative flex aspect-[16/9] w-full flex-col items-center justify-center gap-4 border border-white/12 bg-azul-tenue p-6 text-center sm:aspect-[21/9]">
+      <p className="max-w-md font-medium text-white">{direccionCompleta(sede)}</p>
+      <p className="max-w-sm text-sm text-white/70">
         El mapa se carga sólo si lo pides: así el sitio no contacta a Google sin tu consentimiento.
       </p>
       <div className="flex flex-wrap justify-center gap-3">
@@ -45,7 +45,7 @@ export function MapaSede({ sede }: { sede: Sede }) {
           href={sede.mapsUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex min-h-(--spacing-toque) items-center px-5 font-mono text-xs font-bold tracking-[0.13em] text-tinta uppercase ring-2 ring-tinta ring-inset"
+          className="inline-flex min-h-(--spacing-toque) items-center px-5 font-mono text-xs font-bold tracking-[0.13em] text-white uppercase ring-2 ring-tinta ring-inset"
         >
           Abrir en Google Maps
         </a>

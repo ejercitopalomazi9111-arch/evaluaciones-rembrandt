@@ -6,7 +6,7 @@ import { CONTACTO } from '@/content/institucion';
 export function CtaRecorrido() {
   return (
     <Section className="relative overflow-hidden bg-azul text-white">
-      <div aria-hidden="true" className="plano-claro absolute inset-0 opacity-50" />
+      <div aria-hidden="true" className="grano absolute inset-0 opacity-50" />
       <div
         aria-hidden="true"
         className="absolute inset-y-0 right-0 w-1/3 bg-rojo/80"

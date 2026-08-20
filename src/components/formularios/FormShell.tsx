@@ -15,11 +15,11 @@ const BOTON =
 /** Aviso simplificado en el punto de recolección — lo exige la LFPDPPP. */
 function AvisoSimplificado() {
   return (
-    <p className="border-l-2 border-azul pl-4 text-sm leading-relaxed text-tinta-suave">
+    <p className="border-l-2 border-azul pl-4 text-sm leading-relaxed text-white/70">
       Los datos que envíes serán utilizados por el Instituto Rembrandt de Querétaro únicamente para
       atender tu solicitud. Si incluyes el nombre de un menor de edad, confirmas ser su padre, madre
       o tutor. Consulta el{' '}
-      <Link href="/aviso-de-privacidad" className="font-semibold text-azul underline">
+      <Link href="/aviso-de-privacidad" className="font-semibold text-azul-vivo underline">
         aviso de privacidad integral
       </Link>
       .
@@ -31,23 +31,23 @@ function PanelExito({ estado }: { estado: Extract<EstadoFormulario, { estado: 'o
   const ref = useRef<HTMLHeadingElement>(null);
   useEffect(() => ref.current?.focus(), []);
   return (
-    <div className="corte-esquina bg-papel p-8 ring-1 ring-linea shadow-[6px_6px_0_0_var(--color-rojo)]">
-      <p className="font-mono text-[0.6rem] font-bold tracking-[0.2em] text-rojo-texto uppercase">
+    <div className="corte-esquina bg-azul-hondo/60 p-8 ring-1 ring-white/12 shadow-[6px_6px_0_0_var(--color-rojo)]">
+      <p className="font-mono text-[0.6rem] font-bold tracking-[0.2em] text-rojo-claro uppercase">
         Solicitud recibida
       </p>
       <h3 ref={ref} tabIndex={-1} className="mt-4 text-2xl outline-none">
         {estado.nombre ? `Gracias, ${estado.nombre.split(' ')[0]}.` : 'Gracias.'}
       </h3>
-      <p className="mt-4 text-tinta-suave">
+      <p className="mt-4 text-white/70">
         Coordinación te contactará para dar seguimiento. Guarda tu folio por si necesitas
         referenciarlo.
       </p>
       <p className="tabular mt-5 inline-block bg-tinta px-4 py-2 font-mono text-sm font-bold text-white">
         {estado.folio}
       </p>
-      <p className="mt-6 text-sm text-tinta-suave">
+      <p className="mt-6 text-sm text-white/70">
         ¿Prefieres hablar ahora?{' '}
-        <a href={`tel:${CONTACTO.telefonoE164}`} className="font-semibold text-azul underline">
+        <a href={`tel:${CONTACTO.telefonoE164}`} className="font-semibold text-azul-vivo underline">
           {CONTACTO.telefonoDisplay}
         </a>
       </p>
@@ -64,11 +64,11 @@ function PanelFallback({
 }) {
   return (
     <div className="border border-rojo bg-rojo-tenue/50 p-6">
-      <p className="font-mono text-[0.6rem] font-bold tracking-[0.2em] text-rojo-texto uppercase">
+      <p className="font-mono text-[0.6rem] font-bold tracking-[0.2em] text-rojo-claro uppercase">
         Envío no disponible
       </p>
       <p className="mt-3 font-semibold">{mensaje}</p>
-      <p className="mt-2 text-sm text-tinta-suave">
+      <p className="mt-2 text-sm text-white/70">
         No se perdió nada de lo que escribiste: los botones de abajo ya llevan tu mensaje completo.
       </p>
       <div className="mt-5 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap">
@@ -85,7 +85,7 @@ function PanelFallback({
             Enviar por WhatsApp
           </a>
         )}
-        <a href={fallback.tel} className={`${BOTON} text-tinta ring-2 ring-tinta ring-inset`}>
+        <a href={fallback.tel} className={`${BOTON} text-white ring-2 ring-tinta ring-inset`}>
           Llamar {CONTACTO.telefonoDisplay}
         </a>
       </div>
@@ -135,13 +135,13 @@ export function FormShell({
             <p
               ref={resumenRef}
               tabIndex={-1}
-              className="font-mono text-[0.62rem] font-bold tracking-[0.16em] text-rojo-texto uppercase outline-none"
+              className="font-mono text-[0.62rem] font-bold tracking-[0.16em] text-rojo-claro uppercase outline-none"
             >
               Revisa {Object.keys(errores).length === 1 ? 'este dato' : 'estos datos'}
             </p>
             <ul className="mt-3 list-none space-y-1.5 text-sm">
               {Object.entries(errores).map(([campo, msg]) => (
-                <li key={campo} className="text-rojo-texto">
+                <li key={campo} className="text-rojo-claro">
                   <strong className="font-semibold">{ETIQUETAS[campo] ?? campo}:</strong> {msg}
                 </li>
               ))}

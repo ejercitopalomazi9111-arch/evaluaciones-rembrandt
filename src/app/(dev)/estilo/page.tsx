@@ -22,7 +22,7 @@ export default function EstiloPage() {
       <Container>
         <Eyebrow>Uso interno</Eyebrow>
         <h1 className="mt-5 text-4xl">Sistema de diseño</h1>
-        <p className="mt-5 max-w-2xl text-lg text-tinta-suave">
+        <p className="mt-5 max-w-2xl text-lg text-white/70">
           Geometría tecnológica: esquinas vivas, retícula de plano, sombras duras. Derivado de la
           papelería institucional.
         </p>
@@ -30,18 +30,18 @@ export default function EstiloPage() {
         <h2 className="mt-14 text-2xl">Color</h2>
         <ul className="mt-6 grid list-none grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
           {COLORES.map(([n, hex]) => (
-            <li key={n} className="border border-linea">
+            <li key={n} className="border border-white/12">
               <div className="h-16" style={{ background: hex }} />
               <div className="p-3">
                 <p className="font-mono text-[0.62rem] font-bold">{n}</p>
-                <p className="font-mono text-[0.6rem] text-tinta-suave uppercase">{hex}</p>
+                <p className="font-mono text-[0.6rem] text-white/70 uppercase">{hex}</p>
               </div>
             </li>
           ))}
         </ul>
 
         <h2 className="mt-14 text-2xl">Tipografía</h2>
-        <div className="mt-6 space-y-4 border-y border-linea py-8">
+        <div className="mt-6 space-y-4 border-y border-white/12 py-8">
           <p className="text-hero font-black">Hero 6.75rem</p>
           <p className="text-4xl">Título 4xl</p>
           <p className="text-3xl">Título 3xl</p>
@@ -78,9 +78,9 @@ export default function EstiloPage() {
         <h2 className="mt-14 text-2xl">Iconos</h2>
         <ul className="mt-6 grid list-none grid-cols-4 gap-4 sm:grid-cols-9">
           {ICONOS.map((i) => (
-            <li key={i} className="flex flex-col items-center gap-2 border border-linea p-3">
-              <Icon name={i} className="size-6 text-azul" />
-              <span className="font-mono text-[0.55rem] text-tinta-suave">{i}</span>
+            <li key={i} className="flex flex-col items-center gap-2 border border-white/12 p-3">
+              <Icon name={i} className="size-6 text-azul-vivo" />
+              <span className="font-mono text-[0.55rem] text-white/70">{i}</span>
             </li>
           ))}
         </ul>

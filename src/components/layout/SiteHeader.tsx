@@ -19,7 +19,7 @@ export function SiteHeader() {
       />
       <div /* Sin backdrop-filter a propósito: en un header pegajoso obliga a
            Chrome a recomponer en cada fotograma de scroll. Fondo sólido. */
-        className="border-b border-linea bg-hueso">
+        className="border-b border-white/12 bg-transparent">
         <Container>
           <div className="flex h-16 items-center justify-between gap-4 sm:h-[4.5rem]">
             <Link href="/" className="shrink-0" aria-label="Instituto Rembrandt — Inicio">
@@ -31,7 +31,7 @@ export function SiteHeader() {
             <div className="flex items-center gap-2">
               <a
                 href={`tel:${CONTACTO.telefonoE164}`}
-                className="hidden min-h-11 items-center gap-2 px-3 font-mono text-xs font-semibold tracking-[0.1em] text-tinta-suave uppercase whitespace-nowrap transition-colors hover:text-rojo-texto xl:inline-flex"
+                className="hidden min-h-11 items-center gap-2 px-3 font-mono text-xs font-semibold tracking-[0.1em] text-white/70 uppercase whitespace-nowrap transition-colors hover:text-rojo-claro xl:inline-flex"
               >
                 {CONTACTO.telefonoDisplay}
               </a>

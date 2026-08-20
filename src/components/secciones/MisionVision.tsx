@@ -12,11 +12,11 @@ export function MisionVision() {
     <Section id="mision">
       <Container>
         <Eyebrow>Lo que nos comprometimos a hacer</Eyebrow>
-        <div className="mt-10 grid gap-px bg-linea md:grid-cols-2">
+        <div className="mt-10 grid gap-px bg-white/12 md:grid-cols-2">
           {bloques.map((b) => (
-            <article key={b.id} id={b.id} className="bg-hueso p-8 sm:p-10">
+            <article key={b.id} id={b.id} className="bg-transparent p-8 sm:p-10">
               <h2
-                className="font-mono text-eyebrow font-bold tracking-[0.2em] text-rojo-texto uppercase"
+                className="font-mono text-eyebrow font-bold tracking-[0.2em] text-rojo-claro uppercase"
               >
                 {b.etiqueta}
               </h2>
@@ -24,7 +24,7 @@ export function MisionVision() {
             </article>
           ))}
         </div>
-        <p className="mt-8 font-mono text-[0.65rem] tracking-[0.14em] text-tinta-suave uppercase">
+        <p className="mt-8 font-mono text-[0.65rem] tracking-[0.14em] text-white/70 uppercase">
           {INSTITUCION.direccionAcademica.cargo} — {INSTITUCION.direccionAcademica.nombre}
         </p>
       </Container>

@@ -17,12 +17,12 @@ export function DocumentoLegal({
     <article>
       <Eyebrow>{eyebrow}</Eyebrow>
       <h1 className="mt-5 text-4xl">{titulo}</h1>
-      <p className="mt-5 text-lg text-tinta-suave">{entradilla}</p>
+      <p className="mt-5 text-lg text-white/70">{entradilla}</p>
       <ReglaInstitucional className="mt-8" />
 
       {/* Índice */}
-      <nav aria-label="Contenido del documento" className="mt-10 border border-linea bg-papel p-6">
-        <p className="font-mono text-[0.6rem] font-bold tracking-[0.18em] text-tinta-suave uppercase">
+      <nav aria-label="Contenido del documento" className="mt-10 border border-white/12 bg-azul-hondo/60 p-6">
+        <p className="font-mono text-[0.6rem] font-bold tracking-[0.18em] text-white/70 uppercase">
           Contenido
         </p>
         <ol className="mt-4 list-none space-y-1.5">
@@ -30,9 +30,9 @@ export function DocumentoLegal({
             <li key={s.id}>
               <a
                 href={`#${s.id}`}
-                className="flex min-h-9 items-baseline gap-3 text-sm hover:text-rojo-texto"
+                className="flex min-h-9 items-baseline gap-3 text-sm hover:text-rojo-claro"
               >
-                <span className="tabular font-mono text-[0.65rem] text-rojo-texto">
+                <span className="tabular font-mono text-[0.65rem] text-rojo-claro">
                   {String(i + 1).padStart(2, '0')}
                 </span>
                 {s.titulo}
@@ -46,14 +46,14 @@ export function DocumentoLegal({
         {secciones.map((s, i) => (
           <section key={s.id} id={s.id} className="scroll-mt-28">
             <h2 className="flex items-baseline gap-4 text-2xl">
-              <span className="tabular font-mono text-sm font-bold text-rojo-texto">
+              <span className="tabular font-mono text-sm font-bold text-rojo-claro">
                 {String(i + 1).padStart(2, '0')}
               </span>
               {s.titulo}
             </h2>
             <div className="mt-5 space-y-4">
               {s.parrafos.map((p) => (
-                <p key={p.slice(0, 40)} className="leading-[1.7] text-tinta-suave">
+                <p key={p.slice(0, 40)} className="leading-[1.7] text-white/70">
                   {p}
                 </p>
               ))}
@@ -61,7 +61,7 @@ export function DocumentoLegal({
             {s.lista && (
               <ul className="mt-5 list-none space-y-2.5">
                 {s.lista.map((it) => (
-                  <li key={it} className="flex gap-3.5 text-tinta-suave">
+                  <li key={it} className="flex gap-3.5 text-white/70">
                     <span aria-hidden="true" className="mt-2.5 block size-1.5 shrink-0 bg-azul" />
                     <span>{it}</span>
                   </li>

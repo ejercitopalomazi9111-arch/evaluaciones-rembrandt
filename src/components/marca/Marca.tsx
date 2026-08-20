@@ -62,7 +62,7 @@ export function Lockup({
       <span className="flex flex-col leading-none">
         <span
           className={`font-display text-[0.95rem] leading-[1.05] font-extrabold tracking-[-0.01em] uppercase sm:text-[1.05rem] ${
-            claro ? 'text-white' : 'text-rojo-texto'
+            claro ? 'text-white' : 'text-rojo-claro'
           }`}
           style={{ fontStretch: '115%' }}
         >
@@ -72,7 +72,7 @@ export function Lockup({
         </span>
         <span
           className={`mt-1 font-mono text-[0.5rem] font-semibold tracking-[0.22em] uppercase sm:text-[0.55rem] ${
-            claro ? 'text-white/55' : 'text-tinta-suave'
+            claro ? 'text-white/55' : 'text-white/70'
           }`}
         >
           Querétaro

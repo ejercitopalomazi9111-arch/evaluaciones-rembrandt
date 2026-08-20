@@ -30,6 +30,23 @@
   var ultimo = 0;
   var PASO = 1000 / 30;
 
+  /* Mientras el usuario hace scroll, el lienzo NO pinta. Aunque va a 30 fps,
+     competir con el desplazamiento por el mismo hilo es lo que se siente como
+     tirones. Se reanuda 140 ms después de que el scroll para. */
+  var desplazando = false;
+  var tempScroll = 0;
+  addEventListener(
+    'scroll',
+    function () {
+      desplazando = true;
+      clearTimeout(tempScroll);
+      tempScroll = setTimeout(function () {
+        desplazando = false;
+      }, 140);
+    },
+    { passive: true },
+  );
+
   function rng(semilla) {
     var a = semilla >>> 0;
     return function () {
@@ -213,7 +230,7 @@
   }
 
   function bucle(ahora) {
-    if (ahora - ultimo >= PASO) {
+    if (!desplazando && ahora - ultimo >= PASO) {
       ultimo = ahora;
       for (var i = 0; i < lienzos.length; i++) {
         var L = lienzos[i];

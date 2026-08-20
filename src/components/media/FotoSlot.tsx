@@ -45,11 +45,11 @@ export function FotoSlot({
 
   return (
     <div
-      className={`${marco} plano bg-azul-tenue ring-1 ring-azul/25`}
+      className={`${marco} grano bg-azul-tenue ring-1 ring-azul/25`}
       role="img"
       aria-label={`Espacio reservado para una fotografía: ${slot.alt}`}
     >
-      {/* marcas de registro, como un plano técnico */}
+      {/* marcas de registro, como un grano técnico */}
       <span aria-hidden="true" className="absolute top-3 left-3 h-4 w-px bg-azul/40" />
       <span aria-hidden="true" className="absolute top-3 left-3 h-px w-4 bg-azul/40" />
       <span aria-hidden="true" className="absolute right-3 bottom-3 h-4 w-px bg-azul/40" />

@@ -41,10 +41,10 @@ export function NivelTemplate({ nivel, extra }: { nivel: Nivel; extra?: ReactNod
             <div>
               <p className="text-xl leading-[1.55] text-balance">{nivel.descripcion}</p>
 
-              <dl className="mt-10 grid grid-cols-2 gap-px bg-linea">
+              <dl className="mt-10 grid grid-cols-2 gap-px bg-white/12">
                 {nivel.datosClave.map((d) => (
-                  <div key={d.etiqueta} className="bg-hueso p-5">
-                    <dt className="font-mono text-[0.58rem] font-bold tracking-[0.18em] text-tinta-suave uppercase">
+                  <div key={d.etiqueta} className="bg-transparent p-5">
+                    <dt className="font-mono text-[0.58rem] font-bold tracking-[0.18em] text-white/70 uppercase">
                       {d.etiqueta}
                     </dt>
                     <dd className="mt-2 font-display text-lg leading-tight font-bold">{d.valor}</dd>
@@ -60,20 +60,20 @@ export function NivelTemplate({ nivel, extra }: { nivel: Nivel; extra?: ReactNod
 
       {extra}
 
-      <Section className="bg-hueso-2">
+      <Section className="bg-azul-hondo/45">
         <Container>
           <Eyebrow>En qué se trabaja</Eyebrow>
           <h2 className="mt-5 max-w-2xl text-3xl">Los ejes del nivel</h2>
 
-          <ul className="mt-10 grid list-none gap-px bg-linea sm:grid-cols-2">
+          <ul className="mt-10 grid list-none gap-px bg-white/12 sm:grid-cols-2">
             {nivel.destacados.map((d, i) => (
               <li key={d.titulo}>
                 <Reveal delay={i * 60} className="h-full">
-                  <div className="flex h-full gap-5 bg-hueso-2 p-6 sm:p-8">
+                  <div className="flex h-full gap-5 bg-azul-hondo/45 p-6 sm:p-8">
                     <Icon name={d.icono} className="mt-0.5 size-6 shrink-0 text-rojo" />
                     <div>
                       <h3 className="text-xl">{d.titulo}</h3>
-                      <p className="mt-2.5 text-tinta-suave">{d.texto}</p>
+                      <p className="mt-2.5 text-white/70">{d.texto}</p>
                     </div>
                   </div>
                 </Reveal>
@@ -103,18 +103,18 @@ export function NivelTemplate({ nivel, extra }: { nivel: Nivel; extra?: ReactNod
               <Eyebrow>Instalaciones</Eyebrow>
               <h2 className="mt-5 text-3xl">Dónde se cursa</h2>
             </div>
-            <div className="corte-esquina-sm bg-papel p-5 ring-1 ring-linea">
-              <p className="font-mono text-[0.58rem] font-bold tracking-[0.18em] text-rojo-texto uppercase">
+            <div className="corte-esquina-sm bg-azul-hondo/60 p-5 ring-1 ring-white/12">
+              <p className="font-mono text-[0.58rem] font-bold tracking-[0.18em] text-rojo-claro uppercase">
                 {sede.nombre}
               </p>
-              <address className="mt-2 text-sm leading-relaxed text-tinta-suave not-italic">
+              <address className="mt-2 text-sm leading-relaxed text-white/70 not-italic">
                 {direccionCompleta(sede)}
               </address>
               <a
                 href={sede.mapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-2 inline-flex min-h-9 items-center font-mono text-[0.65rem] tracking-wide text-azul uppercase hover:underline"
+                className="mt-2 inline-flex min-h-9 items-center font-mono text-[0.65rem] tracking-wide text-azul-vivo uppercase hover:underline"
               >
                 Cómo llegar →
               </a>

@@ -48,17 +48,17 @@ export default function AdmisionesPage() {
             {PASOS_ADMISION.map((p, i) => (
               <li key={p.numero}>
                 <Reveal delay={i * 60}>
-                  <div className="grid gap-5 border-t border-linea py-8 sm:grid-cols-[6rem_minmax(0,1fr)] sm:gap-8 sm:py-10">
+                  <div className="grid gap-5 border-t border-white/12 py-8 sm:grid-cols-[6rem_minmax(0,1fr)] sm:gap-8 sm:py-10">
                     <span className="tabular font-mono text-3xl leading-none font-bold text-rojo">
                       {p.numero}
                     </span>
                     <div className="max-w-[62ch]">
                       <h3 className="text-2xl">{p.titulo}</h3>
-                      <p className="mt-3 text-lg text-tinta-suave">{p.texto}</p>
+                      <p className="mt-3 text-lg text-white/70">{p.texto}</p>
                       {p.accion && (
                         <Link
                           href={p.accion.href}
-                          className="mt-5 inline-flex min-h-11 items-center gap-2 font-mono text-xs font-bold tracking-[0.14em] text-azul uppercase hover:underline"
+                          className="mt-5 inline-flex min-h-11 items-center gap-2 font-mono text-xs font-bold tracking-[0.14em] text-azul-vivo uppercase hover:underline"
                         >
                           {p.accion.label} →
                         </Link>
@@ -73,18 +73,18 @@ export default function AdmisionesPage() {
       </Section>
 
       {/* Requisitos */}
-      <Section className="bg-hueso-2" id="requisitos">
+      <Section className="bg-azul-hondo/45" id="requisitos">
         <Container>
           <Eyebrow>Documentación</Eyebrow>
           <h2 className="mt-5 max-w-2xl text-3xl">Qué hay que reunir</h2>
 
-          <div className="mt-10 grid gap-px bg-linea sm:grid-cols-2">
+          <div className="mt-10 grid gap-px bg-white/12 sm:grid-cols-2">
             {REQUISITOS.map((r) => (
-              <div key={r.titulo} className="bg-hueso-2 p-7 sm:p-9">
+              <div key={r.titulo} className="bg-azul-hondo/45 p-7 sm:p-9">
                 <h3 className="text-xl">{r.titulo}</h3>
                 <ul className="mt-5 list-none space-y-3">
                   {r.puntos.map((p) => (
-                    <li key={p} className="flex gap-3.5 text-tinta-suave">
+                    <li key={p} className="flex gap-3.5 text-white/70">
                       <span aria-hidden="true" className="mt-2.5 block size-1.5 shrink-0 bg-azul" />
                       <span>{p}</span>
                     </li>
@@ -94,7 +94,7 @@ export default function AdmisionesPage() {
             ))}
           </div>
 
-          <p className="mt-8 max-w-3xl border-l-2 border-rojo pl-5 text-sm leading-relaxed text-tinta-suave">
+          <p className="mt-8 max-w-3xl border-l-2 border-rojo pl-5 text-sm leading-relaxed text-white/70">
             {NOTA_REQUISITOS}
           </p>
         </Container>

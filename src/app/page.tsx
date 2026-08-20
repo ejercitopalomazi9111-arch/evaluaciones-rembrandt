@@ -32,7 +32,7 @@ export default function Inicio() {
       <MisionVision />
 
       {/* Vida escolar — avance */}
-      <Section className="bg-hueso-2">
+      <Section className="bg-azul-hondo/45">
         <Container>
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div className="max-w-2xl">
@@ -41,20 +41,20 @@ export default function Inicio() {
             </div>
             <Link
               href="/vida-escolar"
-              className="inline-flex min-h-11 items-center gap-2 font-mono text-xs font-bold tracking-[0.14em] text-tinta uppercase hover:text-rojo-texto"
+              className="inline-flex min-h-11 items-center gap-2 font-mono text-xs font-bold tracking-[0.14em] text-white uppercase hover:text-rojo-claro"
             >
               Ver vida escolar →
             </Link>
           </div>
 
-          <ul className="mt-10 grid list-none gap-px bg-linea sm:grid-cols-2 lg:grid-cols-4">
+          <ul className="mt-10 grid list-none gap-px bg-white/12 sm:grid-cols-2 lg:grid-cols-4">
             {EJES.map((e, i) => (
               <li key={e.titulo}>
                 <Reveal delay={i * 60} className="h-full">
-                  <div className="flex h-full flex-col bg-hueso-2 p-7">
+                  <div className="flex h-full flex-col bg-azul-hondo/45 p-7">
                     <Icon name={e.icono} className="size-7 text-rojo" />
                     <h3 className="mt-5 text-xl">{e.titulo}</h3>
-                    <p className="mt-3 text-sm text-tinta-suave">{e.texto}</p>
+                    <p className="mt-3 text-sm text-white/70">{e.texto}</p>
                   </div>
                 </Reveal>
               </li>

@@ -33,7 +33,7 @@ export function Section({
   return (
     <section
       id={id}
-      className={`${compacta ? 'py-12 sm:py-16' : 'py-(--spacing-seccion)'} ${className}`}
+      className={`seccion-difierible ${compacta ? 'py-12 sm:py-16' : 'py-(--spacing-seccion)'} ${className}`}
     >
       {children}
     </section>
@@ -52,7 +52,7 @@ export function Eyebrow({
   className?: string;
 }) {
   const color =
-    tono === 'claro' ? 'text-white/70' : tono === 'rojo' ? 'text-rojo-texto' : 'text-tinta-suave';
+    tono === 'claro' ? 'text-white/70' : tono === 'rojo' ? 'text-rojo-claro' : 'text-white/70';
   const regla = tono === 'claro' ? 'bg-white/35' : 'bg-rojo';
   return (
     <p
@@ -91,13 +91,15 @@ export function ReglaInstitucional({
 type Variante = 'rojo' | 'azul' | 'linea' | 'claro';
 
 const VARIANTES: Record<Variante, string> = {
-  // #A3141F sobre blanco da 7:1; la sombra usa el rojo vivo del escudo.
+  // Sobre superficie roja el texto blanco necesita #a3141f para llegar a 7:1;
+  // el rojo vivo del escudo queda en la sombra, donde no carga texto.
   rojo: 'bg-rojo-texto text-white shadow-[5px_5px_0_0_var(--color-rojo)] hover:shadow-[2px_2px_0_0_var(--color-rojo)] hover:translate-x-[3px] hover:translate-y-[3px]',
-  azul: 'bg-azul text-white shadow-[5px_5px_0_0_var(--color-tinta)] hover:shadow-[2px_2px_0_0_var(--color-tinta)] hover:translate-x-[3px] hover:translate-y-[3px]',
+  azul: 'bg-azul-vivo text-white shadow-[5px_5px_0_0_var(--color-tinta)] hover:shadow-[2px_2px_0_0_var(--color-tinta)] hover:translate-x-[3px] hover:translate-y-[3px]',
   linea:
-    'bg-transparent text-tinta ring-2 ring-tinta ring-inset hover:bg-tinta hover:text-hueso',
+    'bg-transparent text-white ring-2 ring-white/45 ring-inset hover:bg-white hover:text-tinta',
+  // Botón claro sobre fondo oscuro: la tinta es la que da el contraste.
   claro:
-    'bg-white text-tinta shadow-[5px_5px_0_0_var(--color-rojo)] hover:shadow-[2px_2px_0_0_var(--color-rojo)] hover:translate-x-[3px] hover:translate-y-[3px]',
+    'bg-hueso text-tinta shadow-[5px_5px_0_0_var(--color-rojo)] hover:shadow-[2px_2px_0_0_var(--color-rojo)] hover:translate-x-[3px] hover:translate-y-[3px]',
 };
 
 const BASE =
@@ -153,7 +155,7 @@ export function Card({
 }) {
   return (
     <div
-      className={`relative bg-papel ring-1 ring-linea ${corte ? 'corte-esquina' : ''} ${
+      className={`relative bg-azul-hondo/60 ring-1 ring-white/12 ${corte ? 'corte-esquina' : ''} ${
         hover
           ? 'transition-transform duration-200 ease-(--ease-tecnico) hover:-translate-y-1'
           : ''
@@ -188,10 +190,10 @@ export function NumeroIndice({
 export function Tag({ children, tono = 'azul' }: { children: ReactNode; tono?: 'azul' | 'rojo' | 'linea' }) {
   const c =
     tono === 'rojo'
-      ? 'bg-rojo-tenue text-rojo-texto'
+      ? 'bg-rojo-tenue text-rojo-claro'
       : tono === 'linea'
-        ? 'text-tinta-suave ring-1 ring-linea'
-        : 'bg-azul-tenue text-azul';
+        ? 'text-white/70 ring-1 ring-white/12'
+        : 'bg-azul-tenue text-azul-vivo';
   return (
     <span className={`inline-block px-3 py-1.5 font-mono text-xs font-semibold tracking-wide ${c}`}>
       {children}
@@ -203,7 +205,7 @@ export function Tag({ children, tono = 'azul' }: { children: ReactNode; tono?: '
 
 export function Accordion({ items }: { items: readonly { pregunta: string; respuesta: string }[] }) {
   return (
-    <div className="divide-y divide-linea border-y border-linea">
+    <div className="divide-y divide-white/12 border-y border-white/12">
       {items.map((it) => (
         <details key={it.pregunta} className="group">
           <summary className="flex min-h-(--spacing-toque) cursor-pointer list-none items-center justify-between gap-4 py-5 text-lg font-bold [&::-webkit-details-marker]:hidden">
@@ -217,7 +219,7 @@ export function Accordion({ items }: { items: readonly { pregunta: string; respu
               </svg>
             </span>
           </summary>
-          <p className="max-w-3xl pb-6 text-tinta-suave">{it.respuesta}</p>
+          <p className="max-w-3xl pb-6 text-white/70">{it.respuesta}</p>
         </details>
       ))}
     </div>
@@ -232,5 +234,42 @@ export function JsonLd({ data }: { data: Record<string, unknown> }) {
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(data).replace(/</g, '\\u003c') }}
     />
+  );
+}
+
+/* ── Índice de sección: numeral + regla, como en una revista ──────────────── */
+
+export function IndiceSeccion({
+  numero,
+  nombre,
+  tono = 'claro',
+}: {
+  numero: string;
+  nombre: string;
+  tono?: 'claro' | 'tinta';
+}) {
+  const regla = tono === 'claro' ? 'bg-white/25' : 'bg-white/12';
+  const texto = tono === 'claro' ? 'text-white/55' : 'text-white/70';
+  return (
+    <div className="flex min-w-0 flex-1 items-center gap-4 sm:gap-6">
+      <span aria-hidden="true" className={`h-px flex-1 ${regla}`} />
+      <p className={`shrink-0 font-mono text-[0.62rem] tracking-[0.18em] uppercase ${texto}`}>
+        <span className="tabular font-bold text-rojo-claro">{numero}</span>
+        <span aria-hidden="true"> / </span>
+        {nombre}
+      </p>
+    </div>
+  );
+}
+
+/** Etiqueta vertical girada en el borde — el detalle editorial de la referencia. */
+export function EtiquetaVertical({ children }: { children: ReactNode }) {
+  return (
+    <span
+      aria-hidden="true"
+      className="pointer-events-none absolute top-1/2 -left-1 hidden origin-center -translate-y-1/2 -rotate-90 font-mono text-[0.58rem] tracking-[0.3em] whitespace-nowrap text-white/30 uppercase xl:block"
+    >
+      {children}
+    </span>
   );
 }
