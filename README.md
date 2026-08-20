@@ -27,6 +27,17 @@ workflow da de alta Pages la primera vez. Si se renombra el repositorio, la URL
 cambia con él y el propio workflow se ajusta, porque lee el prefijo de la
 configuración de Pages en vez de tenerlo escrito.
 
+### Un solo archivo, sin montar nada
+
+`sitio.html` en la raíz del repositorio es el sitio entero —las 13 rutas, con
+navegación— con todo incrustado: tipografías, arte, JavaScript. **Cero
+peticiones externas**, así que se abre desde cualquier visor de HTML crudo de
+GitHub, se manda por correo o se guarda en el teléfono y sigue funcionando sin
+conexión. Lo regenera el mismo workflow en cada publicación, así que no
+envejece.
+
+Es la vía para compartir el sitio sin depender de que nadie active nada.
+
 ### Qué cambia en Pages respecto a un servidor propio
 
 Pages sólo sirve archivos, así que el build usa `EXPORT_ESTATICO=1` y Next 16

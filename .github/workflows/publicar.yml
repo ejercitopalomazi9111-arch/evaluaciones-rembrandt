@@ -18,6 +18,10 @@ on:
   push:
     branches:
       - master
+    # El propio workflow committea `sitio.html`. Sin ignorarlo, ese commit
+    # dispararía otra ejecución y así indefinidamente.
+    paths-ignore:
+      - 'sitio.html'
   workflow_dispatch:
 
 permissions:
@@ -70,3 +74,45 @@ jobs:
           # La rama es un espejo del build, no un historial: se reescribe entera
           # en cada publicación para que no crezca sin límite.
           git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" HEAD:gh-pages
+
+  # `sitio.html` es el sitio entero —las 13 rutas, con navegación— en un solo
+  # archivo con todo incrustado: cero peticiones externas. Sirve para abrirlo
+  # desde cualquier visor de HTML crudo de GitHub sin montar infraestructura, y
+  # para mandarlo por correo o WhatsApp. Se regenera aquí para que no envejezca.
+  empaquetar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+      - run: npm run build
+
+      - name: Empaquetar en un solo archivo
+        run: |
+          npx next start -p 3310 &
+          until curl -sf -o /dev/null http://localhost:3310/; do sleep 2; done
+          node scripts/empaquetar-una-pagina.mjs
+          cp sitio-una-pagina.html sitio.html
+
+      - name: Committear el archivo único
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add sitio.html
+          if git diff --cached --quiet; then
+            echo "Sin cambios."
+            exit 0
+          fi
+          git commit -q -m "chore: regenerar sitio.html"
+          for intento in 1 2 3; do
+            git fetch origin master
+            git rebase origin/master || exit 1
+            git push origin HEAD:master && exit 0
+            sleep $((intento * 5))
+          done
+          exit 1
