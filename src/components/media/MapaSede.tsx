@@ -28,7 +28,7 @@ export function MapaSede({ sede }: { sede: Sede }) {
   }
 
   return (
-    <div className="grano relative flex aspect-[16/9] w-full flex-col items-center justify-center gap-4 border border-white/12 bg-azul-tenue p-6 text-center sm:aspect-[21/9]">
+    <div className="grano relative flex aspect-[16/9] w-full flex-col items-center justify-center gap-4 border border-white/12 bg-azul-hondo/50 p-6 text-center sm:aspect-[21/9]">
       <p className="max-w-md font-medium text-white">{direccionCompleta(sede)}</p>
       <p className="max-w-sm text-sm text-white/70">
         El mapa se carga sólo si lo pides: así el sitio no contacta a Google sin tu consentimiento.

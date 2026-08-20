@@ -5,9 +5,8 @@ import { BandaDiagonal } from '@/components/secciones/BandaDiagonal';
 import { Container, Eyebrow, Section } from '@/components/ui/primitivas';
 import { Icon } from '@/components/ui/Icon';
 import { Reveal } from '@/components/ui/Reveal';
-import { GaleriaSlots } from '@/components/media/FotoSlot';
 import { Mascota } from '@/components/marca/Marca';
-import { EJES, GALERIA_VIDA } from '@/content/vida-escolar';
+import { EJES } from '@/content/vida-escolar';
 import { seoDe } from '@/content/seo';
 
 export const metadata: Metadata = seoDe('/vida-escolar');
@@ -28,7 +27,7 @@ export default function VidaEscolarPage() {
             {EJES.map((e, i) => (
               <li key={e.titulo}>
                 <Reveal delay={i * 60} className="h-full">
-                  <div className="flex h-full gap-5 bg-transparent p-7 sm:p-9">
+                  <div className="flex h-full gap-5 bg-azul-hondo/45 p-7 sm:p-9">
                     <Icon name={e.icono} className="mt-1 size-7 shrink-0 text-rojo" />
                     <div>
                       <h2 className="text-2xl">{e.titulo}</h2>
@@ -62,14 +61,19 @@ export default function VidaEscolarPage() {
 
       <Section>
         <Container>
-          <Eyebrow>Galería</Eyebrow>
-          <h2 className="mt-5 max-w-2xl text-3xl">El instituto por dentro</h2>
+          <Eyebrow>El plantel</Eyebrow>
+          <h2 className="mt-5 max-w-2xl text-3xl">Col. Satélite, Querétaro</h2>
           <p className="mt-4 max-w-[58ch] text-white/70">
-            Estos espacios están reservados para fotografías reales del plantel. Se publican
-            únicamente con el consentimiento de padres y tutores cuando aparecen alumnos.
+            Dos sedes a unos pasos una de otra, en el mismo barrio donde muchas familias del
+            instituto viven. Las fotografías del plantel se publican con el consentimiento de
+            padres y tutores cuando aparecen alumnos.
           </p>
-          <div className="mt-10">
-            <GaleriaSlots slots={GALERIA_VIDA} />
+          <div className="corte-esquina-lg mt-10 aspect-[21/9] w-full overflow-hidden ring-1 ring-white/12">
+            <div
+              role="img"
+              aria-label="Ilustración del paisaje de Querétaro al atardecer"
+              className="acerca size-full bg-[url('/ilustraciones/fondo-vida.svg')] bg-cover bg-center"
+            />
           </div>
         </Container>
       </Section>

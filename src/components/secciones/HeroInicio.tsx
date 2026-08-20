@@ -28,7 +28,7 @@ export function HeroInicio() {
           navegador lo compone sin pasar por el optimizador. */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 -z-20 bg-[image:var(--escena)] bg-cover bg-bottom bg-no-repeat"
+        className="parallax-escena absolute inset-0 -z-20 bg-[image:var(--escena)] bg-cover bg-bottom bg-no-repeat"
       />
       {/* cortinilla: asegura el contraste del texto sobre cualquier recorte */}
       <div
@@ -101,7 +101,7 @@ export function HeroInicio() {
               height={538}
               sizes="300px"
               quality={82}
-              className="h-auto w-[17rem] drop-shadow-[0_24px_40px_rgba(0,0,0,0.55)] xl:w-[19rem]"
+              className="flota h-auto w-[17rem] drop-shadow-[0_24px_40px_rgba(0,0,0,0.55)] xl:w-[19rem]"
             />
           </div>
         </div>

@@ -301,3 +301,118 @@ p, li {
   content-visibility: auto;
   contain-intrinsic-size: auto 720px;
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ANIMACIONES DIRIGIDAS POR SCROLL
+   Todas usan `animation-timeline`, que Chrome resuelve en el compositor: no
+   pasan por el hilo principal, así que no compiten con el desplazamiento. Es
+   la única forma de meter más movimiento sin recuperar los tirones.
+
+   Reglas que se mantienen:
+   - Sólo `transform` sobre texto. Nunca `opacity`, porque a media transición
+     un texto no cumple contraste.
+   - `opacity` sí en elementos decorativos e imágenes.
+   - Todo dentro de @supports: donde no haya soporte, el contenido se ve
+     estático y completo, nunca a medias.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@keyframes deriva-escena {
+  from { transform: translate3d(0, -3%, 0) scale(1.1); }
+  to   { transform: translate3d(0, 7%, 0) scale(1.1); }
+}
+@keyframes subir-al-entrar {
+  from { transform: translate3d(0, 46px, 0); }
+  to   { transform: none; }
+}
+@keyframes acercar-al-entrar {
+  from { transform: scale(1.12); }
+  to   { transform: scale(1); }
+}
+@keyframes aparecer-decorativo {
+  from { opacity: 0; transform: translate3d(0, 28px, 0); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes crecer-regla {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+@keyframes avance-scroll {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+@keyframes flotar-mascota {
+  from { transform: translate3d(0, 26px, 0); }
+  to   { transform: translate3d(0, -22px, 0); }
+}
+
+@media (scripting: enabled) {
+  @supports (animation-timeline: view()) {
+    /* El revelado deja de ser un interruptor y pasa a seguir el scroll: el
+       elemento sube a la vez que entra en pantalla. */
+    .revelar {
+      transform: none;
+      transition: none;
+      animation: subir-al-entrar linear both;
+      animation-timeline: view();
+      animation-range: entry 4% entry 82%;
+    }
+
+    /* Paralaje de la escena del hero: el fondo se mueve más lento que el texto. */
+    .parallax-escena {
+      animation: deriva-escena linear both;
+      animation-timeline: view();
+      animation-range: entry 0% exit 100%;
+    }
+
+    /* La mascota flota en sentido contrario, que es lo que da la sensación de
+       profundidad entre las capas. */
+    .flota {
+      animation: flotar-mascota linear both;
+      animation-timeline: view();
+      animation-range: entry 0% exit 100%;
+    }
+
+    /* Imágenes que se asientan al entrar. Es escala, no opacidad. */
+    .acerca {
+      animation: acercar-al-entrar linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 42%;
+    }
+
+    /* Elementos decorativos: aquí sí puede desvanecerse, no llevan texto. */
+    .decorativo-entra {
+      animation: aparecer-decorativo linear both;
+      animation-timeline: view();
+      animation-range: entry 8% cover 32%;
+    }
+
+    /* Reglas que se dibujan solas al llegar. */
+    .regla-crece {
+      transform-origin: left center;
+      animation: crecer-regla linear both;
+      animation-timeline: view();
+      animation-range: entry 12% cover 30%;
+    }
+
+    /* Barra de avance de lectura, pegada bajo la cabecera. */
+    .avance-lectura {
+      transform-origin: left center;
+      animation: avance-scroll linear both;
+      animation-timeline: scroll(root block);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .revelar,
+  .parallax-escena,
+  .flota,
+  .acerca,
+  .decorativo-entra,
+  .regla-crece,
+  .avance-lectura {
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}

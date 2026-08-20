@@ -50,7 +50,7 @@ export function NivelesGrid({ titulo = 'Un instituto, cuatro etapas' }: { titulo
                         width={400}
                         height={400}
                         sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
-                        className="size-full scale-[0.92] object-contain transition-transform duration-500 ease-(--ease-tecnico) group-hover:scale-[1]"
+                        className="acerca size-full scale-[0.92] object-contain transition-transform duration-500 ease-(--ease-tecnico) group-hover:scale-[1]"
                       />
                     </div>
 

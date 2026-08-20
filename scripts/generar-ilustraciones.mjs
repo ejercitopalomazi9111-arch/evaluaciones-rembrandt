@@ -63,8 +63,13 @@ function aPath(pts, H) {
 }
 
 /* ── Escena principal: Querétaro al atardecer ────────────────────────────── */
-function escenaQueretaro(semilla, W = 1600, H = 900) {
+function escenaQueretaro(semilla, W = 1600, H = 900, variante = {}) {
   const r = rng(semilla);
+  const {
+    cielo = [TINTA, AZUL_HONDO, AZUL, mezclar(AZUL, ROJO, 0.6), AMBAR],
+    conAcueducto = true,
+    conMagueyes = true,
+  } = variante;
   const horizonte = H * 0.74;
   const p = [];
 
@@ -123,7 +128,7 @@ function escenaQueretaro(semilla, W = 1600, H = 900) {
   }
   // el acueducto va sobre una banda de tierra
   p.push(`<path d="${aPath(cresta(r, W, sueloAc + 6, H * 0.02, 2), H)}" fill="${TINTA}"/>`);
-  p.push(...ac);
+  if (conAcueducto) p.push(...ac);
 
   // Magueyes: se plantan SOBRE la cresta del suelo, no dentro de la masa
   // negra, para que las pencas se recorten contra el cielo. Antes quedaban
@@ -133,7 +138,7 @@ function escenaQueretaro(semilla, W = 1600, H = 900) {
     const i = Math.min(suelo.length - 1, Math.max(0, Math.round(x / 12)));
     return suelo[i][1];
   };
-  for (let i = 0; i < 11; i++) {
+  for (let i = 0; conMagueyes && i < 11; i++) {
     const mx = W * 0.03 + r() * W * 0.94;
     const my = alturaEn(mx) + 4;
     const s2 = 38 + r() * 66;
@@ -154,11 +159,11 @@ function escenaQueretaro(semilla, W = 1600, H = 900) {
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid slice" fill="none">
 <defs>
   <linearGradient id="cielo" x1="0" y1="0" x2="0" y2="1">
-    <stop offset="0" stop-color="${TINTA}"/>
-    <stop offset="0.28" stop-color="${AZUL_HONDO}"/>
-    <stop offset="0.5" stop-color="${AZUL}"/>
-    <stop offset="0.63" stop-color="${mezclar(AZUL, ROJO, 0.6)}"/>
-    <stop offset="0.72" stop-color="${AMBAR}"/>
+    <stop offset="0" stop-color="${cielo[0]}"/>
+    <stop offset="0.28" stop-color="${cielo[1]}"/>
+    <stop offset="0.5" stop-color="${cielo[2]}"/>
+    <stop offset="0.63" stop-color="${cielo[3]}"/>
+    <stop offset="0.72" stop-color="${cielo[4]}"/>
   </linearGradient>
   <filter id="suave" x="-30%" y="-300%" width="160%" height="700%">
     <feGaussianBlur stdDeviation="7"/>
@@ -241,12 +246,34 @@ ${m.join('\n')}
 `;
 }
 
+/* Paletas por momento del día. Todas salen de la gama institucional: sólo
+   cambia el peso entre el azul del escudo, el rojo y el ámbar. */
+const CIELOS = {
+  atardecer: [TINTA, AZUL_HONDO, AZUL, mezclar(AZUL, ROJO, 0.6), AMBAR],
+  amanecer: [AZUL_HONDO, AZUL, mezclar(AZUL, AMBAR, 0.35), mezclar(AMBAR, ROJO, 0.35), '#ffd79a'],
+  mediodia: [AZUL_HONDO, AZUL, mezclar(AZUL, '#7fa6ff', 0.5), '#a9c4ff', '#e8eeff'],
+  noche: ['#05070f', TINTA, AZUL_HONDO, AZUL, mezclar(AZUL, AMBAR, 0.25)],
+  tormenta: [TINTA, AZUL_HONDO, mezclar(AZUL, ROJO, 0.3), mezclar(ROJO, AZUL, 0.5), mezclar(ROJO, AMBAR, 0.4)],
+};
+
+/** Escenas para los huecos de imagen del sitio: cada una con su semilla, su
+ *  paleta y su composición, para que no se repitan entre secciones. */
+const ESCENAS = [
+  ['fondo-preescolar', 4101, { cielo: CIELOS.amanecer, conAcueducto: false }],
+  ['fondo-primaria', 5202, { cielo: CIELOS.mediodia, conAcueducto: false }],
+  ['fondo-secundaria', 6303, { cielo: CIELOS.atardecer }],
+  ['fondo-preparatoria', 7404, { cielo: CIELOS.noche }],
+  ['fondo-vida', 8505, { cielo: CIELOS.tormenta, conAcueducto: false }],
+  ['fondo-instituto', 9606, { cielo: CIELOS.atardecer, conMagueyes: false }],
+];
+
 const SALIDAS = [
   ['escena-queretaro', escenaQueretaro(90210)],
   ['vineta-preescolar', vineta(11, AMBAR, 'bloques')],
   ['vineta-primaria', vineta(22, '#4d63e0', 'libro')],
   ['vineta-secundaria', vineta(33, '#4d63e0', 'atomo')],
   ['vineta-preparatoria', vineta(44, ROJO, 'codigo')],
+  ...ESCENAS.map(([nombre, semilla, v]) => [nombre, escenaQueretaro(semilla, 1600, 1000, v)]),
 ];
 
 for (const [nombre, svg] of SALIDAS) {

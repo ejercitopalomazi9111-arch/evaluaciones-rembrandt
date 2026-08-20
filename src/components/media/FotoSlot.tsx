@@ -45,20 +45,20 @@ export function FotoSlot({
 
   return (
     <div
-      className={`${marco} grano bg-azul-tenue ring-1 ring-azul/25`}
+      className={`${marco} grano bg-azul-hondo/50 ring-1 ring-white/12`}
       role="img"
       aria-label={`Espacio reservado para una fotografía: ${slot.alt}`}
     >
       {/* marcas de registro, como un grano técnico */}
-      <span aria-hidden="true" className="absolute top-3 left-3 h-4 w-px bg-azul/40" />
-      <span aria-hidden="true" className="absolute top-3 left-3 h-px w-4 bg-azul/40" />
-      <span aria-hidden="true" className="absolute right-3 bottom-3 h-4 w-px bg-azul/40" />
-      <span aria-hidden="true" className="absolute right-3 bottom-3 h-px w-4 bg-azul/40" />
+      <span aria-hidden="true" className="absolute top-3 left-3 h-4 w-px bg-white/25" />
+      <span aria-hidden="true" className="absolute top-3 left-3 h-px w-4 bg-white/25" />
+      <span aria-hidden="true" className="absolute right-3 bottom-3 h-4 w-px bg-white/25" />
+      <span aria-hidden="true" className="absolute right-3 bottom-3 h-px w-4 bg-white/25" />
 
       <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 p-5 text-center">
         <svg
           viewBox="0 0 24 24"
-          className="size-7 text-azul/55"
+          className="size-7 text-white/45"
           fill="none"
           stroke="currentColor"
           strokeWidth="1.6"
@@ -67,10 +67,10 @@ export function FotoSlot({
           <path d="M3 7.5h4l1.5-2.5h7L17 7.5h4v12H3z" />
           <circle cx="12" cy="13" r="3.6" />
         </svg>
-        <p className="font-mono text-[0.58rem] font-bold tracking-[0.18em] text-azul/75 uppercase">
+        <p className="font-mono text-[0.58rem] font-bold tracking-[0.18em] text-white/60 uppercase">
           Espacio para fotografía
         </p>
-        <p className="max-w-[26ch] font-mono text-[0.6rem] leading-relaxed text-azul/80">
+        <p className="max-w-[26ch] font-mono text-[0.6rem] leading-relaxed text-white/55">
           {slot.id}
         </p>
       </div>

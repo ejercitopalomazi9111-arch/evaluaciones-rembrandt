@@ -3,9 +3,9 @@
 import { useEffect, useId, useRef, type ReactNode } from 'react';
 
 const BASE_CAMPO =
-  'block w-full min-h-(--spacing-toque) border border-white/12 bg-azul-hondo/60 px-4 py-3 text-base ' +
-  'transition-colors placeholder:text-white/70/60 focus:border-azul focus:outline-none ' +
-  'aria-[invalid=true]:border-rojo aria-[invalid=true]:bg-rojo-tenue/40';
+  'block w-full min-h-(--spacing-toque) border border-white/20 bg-tinta/70 px-4 py-3 text-base text-white ' +
+  'transition-colors placeholder:text-white/45 focus:border-rojo focus:bg-tinta focus:outline-none ' +
+  'aria-[invalid=true]:border-rojo aria-[invalid=true]:bg-rojo/12';
 
 function Etiqueta({ htmlFor, children, opcional }: { htmlFor: string; children: ReactNode; opcional?: boolean }) {
   return (

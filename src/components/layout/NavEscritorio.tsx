@@ -32,12 +32,12 @@ export function NavEscritorio() {
 
               {item.hijos && (
                 <div className="invisible absolute top-full left-0 pt-2 opacity-0 transition-[opacity,visibility] duration-150 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
-                  <ul className="w-64 list-none border border-white/12 bg-azul-hondo/60 shadow-[6px_6px_0_0_var(--color-tinta)]">
+                  <ul className="w-64 list-none border border-white/15 bg-tinta shadow-[6px_6px_0_0_rgba(0,0,0,0.5)]">
                     {item.hijos.map((h) => (
                       <li key={h.href} className="border-b border-white/12 last:border-b-0">
                         <Link
                           href={h.href}
-                          className="block px-4 py-3 transition-colors hover:bg-azul-tenue"
+                          className="block px-4 py-3 transition-colors hover:bg-white/10"
                         >
                           <span className="block text-sm font-bold">{h.label}</span>
                           {h.descripcion && (

@@ -5,7 +5,7 @@ import { Container, Eyebrow, Section, Tag, Button } from '@/components/ui/primit
 import { Icon } from '@/components/ui/Icon';
 import { Reveal } from '@/components/ui/Reveal';
 import { PageHero } from '@/components/layout/PageHero';
-import { FotoSlot, GaleriaSlots } from '@/components/media/FotoSlot';
+import { FotoSlot } from '@/components/media/FotoSlot';
 import { BandaDiagonal } from './BandaDiagonal';
 import { CtaRecorrido } from './CtaRecorrido';
 
@@ -43,7 +43,7 @@ export function NivelTemplate({ nivel, extra }: { nivel: Nivel; extra?: ReactNod
 
               <dl className="mt-10 grid grid-cols-2 gap-px bg-white/12">
                 {nivel.datosClave.map((d) => (
-                  <div key={d.etiqueta} className="bg-transparent p-5">
+                  <div key={d.etiqueta} className="bg-azul-hondo/45 p-5">
                     <dt className="font-mono text-[0.58rem] font-bold tracking-[0.18em] text-white/70 uppercase">
                       {d.etiqueta}
                     </dt>
@@ -119,10 +119,6 @@ export function NivelTemplate({ nivel, extra }: { nivel: Nivel; extra?: ReactNod
                 Cómo llegar →
               </a>
             </div>
-          </div>
-
-          <div className="mt-10">
-            <GaleriaSlots slots={nivel.galeria} columnas={2} />
           </div>
 
           <div className="mt-10 flex flex-col gap-3 sm:flex-row">

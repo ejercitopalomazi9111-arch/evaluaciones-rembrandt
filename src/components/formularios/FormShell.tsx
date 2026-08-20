@@ -63,7 +63,7 @@ function PanelFallback({
   mensaje: string;
 }) {
   return (
-    <div className="border border-rojo bg-rojo-tenue/50 p-6">
+    <div className="border border-rojo bg-rojo/12 p-6">
       <p className="font-mono text-[0.6rem] font-bold tracking-[0.2em] text-rojo-claro uppercase">
         Envío no disponible
       </p>
@@ -131,7 +131,7 @@ export function FormShell({
 
       <div aria-live="polite">
         {estado.estado === 'invalido' && (
-          <div className="border border-rojo bg-rojo-tenue/50 p-5">
+          <div className="border border-rojo bg-rojo/12 p-5">
             <p
               ref={resumenRef}
               tabIndex={-1}

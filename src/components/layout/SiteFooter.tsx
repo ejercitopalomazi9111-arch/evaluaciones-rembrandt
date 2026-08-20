@@ -12,7 +12,7 @@ export function SiteFooter() {
   return (
     <footer className="relative mt-auto bg-tinta text-hueso no-imprimir">
       {/* cuña diagonal — el gesto del membrete */}
-      <div aria-hidden="true" className="relative h-16 overflow-hidden bg-transparent sm:h-24">
+      <div aria-hidden="true" className="relative h-16 overflow-hidden sm:h-24">
         <div
           className="absolute inset-0 bg-tinta"
           style={{ clipPath: 'polygon(0 100%, 100% 0, 100% 100%)' }}

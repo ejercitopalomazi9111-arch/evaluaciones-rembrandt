@@ -53,10 +53,11 @@ export const NIVELES = {
     acento: 'ambar',
     hero: {
       id: 'preescolar-hero',
-      alt: 'Alumnas y alumnos de preescolar en actividad en el Jardín de Niños Las Rosas',
+      alt: 'Ilustración del paisaje de Querétaro que acompaña al nivel de preescolar',
       ratio: '4/3',
-      nota: 'Foto horizontal luminosa de un salón o patio de preescolar en actividad. Recomendado: sin rostros identificables o con consentimiento firmado de padres y tutores.',
+      nota: 'Sustituible por una fotografía real del nivel cuando la escuela la entregue.',
       prioridad: true,
+      src: '/ilustraciones/fondo-preescolar.svg',
     },
     galeria: [
       {
@@ -119,10 +120,11 @@ export const NIVELES = {
     acento: 'azul',
     hero: {
       id: 'primaria-hero',
-      alt: 'Alumnas y alumnos de primaria del Instituto Rembrandt en clase',
+      alt: 'Ilustración del paisaje de Querétaro que acompaña al nivel de primaria',
       ratio: '16/9',
-      nota: 'Foto horizontal de un salón de primaria en actividad o del patio en hora de clase.',
+      nota: 'Sustituible por una fotografía real del nivel cuando la escuela la entregue.',
       prioridad: true,
+      src: '/ilustraciones/fondo-primaria.svg',
     },
     galeria: [
       {
@@ -186,10 +188,11 @@ export const NIVELES = {
     acento: 'azul',
     hero: {
       id: 'secundaria-hero',
-      alt: 'Alumnas y alumnos de secundaria del Instituto Rembrandt',
+      alt: 'Ilustración del paisaje de Querétaro que acompaña al nivel de secundaria',
       ratio: '16/9',
-      nota: 'Foto horizontal de un grupo de secundaria en clase, laboratorio o actividad.',
+      nota: 'Sustituible por una fotografía real del nivel cuando la escuela la entregue.',
       prioridad: true,
+      src: '/ilustraciones/fondo-secundaria.svg',
     },
     galeria: [
       {
@@ -254,10 +257,11 @@ export const NIVELES = {
     acento: 'rojo',
     hero: {
       id: 'preparatoria-hero',
-      alt: 'Estudiantes de la preparatoria del Instituto Rembrandt en el laboratorio de cómputo',
+      alt: 'Ilustración del paisaje de Querétaro que acompaña al nivel de preparatoria',
       ratio: '16/9',
-      nota: 'Foto horizontal del laboratorio de cómputo con estudiantes trabajando. Es la imagen más importante del sitio.',
+      nota: 'Sustituible por una fotografía real del nivel cuando la escuela la entregue.',
       prioridad: true,
+      src: '/ilustraciones/fondo-preparatoria.svg',
     },
     galeria: [
       {

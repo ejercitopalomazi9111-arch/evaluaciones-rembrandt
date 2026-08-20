@@ -190,10 +190,10 @@ export function NumeroIndice({
 export function Tag({ children, tono = 'azul' }: { children: ReactNode; tono?: 'azul' | 'rojo' | 'linea' }) {
   const c =
     tono === 'rojo'
-      ? 'bg-rojo-tenue text-rojo-claro'
+      ? 'bg-rojo/15 text-rojo-claro'
       : tono === 'linea'
         ? 'text-white/70 ring-1 ring-white/12'
-        : 'bg-azul-tenue text-azul-vivo';
+        : 'bg-white/10 text-white/85';
   return (
     <span className={`inline-block px-3 py-1.5 font-mono text-xs font-semibold tracking-wide ${c}`}>
       {children}
@@ -252,7 +252,7 @@ export function IndiceSeccion({
   const texto = tono === 'claro' ? 'text-white/55' : 'text-white/70';
   return (
     <div className="flex min-w-0 flex-1 items-center gap-4 sm:gap-6">
-      <span aria-hidden="true" className={`h-px flex-1 ${regla}`} />
+      <span aria-hidden="true" className={`regla-crece h-px flex-1 ${regla}`} />
       <p className={`shrink-0 font-mono text-[0.62rem] tracking-[0.18em] uppercase ${texto}`}>
         <span className="tabular font-bold text-rojo-claro">{numero}</span>
         <span aria-hidden="true"> / </span>

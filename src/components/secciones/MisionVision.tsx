@@ -14,7 +14,7 @@ export function MisionVision() {
         <Eyebrow>Lo que nos comprometimos a hacer</Eyebrow>
         <div className="mt-10 grid gap-px bg-white/12 md:grid-cols-2">
           {bloques.map((b) => (
-            <article key={b.id} id={b.id} className="bg-transparent p-8 sm:p-10">
+            <article key={b.id} id={b.id} className="bg-azul-hondo/45 p-8 sm:p-10">
               <h2
                 className="font-mono text-eyebrow font-bold tracking-[0.2em] text-rojo-claro uppercase"
               >

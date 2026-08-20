@@ -17,13 +17,15 @@ export function SiteHeader() {
           background: 'linear-gradient(90deg, var(--color-azul) 0 45%, var(--color-rojo) 45% 100%)',
         }}
       />
-      <div /* Sin backdrop-filter a propósito: en un header pegajoso obliga a
-           Chrome a recomponer en cada fotograma de scroll. Fondo sólido. */
-        className="border-b border-white/12 bg-transparent">
+      {/* Fondo SÓLIDO y opaco, sin backdrop-filter. Dos razones: el filtro
+          obliga a Chrome a recomponer en cada fotograma de scroll, y un header
+          pegajoso translúcido deja ver el contenido pasar por debajo, que se
+          lee como texto encimado. */}
+      <div className="border-b border-white/12 bg-tinta">
         <Container>
           <div className="flex h-16 items-center justify-between gap-4 sm:h-[4.5rem]">
             <Link href="/" className="shrink-0" aria-label="Instituto Rembrandt — Inicio">
-              <Lockup />
+              <Lockup tono="claro" />
             </Link>
 
             <NavEscritorio />
