@@ -6,12 +6,10 @@ const nextConfig: NextConfig = {
     // `quality` distinto del default rompe el build.
     qualities: [70, 82, 90],
     formats: ['image/avif', 'image/webp'],
-    // Las ilustraciones son SVG propios, generados por `scripts/generar-ilustraciones.mjs`.
-    // No hay SVG de terceros ni subidos por usuarios, y aun así se sirven con una CSP
-    // estricta que impide cualquier script dentro del archivo.
-    dangerouslyAllowSVG: true,
-    contentDispositionType: 'attachment',
-    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    // `dangerouslyAllowSVG` hacía falta cuando las viñetas de nivel eran SVG y
+    // pasaban por next/image. Ahora el arte es WebP y los SVG que quedan
+    // (`public/arte/`) entran como background-image, sin tocar el optimizador,
+    // así que la bandera se retira: menos superficie por nada a cambio.
   },
   poweredByHeader: false,
   async headers() {

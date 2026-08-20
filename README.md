@@ -198,6 +198,25 @@ Deliberadamente no representan el plantel ni imitan la obra de ningún pintor: l
 entran por `FotoSlot`, y el vínculo con el nombre del instituto se expresa con geometría, no
 copiando cuadros.
 
+### Ilustración generada con IA
+
+Las diez piezas de `public/img/` (la escena del hero, las cuatro viñetas de nivel, los cuatro
+fondos de nivel y la banda de vida escolar) están generadas con un modelo de imagen a partir de
+encargos escritos para este proyecto, sobre la paleta del escudo. La receta vive en
+`scripts/generar-arte-ia.mjs`: prompts, semillas fijas y post-proceso a WebP.
+
+**No se regeneran en local.** La salida a internet del entorno de desarrollo pasa por un proxy con
+lista blanca que no alcanza los CDN de imagen, así que la generación corre en GitHub Actions
+(`.github/workflows/generar-arte.yml`) y el propio workflow committea el resultado. Para pedir otra
+toma, cambia la semilla o el prompt de la pieza en el script y haz push: el push de ese archivo
+dispara el workflow.
+
+Las semillas están fijas a propósito, así que dos ejecuciones dan el mismo resultado y el commit es
+reproducible.
+
+Igual que el arte generativo, **no representan el plantel**: son ilustración, no fotografía. Las
+fotos reales siguen entrando por `FotoSlot`.
+
 ### Marca
 
 `public/marca/escudo.png` se recortó del membrete oficial y sólo existe a baja resolución, por lo
