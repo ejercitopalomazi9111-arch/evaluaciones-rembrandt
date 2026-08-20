@@ -2,6 +2,7 @@ import Image from 'next/image';
 
 
 import { INSTITUCION } from '@/content/institucion';
+import { estatico } from '@/lib/ruta';
 
 /**
  * El escudo se recortó del membrete oficial y sólo existe a baja resolución,
@@ -10,7 +11,7 @@ import { INSTITUCION } from '@/content/institucion';
 export function Escudo({ size = 44, className = '' }: { size?: number; className?: string }) {
   return (
     <Image
-      src="/marca/escudo.png"
+      src={estatico('/marca/escudo.png')}
       alt=""
       width={size}
       height={Math.round((size * 786) / 714)}
@@ -33,7 +34,7 @@ export function Mascota({
 }) {
   return (
     <Image
-      src="/marca/mascota.png"
+      src={estatico('/marca/mascota.png')}
       alt="Bisonte, mascota del Instituto Rembrandt, con el jersey del escudo institucional"
       width={width}
       height={Math.round((width * 669) / 373)}

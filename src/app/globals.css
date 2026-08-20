@@ -103,6 +103,10 @@
      cachea. Sustituye a las retículas de gradientes repetidos que había antes,
      que se repintaban en cada fotograma de scroll y eran la causa principal de
      que la página fuera a tirones. */
+  /* Los valores reales los pone `layout.tsx` como estilo en línea sobre
+     <body>: llevan el prefijo del despliegue (en GitHub Pages el sitio cuelga
+     de /<repo>/) y el CSS no puede leer la variable de entorno del build.
+     Estos son el respaldo para cuando el sitio vive en la raíz. */
   --grano: url('/grano.png');
   --escena: url('/img/escena-queretaro.webp');
 }

@@ -1,56 +1,19 @@
 'use server';
 
+import {
+  construirFallback,
+  esTipo,
+  folio,
+  pareceBot,
+  redactar,
+  type EstadoFormulario,
+} from '@/app/actions/comun';
 import { CONTACTO } from '@/content/institucion';
-import { ESQUEMAS, ETIQUETAS, TITULOS, type TipoSolicitud } from '@/lib/esquemas';
+import { ESQUEMAS, TITULOS, type TipoSolicitud } from '@/lib/esquemas';
 import { validar } from '@/lib/validacion';
 
-export interface EnlacesFallback {
-  readonly mailto: string;
-  readonly whatsapp?: string;
-  readonly tel: string;
-}
-
-export type EstadoFormulario =
-  | { readonly estado: 'inicial' }
-  | {
-      readonly estado: 'invalido';
-      readonly errores: Readonly<Record<string, string>>;
-      readonly valores: Readonly<Record<string, string>>;
-    }
-  | { readonly estado: 'sin-configurar'; readonly fallback: EnlacesFallback }
-  | { readonly estado: 'error'; readonly mensaje: string; readonly fallback: EnlacesFallback }
-  | { readonly estado: 'ok'; readonly folio: string; readonly nombre: string };
-
-const ESTADO_INICIAL: EstadoFormulario = { estado: 'inicial' };
-export { ESTADO_INICIAL };
-
-function esTipo(v: unknown): v is TipoSolicitud {
-  return v === 'informes' || v === 'recorrido' || v === 'contacto';
-}
-
-function redactar(tipo: TipoSolicitud, valores: Record<string, string>): string {
-  const lineas = Object.entries(valores)
-    .filter(([, v]) => v.trim().length > 0)
-    .map(([k, v]) => `${ETIQUETAS[k] ?? k}: ${v.trim()}`);
-  return `${TITULOS[tipo]}\n\n${lineas.join('\n')}`;
-}
-
-function construirFallback(tipo: TipoSolicitud, valores: Record<string, string>): EnlacesFallback {
-  const cuerpo = redactar(tipo, valores);
-  const asunto = `${TITULOS[tipo]} — sitio web`;
-  const wa = process.env.NEXT_PUBLIC_WHATSAPP?.replace(/\D/g, '');
-
-  return {
-    mailto: `mailto:${CONTACTO.email}?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(cuerpo)}`,
-    // Sólo si la escuela confirmó que ese número tiene WhatsApp.
-    whatsapp: wa ? `https://wa.me/${wa}?text=${encodeURIComponent(cuerpo)}` : undefined,
-    tel: `tel:${CONTACTO.telefonoE164}`,
-  };
-}
-
-function folio(): string {
-  return `REM-${Date.now().toString(36).toUpperCase()}`;
-}
+export { ESTADO_INICIAL } from '@/app/actions/comun';
+export type { EnlacesFallback, EstadoFormulario } from '@/app/actions/comun';
 
 /**
  * Una sola acción para los tres formularios del sitio.
@@ -58,6 +21,9 @@ function folio(): string {
  * Si no hay RESEND_API_KEY —o el envío falla— NO se pierde nada de lo que la
  * persona escribió: se devuelve un enlace mailto/WhatsApp con el mensaje ya
  * redactado. El formulario siempre tiene un camino que funciona.
+ *
+ * El gemelo de este archivo es `enviar-solicitud.estatico.ts`, que es el que
+ * entra en el export estático, donde no hay servidor que pueda enviar nada.
  */
 export async function enviarSolicitud(
   _anterior: EstadoFormulario,
@@ -66,23 +32,7 @@ export async function enviarSolicitud(
   const tipoBruto = datos.get('tipo');
   const tipo: TipoSolicitud = esTipo(tipoBruto) ? tipoBruto : 'contacto';
 
-  // ── Anti-spam sin estado ────────────────────────────────────────────────
-  // 1) Honeypot: campo fuera de pantalla que una persona nunca llena.
-  const trampa = datos.get('sitio_web');
-  if (typeof trampa === 'string' && trampa.trim().length > 0) {
-    // Se responde "ok" para no darle señal al bot.
-    return { estado: 'ok', folio: folio(), nombre: '' };
-  }
-  // 2) Tiempo mínimo de llenado. El campo lo pone el cliente al montar, porque
-  //    las páginas son estáticas y una marca de tiempo del servidor quedaría
-  //    congelada en el momento del build. Si no hay JS, no se comprueba.
-  const ts = datos.get('_ts');
-  if (typeof ts === 'string' && ts.length > 0) {
-    const transcurrido = Date.now() - Number(ts);
-    if (Number.isFinite(transcurrido) && (transcurrido < 2500 || transcurrido > 7_200_000)) {
-      return { estado: 'ok', folio: folio(), nombre: '' };
-    }
-  }
+  if (pareceBot(datos)) return { estado: 'ok', folio: folio(), nombre: '' };
 
   const resultado = validar(datos, ESQUEMAS[tipo]);
   if (!resultado.ok) {

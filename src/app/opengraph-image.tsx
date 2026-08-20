@@ -3,6 +3,13 @@ import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { INSTITUCION } from '@/content/institucion';
 
+/**
+ * `force-static` es obligatorio para el export estático: sin él, Next trata la
+ * ruta como dinámica y el build aborta. La imagen se genera en el build y no
+ * cambia después.
+ */
+export const dynamic = 'force-static';
+
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 export const alt = `${INSTITUCION.nombreLegal} — Preescolar, Primaria, Secundaria y Preparatoria`;

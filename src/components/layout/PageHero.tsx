@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import type { ReactNode } from 'react';
 import { Container, Eyebrow } from '@/components/ui/primitivas';
+import { estatico } from '@/lib/ruta';
 
 /** Encabezado interior. Mantiene la geometría del hero sin competir con él. */
 export function PageHero({
@@ -30,7 +31,7 @@ export function PageHero({
         <div
           aria-hidden="true"
           className="absolute inset-y-0 right-0 hidden w-[46%] bg-cover bg-right bg-no-repeat opacity-75 lg:block"
-          style={{ backgroundImage: `url(${arte})` }}
+          style={{ backgroundImage: `url(${estatico(arte)})` }}
         />
       ) : (
         <div

@@ -8,6 +8,7 @@ import { Reveal } from '@/components/ui/Reveal';
 import { Mascota } from '@/components/marca/Marca';
 import { EJES } from '@/content/vida-escolar';
 import { seoDe } from '@/content/seo';
+import { estatico } from '@/lib/ruta';
 
 export const metadata: Metadata = seoDe('/vida-escolar');
 
@@ -72,7 +73,8 @@ export default function VidaEscolarPage() {
             <div
               role="img"
               aria-label="Ilustración del paisaje de Querétaro al atardecer"
-              className="acerca size-full bg-[url('/img/fondo-vida.webp')] bg-cover bg-center"
+              className="acerca size-full bg-cover bg-center"
+              style={{ backgroundImage: `url(${estatico('/img/fondo-vida.webp')})` }}
             />
           </div>
         </Container>

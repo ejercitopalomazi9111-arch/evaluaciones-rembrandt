@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import type { MediaSlot } from '@/content/types';
+import { estatico } from '@/lib/ruta';
 
 const RATIO: Record<MediaSlot['ratio'], string> = {
   '16/9': 'aspect-[16/9]',
@@ -31,7 +32,7 @@ export function FotoSlot({
     return (
       <div className={marco}>
         <Image
-          src={slot.src}
+          src={estatico(slot.src)}
           alt={slot.alt}
           fill
           sizes={sizes}

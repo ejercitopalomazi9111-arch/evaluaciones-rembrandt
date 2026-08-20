@@ -8,6 +8,7 @@ import { BarraAccionMovil } from '@/components/layout/BarraAccionMovil';
 import { JsonLd } from '@/components/ui/primitivas';
 import { CONTACTO, INSTITUCION, SEDES } from '@/content/institucion';
 import { SITE_URL } from '@/content/seo';
+import { estatico } from '@/lib/ruta';
 
 /**
  * Archivo: grotesca variable con eje de ancho. Los títulos van en 112–115% de
@@ -78,7 +79,18 @@ const ORGANIZACION = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es-MX" className={`${archivo.variable} ${mono.variable}`}>
-      <body className="flex min-h-[100dvh] flex-col pb-14 lg:pb-0">
+      <body
+        className="flex min-h-[100dvh] flex-col pb-14 lg:pb-0"
+        /* El CSS no puede leer la variable de entorno del build, así que las
+           dos texturas que van por `url()` se inyectan aquí ya con el prefijo
+           del despliegue. Sin esto, en GitHub Pages salen 404. */
+        style={
+          {
+            '--grano': `url(${estatico('/grano.png')})`,
+            '--escena': `url(${estatico('/img/escena-queretaro.webp')})`,
+          } as React.CSSProperties
+        }
+      >
         <a
           href="#contenido"
           className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-200 focus:bg-tinta focus:px-5 focus:py-3 focus:font-mono focus:text-xs focus:tracking-widest focus:text-white focus:uppercase"
@@ -97,7 +109,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Motor de movimiento: lienzos, contadores y revelados. Un solo
             archivo sin dependencias, diferido, compartido con la versión
             empaquetada en un archivo. */}
-        <script src="/lienzo.js" defer />
+        <script src={estatico('/lienzo.js')} defer />
       </body>
     </html>
   );

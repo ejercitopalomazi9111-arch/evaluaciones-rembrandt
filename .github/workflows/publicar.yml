@@ -1,0 +1,74 @@
+# Publica el sitio en GitHub Pages.
+#
+# Pages sólo sirve archivos estáticos, así que se compila con
+# `EXPORT_ESTATICO=1` (ver `next.config.ts`): sin optimización de imágenes al
+# vuelo, sin cabeceras desde Next y con el formulario en su camino de respaldo
+# —correo, WhatsApp, llamada— porque no hay servidor que mande nada.
+#
+# El sitio queda en https://<usuario>.github.io/<repo>/. Ese prefijo se lee de
+# la propia configuración de Pages y se pasa al build: `basePath` de Next no
+# alcanza a los archivos de `public/`, de eso se encarga `src/lib/ruta.ts`.
+name: Publicar el sitio
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Una publicación a la vez, sin cancelar la que ya esté corriendo: cancelar a
+# medias puede dejar el sitio servido a medio actualizar.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  construir:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      # `enablement: true` da de alta Pages la primera vez, para no depender de
+      # que alguien lo active a mano en Settings.
+      - id: pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - run: npm ci
+
+      - run: npm run build
+        env:
+          EXPORT_ESTATICO: '1'
+          RUTA_BASE: ${{ steps.pages.outputs.base_path }}
+          NEXT_PUBLIC_RUTA_BASE: ${{ steps.pages.outputs.base_path }}
+          # De aquí salen el canonical, el sitemap y las tarjetas de Open Graph.
+          NEXT_PUBLIC_SITE_URL: ${{ steps.pages.outputs.base_url }}
+
+      # Sin este archivo, Jekyll se traga todo lo que empieza por guion bajo y
+      # el sitio se queda sin `_next/`: ni estilos ni JavaScript.
+      - run: touch out/.nojekyll
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: out
+
+  desplegar:
+    needs: construir
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.desplegar.outputs.page_url }}
+    steps:
+      - id: desplegar
+        uses: actions/deploy-pages@v4

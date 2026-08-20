@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { NIVELES_LISTA } from '@/content/niveles';
 import { Container, Eyebrow, IndiceSeccion, Section } from '@/components/ui/primitivas';
 import { Reveal } from '@/components/ui/Reveal';
+import { estatico } from '@/lib/ruta';
 
 const ACENTO = {
   azul: { barra: 'bg-azul-vivo', texto: 'text-azul-vivo' },
@@ -45,7 +46,7 @@ export function NivelesGrid({ titulo = 'Un instituto, cuatro etapas' }: { titulo
                   >
                     <div className="relative aspect-[4/3] overflow-hidden">
                       <Image
-                        src={`/img/vineta-${nivel.slug}.webp`}
+                        src={estatico(`/img/vineta-${nivel.slug}.webp`)}
                         alt=""
                         width={400}
                         height={400}

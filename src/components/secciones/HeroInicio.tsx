@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { Container, Eyebrow, Button } from '@/components/ui/primitivas';
 import { SelloDGETI } from '@/components/marca/Marca';
 import { CONTACTO } from '@/content/institucion';
+import { estatico } from '@/lib/ruta';
 
 const DATOS: { valor: string; etiqueta: string; contador?: number }[] = [
   { valor: '4', etiqueta: 'Niveles educativos', contador: 4 },
@@ -96,7 +97,7 @@ export function HeroInicio() {
           <div className="relative hidden justify-self-end lg:block">
             <SelloDGETI className="absolute -top-2 right-0 z-10" />
             <Image
-              src="/marca/mascota.png"
+              src={estatico('/marca/mascota.png')}
               alt="Bisonte, mascota del Instituto Rembrandt"
               width={300}
               height={538}
