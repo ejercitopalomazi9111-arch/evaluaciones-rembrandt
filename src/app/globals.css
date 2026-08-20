@@ -1,26 +1,422 @@
 @import "tailwindcss";
 
+/* ═══════════════════════════════════════════════════════════════════════════
+   INSTITUTO REMBRANDT DE QUERÉTARO — Sistema de diseño "Geometría tecnológica"
+   Derivado de la papelería oficial: cuña diagonal roja/azul del pie y la doble
+   regla azul+roja de la cabecera. Esquinas vivas, retícula de grano técnico,
+   sombras duras desplazadas. En el membrete el nombre va en ROJO y el azul es
+   estructura: por eso aquí el rojo es la acción y el azul es el suelo.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@theme {
+  /* ── Color ─────────────────────────────────────────────────────────── */
+  --color-tinta: #0b0e1a;
+  --color-tinta-2: #141a30;
+  --color-tinta-suave: #474d63;
+
+  --color-azul: #1b2a8f;          /* azul institucional del membrete */
+  --color-azul-hondo: #0d1450;
+  --color-azul-vivo: #2e42c8;
+  --color-azul-tenue: #e5e8f6;
+
+  --color-rojo: #d0202e;          /* rojo del escudo — display y gráficos */
+  --color-rojo-texto: #a3141f;    /* superficies con texto blanco (AA 7:1) */
+  --color-rojo-tenue: #fbe9ea;
+  --color-rojo-claro: #ff4d5a;   /* rojo para texto sobre tinta */
+
+  --color-hueso: #f4f3ef;         /* fondo cálido — anti "azul grisáceo" */
+  --color-hueso-2: #eceae3;
+  --color-papel: #ffffff;
+
+  --color-linea: #d9d6cd;
+  --color-linea-oscura: #2a3150;
+
+  --color-ambar: #e8a317;         /* calidez para preescolar/primaria */
+  --color-verde: #12784a;
+
+  /* ── Tipografía ────────────────────────────────────────────────────── */
+  --font-sans: var(--fuente-archivo), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--fuente-archivo), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--fuente-mono), ui-monospace, "SF Mono", monospace;
+
+  /* escala fluida — de 320px a 1440px */
+  --text-eyebrow: clamp(0.6875rem, 0.66rem + 0.13vw, 0.8125rem);
+  --text-eyebrow--line-height: 1;
+  --text-eyebrow--letter-spacing: 0.16em;
+
+  --text-xs: clamp(0.75rem, 0.73rem + 0.10vw, 0.8125rem);
+  --text-sm: clamp(0.875rem, 0.85rem + 0.12vw, 0.9375rem);
+  --text-base: clamp(1rem, 0.97rem + 0.16vw, 1.0625rem);
+  --text-base--line-height: 1.62;
+  --text-lg: clamp(1.0625rem, 1.01rem + 0.28vw, 1.25rem);
+  --text-lg--line-height: 1.55;
+  --text-xl: clamp(1.25rem, 1.13rem + 0.58vw, 1.5rem);
+  --text-xl--line-height: 1.35;
+  --text-2xl: clamp(1.5rem, 1.31rem + 0.95vw, 2rem);
+  --text-2xl--line-height: 1.18;
+  --text-2xl--letter-spacing: -0.015em;
+  --text-3xl: clamp(1.875rem, 1.48rem + 1.95vw, 2.75rem);
+  --text-3xl--line-height: 1.06;
+  --text-3xl--letter-spacing: -0.025em;
+  --text-4xl: clamp(2.25rem, 1.58rem + 3.35vw, 3.75rem);
+  --text-4xl--line-height: 1.0;
+  --text-4xl--letter-spacing: -0.032em;
+  --text-hero: clamp(2.75rem, 1.35rem + 7vw, 6.75rem);
+  --text-hero--line-height: 0.9;
+  --text-hero--letter-spacing: -0.042em;
+
+  /* ── Radios: TOPE 3px en todo el namespace ─────────────────────────── */
+  --radius-xs: 0px;
+  --radius-sm: 1px;
+  --radius-md: 2px;
+  --radius-lg: 2px;
+  --radius-xl: 3px;
+  --radius-2xl: 3px;
+  --radius-3xl: 3px;
+  --radius-4xl: 3px;
+
+  /* ── Sombras duras, nunca difusas ──────────────────────────────────── */
+  --shadow-dura: 5px 5px 0 0 var(--color-tinta);
+  --shadow-dura-azul: 6px 6px 0 0 var(--color-azul);
+  --shadow-dura-roja: 5px 5px 0 0 var(--color-rojo);
+  --shadow-dura-sm: 3px 3px 0 0 var(--color-tinta);
+  --shadow-sm: none;
+  --shadow-md: none;
+  --shadow-lg: none;
+  --shadow-xl: none;
+  --shadow-2xl: none;
+
+  /* ── Espaciado ─────────────────────────────────────────────────────── */
+  --spacing-seccion: clamp(3.5rem, 2rem + 7vw, 8rem);
+  --spacing-gutter: clamp(1.125rem, 0.55rem + 2.7vw, 3rem);
+  --spacing-toque: 2.75rem;
+  --container-sitio: 78rem;
+
+  /* ── Movimiento ────────────────────────────────────────────────────── */
+  --ease-tecnico: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-corte: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* ── Geometría y textura (no son tokens de tema, son formas) ─────────────── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Grano: un PNG de 128px en `repeat`. Chrome lo trata como UNA textura y lo
+     cachea. Sustituye a las retículas de gradientes repetidos que había antes,
+     que se repintaban en cada fotograma de scroll y eran la causa principal de
+     que la página fuera a tirones. */
+  /* Los valores reales los pone `layout.tsx` como estilo en línea sobre
+     <body>: llevan el prefijo del despliegue (en GitHub Pages el sitio cuelga
+     de /<repo>/) y el CSS no puede leer la variable de entorno del build.
+     Estos son el respaldo para cuando el sitio vive en la raíz. */
+  --grano: url('/grano.png');
+  --escena: url('/img/escena-queretaro.webp');
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: 5.5rem;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  /* Terreno continuo azul profundo. Antes el sitio alternaba bloques claros y
+     oscuros y ese vaivén rompía la cohesión; ahora todo se asienta sobre el
+     mismo campo y el hueso queda para los bloques que quieren destacar. */
+  background:
+    radial-gradient(120% 80% at 70% 0%, #16205e 0%, transparent 60%),
+    linear-gradient(180deg, #0d1450 0%, #0b0e1a 55%, #0b0e1a 100%);
+  background-attachment: scroll;
+  color: #f4f3ef;
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: 1.62;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+
+/* Los títulos son la voz de la marca: Archivo muy ancho y muy apretado. */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-stretch: 112%;
+  text-wrap: balance;
+}
+
+p, li {
+  text-wrap: pretty;
+}
+
+::selection {
+  background: var(--color-rojo);
+  color: #fff;
+}
+
+*:focus-visible {
+  outline: 3px solid var(--color-rojo);
+  outline-offset: 3px;
+}
+
+/* Numerales de reporte donde importa la alineación */
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Utilidades del sistema ───────────────────────────────────────────── */
+
+/* Textura de grano sobre las superficies oscuras. Una sola imagen repetida,
+   sin gradientes que recalcular al desplazar. */
+.grano::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: var(--grano);
+  opacity: 0.5;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+/* Cortes diagonales — el gesto del membrete */
+.corte-abajo {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 4.5vw));
+}
+.corte-arriba {
+  clip-path: polygon(0 4.5vw, 100% 0, 100% 100%, 0 100%);
+}
+.corte-esquina-sm {
+  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%);
+}
+.corte-esquina {
+  clip-path: polygon(0 0, calc(100% - 26px) 0, 100% 26px, 100% 100%, 0 100%);
+}
+.corte-esquina-lg {
+  clip-path: polygon(0 0, calc(100% - 44px) 0, 100% 44px, 100% 100%, 0 100%);
+}
+
+/* La doble regla azul + roja de la cabecera institucional */
+.regla-institucional {
+  display: block;
+  height: 5px;
+  background: linear-gradient(90deg, var(--color-azul) 0 45%, var(--color-rojo) 45% 100%);
+}
+
+/* ── Entrada del hero: una secuencia, no efectos sueltos ──────────────────
+   Regla que no se negocia: NADA de animar `opacity` sobre texto. Un texto a
+   media transición no cumple contraste, y una auditoría lo marca con razón.
+   El titular se destapa con máscara (overflow oculto + desplazamiento), así
+   que va siempre a opacidad plena; el resto sólo se desliza.
+   Sólo `transform`: lo resuelve el compositor, sin recalcular layout. */
+@keyframes subir-tapado {
+  from { transform: translate3d(0, 100%, 0); }
+  to   { transform: none; }
+}
+@keyframes deslizar {
+  from { transform: translate3d(0, 20px, 0); }
+  to   { transform: none; }
+}
+
+@media (scripting: enabled) {
+  .entra > * {
+    animation: deslizar 0.6s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+  }
+  .entra > *:nth-child(1) { animation-delay: 0.05s; }
+  .entra > *:nth-child(2) { animation-delay: 0.12s; }
+  .entra > *:nth-child(3) { animation-delay: 0.22s; }
+  .entra > *:nth-child(4) { animation-delay: 0.32s; }
+  .entra > *:nth-child(5) { animation-delay: 0.42s; }
+  .entra > *:nth-child(6) { animation-delay: 0.52s; }
+
+  /* El titular sube línea por línea desde detrás de su propia máscara.
+     Es el momento firma de la portada. */
+  .titular .linea > span {
+    animation: subir-tapado 0.85s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+  }
+  .titular .linea:nth-child(1) > span { animation-delay: 0.1s; }
+  .titular .linea:nth-child(2) > span { animation-delay: 0.19s; }
+  .titular .linea:nth-child(3) > span { animation-delay: 0.28s; }
+}
+
+.titular .linea {
+  display: block;
+  overflow: hidden;
+  /* deja aire para las colas de la «p» y la «y»; sin esto la máscara las corta */
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+.titular .linea > span {
+  display: block;
+}
+
+/* Revelado al hacer scroll — sin librerías.
+   Dos decisiones deliberadas:
+   1. Va dentro de `scripting: enabled`. Sin JavaScript el contenido se muestra
+      normal en vez de quedarse invisible para siempre.
+   2. Anima sólo `transform`, no `opacity`. Un texto a medio desvanecer no
+      cumple contraste mientras dura la transición, y `transform` no afecta al
+      layout, así que tampoco produce saltos. */
+@media (scripting: enabled) {
+  .revelar {
+    transform: translate3d(0, 18px, 0);
+    transition: transform 0.5s var(--ease-tecnico);
+  }
+  .revelar[data-visible='true'] {
+    transform: none;
+  }
+}
+
+/* Trampa anti-spam: fuera de pantalla, no display:none (los bots la saltan) */
+.trampa {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .revelar {
+    transform: none;
+  }
+  .entra > *,
+  .titular .linea > span {
+    animation: none;
+  }
+}
+
+@media print {
+  .no-imprimir { display: none !important; }
+  body { background: #fff; }
+}
+
+/* ── Rendimiento de scroll ────────────────────────────────────────────────
+   `content-visibility` deja que Chrome se salte layout y pintado de las
+   secciones que no están en pantalla. En una página larga es la diferencia
+   entre un scroll suelto y uno a tirones. `contain-intrinsic-size` le da una
+   altura estimada para que la barra de scroll no salte. */
+.seccion-difierible {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 720px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ANIMACIONES DIRIGIDAS POR SCROLL
+   Todas usan `animation-timeline`, que Chrome resuelve en el compositor: no
+   pasan por el hilo principal, así que no compiten con el desplazamiento. Es
+   la única forma de meter más movimiento sin recuperar los tirones.
+
+   Reglas que se mantienen:
+   - Sólo `transform` sobre texto. Nunca `opacity`, porque a media transición
+     un texto no cumple contraste.
+   - `opacity` sí en elementos decorativos e imágenes.
+   - Todo dentro de @supports: donde no haya soporte, el contenido se ve
+     estático y completo, nunca a medias.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@keyframes deriva-escena {
+  from { transform: translate3d(0, -3%, 0) scale(1.1); }
+  to   { transform: translate3d(0, 7%, 0) scale(1.1); }
+}
+@keyframes subir-al-entrar {
+  from { transform: translate3d(0, 46px, 0); }
+  to   { transform: none; }
+}
+@keyframes acercar-al-entrar {
+  from { transform: scale(1.12); }
+  to   { transform: scale(1); }
+}
+@keyframes aparecer-decorativo {
+  from { opacity: 0; transform: translate3d(0, 28px, 0); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes crecer-regla {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+@keyframes avance-scroll {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+@keyframes flotar-mascota {
+  from { transform: translate3d(0, 26px, 0); }
+  to   { transform: translate3d(0, -22px, 0); }
+}
+
+@media (scripting: enabled) {
+  @supports (animation-timeline: view()) {
+    /* El revelado deja de ser un interruptor y pasa a seguir el scroll: el
+       elemento sube a la vez que entra en pantalla. */
+    .revelar {
+      transform: none;
+      transition: none;
+      animation: subir-al-entrar linear both;
+      animation-timeline: view();
+      animation-range: entry 4% entry 82%;
+    }
+
+    /* Paralaje de la escena del hero: el fondo se mueve más lento que el texto. */
+    .parallax-escena {
+      animation: deriva-escena linear both;
+      animation-timeline: view();
+      animation-range: entry 0% exit 100%;
+    }
+
+    /* La mascota flota en sentido contrario, que es lo que da la sensación de
+       profundidad entre las capas. */
+    .flota {
+      animation: flotar-mascota linear both;
+      animation-timeline: view();
+      animation-range: entry 0% exit 100%;
+    }
+
+    /* Imágenes que se asientan al entrar. Es escala, no opacidad. */
+    .acerca {
+      animation: acercar-al-entrar linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 42%;
+    }
+
+    /* Elementos decorativos: aquí sí puede desvanecerse, no llevan texto. */
+    .decorativo-entra {
+      animation: aparecer-decorativo linear both;
+      animation-timeline: view();
+      animation-range: entry 8% cover 32%;
+    }
+
+    /* Reglas que se dibujan solas al llegar. */
+    .regla-crece {
+      transform-origin: left center;
+      animation: crecer-regla linear both;
+      animation-timeline: view();
+      animation-range: entry 12% cover 30%;
+    }
+
+    /* Barra de avance de lectura, pegada bajo la cabecera. */
+    .avance-lectura {
+      transform-origin: left center;
+      animation: avance-scroll linear both;
+      animation-timeline: scroll(root block);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .revelar,
+  .parallax-escena,
+  .flota,
+  .acerca,
+  .decorativo-entra,
+  .regla-crece,
+  .avance-lectura {
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
 }

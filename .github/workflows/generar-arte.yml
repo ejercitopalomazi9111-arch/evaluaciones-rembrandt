@@ -1,0 +1,65 @@
+# Genera el arte del sitio y lo committea.
+#
+# Vive en Actions porque el entorno de desarrollo sale a internet por un proxy
+# con lista blanca que no alcanza los CDN de imagen; el runner sí.
+#
+# `workflow_dispatch` sólo queda disponible cuando el archivo existe en la rama
+# por defecto, así que mientras esto viva en una rama de trabajo el disparo real
+# es el push. El filtro de rutas lo limita a cambios en la propia receta: el
+# commit que hace el job toca `public/img`, que no está en la lista, de modo que
+# no se realimenta.
+name: Generar arte
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - 'claude/**'
+    paths:
+      - '.github/workflows/generar-arte.yml'
+      - 'scripts/generar-arte-ia.mjs'
+
+permissions:
+  contents: write
+
+jobs:
+  generar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # `sharp` es lo único que necesita el script; viene con Next, pero se
+      # instala aparte para no bajar todo el árbol de dependencias.
+      - run: npm install --no-save sharp
+
+      - run: node scripts/generar-arte-ia.mjs
+
+      - name: Committear las piezas
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/img
+          if git diff --cached --quiet; then
+            echo "Sin cambios en el arte."
+            exit 0
+          fi
+          git commit -m "chore: regenerar el arte del sitio con IA"
+          # La rama puede haber avanzado mientras se generaba (la generación tarda
+          # varios minutos). Sin este rebase el push rebota por no ser avance
+          # directo y se pierde el trabajo del job.
+          for intento in 1 2 3 4 5; do
+            git fetch origin ${{ github.ref_name }}
+            git rebase origin/${{ github.ref_name }} || exit 1
+            if git push origin HEAD:${{ github.ref_name }}; then
+              exit 0
+            fi
+            sleep $((intento * 5))
+          done
+          echo "No se pudo subir el arte tras 5 intentos."
+          exit 1

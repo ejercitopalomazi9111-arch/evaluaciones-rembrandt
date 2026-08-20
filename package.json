@@ -1,15 +1,15 @@
 {
-  "name": "evaluaciones",
-  "version": "0.1.0",
+  "name": "instituto-rembrandt",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "animejs": "^4.4.1",
     "next": "16.2.6",
     "react": "19.2.4",
     "react-dom": "19.2.4"
@@ -23,5 +23,6 @@
     "eslint-config-next": "16.2.6",
     "tailwindcss": "^4",
     "typescript": "^5"
-  }
+  },
+  "description": "Sitio web institucional del Instituto Rembrandt de Querétaro"
 }
