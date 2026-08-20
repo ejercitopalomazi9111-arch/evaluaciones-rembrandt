@@ -2,10 +2,11 @@ import { Container, Eyebrow, Button } from '@/components/ui/primitivas';
 import { SelloDGETI } from '@/components/marca/Marca';
 import { CONTACTO } from '@/content/institucion';
 
-const DATOS = [
-  { valor: '4', etiqueta: 'Niveles educativos' },
+/** `contador` hace que la cifra suba al entrar en pantalla; el resto se pinta tal cual. */
+const DATOS: { valor: string; etiqueta: string; contador?: number; sufijo?: string }[] = [
+  { valor: '4', etiqueta: 'Niveles educativos', contador: 4 },
   { valor: '3–18', etiqueta: 'Años de edad' },
-  { valor: '2', etiqueta: 'Planteles en Satélite' },
+  { valor: '2', etiqueta: 'Planteles en Satélite', contador: 2 },
   { valor: 'DGETI', etiqueta: 'Bachillerato tecnológico' },
 ];
 
@@ -20,24 +21,30 @@ export function HeroInicio() {
       {/* ── Bloque superior con la geometría ───────────────────────────── */}
       <div className="relative overflow-hidden">
         <div aria-hidden="true" className="plano-claro absolute inset-0 opacity-60" />
-        {/* Arte generado: cuñas diagonales del membrete, pieza `arte-hero`.
-            Es decorativo y va por debajo del texto — el LCP sigue siendo el
-            titular, no una imagen. En móvil se omite para no recortar mal. */}
-        <div
+        {/* Las cuñas del membrete, animadas: entran deslizando al cargar y
+            después derivan muy lento. Es decorativo y va por debajo del texto,
+            así que el LCP sigue siendo el titular, no una imagen. */}
+        <canvas
+          data-lienzo="cunas"
           aria-hidden="true"
-          className="absolute inset-y-0 right-0 hidden w-[58%] bg-cover bg-right bg-no-repeat opacity-90 sm:block"
-          style={{ backgroundImage: 'url(/arte/arte-hero.svg)' }}
+          className="absolute inset-y-0 right-0 hidden w-[58%] sm:block"
         />
 
         <Container className="relative">
           <div className="grid items-start gap-10 pt-14 pb-16 sm:pt-20 sm:pb-24 lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-14">
-            <div className="max-w-[44rem]">
+            <div className="entra max-w-[44rem]">
               <Eyebrow tono="claro">Querétaro · Col. Satélite · Desde 3 años</Eyebrow>
 
-              <h1 className="mt-7 text-hero font-black">
-                <span className="block">Respeto,</span>
-                <span className="block">cultura</span>
-                <span className="block">y honor.</span>
+              <h1 className="titular mt-7 text-hero font-black">
+                <span className="linea">
+                  <span>Respeto,</span>
+                </span>
+                <span className="linea">
+                  <span>cultura</span>
+                </span>
+                <span className="linea">
+                  <span>y honor.</span>
+                </span>
               </h1>
 
               <p
@@ -100,7 +107,13 @@ export function HeroInicio() {
                 <dt className="sr-only">{d.etiqueta}</dt>
                 <dd>
                   <span className="block font-display text-3xl font-black text-white">
-                    {d.valor}
+                    {d.contador ? (
+                      <span data-contador={d.contador} data-sufijo={d.sufijo ?? ''}>
+                        0{d.sufijo ?? ''}
+                      </span>
+                    ) : (
+                      d.valor
+                    )}
                   </span>
                   <span className="mt-1.5 block font-mono text-[0.58rem] leading-tight tracking-[0.16em] text-white/55 uppercase">
                     {d.etiqueta}

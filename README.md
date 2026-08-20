@@ -138,6 +138,37 @@ Sistema propio: **«Geometría tecnológica»**, derivado de la papelería ofici
 Los tokens están en `src/app/globals.css` (bloque `@theme` de Tailwind v4, sin
 `tailwind.config.js`). La guía viva está en **`/estilo`** en desarrollo.
 
+### Movimiento
+
+`public/lienzo.js` es el motor de movimiento: un archivo sin dependencias que el sitio y la
+versión empaquetada comparten. Anima en `<canvas>` las cuñas del membrete en la portada y los
+trazos con pulsos de la sección de Programación, y además maneja los contadores y los revelados
+al hacer scroll.
+
+Decisiones de rendimiento, todas deliberadas:
+
+- **Un solo `requestAnimationFrame`** para todos los lienzos de la página, no uno por elemento.
+- Cada lienzo **se pausa al salir de pantalla** (`IntersectionObserver`).
+- `devicePixelRatio` **tapado a 1.5**: en pantallas 3× el coste se triplica sin verse mejor.
+- Presupuesto de **~30 fps** para el fondo: en algo que deriva lento el ojo no distingue más, y
+  deja medio hilo libre para el scroll.
+- Con `prefers-reduced-motion` se dibuja **un fotograma** y el bucle no arranca.
+- **El `Reveal` de React ya no lleva JavaScript propio**: el motor observa todos los `.revelar`
+  con un observer compartido, así que es Server Component y no envía nada al navegador.
+
+Dos reglas de la coreografía que no se negocian:
+
+1. **Nunca se anima `opacity` sobre texto.** Un texto a media transición no cumple contraste y una
+   auditoría lo marca con razón. El titular de la portada se destapa con máscara (`overflow`
+   oculto + desplazamiento), así que va siempre a opacidad plena.
+2. **Sólo `transform`**, que resuelve el compositor sin recalcular layout.
+
+También se quitó el `backdrop-filter` de la cabecera pegajosa: obliga a Chrome a recomponer en
+cada fotograma de scroll y era la causa principal de que el sitio se sintiera lento.
+
+Medido en Chromium con la CPU **6× ralentizada**: 48–51 fps de media durante scroll continuo y
+prácticamente ningún fotograma por encima de 50 ms.
+
 ### Arte generativo
 
 Las seis piezas de `public/arte/` son **arte original generado por código**, no imágenes de banco

@@ -9,6 +9,7 @@
  * Uso:
  *   npm run build
  *   npx next start -p 3310     (en otra terminal)
+ *   # o: SITIO_URL=http://localhost:3000 node scripts/empaquetar-una-pagina.mjs
  *   node scripts/empaquetar-una-pagina.mjs
  *
  * Qué hace y por qué:
@@ -31,7 +32,7 @@ import { readFileSync, writeFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { execSync } from 'node:child_process';
 
-const BASE = 'http://localhost:3310';
+const BASE = process.env.SITIO_URL || 'http://localhost:3310';
 const RAIZ = process.cwd();
 
 const RUTAS = [
@@ -176,20 +177,14 @@ const script = `
     revelar();
   }
 
-  // Revelado al entrar en pantalla (el original usa IntersectionObserver igual)
-  var io = null;
+  // El movimiento lo lleva el mismo motor que el sitio real (public/lienzo.js),
+  // incrustado más abajo: lienzos animados, contadores y revelados.
   function revelar() {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      document.querySelectorAll('.revelar').forEach(function (e) { e.dataset.visible = 'true'; });
-      return;
+    if (window.__motor) {
+      window.__motor.revelados();
+      window.__motor.contadores();
+      window.__motor.lienzos();
     }
-    if (io) io.disconnect();
-    io = new IntersectionObserver(function (es) {
-      es.forEach(function (e) {
-        if (e.isIntersecting) { e.target.dataset.visible = 'true'; io.unobserve(e.target); }
-      });
-    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
-    document.querySelectorAll('.ruta:not([hidden]) .revelar').forEach(function (e) { io.observe(e); });
   }
 
   window.addEventListener('hashchange', pintar);
@@ -263,12 +258,15 @@ const script = `
 
 const scriptFinal = script;
 
+const motor = readFileSync(join(RAIZ, 'public/lienzo.js'), 'utf8');
+
 const salida = `<title>Instituto Rembrandt de Querétaro</title>
 <meta name="description" content="Preescolar, Primaria, Secundaria y Preparatoria en Col. Satélite, Querétaro. Bachillerato Tecnológico DGETI con especialidad en Programación.">
 <style>${css}</style>
 <div id="raiz-sitio" class="flex min-h-[100dvh] flex-col">
 ${cuerpo}
 </div>
+<script>${motor}</script>
 ${scriptFinal}
 `;
 

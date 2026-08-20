@@ -17,7 +17,9 @@ export function SiteHeader() {
           background: 'linear-gradient(90deg, var(--color-azul) 0 45%, var(--color-rojo) 45% 100%)',
         }}
       />
-      <div className="border-b border-linea bg-hueso/92 backdrop-blur-md">
+      <div /* Sin backdrop-filter a propósito: en un header pegajoso obliga a
+           Chrome a recomponer en cada fotograma de scroll. Fondo sólido. */
+        className="border-b border-linea bg-hueso">
         <Container>
           <div className="flex h-16 items-center justify-between gap-4 sm:h-[4.5rem]">
             <Link href="/" className="shrink-0" aria-label="Instituto Rembrandt — Inicio">

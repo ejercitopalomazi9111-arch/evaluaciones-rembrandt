@@ -94,6 +94,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </div>
         <BarraAccionMovil />
         <JsonLd data={ORGANIZACION} />
+        {/* Motor de movimiento: lienzos, contadores y revelados. Un solo
+            archivo sin dependencias, diferido, compartido con la versión
+            empaquetada en un archivo. */}
+        <script src="/lienzo.js" defer />
       </body>
     </html>
   );

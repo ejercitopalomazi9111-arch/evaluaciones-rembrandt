@@ -1,12 +1,12 @@
-'use client';
-
-import { useEffect, useRef, type ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 /**
- * Revelado al entrar en pantalla. Sustituye a anime.js: sin librería, una sola
- * clase CSS y un IntersectionObserver por instancia que se desconecta al
- * disparar. Respeta prefers-reduced-motion — el contenido nace visible, nunca
- * oculto e inaccesible.
+ * Revelado al entrar en pantalla.
+ *
+ * Ya no lleva JavaScript propio: `public/lienzo.js` observa todos los
+ * `.revelar` con un único IntersectionObserver compartido. Eso lo convierte en
+ * Server Component —cero JS enviado al navegador por cada uso— y evita crear un
+ * observer por instancia, que era el patrón caro anterior.
  */
 export function Reveal({
   children,
@@ -17,33 +17,8 @@ export function Reveal({
   delay?: number;
   className?: string;
 }) {
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      el.dataset.visible = 'true';
-      return;
-    }
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const e of entries) {
-          if (e.isIntersecting) {
-            (e.target as HTMLElement).dataset.visible = 'true';
-            io.unobserve(e.target);
-          }
-        }
-      },
-      { rootMargin: '0px 0px -8% 0px', threshold: 0.08 },
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
-
   return (
     <div
-      ref={ref}
       className={`revelar ${className}`}
       style={delay ? { transitionDelay: `${delay}ms` } : undefined}
     >

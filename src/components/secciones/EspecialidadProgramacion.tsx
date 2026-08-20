@@ -13,12 +13,12 @@ export function EspecialidadProgramacion({ conCta = true }: { conCta?: boolean }
   return (
     <Section className="relative overflow-hidden bg-tinta text-hueso" id="especialidad">
       <div aria-hidden="true" className="plano-claro absolute inset-0 opacity-60" />
-      {/* Arte generado `arte-especialidad`: trazos ortogonales tipo circuito,
-          el eje «Programación» del instituto hecho geometría. */}
-      <div
+      {/* Circuito vivo: los trazos se dibujan al entrar y después recorren
+          pulsos. Es el eje «Programación» del instituto hecho movimiento. */}
+      <canvas
+        data-lienzo="circuito"
         aria-hidden="true"
-        className="absolute inset-y-0 right-0 hidden w-[55%] bg-cover bg-right bg-no-repeat opacity-70 lg:block"
-        style={{ backgroundImage: 'url(/arte/arte-especialidad.svg)' }}
+        className="absolute inset-y-0 right-0 hidden w-[55%] lg:block"
       />
 
       <Container className="relative">

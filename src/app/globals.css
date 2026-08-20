@@ -188,6 +188,53 @@ p, li {
   background: linear-gradient(90deg, var(--color-azul) 0 45%, var(--color-rojo) 45% 100%);
 }
 
+/* ── Entrada del hero: una secuencia, no efectos sueltos ──────────────────
+   Regla que no se negocia: NADA de animar `opacity` sobre texto. Un texto a
+   media transición no cumple contraste, y una auditoría lo marca con razón.
+   El titular se destapa con máscara (overflow oculto + desplazamiento), así
+   que va siempre a opacidad plena; el resto sólo se desliza.
+   Sólo `transform`: lo resuelve el compositor, sin recalcular layout. */
+@keyframes subir-tapado {
+  from { transform: translate3d(0, 100%, 0); }
+  to   { transform: none; }
+}
+@keyframes deslizar {
+  from { transform: translate3d(0, 20px, 0); }
+  to   { transform: none; }
+}
+
+@media (scripting: enabled) {
+  .entra > * {
+    animation: deslizar 0.6s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+  }
+  .entra > *:nth-child(1) { animation-delay: 0.05s; }
+  .entra > *:nth-child(2) { animation-delay: 0.12s; }
+  .entra > *:nth-child(3) { animation-delay: 0.22s; }
+  .entra > *:nth-child(4) { animation-delay: 0.32s; }
+  .entra > *:nth-child(5) { animation-delay: 0.42s; }
+  .entra > *:nth-child(6) { animation-delay: 0.52s; }
+
+  /* El titular sube línea por línea desde detrás de su propia máscara.
+     Es el momento firma de la portada. */
+  .titular .linea > span {
+    animation: subir-tapado 0.85s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+  }
+  .titular .linea:nth-child(1) > span { animation-delay: 0.1s; }
+  .titular .linea:nth-child(2) > span { animation-delay: 0.19s; }
+  .titular .linea:nth-child(3) > span { animation-delay: 0.28s; }
+}
+
+.titular .linea {
+  display: block;
+  overflow: hidden;
+  /* deja aire para las colas de la «p» y la «y»; sin esto la máscara las corta */
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+.titular .linea > span {
+  display: block;
+}
+
 /* Revelado al hacer scroll — sin librerías.
    Dos decisiones deliberadas:
    1. Va dentro de `scripting: enabled`. Sin JavaScript el contenido se muestra
@@ -226,6 +273,10 @@ p, li {
   }
   .revelar {
     transform: none;
+  }
+  .entra > *,
+  .titular .linea > span {
+    animation: none;
   }
 }
 
