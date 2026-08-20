@@ -22,7 +22,18 @@ const estatico = process.env.EXPORT_ESTATICO === '1';
 const basePath = process.env.RUTA_BASE ?? '';
 
 const nextConfig: NextConfig = {
-  ...(estatico ? { output: 'export' as const, basePath, assetPrefix: basePath } : {}),
+  ...(estatico
+    ? {
+        output: 'export' as const,
+        basePath,
+        assetPrefix: basePath,
+        // Sin esto Next emite `instituto.html` **y** una carpeta `instituto/`
+        // con las cargas RSC, y el servidor de archivos resuelve la carpeta:
+        // la URL acaba devolviendo un listado en vez de la página. Con barra
+        // final cada ruta emite su `index.html` y no hay ambigüedad.
+        trailingSlash: true,
+      }
+    : {}),
 
   images: {
     // Next 16 exige declarar las calidades permitidas; sin esto, cualquier

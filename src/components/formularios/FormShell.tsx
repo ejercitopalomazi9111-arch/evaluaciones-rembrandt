@@ -2,7 +2,8 @@
 
 import Link from 'next/link';
 import { useActionState, useEffect, useRef, type ReactNode } from 'react';
-import { enviarSolicitud, ESTADO_INICIAL, type EstadoFormulario } from '@/app/actions/enviar-solicitud';
+import { enviarSolicitud } from '@/app/actions/enviar-solicitud';
+import { ESTADO_INICIAL, type EstadoFormulario } from '@/app/actions/comun';
 import type { TipoSolicitud } from '@/lib/esquemas';
 import { ETIQUETAS } from '@/lib/esquemas';
 import { CONTACTO } from '@/content/institucion';

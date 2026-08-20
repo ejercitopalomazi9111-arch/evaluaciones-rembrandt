@@ -12,8 +12,8 @@ import { CONTACTO } from '@/content/institucion';
 import { ESQUEMAS, TITULOS, type TipoSolicitud } from '@/lib/esquemas';
 import { validar } from '@/lib/validacion';
 
-export { ESTADO_INICIAL } from '@/app/actions/comun';
-export type { EnlacesFallback, EstadoFormulario } from '@/app/actions/comun';
+// Un archivo 'use server' sólo puede exportar funciones async, así que el
+// estado inicial y los tipos se importan de `comun.ts` allí donde hagan falta.
 
 /**
  * Una sola acción para los tres formularios del sitio.

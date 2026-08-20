@@ -18,40 +18,37 @@ npm run lint
 
 ## Publicar el sitio (link público)
 
-**Vercel, importando este mismo repo.** No hace falta cambiar nada del código: Vercel corre el
-build de Next tal cual, así que los formularios siguen enviando correo automático y `next/image`
-sigue optimizando.
+El sitio se publica solo en **GitHub Pages** cada vez que algo llega a `master`:
 
-1. Entra a [vercel.com](https://vercel.com) y accede con la cuenta de GitHub dueña del repo.
-2. **Add New… → Project → Import Git Repository** y elige este repositorio.
-3. Vercel detecta Next.js solo: no toques Framework Preset, Build Command ni Output Directory.
-4. En **Environment Variables** añade al menos `NEXT_PUBLIC_SITE_URL` con la URL final. De ahí
-   salen las etiquetas canonical, el sitemap y las imágenes de Open Graph, así que si queda mal
-   el SEO queda mal.
-5. **Deploy.** A partir de ahí, cada push a la rama actualiza el sitio solo.
+    https://ejercitopalomazi9111-arch.github.io/evaluaciones-rembrandt/
 
-### Compartir el sitio sin desplegar nada
+Lo hace `.github/workflows/publicar.yml`. No hay que tocar nada en Settings: el
+workflow da de alta Pages la primera vez. Si se renombra el repositorio, la URL
+cambia con él y el propio workflow se ajusta, porque lee el prefijo de la
+configuración de Pages en vez de tenerlo escrito.
 
-`scripts/empaquetar-una-pagina.mjs` empaqueta las 13 rutas públicas en **un solo archivo HTML
-autocontenido** (~1.6 MB), con el CSS, las tipografías, el escudo, la mascota y el arte
-incrustados. Se abre en cualquier dispositivo, funciona sin conexión y no pide ningún recurso
-externo. Útil para enseñar el sitio antes de que exista el dominio.
+### Qué cambia en Pages respecto a un servidor propio
 
-```bash
-npm run build
-npx next start -p 3310                     # en otra terminal
-node scripts/empaquetar-una-pagina.mjs     # genera sitio-una-pagina.html
-```
+Pages sólo sirve archivos, así que el build usa `EXPORT_ESTATICO=1` y Next 16
+deja fuera tres cosas (documentado en `02-guides/static-exports.md`):
 
-En esa versión los formularios abren el correo con el mensaje ya redactado (no hay servidor
-detrás) y el mapa embebido se sustituye por el enlace a Google Maps. Todo lo demás —navegación,
-menú móvil, acordeones, revelados— funciona igual.
+| | Con servidor (Vercel, Node) | En GitHub Pages |
+|---|---|---|
+| Formulario | manda correo por Resend | valida y ofrece correo, WhatsApp o llamada, con el mensaje ya redactado |
+| Imágenes | `next/image` optimiza al vuelo | se sirven tal cual, ya en WebP y al tamaño de uso |
+| Cabeceras de seguridad | las pone Next | las pone GitHub (todo por HTTPS) |
 
-> **Por qué no GitHub Pages:** sólo sirve archivos estáticos, y los docs de Next 16 confirman que
-> en export estático **no funcionan las Server Actions, `headers()` ni la optimización de
-> imágenes**. Es decir, se perderían los formularios y las imágenes pesarían más en móvil.
+Nada de eso rompe el sitio: **el formulario nunca pierde lo que la persona
+escribió**, sólo cambia por dónde sale.
 
----
+### Si quieren dominio propio y envío automático de correo
+
+Con Vercel el sitio corre con servidor y recupera las tres filas de la
+izquierda, sin cambiar una línea de código:
+
+1. vercel.com → *Add New… → Project* → *Import Git Repository* → este repo.
+2. Variables: `NEXT_PUBLIC_SITE_URL` con el dominio final y, para el correo
+   automático, `RESEND_API_KEY`, `CORREO_DESTINO` y `CORREO_REMITENTE`.
 
 ## Cómo edita el contenido la escuela
 

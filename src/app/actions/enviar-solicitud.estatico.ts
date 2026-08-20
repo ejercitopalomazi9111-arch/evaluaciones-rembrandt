@@ -21,8 +21,8 @@ import {
 import { ESQUEMAS, type TipoSolicitud } from '@/lib/esquemas';
 import { validar } from '@/lib/validacion';
 
-export { ESTADO_INICIAL } from '@/app/actions/comun';
-export type { EnlacesFallback, EstadoFormulario } from '@/app/actions/comun';
+// El gemelo con servidor no puede reexportar constantes (lo prohíbe
+// 'use server'), así que aquí tampoco, para que las dos superficies coincidan.
 
 export async function enviarSolicitud(
   _anterior: EstadoFormulario,
