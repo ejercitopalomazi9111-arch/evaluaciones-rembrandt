@@ -20,17 +20,13 @@ export function HeroInicio() {
       {/* ── Bloque superior con la geometría ───────────────────────────── */}
       <div className="relative overflow-hidden">
         <div aria-hidden="true" className="plano-claro absolute inset-0 opacity-60" />
-        {/* cuña azul profunda desde la derecha */}
+        {/* Arte generado: cuñas diagonales del membrete, pieza `arte-hero`.
+            Es decorativo y va por debajo del texto — el LCP sigue siendo el
+            titular, no una imagen. En móvil se omite para no recortar mal. */}
         <div
           aria-hidden="true"
-          className="absolute inset-y-0 right-0 hidden w-[52%] bg-azul-hondo sm:block"
-          style={{ clipPath: 'polygon(32% 0, 100% 0, 100% 100%, 0 100%)' }}
-        />
-        {/* filo rojo que corta la cuña — el gesto del membrete */}
-        <div
-          aria-hidden="true"
-          className="absolute inset-y-0 right-0 hidden w-[52%] bg-rojo sm:block"
-          style={{ clipPath: 'polygon(32% 0, 35.5% 0, 3.5% 100%, 0 100%)' }}
+          className="absolute inset-y-0 right-0 hidden w-[58%] bg-cover bg-right bg-no-repeat opacity-90 sm:block"
+          style={{ backgroundImage: 'url(/arte/arte-hero.svg)' }}
         />
 
         <Container className="relative">

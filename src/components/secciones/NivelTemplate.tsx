@@ -24,6 +24,7 @@ export function NivelTemplate({ nivel, extra }: { nivel: Nivel; extra?: ReactNod
         titulo={nivel.nombre}
         entradilla={nivel.claim}
         acento={nivel.acento}
+        arte={`/arte/arte-${nivel.slug}.svg`}
         migas={[{ label: 'Niveles', href: '/niveles' }]}
         extra={
           nivel.nombreLargo ? (

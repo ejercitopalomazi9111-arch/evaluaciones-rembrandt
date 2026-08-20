@@ -16,6 +16,26 @@ npm run lint
 
 ---
 
+## Publicar el sitio (link público)
+
+**Vercel, importando este mismo repo.** No hace falta cambiar nada del código: Vercel corre el
+build de Next tal cual, así que los formularios siguen enviando correo automático y `next/image`
+sigue optimizando.
+
+1. Entra a [vercel.com](https://vercel.com) y accede con la cuenta de GitHub dueña del repo.
+2. **Add New… → Project → Import Git Repository** y elige este repositorio.
+3. Vercel detecta Next.js solo: no toques Framework Preset, Build Command ni Output Directory.
+4. En **Environment Variables** añade al menos `NEXT_PUBLIC_SITE_URL` con la URL final. De ahí
+   salen las etiquetas canonical, el sitemap y las imágenes de Open Graph, así que si queda mal
+   el SEO queda mal.
+5. **Deploy.** A partir de ahí, cada push a la rama actualiza el sitio solo.
+
+> **Por qué no GitHub Pages:** sólo sirve archivos estáticos, y los docs de Next 16 confirman que
+> en export estático **no funcionan las Server Actions, `headers()` ni la optimización de
+> imágenes**. Es decir, se perderían los formularios y las imágenes pesarían más en móvil.
+
+---
+
 ## Cómo edita el contenido la escuela
 
 **Nunca hay que tocar JSX.** Todos los textos institucionales viven en `src/content/`:
@@ -100,6 +120,35 @@ Sistema propio: **«Geometría tecnológica»**, derivado de la papelería ofici
 
 Los tokens están en `src/app/globals.css` (bloque `@theme` de Tailwind v4, sin
 `tailwind.config.js`). La guía viva está en **`/estilo`** en desarrollo.
+
+### Arte generativo
+
+Las seis piezas de `public/arte/` son **arte original generado por código**, no imágenes de banco
+ni de un modelo de difusión. Las produce `scripts/generar-arte.mjs`, que dibuja composiciones
+geométricas abstractas con las mismas reglas que el resto del sitio: cuñas diagonales, trazos
+ortogonales, retícula de plano y marcas de registro, en la paleta institucional.
+
+```bash
+node scripts/generar-arte.mjs   # regenera las 6 piezas en public/arte/
+```
+
+Usa un PRNG con semilla fija, así que **el resultado es determinista**: misma semilla, mismo
+dibujo. Para explorar variantes, cambia la semilla de la pieza en el array `PIEZAS` al final del
+script y vuelve a correrlo.
+
+| Pieza | Dónde aparece |
+|---|---|
+| `arte-hero` | telón del hero de la portada |
+| `arte-especialidad` | sección del Bachillerato en Programación |
+| `arte-preescolar` · `-primaria` · `-secundaria` · `-preparatoria` | cabecera de cada nivel |
+
+Son SVG: pesan ~16 KB **entre las seis**, son nítidos en cualquier pantalla y no producen ningún
+salto de layout. Van siempre `aria-hidden`, por debajo del texto y ocultas en móvil donde el
+recorte no favorece, de modo que **la página se sostiene igual si no cargan**.
+
+Deliberadamente no representan el plantel ni imitan la obra de ningún pintor: las fotos reales
+entran por `FotoSlot`, y el vínculo con el nombre del instituto se expresa con geometría, no
+copiando cuadros.
 
 ### Marca
 

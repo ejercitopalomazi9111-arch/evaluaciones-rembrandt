@@ -9,6 +9,7 @@ export function PageHero({
   entradilla,
   migas,
   acento = 'rojo',
+  arte,
   extra,
 }: {
   eyebrow: string;
@@ -16,6 +17,8 @@ export function PageHero({
   entradilla?: string;
   migas?: readonly { label: string; href: string }[];
   acento?: 'rojo' | 'azul' | 'ambar';
+  /** Ruta a una pieza de `public/arte/`. Decorativa, va por debajo del texto. */
+  arte?: string;
   extra?: ReactNode;
 }) {
   const barra = acento === 'azul' ? 'bg-azul' : acento === 'ambar' ? 'bg-ambar' : 'bg-rojo';
@@ -23,11 +26,19 @@ export function PageHero({
   return (
     <div className="relative overflow-hidden bg-tinta text-hueso">
       <div aria-hidden="true" className="plano-claro absolute inset-0 opacity-55" />
-      <div
-        aria-hidden="true"
-        className="absolute inset-y-0 right-0 hidden w-[38%] bg-azul-hondo lg:block"
-        style={{ clipPath: 'polygon(38% 0, 100% 0, 100% 100%, 0 100%)' }}
-      />
+      {arte ? (
+        <div
+          aria-hidden="true"
+          className="absolute inset-y-0 right-0 hidden w-[46%] bg-cover bg-right bg-no-repeat opacity-75 lg:block"
+          style={{ backgroundImage: `url(${arte})` }}
+        />
+      ) : (
+        <div
+          aria-hidden="true"
+          className="absolute inset-y-0 right-0 hidden w-[38%] bg-azul-hondo lg:block"
+          style={{ clipPath: 'polygon(38% 0, 100% 0, 100% 100%, 0 100%)' }}
+        />
+      )}
       <span aria-hidden="true" className={`absolute inset-x-0 bottom-0 h-1 ${barra}`} />
 
       <Container className="relative">
