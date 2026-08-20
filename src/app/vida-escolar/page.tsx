@@ -72,7 +72,7 @@ export default function VidaEscolarPage() {
             <div
               role="img"
               aria-label="Ilustración del paisaje de Querétaro al atardecer"
-              className="acerca size-full bg-[url('/ilustraciones/fondo-vida.svg')] bg-cover bg-center"
+              className="acerca size-full bg-[url('/img/fondo-vida.webp')] bg-cover bg-center"
             />
           </div>
         </Container>

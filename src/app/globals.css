@@ -104,7 +104,7 @@
      que se repintaban en cada fotograma de scroll y eran la causa principal de
      que la página fuera a tirones. */
   --grano: url('/grano.png');
-  --escena: url('/ilustraciones/escena-queretaro.svg');
+  --escena: url('/img/escena-queretaro.webp');
 }
 
 html {

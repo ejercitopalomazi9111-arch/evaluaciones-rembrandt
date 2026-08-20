@@ -86,15 +86,17 @@ const DATA_MASCOTA = png('public/marca/mascota.png', 460);
 
 // Grano y escena entran por variables CSS; las viñetas por next/image.
 const grano = `data:image/png;base64,${readFileSync(join(RAIZ, 'public/grano.png')).toString('base64')}`;
+// Arte generado con IA (`scripts/generar-arte-ia.mjs`). Va en WebP, así que
+// entra tal cual como data URI sin volver a comprimir.
 const ilus = {};
-for (const f of readdirSync(join(RAIZ, 'public/ilustraciones'))) {
-  const svg = readFileSync(join(RAIZ, 'public/ilustraciones', f), 'utf8');
-  ilus[f.replace('.svg', '')] = `data:image/svg+xml;base64,${Buffer.from(svg).toString('base64')}`;
+for (const f of readdirSync(join(RAIZ, 'public/img'))) {
+  const bin = readFileSync(join(RAIZ, 'public/img', f));
+  ilus[f.replace('.webp', '')] = `data:image/webp;base64,${bin.toString('base64')}`;
 }
 // Tailwind compila las url() SIN comillas, así que se sustituyen por regex y
 // no por coincidencia literal: buscar `url('/grano.png')` no encontraba nada.
 css = css.replace(/url\((['"]?)\/grano\.png\1\)/g, `url("${grano}")`);
-css = css.replace(/url\((['"]?)\/ilustraciones\/([a-z-]+)\.svg\1\)/g, (m, _q, nombre) =>
+css = css.replace(/url\((['"]?)\/img\/([a-z-]+)\.webp\1\)/g, (m, _q, nombre) =>
   ilus[nombre] ? `url("${ilus[nombre]}")` : m,
 );
 
@@ -121,12 +123,12 @@ function inlineAssets(html) {
     const p = decodeURIComponent(enc.replace(/&amp;/g, '&'));
     if (p.includes('escudo')) return `src="${DATA_ESCUDO}"`;
     if (p.includes('mascota')) return `src="${DATA_MASCOTA}"`;
-    const vin = p.match(/ilustraciones\/([a-z-]+)\.svg/);
+    const vin = p.match(/img\/([a-z-]+)\.webp/);
     if (vin && ilus[vin[1]]) return `src="${ilus[vin[1]]}"`;
     return m;
   });
   for (const [nombre, data] of Object.entries(ilus)) {
-    h = h.split(`/ilustraciones/${nombre}.svg`).join(data);
+    h = h.split(`/img/${nombre}.webp`).join(data);
   }
   h = h.split('src="/marca/escudo.png"').join(`src="${DATA_ESCUDO}"`);
   h = h.split('src="/marca/mascota.png"').join(`src="${DATA_MASCOTA}"`);

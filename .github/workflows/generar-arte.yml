@@ -1,0 +1,42 @@
+# Genera el arte del sitio y lo committea.
+#
+# Vive en Actions porque el entorno de desarrollo sale a internet por un proxy
+# con lista blanca que no alcanza los CDN de imagen; el runner sí. Se dispara a
+# mano (`workflow_dispatch`) para no gastar minutos en cada push.
+name: Generar arte
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  generar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # `sharp` es lo único que necesita el script; viene con Next, pero se
+      # instala aparte para no bajar todo el árbol de dependencias.
+      - run: npm install --no-save sharp
+
+      - run: node scripts/generar-arte-ia.mjs
+
+      - name: Committear las piezas
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/img
+          if git diff --cached --quiet; then
+            echo "Sin cambios en el arte."
+          else
+            git commit -m "chore: regenerar el arte del sitio con IA"
+            git push origin HEAD:${{ github.ref_name }}
+          fi

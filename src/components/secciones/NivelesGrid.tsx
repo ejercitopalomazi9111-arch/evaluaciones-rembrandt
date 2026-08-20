@@ -45,7 +45,7 @@ export function NivelesGrid({ titulo = 'Un instituto, cuatro etapas' }: { titulo
                   >
                     <div className="relative aspect-[4/3] overflow-hidden">
                       <Image
-                        src={`/ilustraciones/vineta-${nivel.slug}.svg`}
+                        src={`/img/vineta-${nivel.slug}.webp`}
                         alt=""
                         width={400}
                         height={400}

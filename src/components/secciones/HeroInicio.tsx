@@ -13,19 +13,20 @@ const DATOS: { valor: string; etiqueta: string; contador?: number }[] = [
 /**
  * Hero de portada: escena ilustrada a sangre con el titular encima.
  *
- * La ilustración (`escena-queretaro.svg`) es original y generada por código —
- * Querétaro al atardecer con el acueducto— en la paleta del escudo. Va con
- * `object-cover` y una cortinilla oscura sobre la mitad izquierda para
- * garantizar el contraste del texto pase lo que pase con el recorte.
+ * La ilustración (`escena-queretaro.webp`) es original, generada con IA a
+ * partir de un encargo propio —el acueducto de Querétaro en la paleta del
+ * escudo— por `scripts/generar-arte-ia.mjs`. Va con `object-cover` y una
+ * cortinilla oscura sobre la mitad izquierda para garantizar el contraste del
+ * texto pase lo que pase con el recorte.
  *
- * El LCP sigue siendo el titular, no la imagen: la escena es un SVG de ~19 KB.
+ * El LCP sigue siendo el titular, no la imagen: la escena carga de fondo.
  */
 export function HeroInicio() {
   return (
     <section className="relative isolate overflow-hidden bg-tinta text-hueso">
-      {/* Escena de fondo. Va como background-image y no con next/image: para un
-          SVG decorativo evita tener que activar `dangerouslyAllowSVG`, y el
-          navegador lo compone sin pasar por el optimizador. */}
+      {/* Escena de fondo. Va como background-image y no con next/image: es
+          decorativa, no debe competir con el titular por el LCP, y el navegador
+          la compone sin bloquear el pintado del texto. */}
       <div
         aria-hidden="true"
         className="parallax-escena absolute inset-0 -z-20 bg-[image:var(--escena)] bg-cover bg-bottom bg-no-repeat"

@@ -57,7 +57,7 @@ export const NIVELES = {
       ratio: '4/3',
       nota: 'Sustituible por una fotografía real del nivel cuando la escuela la entregue.',
       prioridad: true,
-      src: '/ilustraciones/fondo-preescolar.svg',
+      src: '/img/fondo-preescolar.webp',
     },
     galeria: [
       {
@@ -124,7 +124,7 @@ export const NIVELES = {
       ratio: '16/9',
       nota: 'Sustituible por una fotografía real del nivel cuando la escuela la entregue.',
       prioridad: true,
-      src: '/ilustraciones/fondo-primaria.svg',
+      src: '/img/fondo-primaria.webp',
     },
     galeria: [
       {
@@ -192,7 +192,7 @@ export const NIVELES = {
       ratio: '16/9',
       nota: 'Sustituible por una fotografía real del nivel cuando la escuela la entregue.',
       prioridad: true,
-      src: '/ilustraciones/fondo-secundaria.svg',
+      src: '/img/fondo-secundaria.webp',
     },
     galeria: [
       {
@@ -261,7 +261,7 @@ export const NIVELES = {
       ratio: '16/9',
       nota: 'Sustituible por una fotografía real del nivel cuando la escuela la entregue.',
       prioridad: true,
-      src: '/ilustraciones/fondo-preparatoria.svg',
+      src: '/img/fondo-preparatoria.webp',
     },
     galeria: [
       {
