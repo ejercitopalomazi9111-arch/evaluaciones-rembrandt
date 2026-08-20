@@ -47,7 +47,19 @@ jobs:
           git add public/img
           if git diff --cached --quiet; then
             echo "Sin cambios en el arte."
-          else
-            git commit -m "chore: regenerar el arte del sitio con IA"
-            git push origin HEAD:${{ github.ref_name }}
+            exit 0
           fi
+          git commit -m "chore: regenerar el arte del sitio con IA"
+          # La rama puede haber avanzado mientras se generaba (la generación tarda
+          # varios minutos). Sin este rebase el push rebota por no ser avance
+          # directo y se pierde el trabajo del job.
+          for intento in 1 2 3 4 5; do
+            git fetch origin ${{ github.ref_name }}
+            git rebase origin/${{ github.ref_name }} || exit 1
+            if git push origin HEAD:${{ github.ref_name }}; then
+              exit 0
+            fi
+            sleep $((intento * 5))
+          done
+          echo "No se pudo subir el arte tras 5 intentos."
+          exit 1
