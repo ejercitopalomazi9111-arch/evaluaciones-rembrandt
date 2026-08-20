@@ -87,7 +87,6 @@ async function guardar(nombre, buffer) {
 
 // ── La escena y sus encuadres ────────────────────────────────────────────────
 const escena = await bajar(ESCENA);
-const meta = await sharp(escena).metadata();
 
 for (const r of RECORTES) {
   // Se escala por altura y después se recorta a lo ancho, para que el horizonte
