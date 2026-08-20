@@ -22,10 +22,14 @@ El sitio se publica solo en **GitHub Pages** cada vez que algo llega a `master`:
 
     https://ejercitopalomazi9111-arch.github.io/evaluaciones-rembrandt/
 
-Lo hace `.github/workflows/publicar.yml`. No hay que tocar nada en Settings: el
-workflow da de alta Pages la primera vez. Si se renombra el repositorio, la URL
-cambia con él y el propio workflow se ajusta, porque lee el prefijo de la
+Lo hace `.github/workflows/publicar.yml`. Si se renombra el repositorio, la URL
+cambia con él y el workflow se ajusta solo, porque lee el prefijo de la
 configuración de Pages en vez de tenerlo escrito.
+
+> **Hay que activar Pages una vez, a mano:** Settings → Pages → *Source:
+> **GitHub Actions*** → Save. El token de Actions no puede crear el sitio por su
+> cuenta; GitHub lo prohíbe (*Resource not accessible by integration*). Después
+> de ese clic no vuelve a hacer falta: cada push a `master` republica solo.
 
 ### Qué cambia en Pages respecto a un servidor propio
 

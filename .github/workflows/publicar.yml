@@ -38,12 +38,13 @@ jobs:
           node-version: 22
           cache: npm
 
-      # `enablement: true` da de alta Pages la primera vez, para no depender de
-      # que alguien lo active a mano en Settings.
+      # Pages hay que activarlo UNA VEZ a mano, en Settings → Pages → Source:
+      # "GitHub Actions". El token de Actions no puede crear el sitio por su
+      # cuenta: GitHub responde "Resource not accessible by integration" a
+      # `enablement: true`. Así que aquí sólo se lee la configuración que ya
+      # exista. Después de ese clic, cada push a master republica solo.
       - id: pages
         uses: actions/configure-pages@v5
-        with:
-          enablement: true
 
       - run: npm ci
 
