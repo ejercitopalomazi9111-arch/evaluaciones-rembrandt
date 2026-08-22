@@ -70,7 +70,7 @@ directorio de salida, ni la versión de Node. A partir de ahí, cada push a
 
 | Variable | Para qué | Si falta |
 |---|---|---|
-| `NEXT_PUBLIC_SITE_URL` | dominio final en canonical, sitemap y Open Graph | usa la URL que Vercel asigna al proyecto |
+| `NEXT_PUBLIC_SITE_URL` | dominio final en canonical, sitemap y Open Graph | usa la URL de producción si Vercel la expone; si no, `www.irembrandt.com.mx` |
 | `RESEND_API_KEY` | envío automático de las solicitudes | el formulario ofrece correo, WhatsApp o llamada |
 | `CORREO_DESTINO` | buzón que recibe | `contacto@irembrandt.com.mx` |
 | `CORREO_REMITENTE` | remitente, con dominio verificado en Resend | sin él no se envía |
@@ -81,6 +81,11 @@ de GitHub Pages y aquí romperían las rutas.
 
 Cuando la escuela tenga su dominio, se añade en Vercel → *Domains* y se pone
 `NEXT_PUBLIC_SITE_URL` con él.
+
+> Ojo: `VERCEL_PROJECT_PRODUCTION_URL` sólo aparece en despliegues de producción
+> ligados a un repositorio. En un despliegue manual no está, así que canonical,
+> sitemap y Open Graph apuntan a `www.irembrandt.com.mx` —el destino final del
+> sitio— hasta que se fije `NEXT_PUBLIC_SITE_URL` o se conecte el repositorio.
 
 ## Cómo edita el contenido la escuela
 
