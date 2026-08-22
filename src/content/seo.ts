@@ -1,8 +1,23 @@
 import type { Metadata } from 'next';
 import { INSTITUCION } from './institucion';
 
+/**
+ * Dominio del que cuelgan canonical, sitemap, robots y las tarjetas de Open
+ * Graph. Se resuelve en este orden:
+ *
+ * 1. `NEXT_PUBLIC_SITE_URL`, el dominio definitivo, cuando ya está fijado.
+ * 2. La URL de producción que Vercel expone sola, para que un despliegue recién
+ *    importado tenga metadatos correctos sin configurar nada.
+ * 3. El dominio del instituto, que es donde debería acabar viviendo.
+ *
+ * Sólo lo consumen componentes de servidor y los ficheros de metadatos, así que
+ * no hace falta que la segunda variable sea `NEXT_PUBLIC_`.
+ */
+const dominioVercel = process.env.VERCEL_PROJECT_PRODUCTION_URL;
+
 export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, '') ?? 'https://www.irembrandt.com.mx';
+  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, '') ??
+  (dominioVercel ? `https://${dominioVercel}` : 'https://www.irembrandt.com.mx');
 
 interface EntradaSeo {
   readonly titulo: string;

@@ -52,14 +52,35 @@ deja fuera tres cosas (documentado en `02-guides/static-exports.md`):
 Nada de eso rompe el sitio: **el formulario nunca pierde lo que la persona
 escribió**, sólo cambia por dónde sale.
 
-### Si quieren dominio propio y envío automático de correo
+### Vercel (recomendado): el sitio completo, sin recortes
 
-Con Vercel el sitio corre con servidor y recupera las tres filas de la
-izquierda, sin cambiar una línea de código:
+Vercel corre Next con servidor, así que recupera las tres filas de la izquierda
+de la tabla anterior: `next/image` optimiza, las cabeceras de seguridad se
+envían y el formulario **manda correo de verdad**.
 
-1. vercel.com → *Add New… → Project* → *Import Git Repository* → este repo.
-2. Variables: `NEXT_PUBLIC_SITE_URL` con el dominio final y, para el correo
-   automático, `RESEND_API_KEY`, `CORREO_DESTINO` y `CORREO_REMITENTE`.
+**Importar este repositorio, un toque:**
+
+> https://vercel.com/new/import?s=https://github.com/ejercitopalomazi9111-arch/evaluaciones-rembrandt
+
+Vercel detecta Next.js solo: no hay que tocar el comando de build, ni el
+directorio de salida, ni la versión de Node. A partir de ahí, cada push a
+`master` despliega solo.
+
+**Variables de entorno.** Ninguna es obligatoria para que el sitio funcione:
+
+| Variable | Para qué | Si falta |
+|---|---|---|
+| `NEXT_PUBLIC_SITE_URL` | dominio final en canonical, sitemap y Open Graph | usa la URL que Vercel asigna al proyecto |
+| `RESEND_API_KEY` | envío automático de las solicitudes | el formulario ofrece correo, WhatsApp o llamada |
+| `CORREO_DESTINO` | buzón que recibe | `contacto@irembrandt.com.mx` |
+| `CORREO_REMITENTE` | remitente, con dominio verificado en Resend | sin él no se envía |
+| `NEXT_PUBLIC_WHATSAPP` | botón de WhatsApp, E.164 sin `+` | el botón no aparece |
+
+**No definir `EXPORT_ESTATICO` ni `RUTA_BASE` en Vercel**: son del modo estático
+de GitHub Pages y aquí romperían las rutas.
+
+Cuando la escuela tenga su dominio, se añade en Vercel → *Domains* y se pone
+`NEXT_PUBLIC_SITE_URL` con él.
 
 ## Cómo edita el contenido la escuela
 
