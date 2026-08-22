@@ -64,11 +64,22 @@ function entre(html, ini, fin) {
 const cssFile = execSync(`find ${RAIZ}/.next/static -name "*.css"`).toString().trim().split('\n')[0];
 let css = readFileSync(cssFile, 'utf8');
 
+const escaparRegex = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
 const mediaDir = join(RAIZ, '.next/static/media');
 for (const f of readdirSync(mediaDir)) {
   if (!f.endsWith('.woff2')) continue;
   const b64 = readFileSync(join(mediaDir, f)).toString('base64');
-  css = css.split(`/_next/static/media/${f}`).join(`data:font/woff2;base64,${b64}`);
+  // OJO: el CSS compilado referencia las fuentes con ruta RELATIVA
+  // (`url(../media/x.woff2)`), porque la hoja vive en `.next/static/css/`.
+  // Buscar la forma absoluta `/_next/static/media/x.woff2` no encontraba nada
+  // y las @font-face se quedaban apuntando a una carpeta que en el archivo
+  // suelto no existe: el sitio se veía entero con la tipografía de respaldo.
+  // Se sustituye por nombre de archivo, venga con el prefijo que venga.
+  css = css.replace(
+    new RegExp(`url\\(([^)]*)${escaparRegex(f)}\\)`, 'g'),
+    `url(data:font/woff2;base64,${b64})`,
+  );
 }
 
 /* ── Assets: cada uno se incrusta UNA sola vez ───────────────────────────── */
@@ -281,14 +292,37 @@ const scriptFinal = script;
 
 const motor = readFileSync(join(RAIZ, 'public/lienzo.js'), 'utf8');
 
-const salida = `<title>Instituto Rembrandt de Querétaro</title>
+// Documento completo, no un fragmento. Antes salía suelto —sin doctype, sin
+// <html lang>, sin charset y sin viewport— porque se miraba envuelto por un
+// visor que ponía esa cáscara. Servido en crudo eso significa modo quirks,
+// acentos rotos al abrirlo desde el disco y, lo más grave, el móvil pintando
+// el sitio a ancho de escritorio.
+// `next/font` no aplica la tipografía por nombre: define variables CSS bajo una
+// clase generada y la cuelga de <html>. Sin copiar esa clase, `font-sans` cae
+// al `ui-sans-serif` del sistema y el archivo suelto se ve con otra letra
+// aunque las @font-face estén incrustadas. Se toma de la página real.
+const clasesHtml = (traer('/').match(/<html[^>]*class="([^"]*)"/) ?? [, ''])[1];
+const clasesBody =
+  (traer('/').match(/<body[^>]*class="([^"]*)"/) ?? [, 'flex min-h-[100dvh] flex-col pb-14 lg:pb-0'])[1];
+
+const salida = `<!doctype html>
+<html lang="es-MX" class="${clasesHtml}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b0e1a">
+<title>Instituto Rembrandt de Querétaro</title>
 <meta name="description" content="Preescolar, Primaria, Secundaria y Preparatoria en Col. Satélite, Querétaro. Bachillerato Tecnológico DGETI con especialidad en Programación.">
 <style>${css}</style>
+</head>
+<body class="${clasesBody}">
 <div id="raiz-sitio" class="flex min-h-[100dvh] flex-col">
 ${cuerpo}
 </div>
 <script>${motor}</script>
 ${scriptFinal}
+</body>
+</html>
 `;
 
 writeFileSync('sitio-una-pagina.html', salida);
