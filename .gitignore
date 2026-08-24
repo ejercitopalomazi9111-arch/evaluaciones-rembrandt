@@ -45,3 +45,6 @@ next-env.d.ts
 
 # empaquetado de una sola página
 /sitio-una-pagina.html
+
+# permisos personales, no política del repo
+.claude/settings.local.json
