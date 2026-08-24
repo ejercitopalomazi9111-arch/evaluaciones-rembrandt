@@ -10,7 +10,12 @@ datos, no hay tests y **no hay más dependencias que `next`, `react` y
 
 El `README.md` es la documentación de producto —qué hace el sitio y cómo lo
 opera la escuela—. Este archivo es lo que hay que saber **antes de tocar
-código**.
+código**. `NOTAS.md` guarda el estado real: lo que la escuela aún no ha
+confirmado, lo que está medido y las decisiones que parecen raras y no lo son.
+
+Los procedimientos que se repiten están en **`.claude/skills/`** y se invocan
+solos cuando toca: `verificar` (la comprobación antes de cerrar cualquier
+cambio), `editar-contenido`, `publicar` y `arte`.
 
 ---
 
@@ -84,8 +89,10 @@ src/
   lib/                    validacion.ts, esquemas.ts, ruta.ts
 public/                   arte/ img/ marca/ grano.png lienzo.js
 scripts/                  generadores de arte y empaquetador de una página
+.claude/skills/           procedimientos: verificar, editar-contenido, publicar, arte
 .github/workflows/        publicar.yml, generar-arte.yml
 docs-marca/               papelería oficial de la que sale el diseño
+NOTAS.md                  pendientes de la escuela, estado medido, decisiones
 sitio.html                GENERADO por CI — no editar a mano
 ```
 
