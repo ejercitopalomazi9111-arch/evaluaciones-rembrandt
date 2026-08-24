@@ -1,0 +1,7 @@
+User-Agent: *
+Allow: /
+Disallow: /estilo
+Disallow: /pendientes
+
+Host: https://ejercitopalomazi9111-arch.github.io/evaluaciones-rembrandt
+Sitemap: https://ejercitopalomazi9111-arch.github.io/evaluaciones-rembrandt/sitemap.xml
