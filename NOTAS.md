@@ -48,7 +48,7 @@ rostros reconocibles.
 Comprobado corriendo los comandos, no supuesto:
 
 - `npm run typecheck`, `npm run lint` — limpios.
-- `npm run build` — **23 rutas, todas `○ (Static)`**.
+- `npm run build` — **23/23 páginas generadas · 21 filas, todas `○ (Static)`**.
 - `EXPORT_ESTATICO=1 … npm run build` — genera `out/` sin errores.
 - 13 rutas públicas (`RUTAS_PUBLICAS`, de donde sale el sitemap).
 - 7 archivos con `'use client'`; el resto son Server Components.
